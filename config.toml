@@ -1,0 +1,15 @@
+languageCode = "es-es"
+title = "Code Repo - Mi repositorio de código"
+baseURL = "http://coderepo.blog/"
+theme = "robust"
+MetaDataFormat = "yaml"
+
+pluralizeListTitles = true
+
+preserveTaxonomyNames = true
+
+[taxonomies]
+	tag = "tags"
+	category = "categorías"
+	series = "series"
+
