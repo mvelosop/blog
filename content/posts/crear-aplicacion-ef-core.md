@@ -1,11 +1,11 @@
 ---
 title: Crear Aplicación EF Core
 author: Miguel Veloso
-date: 2017-02-28
+date: 2017-03-02
 description: Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.
-thumbnail: posts/ef-core/post.jpg
+thumbnail: posts/images-ef-core/post.jpg
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework", "C#" ]
+tags: [ "Entity Framework", "CSharp" ]
 series: [ "Entity Framework Core" ]
 ---
 
@@ -42,6 +42,12 @@ El repositorio con la solución completa está aquí:
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
 ### 2) Crear proyecto src/EFCore.App 
+
+```
+{{% getRepoDir %}}
+```
+{{% getRepoSource %}}
+
 
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
@@ -136,7 +142,7 @@ namespace EFCore.App.Model
 ```
 #### Base/EntityTypeConfiguration.cs
 
-Para poder manejar una clase de configuración por cada clase del modelo, como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
+Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
 ```csharp
 using Microsoft.EntityFrameworkCore;
@@ -164,7 +170,7 @@ namespace EFCore.App.Base
 ```
 #### Data/CurrencyConfiguration.cs
 
-Clase de configuración del modelo en EF.
+Clase de configuración del modelo en EF. Así se mantienen fuera del modelo los detalles que corresponden a la capa de base de datos.
 
 ```csharp
 using EFCore.App.Base;
@@ -193,8 +199,8 @@ namespace EFCore.App.Data
 ```
 #### Config/ConfigClasses.cs
 
-Clases de configuración de la aplicación, para manejar la configuraciones que se carguen del archivo 
-**appsettings.json**.
+Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
+**appsettings.json** de una forma "strongly typed".
 
 ```csharp
 namespace EFCore.App.Config
@@ -213,7 +219,7 @@ namespace EFCore.App.Config
 
 #### Data/CommonDbContext.cs
 
-Clase de configuración del DbContext de EF.
+El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
 ```csharp
 using EFCore.App.Base;
@@ -257,6 +263,9 @@ namespace EFCore.App.Data
 ```
 
 #### Program.cs
+
+El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
+
 ```csharp
 using EFCore.App.Config;
 using EFCore.App.Data;
@@ -380,11 +389,12 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
    * Ejecutar **```dotnet ef```**
    * Si todo marchó bien, debe observar la una pantalla similar a la siguiente:
    
-	{{<img-popup src="/posts/ef-core/cmd_2017-02-27_23-41-30.png" width="100%">}}
+	{{<img-popup src="/posts/images-ef-core/cmd_2017-02-27_23-41-30.png" width="100%">}}
 
 2. Crear la migración inicial
 
    * Ejecutar **```dotnet ef migrations add InitialCreateMigration```** en la interfaz de comandos.
+   * Se puede utilizar cualquier nombre para la clase de la migración, pero es recomendable utilizar el sufijo "Migration" para evitar conflictos de nombres con otras clases de la aplicación.
 
 3. Verificar que se hayan creado los archivos del la migración inicial, en la carpeta Migrations, similar a los siguientes:
  
@@ -526,7 +536,10 @@ Verificar que project.json incluya la opción para copiar este archivo a la carp
 
 Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:
 
-{{<img-popup src="/posts/ef-core/cmd_2017-02-28_00-47-31.png">}}
+{{<img-popup src="/posts/images-ef-core/cmd_2017-02-28_00-47-31.png">}}
+
+## Conclusiones
+
 
 ## Enlaces relacionados
 

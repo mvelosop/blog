@@ -1,972 +1,0 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-<meta name="pinterest" content="nopin">
-<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="theme-color" content="#263238">
-
-<meta name="generator" content="Hugo 0.19" />
-
-<link rel="apple-touch-icon" href="http://coderepo.blog/images/logo.png">
-
-
-<link rel="canonical" href="http://coderepo.blog/posts/crear-aplicacion-ef-core/">
-
-
-    
-    <link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700|Montserrat" rel="stylesheet">
-    
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-    <title>Crear Aplicación EF Core - Code Repo - Mi repositorio de código</title>
-    
-<meta name="description" content="Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.">
-
-<meta property="og:title" content="Crear Aplicación EF Core - Code Repo - Mi repositorio de código">
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://coderepo.blog/posts/crear-aplicacion-ef-core/">
-<meta property="og:image" content="http://coderepo.blog/posts/ef-core/post.jpg">
-<meta property="og:site_name" content="Code Repo - Mi repositorio de código">
-<meta property="og:description" content="Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.">
-<meta property="og:locale" content="ja_JP">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="Code Repo - Mi repositorio de código">
-<meta name="twitter:url" content="http://coderepo.blog/posts/crear-aplicacion-ef-core/">
-<meta name="twitter:title" content="Crear Aplicación EF Core - Code Repo - Mi repositorio de código">
-<meta name="twitter:description" content="Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.">
-<meta name="twitter:image" content="http://coderepo.blog/posts/ef-core/post.jpg">
-
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "NewsArticle",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id":"http://coderepo.blog/"
-    },
-    "headline": "Crear Aplicación EF Core - Code Repo - Mi repositorio de código",
-    "image": {
-      "@type": "ImageObject",
-      "url": "http://coderepo.blog/posts/ef-core/post.jpg",
-      "height": 800,
-      "width": 800
-    },
-    "datePublished": "2017-02-28T00:00:00JST",
-    "dateModified": "2017-02-28T00:00:00JST",
-    "author": {
-      "@type": "Person",
-      "name": "Code Repo - Mi repositorio de código"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Code Repo - Mi repositorio de código",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "http://coderepo.blog/images/logo.png",
-        "width": 600,
-        "height": 60
-      }
-    },
-    "description": "Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core."
-  }
-</script>
-
-
-    <style>
-      html { font-size: 16px;}@media (max-width: 768px) { html { font-size: 14px; }}body { font-family: 'Noto Sans','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-size: inherit; font-weight: 300; line-height: 1.5rem; background-color: #eceff1;}p { margin: 0;}a { color: #4caf50;}a:hover { text-decoration: none; color: #388e3c;}ul,ol { margin: 0; padding: 0;}h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 700;}h1 { font-size: 1.8rem; line-height: 2rem; margin: 1.5rem 0; }h2 { font-size: 1.4rem; line-height: 2rem; margin: 1.5rem 0; }h3 { font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; }h4, h5, h6 { font-size: 1rem; line-height: 1.5rem; margin: 1.5rem 0; }main { display: block;}.content-inner { padding: 1rem 2rem;}.content-inner.thin { padding: .5rem 1rem;}@media (max-width: 768px) { .content-inner { padding: 1rem; }}/* Override */.container { position: relative;}/* Parts:layouts */.l-header { background-color: #fff; margin-bottom: 1rem; padding: 1rem 0; text-align: center;}.l-footer { font-size: .8rem; padding: 1.5rem 0;}/* Parts:menu */.p-menu { position: absolute; right: 15px; top: 0;}/* Parts:terms */.p-terms { list-style: none;}.p-terms .terms-title { margin: 0;}.p-terms a { display: inline-block; padding: .25rem 0;}.p-terms.inline li { display: inline-block; font-size: .8rem;}.p-terms.inline li::after { content: ',';}.p-terms.inline li:last-child::after { content: '';}/* Parts:paging */.p-paging { margin-bottom: 1.5rem; text-align: center;}.p-paging a { display: inline-block; padding: 1rem 1.5rem; margin: 0 .5rem; background-color: #cfd8dc; color: #263238;}/* Parts:section */section { margin-bottom: 1.5rem;}section>header { font-size: .8rem; font-weight: 700; margin-bottom: .5rem; text-transform: uppercase;}section>header a { color: #333; text-decoration: underline;}section.article-footer { margin-bottom: 1rem;}section.article-footer>header { margin-bottom: 0;}/* Parts:share */.p-share { min-width: 100%; margin-bottom: 1.5rem;}.p-share .share-inner { display: table; table-layout: fixed; width: 100%; border-spacing: .25rem;}.p-share a { display: table-cell; text-align: center; font-weight: 700; font-size: .7rem; padding: .5rem 0; color: #fff; border-radius: 5px;}.p-share a.ht { background-color: #00a4de; border-bottom: 2px solid #0083b1; }.p-share a.fb { background-color: #3b5998; border-bottom: 2px solid #2f4779; }.p-share a.tw { background-color: #1da1f2; border-bottom: 2px solid #1780c1; }.p-share a.gp { background-color: #dd4b39; border-bottom: 2px solid #b03c2d; }.p-share a.ln { background-color: #00c300; border-bottom: 2px solid #009c00; }.p-share a.ht::before { content: 'Hatena'; }.p-share a.fb::before { content: 'Facebook'; }.p-share a.tw::before { content: 'Twitter'; }.p-share a.gp::before { content: 'Google+'; }.p-share a.ln::before { content: 'LINE'; }/* Parts:logo */.h-logo { font-family: 'Montserrat', sans-serif;}.p-logo { display: inline-block; text-transform: uppercase;}.p-logo a { display: inline-block; font-size: 1.4rem; line-height: 2rem; color: #000;}/* Parts:crumb */.p-crumb ol { list-style: none; margin-bottom: 1rem;}.p-crumb li { display: inline; margin-right: .25rem; font-size: .8rem; color: #607d8b;}.p-crumb li::after { content: '/'; margin-left: .25rem;}.p-crumb li:last-child::after { content: '';}/* Parts:facts */.p-facts { list-style: none; font-size: .8rem; margin-bottom: 1rem;}.p-facts li { display: inline-block; margin-right: .5rem; color: #90a4ae;}.p-facts li i { margin-right: .5rem; color: #cfd8dc;}/* Parts:article */article { background-color: #fff;}article .title { margin: 0; margin-bottom: .5rem; font-weight: 700;}article .title a { color: #000;}article .thumb { display: block; background-image: url(http://coderepo.blog/images/default.jpg); background-position: center; background-size: cover;}article .summary { margin-bottom: .5rem; max-height: 5rem; overflow: hidden;}article.single .thumb { height: 18rem; margin-bottom: 1rem;}@media (max-width: 768px) { article.single .thumb { height: 12rem; }}article.li { margin-bottom: 1rem;}article.li .thumb { height: 7.5rem; margin-bottom: .5rem;}article.li.sm { background-color: transparent; margin-bottom: .5rem;}article.li.sm>header { padding: .5rem 0;}article.li.sm .title { font-size: .8rem; line-height: 1rem; margin-bottom: .25rem;}article.li.sm .p-facts { font-size: .6rem; margin-bottom: 0;}article.li.sm .thumb { float: left; margin-right: .5rem; height: 3rem; width: 3rem;}.article-body h2 { padding: 1rem 0; border-bottom: 2px solid #eceff1;}.article-body h2:first-child { margin-top: 0; }.article-body h3 { color: #428bca;}.article-body h4 { border-left: solid .25rem #428bca; padding: 0 .5rem;}.article-body p { margin: 1rem 0; line-height: 1.5rem;}.article-body a { text-decoration: underline;}.article-body ul,.article-body ol { padding-left: 1.5rem;}.article-body code { display: inline-block; font-family: Menlo, consolas, monospace; font-size: .9rem; padding: 0 .5rem; line-height: 1.5rem;}.article-body pre { margin: 1.5rem 0; padding: 0; font-size: .8rem; border: none; border-radius: 0;}.article-body pre code { display: block; line-height: .9rem; padding: 1rem; white-space: pre;}.article-body blockquote { margin: 1.5rem 0; padding: .5rem 0; font-size: .8rem; border-top: 1px solid #eceff1; border-bottom: 1px solid #eceff1; color: #607d8b;}.article-body blockquote p { margin: .5rem 0; line-height: 1rem;}/*.article-body strong { box-shadow: 0 -.5rem 0 0 #90caf9 inset;}*/.article-body em { font-style: normal; font-weight: 700; color: #03a9f4;}.article-body figure { margin: 1.5rem 0; }.article-body figure img { max-width: 100%; }.article-body figure.left,.article-body figure.right { width: 15rem; height: 12rem; margin-top: 0;}.article-body figure.left { float: left; margin-right: 1rem; }.article-body figure.right { float: right; margin-left: 1rem; }@media (max-width: 768px) { .article-body figure.left, .article-body figure.right { float: none; margin: 0; width: auto; height: auto; }}.article-body figcaption { padding: .5rem 0; font-size: .8rem; text-align: center;}.article-body figcaption a { color: #263238;}
-      
-      
-    </style>
-  </head>
-
-  <body>
-    
-    
-    
-
-    <header class="l-header">
-      <div class="container">
-        <div class="p-logo">
-          <a href="http://coderepo.blog/" class="h-logo">Code Repo - Mi repositorio de código</a>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <div class="container">
-        
-<div class="row">
-  <div class="col-md-9">
-
-    <nav class="p-crumb">
-      <ol>
-        <li><a href="http://coderepo.blog/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-        
-        <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://coderepo.blog/posts/" itemprop="url"><span itemprop="title">posts</span></a></li>
-        
-        <li class="active">Crear Aplicación EF Core</li>
-      </ol>
-    </nav>
-
-    <article class="single">
-
-  <a href="http://coderepo.blog/posts/crear-aplicacion-ef-core/" class="thumb" style="background-image: url(http://coderepo.blog/posts/ef-core/post.jpg);"></a>
-  <div class="content-inner">
-    <h1 class="title">Crear Aplicación EF Core</h1>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://coderepo.blog/posts/">posts</a></li>
-      
-    </ul>
-
-    <div class="article-body">
-
-<h1 id="crear-una-aplicación-con-entity-framework-core-1-1">Crear una aplicación con Entity Framework Core 1.1</h1>
-
-<p>En este artículo se muestra el desarrollo de una aplicación de consola sencilla usando Code First con EF Core 1.1, con el fin de entender los aspectos básicos del trabajo con EF Core.</p>
-
-<p>Finalmente se espera poder migrar una aplicación mediana (~100 clases del modelo de dominio), haciendo lo posible por mantener la experiencia de desarrollo lo más parecida posible a la de EF 6.</p>
-
-<p>El repositorio con la solución completa está aquí:</p>
-
-<h2 id="contexto">Contexto</h2>
-
-<h3 id="herramientas">Herramientas</h3>
-
-<ul>
-<li><a href="https://www.visualstudio.com/post-download-vs/#">Visual Studio 2015 Community Edition</a></li>
-<li><a href="https://www.microsoft.com/en-us/sql-server/sql-server-editions-developers">SQL Server 2016 Developer Edition</a></li>
-<li><a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms">SQL Server Management Studio</a></li>
-</ul>
-
-<h3 id="net-core-1-1">.NET Core 1.1</h3>
-
-<ul>
-<li><a href="https://go.microsoft.com/fwlink/?LinkId=827546">Visual Studio 2015 Tools (Preview 2)</a><br /></li>
-<li><a href="https://go.microsoft.com/fwlink/?LinkID=835014">.NET Core 1.1 SDK - Installer x64</a><br /></li>
-<li><a href="https://go.microsoft.com/fwlink/?LinkID=835009">.NET Core 1.1 runtime - Installer x64</a><br />
-(Este es necesario, además del SDK, para soportar .NET Core 1.1)</li>
-</ul>
-
-<h2 id="paso-a-paso">Paso a paso</h2>
-
-<h3 id="1-crear-la-solución-efcoreapp">1) Crear la solución EFCoreApp</h3>
-
-<ol>
-<li>Crear una solución &ldquo;blank&rdquo; llamada EFCoreApp</li>
-<li>Crear el solution folder &ldquo;src&rdquo;</li>
-<li>Crear la carpeta &ldquo;src&rdquo; dentro de la carpeta de la solución</li>
-</ol>
-
-<h3 id="2-crear-proyecto-src-efcore-app">2) Crear proyecto src/EFCore.App</h3>
-
-<ol>
-<li>Crear el proyecto como una &ldquo;Console Application (.NET Core)&rdquo;</li>
-
-<li><p>Actualizar project.json a lo siguiente:</p>
-
-<pre><code class="language-json">{
-    &quot;buildOptions&quot;: {
-        &quot;copyToOutput&quot;: {
-            &quot;include&quot;: [ &quot;appsettings.json&quot; ]
-        },
-        &quot;emitEntryPoint&quot;: true
-    },
-    &quot;dependencies&quot;: {
-        &quot;Microsoft.EntityFrameworkCore&quot;: &quot;1.1.0&quot;,
-        &quot;Microsoft.EntityFrameworkCore.Design&quot;: {
-            &quot;type&quot;: &quot;build&quot;,
-            &quot;version&quot;: &quot;1.1.0&quot;
-        },
-        &quot;Microsoft.EntityFrameworkCore.SqlServer&quot;: &quot;1.1.0&quot;,
-        &quot;Microsoft.Extensions.Configuration&quot;: &quot;1.1.0&quot;,
-        &quot;Microsoft.Extensions.Configuration.Binder&quot;: &quot;1.1.0&quot;,
-        &quot;Microsoft.Extensions.Configuration.Json&quot;: &quot;1.1.0&quot;,
-        &quot;Microsoft.NETCore.App&quot;: {
-            &quot;type&quot;: &quot;platform&quot;,
-            &quot;version&quot;: &quot;1.1.0&quot;
-        },
-        &quot;System.ComponentModel.Annotations&quot;: &quot;4.3.0&quot;
-    },
-    &quot;frameworks&quot;: {
-        &quot;netcoreapp1.0&quot;: {
-            &quot;imports&quot;: &quot;dnxcore50&quot;
-        }
-    },
-    &quot;tools&quot;: {
-        &quot;Microsoft.EntityFrameworkCore.Tools.DotNet&quot;: &quot;1.1.0-preview4-final&quot;
-    },
-    &quot;version&quot;: &quot;1.0.0-*&quot;
-}
-</code></pre></li>
-
-<li><p>Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute <strong><code>dotnet restore</code></strong></p></li>
-</ol>
-
-<h4 id="detalles-de-project-json">Detalles de project.json</h4>
-
-<ul>
-<li><p>Paquetes de Entity Framework Core</p>
-
-<ul>
-<li><strong>Microsoft.EntityFrameworkCore</strong>: Paquete base</li>
-<li><strong>Microsoft.EntityFrameworkCore.Design</strong>: Componentes para EF Core CLI, sólo para desarrollo, por eso <code>&quot;type&quot;: &quot;build&quot;</code></li>
-<li><strong>Microsoft.EntityFrameworkCore.Tools.DotNet</strong>: EF Core CLI</li>
-<li><strong>Microsoft.EntityFrameworkCore.SqlServer</strong>: SQL Server provider</li>
-</ul></li>
-
-<li><p>Paquetes para manejar archivos de configuración</p>
-
-<ul>
-<li><strong>Microsoft.Extensions.Configuration</strong>: Paquete base</li>
-<li><strong>Microsoft.Extensions.Configuration.Binder</strong>: Para manejar configuraciones &ldquo;strongly typed&rdquo;.</li>
-<li><strong>Microsoft.Extensions.Configuration.Json</strong>: Manejo de archivos json</li>
-</ul></li>
-
-<li><p>Otros</p>
-
-<ul>
-<li><strong>System.ComponentModel.Annotations</strong>: Annotations para los modelos
-<br /></li>
-</ul></li>
-</ul>
-
-<h3 id="3-agregar-archivos-del-proyecto">3) Agregar archivos del proyecto</h3>
-
-<h4 id="model-currency-cs">Model/Currency.cs</h4>
-
-<p>La clase del modelo, Divisas en este caso.</p>
-
-<pre><code class="language-csharp">using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace EFCore.App.Model
-{
-    public class Currency
-    {
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(3)]
-        public string IsoCode { get; set; }
-
-        [Required]
-        [MaxLength(100)] // Default string length
-        public string Name { get; set; }
-
-        public byte[] RowVersion { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        public string Symbol { get; set; }
-    }
-}
-</code></pre>
-
-<h4 id="base-entitytypeconfiguration-cs">Base/EntityTypeConfiguration.cs</h4>
-
-<p>Para poder manejar una clase de configuración por cada clase del modelo, como se puede hacer con EF 6, según lo sugerido en <a href="https://github.com/aspnet/EntityFramework/issues/2805">https://github.com/aspnet/EntityFramework/issues/2805</a></p>
-
-<pre><code class="language-csharp">using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace EFCore.App.Base
-{
-    // As suggested in: https://github.com/aspnet/EntityFramework/issues/2805
-
-    public static class ModelBuilderExtensions
-    {
-        public static void AddConfiguration&lt;TEntity&gt;(this ModelBuilder modelBuilder, EntityTypeConfiguration&lt;TEntity&gt; configuration) 
-            where TEntity : class
-        {
-            configuration.Map(modelBuilder.Entity&lt;TEntity&gt;());
-        }
-    }
-
-    public abstract class EntityTypeConfiguration&lt;TEntity&gt; 
-        where TEntity : class
-    {
-        public abstract void Map(EntityTypeBuilder&lt;TEntity&gt; builder);
-    }
-}
-</code></pre>
-
-<h4 id="data-currencyconfiguration-cs">Data/CurrencyConfiguration.cs</h4>
-
-<p>Clase de configuración del modelo en EF.</p>
-
-<pre><code class="language-csharp">using EFCore.App.Base;
-using EFCore.App.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace EFCore.App.Data
-{
-    public class CurrencyConfiguration : EntityTypeConfiguration&lt;Currency&gt;
-    {
-        public override void Map(EntityTypeBuilder&lt;Currency&gt; builder)
-        {
-            builder.ToTable(&quot;Currencies&quot;, schema: &quot;Common&quot;);
-
-            builder.HasKey(e =&gt; e.Id);
-
-            builder.Property(e =&gt; e.RowVersion)
-                .IsRowVersion();
-
-            builder.HasIndex(e =&gt; e.IsoCode)
-                .IsUnique();
-        }
-    }
-}
-</code></pre>
-
-<h4 id="config-configclasses-cs">Config/ConfigClasses.cs</h4>
-
-<p>Clases de configuración de la aplicación, para manejar la configuraciones que se carguen del archivo
-<strong>appsettings.json</strong>.</p>
-
-<pre><code class="language-csharp">namespace EFCore.App.Config
-{
-    public class AppOptions
-    {
-        public ConnectionStrings ConnectionStrings { get; set; }
-    }
-
-    public class ConnectionStrings
-    {
-        public string DefaultConnection { get; set; }
-    }
-}
-</code></pre>
-
-<h4 id="data-commondbcontext-cs">Data/CommonDbContext.cs</h4>
-
-<p>Clase de configuración del DbContext de EF.</p>
-
-<pre><code class="language-csharp">using EFCore.App.Base;
-using EFCore.App.Config;
-using EFCore.App.Model;
-using Microsoft.EntityFrameworkCore;
-
-namespace EFCore.App.Data
-{
-    public class CommonDbContext : DbContext
-    {
-        // Must not be null or empty for initial create migration
-        private string _connectionString = &quot;ConnectionString&quot;;
-
-        // Default constructor for initial create migration
-        public CommonDbContext()
-        {
-        }
-
-        // Normal use constructor
-        public CommonDbContext(ConnectionStrings connectionStrings)
-        {
-            _connectionString = connectionStrings.DefaultConnection;
-        }
-
-        public DbSet&lt;Currency&gt; Currencies { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlServer(_connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.AddConfiguration(new CurrencyConfiguration());
-        }
-    }
-}
-</code></pre>
-
-<h4 id="program-cs">Program.cs</h4>
-
-<pre><code class="language-csharp">using EFCore.App.Config;
-using EFCore.App.Data;
-using EFCore.App.Model;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace EFCore.App
-{
-    public class Program
-    {
-        private static Currency[] _currencyData = new[]
-        {
-            new Currency { IsoCode = &quot;USD&quot;, Name = &quot;US Dolar&quot;, Symbol = &quot;US$&quot; },
-            new Currency { IsoCode = &quot;EUR&quot;, Name = &quot;Euro&quot;, Symbol = &quot;€&quot; },
-            new Currency { IsoCode = &quot;CHF&quot;, Name = &quot;Swiss Franc&quot;, Symbol = &quot;Fr.&quot; },
-        };
-
-        public static AppOptions AppOptions { get; set; }
-
-        public static IConfigurationRoot Configuration { get; set; }
-
-        public static void Main(string[] args)
-        {
-            Console.OutputEncoding = Encoding.UTF8;
-
-            Console.WriteLine(&quot;EF Core App\n&quot;);
-
-            ReadConfiguration();
-
-            InitDb();
-
-            PrintDb();
-        }
-
-        private static void InitDb()
-        {
-            using (var db = new CommonDbContext(AppOptions.ConnectionStrings))
-            {
-                Console.WriteLine(&quot;Creating database...\n&quot;);
-
-                db.Database.EnsureCreated();
-
-                Console.WriteLine(&quot;Seeding database...\n&quot;);
-
-                LoadInitalData(db);
-            }
-        }
-
-        private static void LoadInitalData(CommonDbContext db)
-        {
-            foreach (var item in _currencyData)
-            {
-                Currency currency = db.Currencies.FirstOrDefault(c =&gt; c.Symbol == item.Symbol);
-
-                if (currency == null)
-                {
-                    db.Currencies.Add(item);
-                }
-                else
-                {
-                    currency.Name = item.Name;
-                    currency.Symbol = item.Symbol;
-                }
-            }
-
-            db.SaveChanges();
-        }
-
-        private static void PrintDb()
-        {
-            using (var db = new CommonDbContext(AppOptions.ConnectionStrings))
-            {
-                Console.WriteLine(&quot;Reading database...\n&quot;);
-
-                Console.WriteLine(&quot;Currencies&quot;);
-                Console.WriteLine(&quot;----------&quot;);
-
-                int symbolLength = _currencyData.Select(c =&gt; c.Symbol.Length).Max();
-                int nameLength = _currencyData.Select(c =&gt; c.Name.Length).Max();
-
-                foreach (var item in db.Currencies)
-                {
-                    Console.WriteLine($&quot;| {item.IsoCode} | {item.Symbol.PadRight(symbolLength)} | {item.Name.PadRight(nameLength)} |&quot;);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        private static void ReadConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(&quot;appsettings.json&quot;);
-
-            Configuration = builder.Build();
-
-            // Reads appsettings.json into a (strongly typed) class
-            AppOptions = Configuration.Get&lt;AppOptions&gt;();
-
-            Console.WriteLine(&quot;Configuration\n&quot;);
-            Console.WriteLine($@&quot;connectionString (defaultConnection) = &quot;&quot;{AppOptions.ConnectionStrings.DefaultConnection}&quot;&quot;&quot;);
-            Console.WriteLine();
-        }
-    }
-}
-</code></pre>
-
-<h3 id="4-generar-la-migración-inicial">4) Generar la migración inicial</h3>
-
-<p>Ahora es necesario generar la migración inicial que utilizará EF para crear la base de datos cuando se ejecute la aplicación por primera vez.</p>
-
-<ol>
-<li><p>Abrir la interfaz de comandos de desarrollo</p>
-
-<ul>
-<li>Hacer click sobre el nodo del proyecto EFCore.App en el explorador de la solución.</li>
-<li>Pulsar [Shift]+[Alt]+[,] o Botón derecho &gt; Open Command Line &gt; Developer Command Prompt</li>
-<li>Ejecutar <strong><code>dotnet ef</code></strong></li>
-<li>Si todo marchó bien, debe observar la una pantalla similar a la siguiente:
-<br /></li>
-</ul>
-
-<figure>
-  <img src="http://coderepo.blog//posts/ef-core/cmd_2017-02-27_23-41-30.png" alt="Crear Aplicación EF Core /posts/ef-core/cmd_2017-02-27_23-41-30.png" width="100%">
-  
-</figure>
-</li>
-
-<li><p>Crear la migración inicial</p>
-
-<ul>
-<li>Ejecutar <strong><code>dotnet ef migrations add InitialCreateMigration</code></strong> en la interfaz de comandos.</li>
-</ul></li>
-
-<li><p>Verificar que se hayan creado los archivos del la migración inicial, en la carpeta Migrations, similar a los siguientes:</p></li>
-</ol>
-
-<h4 id="migrations-commondbcontextmodelsnapshot-cs">Migrations/CommonDbContextModelSnapshot.cs</h4>
-
-<p>Este archivo es la configuración de la última versión del modelo, se utiliza al ejecutar el método DbContext.Database.EnsureCreated().</p>
-
-<pre><code class="language-csharp">using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EFCore.App.Data;
-
-namespace EFCore.App.Migrations
-{
-    [DbContext(typeof(CommonDbContext))]
-    partial class CommonDbContextModelSnapshot : ModelSnapshot
-    {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .HasAnnotation(&quot;ProductVersion&quot;, &quot;1.1.0-rtm-22752&quot;)
-                .HasAnnotation(&quot;SqlServer:ValueGenerationStrategy&quot;, SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity(&quot;EFCore.App.Model.Currency&quot;, b =&gt;
-                {
-                    b.Property&lt;int&gt;(&quot;Id&quot;)
-                        .ValueGeneratedOnAdd();
-
-                    b.Property&lt;string&gt;(&quot;IsoCode&quot;)
-                        .IsRequired()
-                        .HasMaxLength(3);
-
-                    b.Property&lt;string&gt;(&quot;Name&quot;)
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property&lt;byte[]&gt;(&quot;RowVersion&quot;)
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property&lt;string&gt;(&quot;Symbol&quot;)
-                        .IsRequired()
-                        .HasMaxLength(10);
-
-                    b.HasKey(&quot;Id&quot;);
-
-                    b.HasIndex(&quot;IsoCode&quot;)
-                        .IsUnique();
-
-                    b.ToTable(&quot;Currencies&quot;,&quot;Common&quot;);
-                });
-        }
-    }
-}
-</code></pre>
-
-<h4 id="migrations-20170227231210-initialcreatemigration">Migrations/20170227231210_InitialCreateMigration</h4>
-
-<p>Este archivo es el encargado de generar la migración desde la versión anterior de CommonDbContextModelSnapshot.cs, se utiliza al ejecutar el método DbContext.Database.Migrate().</p>
-
-<p>Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.</p>
-
-<pre><code class="language-csharp">using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-namespace EFCore.App.Migrations
-{
-    public partial class InitialCreateMigration : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.EnsureSchema(
-                name: &quot;Common&quot;);
-
-            migrationBuilder.CreateTable(
-                name: &quot;Currencies&quot;,
-                schema: &quot;Common&quot;,
-                columns: table =&gt; new
-                {
-                    Id = table.Column&lt;int&gt;(nullable: false)
-                        .Annotation(&quot;SqlServer:ValueGenerationStrategy&quot;, SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsoCode = table.Column&lt;string&gt;(maxLength: 3, nullable: false),
-                    Name = table.Column&lt;string&gt;(maxLength: 100, nullable: false),
-                    RowVersion = table.Column&lt;byte[]&gt;(rowVersion: true, nullable: true),
-                    Symbol = table.Column&lt;string&gt;(maxLength: 10, nullable: false)
-                },
-                constraints: table =&gt;
-                {
-                    table.PrimaryKey(&quot;PK_Currencies&quot;, x =&gt; x.Id);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: &quot;IX_Currencies_IsoCode&quot;,
-                schema: &quot;Common&quot;,
-                table: &quot;Currencies&quot;,
-                column: &quot;IsoCode&quot;,
-                unique: true);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: &quot;Currencies&quot;,
-                schema: &quot;Common&quot;);
-        }
-    }
-}
-</code></pre>
-
-<h3 id="5-crear-archivo-de-configuración">5) Crear archivo de configuración</h3>
-
-<h4 id="appsettings-json">appsettings.json</h4>
-
-<pre><code class="language-json">{
-    &quot;connectionStrings&quot;: {
-        &quot;defaultConnection&quot;: &quot;Data Source=localhost;Initial Catalog=EFCore.App;Integrated Security=SSPI;&quot;
-    }
-}
-</code></pre>
-
-<p>Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:</p>
-
-<pre><code class="language-json">    &quot;buildOptions&quot;: {
-        &quot;copyToOutput&quot;: {
-            &quot;include&quot;: [ &quot;appsettings.json&quot; ]
-        },
-        &quot;emitEntryPoint&quot;: true
-    },
-</code></pre>
-
-<h3 id="6-ejecutar-la-aplicación">6) Ejecutar la aplicación</h3>
-
-<p>Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:</p>
-
-<figure>
-  <img src="http://coderepo.blog//posts/ef-core/cmd_2017-02-28_00-47-31.png" alt="Crear Aplicación EF Core /posts/ef-core/cmd_2017-02-28_00-47-31.png" width="100%">
-  
-</figure>
-
-
-<h2 id="enlaces-relacionados">Enlaces relacionados</h2>
-
-<p><strong>.NET Core current downloads</strong><br />
-<a href="https://www.microsoft.com/net/download/core#/current">https://www.microsoft.com/net/download/core#/current</a></p>
-
-<p><strong>.NET Core EF CLI</strong><br />
-<a href="https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet">https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet</a></p>
-</div>
-  </div>
-
-  <footer class="article-footer">
-    <div class="content-inner">
-
-      <aside class="p-share">
-  <div class="share-inner">
-    <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2fcoderepo.blog%2fposts%2fcrear-aplicacion-ef-core%2f&title=Crear%20Aplicaci%c3%b3n%20EF%20Core" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow"></a>
-    <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fcoderepo.blog%2fposts%2fcrear-aplicacion-ef-core%2f&t=Crear%20Aplicaci%c3%b3n%20EF%20Core" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"></a>
-    <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2fcoderepo.blog%2fposts%2fcrear-aplicacion-ef-core%2f&text=Crear%20Aplicaci%c3%b3n%20EF%20Core&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2fcoderepo.blog%2fposts%2fcrear-aplicacion-ef-core%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"></a>
-    <a href="http://line.me/R/msg/text/?Crear%20Aplicaci%c3%b3n%20EF%20Core http%3a%2f%2fcoderepo.blog%2fposts%2fcrear-aplicacion-ef-core%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow"></a>
-  </div>
-</aside>
-
-
-      <nav class="p-crumb">
-        <ol>
-          <li><a href="http://coderepo.blog/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-          
-          <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://coderepo.blog/posts/" itemprop="url"><span itemprop="title">posts</span></a></li>
-          
-          <li class="active">Crear Aplicación EF Core</li>
-        </ol>
-      </nav>
-
-      
-      
-      
-      <section class="article-footer">
-        <header>
-          <a href="http://coderepo.blog/categor%C3%ADas/">CATEGORÍAS</a>
-        </header>
-        <div>
-          <ul class="p-terms inline">
-            
-            <li><a href="http://coderepo.blog/categor%C3%ADas/desarrollo/">Desarrollo</a></li>
-            
-          </ul>
-        </div>
-      </section>
-      
-      
-      
-      <section class="article-footer">
-        <header>
-          <a href="http://coderepo.blog/series/">SERIES</a>
-        </header>
-        <div>
-          <ul class="p-terms inline">
-            
-            <li><a href="http://coderepo.blog/series/entity-framework-core/">Entity Framework Core</a></li>
-            
-          </ul>
-        </div>
-      </section>
-      
-      
-      
-      <section class="article-footer">
-        <header>
-          <a href="http://coderepo.blog/tags/">TAGS</a>
-        </header>
-        <div>
-          <ul class="p-terms inline">
-            
-            <li><a href="http://coderepo.blog/tags/entity-framework/">Entity Framework</a></li>
-            
-            <li><a href="http://coderepo.blog/tags/c/">C#</a></li>
-            
-          </ul>
-        </div>
-      </section>
-      
-      
-    </div>
-  </footer>
-
-</article>
-
-
-    
-  </div>
-
-  <div class="col-md-3">
-    <aside class="site">
-
-  <section>
-    <header>latests</header>
-    <div>
-      <div class="row">
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/posts/crear-aplicacion-ef-core/" class="thumb" style="background-image: url(http://coderepo.blog/posts/ef-core/post.jpg);"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/posts/crear-aplicacion-ef-core/">Crear Aplicación EF Core</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://coderepo.blog/posts/">posts</a></li>
-    </ul>
-  </header>
-</article>
-</div>
-        
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/tags/c/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/tags/c/">C#</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        <div class="col-sm-12"></div>
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/categor%C3%ADas/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/categor%C3%ADas/">Categorías</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="0001-01-01T00:00:00JST">Jan 1, 0001</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/">Code Repo - Mi repositorio de código</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        <div class="col-sm-12"></div>
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/categor%C3%ADas/desarrollo/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/categor%C3%ADas/desarrollo/">Desarrollo</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/tags/entity-framework/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/tags/entity-framework/">Entity Framework</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        <div class="col-sm-12"></div>
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/series/entity-framework-core/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/series/entity-framework-core/">Entity Framework Core</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/posts/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/posts/">Posts</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-28T00:00:00JST">Feb 28, 2017</time></li>
-      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://coderepo.blog/posts/">posts</a></li>
-    </ul>
-  </header>
-</article>
-</div>
-        <div class="col-sm-12"></div>
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/series/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/series/">Series</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="0001-01-01T00:00:00JST">Jan 1, 0001</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        
-        
-        <div class="col-md-12 col-sm-6 col-xs-12"><article class="li sm">
-  <a href="http://coderepo.blog/tags/" class="thumb"></a>
-  <header>
-    <div class="title"><a href="http://coderepo.blog/tags/">Tags</a></div>
-
-    <ul class="p-facts">
-      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="0001-01-01T00:00:00JST">Jan 1, 0001</time></li>
-      
-    </ul>
-  </header>
-</article>
-</div>
-        <div class="col-sm-12"></div>
-        
-      </div>
-    </div>
-  </section>
-
-  
-  <section>
-    <header>categorías</header>
-    <div>
-      <ul class="p-terms">
-        <li><a href="http://coderepo.blog/categor%c3%adas/desarrollo">Desarrollo</a></li>
-      </ul>
-    </div>
-  </section>
-  
-  <section>
-    <header>series</header>
-    <div>
-      <ul class="p-terms">
-        <li><a href="http://coderepo.blog/series/entity-framework-core">Entity Framework Core</a></li>
-      </ul>
-    </div>
-  </section>
-  
-  <section>
-    <header>tags</header>
-    <div>
-      <ul class="p-terms">
-        <li><a href="http://coderepo.blog/tags/c">C#</a></li><li><a href="http://coderepo.blog/tags/entity-framework">Entity Framework</a></li>
-      </ul>
-    </div>
-  </section>
-  
-
-</aside>
-
-  </div>
-</div>
-
-      </div>
-    </main>
-
-    <footer class="l-footer">
-      <div class="container">
-        <p><span class="h-logo">&copy; Code Repo - Mi repositorio de código</span></p>
-        <aside>
-          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
-          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
-        </aside>
-      </div>
-    </footer>
-
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-  </body>
-</html>
-

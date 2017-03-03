@@ -4,7 +4,7 @@
     <header>latests</header>
     <div>
       <div class="row">
-        {{ range $i, $p := (first 10 .Site.Pages) }}
+        {{ range $i, $p := (first 5 .Site.Pages) }}
         <div class="col-md-12 col-sm-6 col-xs-12">{{ .Render "li_sm" }}</div>
         {{ if eq (mod (add $i 1) 2) 0 }}<div class="col-sm-12"></div>{{ end }}
         {{ end }}
