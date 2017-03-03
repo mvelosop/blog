@@ -1,0 +1,5 @@
+{{ with .Get 0 }}
+<pre><code>{{ readFile . }}</code>
+<span class="source-footer">{{.}}</span>
+</pre>
+{{ end }}

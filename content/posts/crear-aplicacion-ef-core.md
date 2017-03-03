@@ -35,6 +35,8 @@ El repositorio con la solución completa está aquí:
 
 ## Paso a paso
 
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/project.json" >}}
+
 ### 1) Crear la solución EFCoreApp
 
 1. Crear una solución "blank" llamada EFCoreApp
@@ -42,12 +44,6 @@ El repositorio con la solución completa está aquí:
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
 ### 2) Crear proyecto src/EFCore.App 
-
-```
-{{% getRepoDir %}}
-```
-{{% getRepoSource %}}
-
 
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
