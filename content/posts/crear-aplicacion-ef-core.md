@@ -35,8 +35,6 @@ El repositorio con la solución completa está aquí:
 
 ## Paso a paso
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/project.json" >}}
-
 ### 1) Crear la solución EFCoreApp
 
 1. Crear una solución "blank" llamada EFCoreApp
@@ -48,41 +46,8 @@ El repositorio con la solución completa está aquí:
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
 
-	```json
-	{
-		"buildOptions": {
-			"copyToOutput": {
-				"include": [ "appsettings.json" ]
-			},
-			"emitEntryPoint": true
-		},
-		"dependencies": {
-			"Microsoft.EntityFrameworkCore": "1.1.0",
-			"Microsoft.EntityFrameworkCore.Design": {
-				"type": "build",
-				"version": "1.1.0"
-			},
-			"Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
-			"Microsoft.Extensions.Configuration": "1.1.0",
-			"Microsoft.Extensions.Configuration.Binder": "1.1.0",
-			"Microsoft.Extensions.Configuration.Json": "1.1.0",
-			"Microsoft.NETCore.App": {
-				"type": "platform",
-				"version": "1.1.0"
-			},
-			"System.ComponentModel.Annotations": "4.3.0"
-		},
-		"frameworks": {
-			"netcoreapp1.0": {
-				"imports": "dnxcore50"
-			}
-		},
-		"tools": {
-			"Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final"
-		},
-		"version": "1.0.0-*"
-	}
-	```
+    {{< getSourceFile "repos/EFCoreApp/src/EFCore.App/project.json" >}}
+
 3. Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute **```dotnet restore```**
 
 #### Detalles de project.json
@@ -110,269 +75,38 @@ El repositorio con la solución completa está aquí:
 
 La clase del modelo, Divisas en este caso.
 
-```csharp
-using System;
-using System.ComponentModel.DataAnnotations;
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Model/Currency.cs" >}}
 
-namespace EFCore.App.Model
-{
-    public class Currency
-    {
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(3)]
-        public string IsoCode { get; set; }
-
-        [Required]
-        [MaxLength(100)] // Default string length
-        public string Name { get; set; }
-
-        public byte[] RowVersion { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        public string Symbol { get; set; }
-    }
-}
-```
 #### Base/EntityTypeConfiguration.cs
 
 Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
-```csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Base/EntityTypeConfiguration.cs" >}}
 
-namespace EFCore.App.Base
-{
-    // As suggested in: https://github.com/aspnet/EntityFramework/issues/2805
-
-    public static class ModelBuilderExtensions
-    {
-        public static void AddConfiguration<TEntity>(this ModelBuilder modelBuilder, EntityTypeConfiguration<TEntity> configuration) 
-            where TEntity : class
-        {
-            configuration.Map(modelBuilder.Entity<TEntity>());
-        }
-    }
-
-    public abstract class EntityTypeConfiguration<TEntity> 
-        where TEntity : class
-    {
-        public abstract void Map(EntityTypeBuilder<TEntity> builder);
-    }
-}
-```
 #### Data/CurrencyConfiguration.cs
 
 Clase de configuración del modelo en EF. Así se mantienen fuera del modelo los detalles que corresponden a la capa de base de datos.
 
-```csharp
-using EFCore.App.Base;
-using EFCore.App.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Data/CurrencyConfiguration.cs" >}}
 
-namespace EFCore.App.Data
-{
-    public class CurrencyConfiguration : EntityTypeConfiguration<Currency>
-    {
-        public override void Map(EntityTypeBuilder<Currency> builder)
-        {
-            builder.ToTable("Currencies", schema: "Common");
-
-            builder.HasKey(e => e.Id);
-
-            builder.Property(e => e.RowVersion)
-                .IsRowVersion();
-
-            builder.HasIndex(e => e.IsoCode)
-                .IsUnique();
-        }
-    }
-}
-```
 #### Config/ConfigClasses.cs
 
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
 **appsettings.json** de una forma "strongly typed".
 
-```csharp
-namespace EFCore.App.Config
-{
-    public class AppOptions
-    {
-        public ConnectionStrings ConnectionStrings { get; set; }
-    }
-
-    public class ConnectionStrings
-    {
-        public string DefaultConnection { get; set; }
-    }
-}
-```
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Config/ConfigClasses.cs" >}}
 
 #### Data/CommonDbContext.cs
 
 El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
-```csharp
-using EFCore.App.Base;
-using EFCore.App.Config;
-using EFCore.App.Model;
-using Microsoft.EntityFrameworkCore;
-
-namespace EFCore.App.Data
-{
-    public class CommonDbContext : DbContext
-    {
-        // Must not be null or empty for initial create migration
-        private string _connectionString = "ConnectionString";
-
-        // Default constructor for initial create migration
-        public CommonDbContext()
-        {
-        }
-
-        // Normal use constructor
-        public CommonDbContext(ConnectionStrings connectionStrings)
-        {
-            _connectionString = connectionStrings.DefaultConnection;
-        }
-
-        public DbSet<Currency> Currencies { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlServer(_connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.AddConfiguration(new CurrencyConfiguration());
-        }
-    }
-}
-```
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Data/CommonDbContext.cs" >}}
 
 #### Program.cs
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
 
-```csharp
-using EFCore.App.Config;
-using EFCore.App.Data;
-using EFCore.App.Model;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace EFCore.App
-{
-    public class Program
-    {
-        private static Currency[] _currencyData = new[]
-        {
-            new Currency { IsoCode = "USD", Name = "US Dolar", Symbol = "US$" },
-            new Currency { IsoCode = "EUR", Name = "Euro", Symbol = "€" },
-            new Currency { IsoCode = "CHF", Name = "Swiss Franc", Symbol = "Fr." },
-        };
-
-        public static AppOptions AppOptions { get; set; }
-
-        public static IConfigurationRoot Configuration { get; set; }
-
-        public static void Main(string[] args)
-        {
-            Console.OutputEncoding = Encoding.UTF8;
-
-            Console.WriteLine("EF Core App\n");
-
-            ReadConfiguration();
-
-            InitDb();
-
-            PrintDb();
-        }
-
-        private static void InitDb()
-        {
-            using (var db = new CommonDbContext(AppOptions.ConnectionStrings))
-            {
-                Console.WriteLine("Creating database...\n");
-
-                db.Database.EnsureCreated();
-
-                Console.WriteLine("Seeding database...\n");
-
-                LoadInitalData(db);
-            }
-        }
-
-        private static void LoadInitalData(CommonDbContext db)
-        {
-            foreach (var item in _currencyData)
-            {
-                Currency currency = db.Currencies.FirstOrDefault(c => c.Symbol == item.Symbol);
-
-                if (currency == null)
-                {
-                    db.Currencies.Add(item);
-                }
-                else
-                {
-                    currency.Name = item.Name;
-                    currency.Symbol = item.Symbol;
-                }
-            }
-
-            db.SaveChanges();
-        }
-
-        private static void PrintDb()
-        {
-            using (var db = new CommonDbContext(AppOptions.ConnectionStrings))
-            {
-                Console.WriteLine("Reading database...\n");
-
-                Console.WriteLine("Currencies");
-                Console.WriteLine("----------");
-
-                int symbolLength = _currencyData.Select(c => c.Symbol.Length).Max();
-                int nameLength = _currencyData.Select(c => c.Name.Length).Max();
-
-                foreach (var item in db.Currencies)
-                {
-                    Console.WriteLine($"| {item.IsoCode} | {item.Symbol.PadRight(symbolLength)} | {item.Name.PadRight(nameLength)} |");
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        private static void ReadConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
-
-            // Reads appsettings.json into a (strongly typed) class
-            AppOptions = Configuration.Get<AppOptions>();
-
-            Console.WriteLine("Configuration\n");
-            Console.WriteLine($@"connectionString (defaultConnection) = ""{AppOptions.ConnectionStrings.DefaultConnection}""");
-            Console.WriteLine();
-        }
-    }
-}
-```
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Program.cs" >}}
 
 ### 4) Generar la migración inicial
 
@@ -398,124 +132,21 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
 
 Este archivo es la configuración de la última versión del modelo, se utiliza al ejecutar el método DbContext.Database.EnsureCreated().
 
-```csharp
-using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EFCore.App.Data;
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
 
-namespace EFCore.App.Migrations
-{
-    [DbContext(typeof(CommonDbContext))]
-    partial class CommonDbContextModelSnapshot : ModelSnapshot
-    {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EFCore.App.Model.Currency", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("IsoCode")
-                        .IsRequired()
-                        .HasMaxLength(3);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("Symbol")
-                        .IsRequired()
-                        .HasMaxLength(10);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsoCode")
-                        .IsUnique();
-
-                    b.ToTable("Currencies","Common");
-                });
-        }
-    }
-}
-```
 #### Migrations/20170227231210_InitialCreateMigration
 
 Este archivo es el encargado de generar la migración desde la versión anterior de CommonDbContextModelSnapshot.cs, se utiliza al ejecutar el método DbContext.Database.Migrate().
 
 Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.
 
-
-```csharp
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-namespace EFCore.App.Migrations
-{
-    public partial class InitialCreateMigration : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.EnsureSchema(
-                name: "Common");
-
-            migrationBuilder.CreateTable(
-                name: "Currencies",
-                schema: "Common",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsoCode = table.Column<string>(maxLength: 3, nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    Symbol = table.Column<string>(maxLength: 10, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Currencies", x => x.Id);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Currencies_IsoCode",
-                schema: "Common",
-                table: "Currencies",
-                column: "IsoCode",
-                unique: true);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Currencies",
-                schema: "Common");
-        }
-    }
-}
-```
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Migrations/20170227231210_InitialCreateMigration.cs" >}}
 
 ### 5) Crear archivo de configuración
 
 #### appsettings.json
-```json
-{
-    "connectionStrings": {
-        "defaultConnection": "Data Source=localhost;Initial Catalog=EFCore.App;Integrated Security=SSPI;"
-    }
-}
-```
+
+{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
 
