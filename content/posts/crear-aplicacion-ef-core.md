@@ -12,11 +12,19 @@ series: [ "Entity Framework Core" ]
 
 # Crear una aplicación con Entity Framework Core 1.1
 
-En este artículo se muestra el desarrollo de una aplicación de consola sencilla usando Code First con EF Core 1.1, con el fin de entender los aspectos básicos del trabajo con EF Core.
+En este artículo desarrollo una aplicación de consola muy sencilla usando Code First con EF Core 1.1, con el fin de entender algunos aspectos básicos del trabajo con EF Core.
+
+Los aspectos principales que exploro son:
+
+0. Uso de la interfaz de comandos para EF Core ([.NET Core EF CLI](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet))
+0. Creación de la migración inicial trabajando con "Code First".
+0. Creación de la base de datos inicial.
+0. Configuración del modelo usando "Fluent API" en una clase de configuración por cada clase del modelo de dominio.
+0. Carga de datos iniciales al crear la base de datos.
 
 Finalmente se espera poder migrar una aplicación mediana (~100 clases del modelo de dominio), haciendo lo posible por mantener la experiencia de desarrollo lo más parecida posible a la de EF 6.
 
-El repositorio con la solución completa está aquí:
+El repositorio con la solución completa está aquí: https://github.com/mvelosop/EFCoreApp
 
 ## Contexto
 
@@ -31,7 +39,6 @@ El repositorio con la solución completa está aquí:
 * [.NET Core 1.1 SDK - Installer x64](https://go.microsoft.com/fwlink/?LinkID=835014)  
 * [.NET Core 1.1 runtime - Installer x64](https://go.microsoft.com/fwlink/?LinkID=835009)  
   (Este es necesario, además del SDK, para soportar .NET Core 1.1)
-
 
 ## Paso a paso
 
@@ -124,7 +131,8 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
 2. Crear la migración inicial
 
    * Ejecutar **```dotnet ef migrations add InitialCreateMigration```** en la interfaz de comandos.
-   * Se puede utilizar cualquier nombre para la clase de la migración, pero es recomendable utilizar el sufijo "Migration" para evitar conflictos de nombres con otras clases de la aplicación.
+   * Se puede utilizar cualquier nombre para la clase de la migración, pero recomiendo utilizar el sufijo "Migration" para evitar conflictos de nombres con otras clases de la aplicación.
+   * También podemos utlizar **```dotnet ef [comando] --help```** para consultar la ayuda de cualquier comando de la interfaz.
 
 3. Verificar que se hayan creado los archivos del la migración inicial, en la carpeta Migrations, similar a los siguientes:
  
@@ -167,8 +175,20 @@ Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a 
 
 ## Conclusiones
 
+0. Identificamos los paquetes requeridos para trabajar con EF Core, diferenciando los utilizados sólo para desarrollo de los necesarios para ejecución.
 
-## Enlaces relacionados
+0. Encontramos una forma de trabajar con clases de configuración separadas por cada clase del dominio, necesario para cualquier aplicación en la vida real.
+
+0. Vimos cómo usar archivos de configuración dentro de la aplicación.
+
+0. Utilizamos la interfaz de comandos para EF Core para crear la migración incial y vimos como usar la ayuda disponible.
+
+Espero que sea de ayuda para alguien.
+
+**Miguel.**
+
+---
+###### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current
