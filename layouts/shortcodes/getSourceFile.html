@@ -1,5 +1,5 @@
-{{ with .Get 0 }}
-<pre><code>{{ readFile . }}</code>
-<span class="source-footer">{{.}}</span>
+{{ $file := .Get 0 }}
+{{ $repoFile := printf "repos/%s" $file }}
+<pre><code>{{ readFile $repoFile }}</code>
+<span class="source-footer">{{$file}}</span>
 </pre>
-{{ end }}

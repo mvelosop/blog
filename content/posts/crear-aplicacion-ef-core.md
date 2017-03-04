@@ -53,7 +53,7 @@ El repositorio con la solución completa está aquí: https://github.com/mveloso
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
 
-    {{< getSourceFile "repos/EFCoreApp/src/EFCore.App/project.json" >}}
+    {{< getSourceFile "EFCoreApp/src/EFCore.App/project.json" >}}
 
 3. Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute **```dotnet restore```**
 
@@ -82,38 +82,38 @@ El repositorio con la solución completa está aquí: https://github.com/mveloso
 
 La clase del modelo, Divisas en este caso.
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Model/Currency.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Model/Currency.cs" >}}
 
 #### Base/EntityTypeConfiguration.cs
 
 Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Base/EntityTypeConfiguration.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Base/EntityTypeConfiguration.cs" >}}
 
 #### Data/CurrencyConfiguration.cs
 
 Clase de configuración del modelo en EF. Así se mantienen fuera del modelo los detalles que corresponden a la capa de base de datos.
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Data/CurrencyConfiguration.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Data/CurrencyConfiguration.cs" >}}
 
 #### Config/ConfigClasses.cs
 
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
 **appsettings.json** de una forma "strongly typed".
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Config/ConfigClasses.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Config/ConfigClasses.cs" >}}
 
 #### Data/CommonDbContext.cs
 
 El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Data/CommonDbContext.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Data/CommonDbContext.cs" >}}
 
 #### Program.cs
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Program.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Program.cs" >}}
 
 ### 4) Generar la migración inicial
 
@@ -140,7 +140,7 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
 
 Este archivo es la configuración de la última versión del modelo, se utiliza al ejecutar el método DbContext.Database.EnsureCreated().
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
 
 #### Migrations/20170227231210_InitialCreateMigration
 
@@ -148,13 +148,13 @@ Este archivo es el encargado de generar la migración desde la versión anterior
 
 Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/Migrations/20170227231210_InitialCreateMigration.cs" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/Migrations/20170227231210_InitialCreateMigration.cs" >}}
 
 ### 5) Crear archivo de configuración
 
 #### appsettings.json
 
-{{< getSourceFile "repos/EFCoreApp/src/EFCore.App/appsettings.json" >}}
+{{< getSourceFile "EFCoreApp/src/EFCore.App/appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
 
