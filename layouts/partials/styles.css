@@ -7,6 +7,15 @@ pre .source-footer {
   line-height: .6rem;
 }
 
+.hljs {
+  background-color: rgb(240, 240, 240);
+}
+
+.cpp .hljs-keyword, .cs .hljs-keyword {
+  color: rgb(33, 33, 233);
+  font-weight: bold;
+}
+
 @media (max-width:  768px)  {
   html {
     font-size: 14px;

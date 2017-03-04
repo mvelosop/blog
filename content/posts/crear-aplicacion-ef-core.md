@@ -140,6 +140,8 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
 
 Este archivo es la configuración de la última versión del modelo, se utiliza al ejecutar el método DbContext.Database.EnsureCreated().
 
+Observe que en esta clase está consolidada toda la definición de los objetos de base de datos, usando Fluent API, incluyendo los atributos utilizados en las propiedades del modelo de dominio.
+
 {{< getSourceFile "EFCoreApp/src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
 
 #### Migrations/20170227231210_InitialCreateMigration
