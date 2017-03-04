@@ -183,6 +183,8 @@ Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a 
 
 0. Utilizamos la interfaz de comandos para EF Core para crear la migración incial y vimos como usar la ayuda disponible.
 
+0. Vimos como ahora EF Core mantiene el "snapshot" de la base de datos en una clase que se puede entender (a diferencia de EF 6).
+
 Espero que sea de ayuda para alguien.
 
 **Miguel.**
