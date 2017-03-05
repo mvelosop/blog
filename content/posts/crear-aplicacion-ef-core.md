@@ -23,8 +23,6 @@ Los aspectos principales que exploro son:
 0. Configuración del modelo usando "Fluent API" en una clase de configuración por cada clase del modelo de dominio.
 0. Carga de datos iniciales al crear la base de datos.
 
-Finalmente se espera poder migrar una aplicación mediana (~100 clases del modelo de dominio), haciendo lo posible por mantener la experiencia de desarrollo lo más parecida posible a la de EF 6.
-
 El repositorio con la solución completa está aquí: {{< repoUrl >}}
 
 ## Contexto
@@ -157,6 +155,8 @@ Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (
 
 #### appsettings.json
 
+Este string de conexión es adecuado para SQL Server Developer Edition con la instancia por default (MSSQLSERVER), puede ser necesario ajustarlo si la situación es distinta.
+
 {{< getSourceFile "src/EFCore.App/appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
@@ -172,9 +172,11 @@ Verificar que project.json incluya la opción para copiar este archivo a la carp
 
 ### 6) Ejecutar la aplicación
 
-Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:
+Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-editions-developers), al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:
 
 {{<img-popup src="/posts/images-ef-core/cmd_2017-02-28_00-47-31.png">}}
+
+Y si en algún momento necesitamos empezar con una base de datos nueva, basta con eliminarla usando el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) y ejecutar la aplicación de nuevo.
 
 ## Conclusiones
 
@@ -188,7 +190,9 @@ Al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a 
 
 0. Vimos como ahora EF Core mantiene el "snapshot" de la base de datos en una clase que se puede entender (a diferencia de EF 6).
 
-Espero que sea de ayuda para alguien.
+0. Vimos como se crea la base de datos automáticamente al trabajar con Code First y Migrations.
+
+Espero que sea de ayuda.
 
 **Miguel.**
 
