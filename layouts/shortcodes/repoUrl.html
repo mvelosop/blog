@@ -1,0 +1,3 @@
+{{ $gitHubUser := "https://github.com/mvelosop" }}
+{{ $repoUrl := printf "%s/%s" $gitHubUser $.Page.Params.repoName }}
+<a href="{{ $repoUrl }}">{{ $repoUrl }}</a>
