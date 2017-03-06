@@ -1,0 +1,18 @@
+    <div id="author">
+      <span><a href="/about" style="color: black"><strong>{{ .Site.Author.name }}</strong></a></span>
+      <div>
+        {{ with .Site.Author.twitter }}
+        <a href="https://twitter.com/{{ . }}"><i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #1da1f2"></i></a>
+        {{ end }}
+        {{ with .Site.Author.github }}
+        <a href="https://github.com/{{ . }}"><i class="fa fa-github-square fa-2x" aria-hidden="true" style="color: black"></i></a>
+        {{ end }}
+        {{ with .Site.Author.linkedin }}
+        <a href="https://www.linkedin.com/in/{{ . }}"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color: #0077B5"></i></a>
+        {{ end }}
+        {{ with .Site.Author.email }}
+        <a href="mailto:{{ . }}"><i class="fa fa-envelope-square fa-2x" aria-hidden="true" style="color: #dd4b39"></i></a>
+        {{ end }}
+      </div>
+    </div>
+

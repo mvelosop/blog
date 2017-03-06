@@ -3,6 +3,8 @@ title: Acerca de mí
 author: Miguel Veloso
 date: 2017-02-28
 thumbnail: /images/img_6713.jpeg
+description: Una breve reseña mía.
+links: personalLinks
 ---
 
 <div>

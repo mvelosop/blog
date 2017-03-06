@@ -22,6 +22,9 @@
     {{ .Render "summary" }}
 
     {{ template "_internal/disqus.html" . }}
+
+    {{ partial "intenseDebate.html" . }}
+
   </div>
 
   <div class="col-md-3">
