@@ -1,7 +1,34 @@
 <aside class="site">
 
   <section>
-    <header>latests</header>
+    <header>Autor</header>
+
+    <div class="image-cropper" style="width: 100px; height: 100px;">
+      <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
+    </div>
+
+    <div id="author">
+      <span><a href="/about" style="color: black"><strong>{{ .Site.Author.name }}</strong></a></span>
+      <div>
+        {{ with .Site.Author.twitter }}
+        <a href="https://twitter.com/{{ . }}"><i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #1da1f2"></i></a>
+        {{ end }}
+        {{ with .Site.Author.github }}
+        <a href="https://github.com/{{ . }}"><i class="fa fa-github-square fa-2x" aria-hidden="true" style="color: black"></i></a>
+        {{ end }}
+        {{ with .Site.Author.linkedin }}
+        <a href="https://www.linkedin.com/in/{{ . }}"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color: #0077B5"></i></a>
+        {{ end }}
+        {{ with .Site.Author.email }}
+        <a href="mailto:{{ . }}"><i class="fa fa-envelope-square fa-2x" aria-hidden="true" style="color: #dd4b39"></i></a>
+        {{ end }}
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <header>Lo más reciente</header>
     <div>
       <div class="row">
         {{ range $i, $p := (first 5 .Site.Pages) }}

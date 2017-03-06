@@ -13,3 +13,14 @@ preserveTaxonomyNames = false
 	category = "categorías"
 	series = "series"
 
+[author]
+    # If you want to display author information set these
+    # This is Optional values
+    name = "Miguel Veloso"
+
+    # Please set account ids
+    # This is Optional values
+    twitter  = "mvelosop"
+    linkedin = "miguelvelosop"
+    github   = "mvelosop"
+    email    = "mvelosop@gmail.com"
