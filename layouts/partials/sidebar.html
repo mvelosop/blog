@@ -3,9 +3,14 @@
   <section>
     <header>Autor</header>
 
-    <div class="image-cropper" style="width: 100px; height: 100px;">
-      <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
-    </div>
+    {{ $base := printf "%s" .Site.BaseURL }}
+    {{ $current := printf "%s" .Permalink }}
+    {{ if eq $base $current }}
+      <div class="image-cropper" style="width: 100px; height: 100px;">
+        <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
+      </div>
+    {{ end }}
+
 
     <div id="author">
       <span><a href="/about" style="color: black"><strong>{{ .Site.Author.name }}</strong></a></span>
