@@ -1,5 +1,6 @@
 ---
 title: Crear Aplicación EF Core
+draft: false
 author: Miguel Veloso
 date: 2017-03-02
 description: Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.

@@ -1,6 +1,6 @@
 ---
 date: 2017-03-01
-draft: true
+draft: false
 title: Publicando un Blog
 description: Sobre el inicio y el proceso de preparación del blog.
 thumbnail: posts/images/sunrise-165094_1280.jpg
@@ -44,4 +44,4 @@ Estoy claro que estaba sufriendo un caso de [sesgo de confirmación](https://es.
 
 ## ¿Dónde publicar?
 
-## ¿Qué herramienta utilizar?
+Ya que estamos trabajando con tecnología .NET, lo más adecuado es publicarlo en Azure y, aunque puede haber opciones más económicas, también hay formas de aprovechar la plataforma para lograr ahorros significativos, aprovechando que se trata de un sitio estático, tal como lo indica este artículo: [Cloud hosting for a static website](https://www.microsoft.com/middleeast/azureboxes/cloud-hosting-for-a-static-website.aspx).

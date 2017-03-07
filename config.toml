@@ -1,8 +1,12 @@
 languageCode = "es-es"
 title = "Code Repo - Mi repositorio de código"
-baseURL = "http://coderepo.blog/"
+baseURL = "http://www.coderepo.blog/"
 theme = "robust"
 MetaDataFormat = "yaml"
+
+googleAnalytics = "UA-92982846-1"
+
+disqusShortName = "www-coderepo-blog"
 
 pluralizeListTitles = true
 
