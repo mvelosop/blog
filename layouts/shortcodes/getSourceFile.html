@@ -1,5 +1,5 @@
 {{ $file := .Get 0 }}
-{{ $repoFilePath := printf "%s/%s" $.Page.Params.repoName $file }}
+{{ $repoFilePath := printf "%s-%s/%s" $.Page.Params.repoName $.Page.Params.repoRelease $file }}
 {{ $repoFile := printf "repos/%s" $repoFilePath }}
 {{ $fileExt := replace (index (findRE "(\\.)\\w+$" $file) 0) "." "" }}
 <pre><code class="language-{{ $fileExt }}">{{ readFile $repoFile }}</code>

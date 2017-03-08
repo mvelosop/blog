@@ -1,3 +1,4 @@
 {{ $gitHubUser := "https://github.com/mvelosop" }}
 {{ $repoUrl := printf "%s/%s" $gitHubUser $.Page.Params.repoName }}
-<a href="{{ $repoUrl }}">{{ $repoUrl }}</a>
+{{ $releaseUrl := printf "%s/%s/releases/tag/%s" $gitHubUser $.Page.Params.repoName $.Page.Params.repoRelease }}
+<a href="{{ $repoUrl }}">{{ $repoUrl }}</a> (release <a href="{{ $releaseUrl }}">{{ $.Page.Params.repoRelease }}</a>)

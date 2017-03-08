@@ -4,13 +4,13 @@ draft: false
 author: Miguel Veloso
 date: 2017-03-02
 description: Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.
-thumbnail: posts/images-ef-core/post.jpg
+thumbnail: posts/images/server-1235959_1280.jpg
 categorías: [ "Desarrollo" ]
 tags: [ "Entity Framework", "CSharp" ]
 series: [ "Entity Framework Core" ]
 repoName: EFCoreApp
+repoRelease: "1.0"
 ---
-
 
 # Crear una aplicación con Entity Framework Core 1.1
 
@@ -24,9 +24,12 @@ Los aspectos principales que exploro son:
 0. Configuración del modelo usando "Fluent API" en una clase de configuración por cada clase del modelo de dominio.
 0. Carga de datos iniciales al crear la base de datos.
 
-El repositorio con la solución completa está aquí: {{< repoUrl >}}
+El repositorio con la solución completa está aquí:  
+{{< repoUrl >}}
 
 ## Contexto
+
+Para seguir este artículo es necesario tener instalado lo siguiente:
 
 ### Herramientas
 
@@ -126,7 +129,7 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
    * Ejecutar **```dotnet ef```**
    * Si todo marchó bien, debe observar la una pantalla similar a la siguiente:
    
-	{{<img-popup src="/posts/images-ef-core/cmd_2017-02-27_23-41-30.png" width="100%">}}
+	{{<img-popup src="/posts/images/cmd_2017-02-27_23-41-30.png" width="100%">}}
 
 2. Crear la migración inicial
 
@@ -175,7 +178,7 @@ Verificar que project.json incluya la opción para copiar este archivo a la carp
 
 Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-editions-developers), al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:
 
-{{<img-popup src="/posts/images-ef-core/cmd_2017-02-28_00-47-31.png">}}
+{{<img-popup src="/posts/images/cmd_2017-02-28_00-47-31.png">}}
 
 Y si en algún momento necesitamos empezar con una base de datos nueva, basta con eliminarla usando el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) y ejecutar la aplicación de nuevo.
 
