@@ -15,3 +15,4 @@ repoName: EFCoreApp
 
 En este artículo voy a migrar la aplicación que desarrollamos en el [artículo anterior](/posts/crear-aplicacion-ef-core), provechando la oportunidad de que justo ayer fue el lanzamiento oficial de Visual Studio 2017, para enteder el proceso de migración, en especial lo referente al cambio del archivo de configuración **project.json** a **"NombreDelProjecto".csproj**.
 
+{{< getSourceFile "src/EFCore.App/project.json" >}}
