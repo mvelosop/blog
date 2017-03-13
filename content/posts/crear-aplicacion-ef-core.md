@@ -65,7 +65,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 * Paquetes de Entity Framework Core
 
    * **Microsoft.EntityFrameworkCore**: Paquete base
-   * **Microsoft.EntityFrameworkCore.Design**: Componentes para EF Core CLI, sólo para desarrollo, por eso ```"type": "build"```
+   * **Microsoft.EntityFrameworkCore.Design**: Componentes para la configuración de los modelos,
    * **Microsoft.EntityFrameworkCore.Tools.DotNet**: EF Core CLI
    * **Microsoft.EntityFrameworkCore.SqlServer**: SQL Server provider
 

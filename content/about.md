@@ -22,7 +22,13 @@ Apasionado de la tecnología y el desarrollo de software "[Clean Code](https://e
 
 * Dedicado al desarrollo de software desde 1993.
 
-* Co-propietario de una empresa de software durante 21 años.
+* Co-propietario de una empresa de software durante 21 años.  
+Desarrollamos un ERP con herramientas de Oracle para la administración pública venezolana. Clientes principales:
+   * SENIAT (Agencia tributaria, 63 oficinas a nivel nacional)
+   * Tribunal Supremo de Justicia
+   * Consejo Nacional Electoral
+   * Contraloría General de la Repúlica
+   * Instituto Nacional de Estadística
 
 * Trabajando como consultor independiente desde 2014.
 
