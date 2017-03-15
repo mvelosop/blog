@@ -3,9 +3,9 @@
   <section>
     <header>Autor</header>
 
-    {{ $base := printf "%s" .Site.BaseURL }}
+    {{ $about := printf "%sabout/" .Site.BaseURL }}
     {{ $current := printf "%s" .Permalink }}
-    {{ if eq $base $current }}
+    {{ if ne $current $about }}
       <div class="image-cropper" style="width: 100px; height: 100px;">
         <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
       </div>

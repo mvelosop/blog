@@ -1,15 +1,16 @@
 {{ $file := .Get 0 }}
 {{ $fileExt := replace (index (findRE "(\\.)\\w+$" $file) 0) "." "" }}
 {{ with $.Page.Params.repoRelease }}
-{{ $sourceFilePath := printf "%s-%s/%s" $.Page.Params.repoName . $file }}
-{{ $sourceFile := printf "releases/%s" $sourceFilePath }}
-<pre><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code>
-<span class="source-footer">{{ $sourceFilePath }}</span>
-</pre>
+{{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $file }}
+{{ $sourceFile := printf "releases\\%s-%s\\%s" $.Page.Params.repoName . $file }}
+<div class="source-file">
+	<div class="source-filename">
+		{{ $sourceFilePath }}
+	</div>
+<pre><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
+</div>
 {{ else }}
-{{ $sourceFilePath := printf "%s/%s" $.Page.Params.repoName $file }}
-{{ $sourceFile := printf "repos/%s" $sourceFilePath }}
-<pre><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code>
-<span class="source-footer">{{ $sourceFilePath }}</span>
-</pre>
+{{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $file }}
+{{ $sourceFile := printf "repos\\%s\\%s" $.Page.Params.repoName $file }}
+<pre><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
 {{ end }}

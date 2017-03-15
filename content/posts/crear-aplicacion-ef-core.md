@@ -56,7 +56,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
 
-    {{< getSourceFile "src/EFCore.App/project.json" >}}
+    {{< getSourceFile "src\EFCore.App\project.json" >}}
 
 3. Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute **```dotnet restore```**
 
@@ -65,7 +65,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 * Paquetes de Entity Framework Core
 
    * **Microsoft.EntityFrameworkCore**: Paquete base
-   * **Microsoft.EntityFrameworkCore.Design**: Componentes para la configuración de los modelos,
+   * **Microsoft.EntityFrameworkCore.Design**: Componentes para EF Core CLI, sólo para desarrollo, por eso ```"type": "build"```
    * **Microsoft.EntityFrameworkCore.Tools.DotNet**: EF Core CLI
    * **Microsoft.EntityFrameworkCore.SqlServer**: SQL Server provider
 
@@ -81,11 +81,11 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
   
 ### 3) Agregar archivos del proyecto
 
-#### Model/Currency.cs
+#### Model\Currency.cs
 
 La clase del modelo, Divisas en este caso.
 
-{{< getSourceFile "src/EFCore.App/Model/Currency.cs" >}}
+{{< getSourceFile "src\EFCore.App\Model\Currency.cs" >}}
 
 #### Base/EntityTypeConfiguration.cs
 
