@@ -23,6 +23,50 @@ div.source-file > pre {
   margin-bottom: 0;
 }
 
+pre.snippet {
+  background-color: white;
+}
+
+/*.clippy {
+  margin-top: -3px;
+  position: relative;
+  top: 3px;
+}
+
+.snippet .btn {
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    padding: 2px 6px;
+    position: relative;
+    right: 4px;
+    top: 4px;
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 0px 2px 6px 4px;
+    width: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #eee;
+    background-image: linear-gradient(#fcfcfc,#eee);
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+}*/
+
 .hljs {
   background-color: rgb(240, 240, 240);
 }
