@@ -27,21 +27,25 @@ pre.snippet {
   background-color: white;
 }
 
-/*.clippy {
-  margin-top: -3px;
+.snippet{
   position: relative;
-  top: 3px;
 }
 
 .snippet .btn {
     -webkit-transition: opacity 0.3s ease-in-out;
     -o-transition: opacity 0.3s ease-in-out;
     transition: opacity 0.3s ease-in-out;
-    opacity: 0;
+    /*opacity: 0;*/
     padding: 2px 6px;
-    position: relative;
+    position: absolute;
     right: 4px;
     top: 4px;
+}
+
+/*.clippy {
+  margin-top: -3px;
+  position: relative;
+  top: 3px;
 }
 
 .btn {

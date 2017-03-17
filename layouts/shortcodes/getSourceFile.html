@@ -3,12 +3,19 @@
 {{ with $.Page.Params.repoRelease }}
 {{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $file }}
 {{ $sourceFile := printf "releases\\%s-%s\\%s" $.Page.Params.repoName . $file }}
-<div class="source-file">
+<div class="source-file"><div class="source-filename" style="line-height: 20px">{{ $sourceFilePath }}</div>
 <pre class="snippet">
-<span class="source-filename" style="line-height: 32px">{{ $sourceFilePath }}</span><button style="height: 26px; padding: 0px 5px 2px 6px; float: right" class="btn" data-clipboard-snippet ><img class="clippy" width="13" src="/images/clippy.svg" alt="Copy to clipboard"></button><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
+<button style="height: 26px; padding: 0px 5px 2px 6px; float: right" class="btn" data-clipboard-snippet >
+	<img class="clippy" width="13" src="/images/clippy.svg" title="Copiar al clipboard"
+></button><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
 </div>
 {{ else }}
 {{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $file }}
 {{ $sourceFile := printf "repos\\%s\\%s" $.Page.Params.repoName $file }}
-<pre class="snippet"><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
+<div class="source-file"><div class="source-filename" style="line-height: 20px">{{ $sourceFilePath }}</div>
+<pre class="snippet">
+<button style="height: 26px; padding: 0px 5px 2px 6px; float: right" class="btn" data-clipboard-snippet >
+	<img class="clippy" width="13" src="/images/clippy.svg" title="Copiar al clipboard"
+></button><code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
+</div>
 {{ end }}
