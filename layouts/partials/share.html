@@ -1,16 +1,16 @@
 <aside>Compartir
   <div class="share">
-    <a href="http://www.facebook.com/sharer.php?u={{ .Permalink }}&t={{ .Title }}" title="Compartir por Facebook" target="_blank" rel="nofollow">
-      <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #4267b2;"></i>
-    </a>
     <a href="http://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton" title="Compartir pot Twitter" target="_blank" rel="nofollow">
       <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #1da1f2"></i>
     </a>
-    <a href="https://plus.google.com/share?url={{ .Permalink }}" title="Compartir por Google Plus" target="_blank" rel="nofollow">
-      <i class="fa fa-google-plus-square fa-2x" aria-hidden="true" style="color: #dd4b39"></i>
+    <a href="http://www.facebook.com/sharer.php?u={{ .Permalink }}&t={{ .Title }}" title="Compartir por Facebook" target="_blank" rel="nofollow">
+      <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #4267b2;"></i>
     </a>
     <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}&summary={{ .Description }}" title="Copartir por LinkedIn" target="_blank" rel="nofollow">
       <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color: #0077B5"></i>
+    </a>
+    <a href="https://plus.google.com/share?url={{ .Permalink }}" title="Compartir por Google Plus" target="_blank" rel="nofollow">
+      <i class="fa fa-google-plus-square fa-2x" aria-hidden="true" style="color: #dd4b39"></i>
     </a>
     {{ $body := printf "%s\n\n%s" .Description .Permalink }}
     <a href="mailto:?subject={{ .Title }}&body={{ $body }}" title="Compartir por email" target="_blank" rel="nofollow">

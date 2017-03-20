@@ -14,16 +14,18 @@ repoRelease: "2.0"
 
 # Migrar una aplicación de consola a Visual Studio 2017
 
-En este artículo vamos a migrar la aplicación que desarrollamos en el [artículo anterior](/posts/crear-aplicacion-ef-core), aprovechando el reciente lanzamiento oficial de Visual Studio 2017, para entender el proceso de migración, en especial lo referente al cambio del archivo de configuración **project.json** a **"NombreDelProjecto".csproj**.
+En este artículo vamos a migrar la aplicación que desarrollamos en el [artículo anterior](/posts/crear-aplicacion-ef-core), aprovechando el reciente lanzamiento oficial de Visual Studio 2017, para entender el proceso de migración, en especial lo referente al cambio del archivo de configuración **project.json** a **&lt;NombreDelProjecto&gt;.csproj**.
 
-Para este ejemplo sencillo la migración transcurre sin ningún inconveniente y al final tenemos nuestro proyecto migrado a VS 2017 y aplicación trabajando con EF Core 1.1.1.
+> ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
-El repositorio con la solución completa está aquí:  
+> 0. Vemos las tranformaciones del archivo project.json a &lt;Nombre-del-proyecto&gt;.csproj
+> 0. Apreciamos las ventajas del nuevo formato simplificado del archivo &lt;Nombre-del-proyecto&gt;.csproj
+> 0. El EF Core CLI 1.1 no funciona y tuvimos que cambiar a 1.0 pero produce los mismos resultados.
+> 0. Para este proyecto muy sencillo la migración es transparente.
+
 {{< repoUrl >}}
 
 ## Contexto
-
-Lo primero es instalar:
 
 * [Visual Studio 2017 Community Edition](https://www.visualstudio.com/es/thank-you-downloading-visual-studio/?sku=Community&rel=15)  
 (ver la [página de descargas de Visual Studio](https://www.visualstudio.com/es/downloads/) para otras versiones).
@@ -31,15 +33,21 @@ Lo primero es instalar:
 * [.NET Core 1.1.1 con SDK 1.0.1 - x64 Installer](https://go.microsoft.com/fwlink/?linkid=843448)  
 (ver la [página de descargas de .NET Core](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) para otras versiones).
 
-## El Proceso
+## Paso a paso
 
-Lo primero que vemos al abrir el proyecto en VS 2017 es lo siguiente:
+### 1) Abrir la solución con VS 2017
+
+En cuanto se abre la solución desarrollada con una versión anterior de Visual Studio se observa lo siguiente:
 
 {{<img-popup src="/posts/images/devenv_2017-03-13_17-49-26.png">}}
 
 Y a continuación el siguiente informe de conversión:
 
 {{<img-popup src="/posts/images/chrome_2017-03-13_17-50-25.png">}}
+
+En este momento ya se realizó la conversión y la solución debería compilar sin problemas.
+
+### 2) Explorar los cambios realizados
 
 Al terminar la conversión se crea una carpeta Backup con los archivos originales de la solución (.sln) y del proyecto (project.json y el .xproj):
 
@@ -49,15 +57,18 @@ También podemos verificar que ahora ya no existe el archivo ```project.json``` 
 
 {{< getSourceFile "src\EFCore.App\EFCore.App.csproj" >}}
 
-En este archivo hay dos cosas notables:
+En este archivo hay tres cosas notables:
 
 1. Se actualizaron automáticamente todos los paquetes a la versión más reciente (1.1.1).
 2. EL paquete **Microsoft.EntityFrameworkCore.Tools.DotNet** se "actualizó" hacia abajo a 1.0.0.  
 (Al cambiar a la versión original falla porque no encuentra el archivo project.json).
+3. No se incluyen las interminables listas de archivos del formato anterior, ¡qué bueno! definitivamente **no voy a extrañar los conflictos durante los merge**.
 
-En cuanto a este último, efectivamente al ejecutar ```dotnet ef``` obtenemos esto:
+Al ejecutar ```dotnet ef``` verificamos que efectivamente se trata de la versión 1.0.0:
 
 {{<img-popup src="/posts/images/cmd_2017-03-14_10-43-14.png">}}
+
+### 3) Verificar funcionamiento de EF Core
 
 Sólo para verificar el funcionamiento del CLI de EF, eliminamos el contenido de la carpeta Migrations, para volver a generar la migración, y ejecutamos ```dotnet ef migrations add InitialCreateMigration``` y se generan los siguientes archivos:
 
@@ -80,3 +91,11 @@ Para verificar que todo sigue funcionando correctamente, eliminamos la base de d
 {{<img-popup src="/posts/images/cmd_2017-03-14_11-07-49.png">}}
 
 Así que, de aquí en adelante, a menos que no se pueda para algún tema en particular, seguiremos trabajando con Visual Studio 2017.
+
+Y con esto terminamos el artículo.
+
+---
+
+Espero que sea de ayuda.
+
+**Miguel.**

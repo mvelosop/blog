@@ -14,17 +14,16 @@ repoRelease: "1.0"
 
 # Crear una aplicación con Entity Framework Core 1.1
 
-En este artículo desarrollo una aplicación de consola muy sencilla usando Code First con EF Core 1.1, con el fin de entender algunos aspectos básicos del trabajo con EF Core.
+En este artículo desarrollamos una aplicación de consola muy sencilla usando Code First con EF Core 1.1, con el fin de entender algunos aspectos básicos del trabajo con EF Core.
 
-Los aspectos principales que exploro son:
+> ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
-0. Uso de la interfaz de comandos para EF Core ([.NET Core EF CLI](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet))
-0. Creación de la migración inicial trabajando con "Code First".
-0. Creación de la base de datos inicial.
-0. Configuración del modelo usando "Fluent API" en una clase de configuración por cada clase del modelo de dominio.
-0. Carga de datos iniciales al crear la base de datos.
+> 0. Identificamos los paquetes mínimos necesarios para trabajar con EF Core.
+> 0. Usamos clases de configuración del modelo con Fluente API fuera del DbContext.
+> 0. Exploramos cómo tomar el string de conexión de archivos configuración.
+> 0. Usamos la interfaz de comandos de EF Core para crear la migración inicial.
+> 0. Creamos automáticamente la base de datos al trabajar con Code First y Migrations.
 
-El repositorio con la solución completa está aquí:  
 {{< repoUrl >}}
 
 ## Contexto
@@ -87,36 +86,36 @@ La clase del modelo, Divisas en este caso.
 
 {{< getSourceFile "src\EFCore.App\Model\Currency.cs" >}}
 
-#### Base/EntityTypeConfiguration.cs
+#### Base\EntityTypeConfiguration.cs
 
 Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
-{{< getSourceFile "src/EFCore.App/Base/EntityTypeConfiguration.cs" >}}
+{{< getSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
 
-#### Data/CurrencyConfiguration.cs
+#### Data\CurrencyConfiguration.cs
 
 Clase de configuración del modelo en EF. Así se mantienen fuera del modelo los detalles que corresponden a la capa de base de datos.
 
-{{< getSourceFile "src/EFCore.App/Data/CurrencyConfiguration.cs" >}}
+{{< getSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
 
-#### Config/ConfigClasses.cs
+#### Config\ConfigClasses.cs
 
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
 **appsettings.json** de una forma "strongly typed".
 
-{{< getSourceFile "src/EFCore.App/Config/ConfigClasses.cs" >}}
+{{< getSourceFile "src\EFCore.App\Config\ConfigClasses.cs" >}}
 
-#### Data/CommonDbContext.cs
+#### Data\CommonDbContext.cs
 
 El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
-{{< getSourceFile "src/EFCore.App/Data/CommonDbContext.cs" >}}
+{{< getSourceFile "src\EFCore.App\Data\CommonDbContext.cs" >}}
 
 #### Program.cs
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
 
-{{< getSourceFile "src/EFCore.App/Program.cs" >}}
+{{< getSourceFile "src\EFCore.App\Program.cs" >}}
 
 ### 4) Generar la migración inicial
 
@@ -139,21 +138,21 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
 
 3. Verificar que se hayan creado los archivos del la migración inicial, en la carpeta Migrations, similar a los siguientes:
  
-#### Migrations/CommonDbContextModelSnapshot.cs
+#### Migrations\CommonDbContextModelSnapshot.cs
 
 Este archivo es la configuración de la última versión del modelo, se utiliza al ejecutar el método DbContext.Database.EnsureCreated().
 
 Observe que en esta clase está consolidada toda la definición de los objetos de base de datos, usando Fluent API, incluyendo los atributos utilizados en las propiedades del modelo de dominio.
 
-{{< getSourceFile "src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
+{{< getSourceFile "src\EFCore.App\Migrations\CommonDbContextModelSnapshot.cs" >}}
 
-#### Migrations/20170227231210_InitialCreateMigration
+#### Migrations\20170227231210_InitialCreateMigration
 
 Este archivo es el encargado de generar la migración desde la versión anterior de CommonDbContextModelSnapshot.cs, se utiliza al ejecutar el método DbContext.Database.Migrate().
 
 Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.
 
-{{< getSourceFile "src/EFCore.App/Migrations/20170227231210_InitialCreateMigration.cs" >}}
+{{< getSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
 
 ### 5) Crear archivo de configuración
 
@@ -161,7 +160,7 @@ Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (
 
 Este string de conexión es adecuado para SQL Server Developer Edition con la instancia por default (MSSQLSERVER), puede ser necesario ajustarlo si la situación es distinta.
 
-{{< getSourceFile "src/EFCore.App/appsettings.json" >}}
+{{< getSourceFile "src\EFCore.App\appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
 
@@ -182,19 +181,9 @@ Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www
 
 Y si en algún momento necesitamos empezar con una base de datos nueva, basta con eliminarla usando el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) y ejecutar la aplicación de nuevo.
 
-## Conclusiones
+Y con esto terminamos el artículo.
 
-0. Identificamos los paquetes requeridos para trabajar con EF Core, diferenciando los utilizados sólo para desarrollo de los necesarios para ejecución.
-
-0. Encontramos una forma de trabajar con clases de configuración separadas por cada clase del dominio, necesario para cualquier aplicación en la vida real.
-
-0. Vimos cómo usar archivos de configuración dentro de la aplicación.
-
-0. Utilizamos la interfaz de comandos para EF Core para crear la migración inicial y vimos cómo usar la ayuda disponible.
-
-0. Vimos como ahora EF Core mantiene el "snapshot" de la base de datos en una clase que se puede entender (a diferencia de EF 6).
-
-0. Vimos cómo se crea la base de datos automáticamente al trabajar con Code First y Migrations.
+---
 
 Espero que sea de ayuda.
 
