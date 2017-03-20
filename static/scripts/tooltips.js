@@ -16,4 +16,3 @@ function fallbackMessage(action) {
 	else { actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action; }
 	return actionMsg;
 }
-hljs.initHighlightingOnLoad();
