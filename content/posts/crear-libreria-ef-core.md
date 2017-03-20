@@ -115,7 +115,7 @@ Tal como se indica en la página de la [interfaz de comandos .NET EF Core (.NET 
 
 Si en este momento ejecutamos ```dotnet ef``` desde el proyecto EFCore.App 
 
-{{<img-popup src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
+{{<image src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
 
 Para esto hay que instalar el paquete **Microsoft.EntityFrameworkCore.Tools** en EFCore.App, pero este es un tipo de paquete **"DotNetCliTool"**, que no se puede instalar como un NuGet cualquiera.
 
@@ -165,7 +165,7 @@ El archivo **EFCore.App.csproj** resultante es así:
 ### 8) Ejecutar la aplicación
 
 Ahora basta con pulsar [Ctrl]+[F5], con lo que obtenemos el resultado esperado:
-   {{<img-popup src="/posts/images/cmd_2017-03-20_16-14-12.png">}}
+   {{<image src="/posts/images/cmd_2017-03-20_16-14-12.png">}}
 
 Y con esto terminamos el artículo.
 

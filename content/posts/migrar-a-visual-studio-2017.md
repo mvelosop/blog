@@ -39,11 +39,11 @@ En este artículo vamos a migrar la aplicación que desarrollamos en el [artícu
 
 En cuanto se abre la solución desarrollada con una versión anterior de Visual Studio se observa lo siguiente:
 
-{{<img-popup src="/posts/images/devenv_2017-03-13_17-49-26.png">}}
+{{<image src="/posts/images/devenv_2017-03-13_17-49-26.png">}}
 
 Y a continuación el siguiente informe de conversión:
 
-{{<img-popup src="/posts/images/chrome_2017-03-13_17-50-25.png">}}
+{{<image src="/posts/images/chrome_2017-03-13_17-50-25.png">}}
 
 En este momento ya se realizó la conversión y la solución debería compilar sin problemas.
 
@@ -51,7 +51,7 @@ En este momento ya se realizó la conversión y la solución debería compilar s
 
 Al terminar la conversión se crea una carpeta Backup con los archivos originales de la solución (.sln) y del proyecto (project.json y el .xproj):
 
-{{<img-popup src="/posts/images/explorer_2017-03-14_10-03-33.png">}}
+{{<image src="/posts/images/explorer_2017-03-14_10-03-33.png">}}
 
 También podemos verificar que ahora ya no existe el archivo ```project.json``` y en su lugar está el archivo ```EFCore.App.csproj``` con el siguiente contenido:
 
@@ -66,7 +66,7 @@ En este archivo hay tres cosas notables:
 
 Al ejecutar ```dotnet ef``` verificamos que efectivamente se trata de la versión 1.0.0:
 
-{{<img-popup src="/posts/images/cmd_2017-03-14_10-43-14.png">}}
+{{<image src="/posts/images/cmd_2017-03-14_10-43-14.png">}}
 
 ### 3) Verificar funcionamiento de EF Core
 
@@ -88,7 +88,7 @@ De la misma forma, el nuevo archivo de la migración sólo se diferencia en el n
 
 Para verificar que todo sigue funcionando correctamente, eliminamos la base de datos EFCore.App y ejecutamos el programa con [Ctrl]+[F5] y obtenemos el resultado esperado:
 
-{{<img-popup src="/posts/images/cmd_2017-03-14_11-07-49.png">}}
+{{<image src="/posts/images/cmd_2017-03-14_11-07-49.png">}}
 
 Así que, de aquí en adelante, a menos que no se pueda para algún tema en particular, seguiremos trabajando con Visual Studio 2017.
 
