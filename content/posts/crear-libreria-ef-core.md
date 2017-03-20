@@ -21,8 +21,8 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
-> 0. Creamos un proyecto de consola para poder ejecutar el EF Core CLI y crear las migraciones
 > 0. Separamos la aplicación en una capa cliente y una capa de datos
+> 0. Usamos la capa de cliente (aplicación de consola) para poder ejecutar el EF Core CLI y crear las migraciones
 > 0. Apreciamos la simplicidad de los nuevos archivos .csproj
 
 {{< repoUrl >}}
@@ -39,12 +39,12 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 
 Como en este artículo estamos separando los componentes de la aplicación, vamos a crear los archivos de programas y luego incluiremos los paquetes necesarios para poder compilar y ejecutar la solución.
 
-En este artículo vamos a desarrollar la solución desde el principio, para apreciar los archivos .proj en su expresión más símple, por no haber pasado por la migración de un proyecto de VS 2015.
+En este artículo vamos a desarrollar la solución desde el principio, para apreciar los archivos .proj en su expresión más simple, por no haber pasado por la migración de un proyecto de VS 2015.
 
 ### 1) Crear la solución EFCoreLib
 
 1. Crear una solución "blank" llamada EFCoreLib
-2. Crear el solution folder "src"
+2. Crear el "solution folder" "src"
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
 ### 2) Crear proyecto src\EFCore.App 
@@ -55,13 +55,13 @@ Este proyecto es el "cliente" que usa la "capa de datos" (el proyecto siguiente 
 
 ### 3) Crear proyecto src\EFCore.Lib
 
-Este proyect corresponde a lo que sería la "capa de datos" de la solución, desde luego de una forma muy rudimentaria.
+Este proyecto corresponde a lo que sería la "capa de datos" de la solución, desde luego de una forma muy rudimentaria.
 
 1. Crear el proyecto como una "Class Library (.NET Core)"
 
 ### 4) Crear los archivos de programa en EFCore.Lib
 
-Vamos a crerar en esencia los mismos archivos que usamos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core).
+Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core).
 
 0. **Model\Currency.cs**
    {{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
@@ -73,7 +73,7 @@ Vamos a crerar en esencia los mismos archivos que usamos en el artículo [Crear 
    {{<getSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
 
 0. **Config\ConnectionStrings.cs** <br/>  
-A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core), en el proyecto EFCore.Lib sólo incluímos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".  
+A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".  
    {{<getSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
 
 0. **Data\CommonDbContext.cs**
@@ -119,7 +119,7 @@ Si en este momento ejecutamos ```dotnet ef``` desde el proyecto EFCore.App
 
 Para esto hay que instalar el paquete **Microsoft.EntityFrameworkCore.Tools** en EFCore.App, pero este es un tipo de paquete **"DotNetCliTool"**, que no se puede instalar como un NuGet cualquiera.
 
-Entonces, siguiendo lo indicado en la página de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#workaround-1---use-an-app-as-the-startup-project), hay que editar el archivo .csproj del projecto (Solution Explorer, sobre EFCore.App: Botón derecho > Edit EFCore.App.csproj) y agregar las líneas siguientes:
+Entonces, siguiendo lo indicado en la página de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#workaround-1---use-an-app-as-the-startup-project), hay que editar el archivo .csproj del proyecto (Solution Explorer, sobre EFCore.App: Botón derecho > Edit EFCore.App.csproj) y agregar las líneas siguientes:
 
 
 ```xml
@@ -134,7 +134,7 @@ También hay que instalar el paquete: **Microsoft.EntityFrameworkCore.Design**.
 
 Sin embargo, como sólo vamos a utilizar **EFCore.App** para ejecutar la [.NET Core EF CLI](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet), no es necesario agregar el atributo **PrivateAssets="All"** manualmente en el archivo .csproj y, por lo tanto, podemos instalarlo como cualquier paquete NuGet.
 
-Después de esto ya podemos ejecutar el comado para crear la migración: ```dotnet ef migrations add InitialCreateMigration --project ..\EFCore.Lib```.
+Después de esto ya podemos ejecutar el comando para crear la migración: ```dotnet ef migrations add InitialCreateMigration --project ..\EFCore.Lib```.
 
 Observe que usamos la opción ```--project``` o ```-p``` para indicar donde se va a crear la migración.
 
@@ -156,7 +156,7 @@ Para esto debemos:
 
 3. Establecer el proyecto **EFCore.App** como la aplicación de arranque  
 
-   * **Botón Derecho > Set as Startup Project** sobre el projecto **EFCore.App** 
+   * **Botón Derecho > Set as Startup Project** sobre el proyecto **EFCore.App** 
 
 El archivo **EFCore.App.csproj** resultante es así:
 
