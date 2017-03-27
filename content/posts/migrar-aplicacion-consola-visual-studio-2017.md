@@ -1,9 +1,9 @@
 ---
-title: Migrar Aplicación a VS 2017
+title: Migrar una aplicación de consola a Visual Studio 2017
 draft: false
 author: Miguel Veloso
 date: 2017-03-14
-description: Migración de una aplicación de consola a Visual Studio 2017 para entender el proceso.
+description: Migración de una aplicación de consola a Visual Studio 2017 para explorar el proceso.
 thumbnail: posts/images/wild-geese-249134_1280.jpg
 categorías: [ "Desarrollo" ]
 tags: [ "Entity Framework", "CSharp", "Migración Visual Studio" ]
@@ -12,9 +12,7 @@ repoName: EFCoreApp
 repoRelease: "2.0"
 ---
 
-# Migrar una aplicación de consola a Visual Studio 2017
-
-En este artículo vamos a migrar la aplicación que desarrollamos en el [artículo anterior](/posts/crear-aplicacion-ef-core), aprovechando el reciente lanzamiento oficial de Visual Studio 2017, para entender el proceso de migración, en especial lo referente al cambio del archivo de configuración **project.json** a **&lt;NombreDelProjecto&gt;.csproj**.
+En este artículo vamos a migrar la aplicación que desarrollamos en el [artículo anterior](/posts/crear-aplicacion-entity-framework-core), aprovechando el reciente lanzamiento oficial de Visual Studio 2017, para explorar el proceso de migración, en especial lo referente al cambio del archivo de configuración **project.json** a **&lt;NombreDelProjecto&gt;.csproj**.
 
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 

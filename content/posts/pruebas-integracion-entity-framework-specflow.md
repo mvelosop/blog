@@ -1,20 +1,18 @@
 ---
-title: Plantilla (título)
+title: Pruebas de integración con Entity Framework y SpecFlow
 draft: true
 author: Miguel Veloso
-date: 2017-01-01
-description: Reseña tamaño twitter
-thumbnail: 
+date: 2017-03-21
+description: Uso de Specflow para probar una librería de EF Core
+thumbnail: posts/images/gears-1236578_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework", "CSharp" ]
-series: [ "Entity Framework Core" ]
+tags: [ "Entity Framework", "CSharp", "SpecFlow" ]
+series: [ "Entity Framework" ]
 repoName: EFCoreLib
-#repoRelease: "1.0"
+keywords: ["entity-framework", "specflow"]
 ---
 
-# Título del artículo
-
-Breve descripción de lo que se hace en el artículo.
+En este artículo exploramos el uso de [SpecFlow](http://specflow.org/), una herramienta enfocada en desarrollo BDD (Behavior Driven Development), para facilitar las pruebas de integración de una librería muy sencilla.
 
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
@@ -30,7 +28,17 @@ Breve descripción de lo que se hace en el artículo.
 * [.NET Core 1.1.1 con SDK 1.0.1 - x64 Installer](https://go.microsoft.com/fwlink/?linkid=843448)  
 (ver la [página de descargas de .NET Core](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) para otras versiones).
 
+* [SpecFlow for Visual Studio 2017](https://marketplace.visualstudio.com/items?itemName=TechTalkSpecFlowTeam.SpecFlowforVisualStudio2017)
+
 ## Paso a paso
+
+---
+
+Instalar SpecFlow
+
+
+
+---
 
 Como en este artículo estamos separando los componentes de la aplicación, vamos a crear los archivos de programas y luego incluiremos los paquetes necesarios para poder compilar y ejecutar la solución.
 

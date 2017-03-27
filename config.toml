@@ -1,8 +1,9 @@
-languageCode = "es-es"
+languageCode = "es-ES"
 title = "Code Repo - Mi repositorio de código"
 baseURL = "http://www.coderepo.blog/"
 theme = "robust"
 MetaDataFormat = "yaml"
+
 
 googleAnalytics = "UA-92982846-1"
 

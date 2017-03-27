@@ -11,6 +11,7 @@
 {{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $file }}
 {{ $sourceFile := printf "repos\\%s\\%s" $.Page.Params.repoName $file }}
 <div class="source-file"><div class="source-filename" style="line-height: 20px">{{ $sourceFilePath }}</div>
+<pre class="snippet">
 <code class="language-{{ $fileExt }}">{{ readFile $sourceFile }}</code></pre>
 </div>
 {{ end }}

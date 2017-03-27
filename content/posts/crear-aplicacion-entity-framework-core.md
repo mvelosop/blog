@@ -1,9 +1,9 @@
 ---
-title: Crear Aplicación EF Core
+title: Crear una aplicación con Entity Framework Core
 draft: false
 author: Miguel Veloso
 date: 2017-03-02
-description: Desarrollo de una aplicación de consola para entender aspectos de configuración de EF Core.
+description: Desarrollo de una aplicación de consola para explorar aspectos de configuración de EF Core.
 thumbnail: posts/images/server-1235959_1280.jpg
 categorías: [ "Desarrollo" ]
 tags: [ "Entity Framework", "CSharp" ]
@@ -12,17 +12,15 @@ repoName: EFCoreApp
 repoRelease: "1.0"
 ---
 
-# Crear una aplicación con Entity Framework Core 1.1
-
-En este artículo desarrollamos una aplicación de consola muy sencilla usando Code First con EF Core 1.1, con el fin de entender algunos aspectos básicos del trabajo con EF Core.
+En este artículo desarrollamos una aplicación de consola sencilla, usando Code First con EF Core 1.1, con el fin explorar algunos aspectos básicos del trabajo con EF Core.
 
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
 > 0. Identificamos los paquetes mínimos necesarios para trabajar con EF Core.
-> 0. Usamos clases de configuración del modelo con Fluente API fuera del DbContext.
+> 0. Usamos clases de configuración con Fluent API, fuera del DbContext.
 > 0. Exploramos cómo tomar el string de conexión de archivos configuración.
 > 0. Usamos la interfaz de comandos de EF Core para crear la migración inicial.
-> 0. Creamos automáticamente la base de datos al trabajar con Code First y Migrations.
+> 0. Creamos automáticamente la base de datos.
 
 {{< repoUrl >}}
 
@@ -126,7 +124,7 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
    * Hacer click sobre el nodo del proyecto EFCore.App en el explorador de la solución.
    * Pulsar [Shift]+[Alt]+[,] o Botón derecho > Open Command Line > Developer Command Prompt
    * Ejecutar **```dotnet ef```**
-   * Si todo marchó bien, debe observar la una pantalla similar a la siguiente:
+   * Si todo marchó bien, debe observar una pantalla similar a la siguiente:
    
 	{{<image src="/posts/images/cmd_2017-02-27_23-41-30.png">}}
 

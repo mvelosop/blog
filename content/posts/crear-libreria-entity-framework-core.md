@@ -1,5 +1,5 @@
 ---
-title: Crear Librería EF Core
+title: Crear una librería con Entity Framework Core
 draft: false
 author: Miguel Veloso
 date: 2017-03-20
@@ -12,9 +12,7 @@ repoName: EFCoreLib
 repoRelease: "1.0"
 ---
 
-# Crear una librería con Entity Framework Core 1.1
-
-En este artículo vamos a desarrollar una versión de la misma [aplicación de consola desarrollada anteriormente (migrada a VS 2017)](/posts/migrar-a-visual-studio-2017) pero separándola en dos capas:
+En este artículo vamos a desarrollar una versión de la misma [aplicación de consola desarrollada anteriormente (migrada a VS 2017)](/posts/migrar-aplicacion-consola-visual-studio-2017) pero separándola en dos capas:
 
 1. La capa de datos en el proyecto EFCore.Lib y
 2. La capa cliente en EFCore.App.
@@ -22,7 +20,7 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
 
 > 0. Separamos la aplicación en una capa cliente y una capa de datos
-> 0. Usamos la capa de cliente (aplicación de consola) para poder ejecutar el EF Core CLI y crear las migraciones
+> 0. Usamos la capa de cliente (aplicación de consola) para ejecutar el EF Core CLI y crear las migraciones
 > 0. Apreciamos la simplicidad de los nuevos archivos .csproj
 
 {{< repoUrl >}}
@@ -61,7 +59,7 @@ Este proyecto corresponde a lo que sería la "capa de datos" de la solución, de
 
 ### 4) Crear los archivos de programa en EFCore.Lib
 
-Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core).
+Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core).
 
 0. **Model\Currency.cs**
    {{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
@@ -73,7 +71,7 @@ Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear A
    {{<getSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
 
 0. **Config\ConnectionStrings.cs** <br/>  
-A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-ef-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".  
+A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".  
    {{<getSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
 
 0. **Data\CommonDbContext.cs**
