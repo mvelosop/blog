@@ -134,7 +134,7 @@ Ahora es necesario generar la migración inicial que utilizará EF para crear la
    * Se puede utilizar cualquier nombre para la clase de la migración, pero recomiendo utilizar el sufijo "Migration" para evitar conflictos de nombres con otras clases de la aplicación.
    * También podemos utilizar **```dotnet ef [comando] --help```** para consultar la ayuda de cualquier comando de la interfaz.
 
-3. Verificar que se hayan creado los archivos del la migración inicial, en la carpeta Migrations, similar a los siguientes:
+3. Verificar que se hayan creado los archivos de la migración inicial, en la carpeta Migrations, similar a los siguientes:
  
 #### Migrations\CommonDbContextModelSnapshot.cs
 
@@ -188,7 +188,7 @@ Espero que sea de ayuda.
 **Miguel.**
 
 ---
-###### Enlaces relacionados
+#### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

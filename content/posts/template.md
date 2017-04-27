@@ -12,8 +12,6 @@ repoName: EFCoreLib
 #repoRelease: "1.0"
 ---
 
-# Título del artículo
-
 Breve descripción de lo que se hace en el artículo.
 
 > ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
@@ -57,3 +55,12 @@ Y con esto terminamos el artículo.
 Espero que sea de ayuda.
 
 **Miguel.**
+
+---
+#### Enlaces relacionados
+
+**.NET Core current downloads**  
+https://www.microsoft.com/net/download/core#/current
+
+**.NET Core EF CLI**  
+https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
