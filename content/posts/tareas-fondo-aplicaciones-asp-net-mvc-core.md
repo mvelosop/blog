@@ -1,15 +1,15 @@
 ---
 title: Tareas de fondo en aplicaciones ASP.NET MVC Core
-draft: true
+draft: false
 author: Miguel Veloso
-date: 2017-04-24
-description: Cómo implementar tareas en background usando HangFire
+date: 2017-04-28
+description: Cómo implementar tareas de fondo usando HangFire
 thumbnail: posts/images/plumbing-840835_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework", "CSharp" ]
+tags: [ "Entity Framework Core", "Background Tasks", "Dynamic Composition", "CSharp" ]
 series: [ ]
 repoName: HangFireCoreWebApp
-#repoRelease: "1.0"
+repoRelease: "1.0"
 ---
 
 Es este artículo vamos a desarrollar la estructura de una aplicación web en .NET Core, para analizar cómo se integra la librería [Hangfire](https://www.hangfire.io) (https://www.hangfire.io) para gestionar tareas de fondo.
@@ -91,11 +91,11 @@ En el repositorio se incluye también el módulo **HangFire.Job.Two**, aunque no
 
 ### 4) Crear el proyecto src\HangFireCore.WebApp
 
-En la aplicación web se integran de forma ligera (loosely coupled) los módulos de la solución, en este caso eso significa, que si la aplicación encuentra los módulos de las tareas programadas, los carga y programa la ejecución de las tareas y si no los encuentra no pasa nada.
+En la aplicación web se integran de forma ligera (loosely coupled) los módulos de la solución, en este caso eso significa, que, si la aplicación encuentra los módulos de las tareas programadas, los carga y programa la ejecución de las tareas y si no los encuentra no pasa nada.
 
-La idea fundamental de esta estructura es que no existe un referencia directa entre la aplicación web y los proyectos (assemblies) de tareas programadas, sino que al arrancar, la aplicación busca los assemblies y usa los que encuentre.
+La idea fundamental de esta estructura es que no existe una referencia directa entre la aplicación web y los proyectos (assemblies) de tareas programadas, sino que, al arrancar, la aplicación busca los assemblies y usa los que encuentre.
 
-Como no hay un referencia directa a esos assemblies, no serán incluidos directamente por el proceso de "Build" y entonces es necesario copiarlos a mano en la carpeta de la aplicación.
+Como no hay una referencia directa a esos assemblies, no serán incluidos directamente por el proceso de "Build" y entonces es necesario copiarlos a mano en la carpeta de la aplicación.
 
 1. **Crear un projecto .NET Core Web Application (.NET Core)**
 
@@ -289,9 +289,9 @@ Ejecutar la aplicación con [Ctrl]+[F5] y navegar hasta /hangfire, si es la prim
 
 Se puede ver que en este caso hay dos tareas recurrentes, una se ejecuta cada minuto y la otra cada dos minutos.
 
-Eventualmente se puede ver más de un servidor activo. Esto ocurre porque la tareas en background corren en threads independientes y no se cierran inmediatamente al reiniciar la aplicación, pero el gestor de tareas de Hangfire se encarga de hacerlo después de un timeout (ver logs).
+Eventualmente se puede ver más de un servidor activo. Esto ocurre porque las tareas en background corren en threads independientes y no se cierran inmediatamente al reiniciar la aplicación, pero el gestor de tareas de Hangfire se encarga de hacerlo después de un timeout (ver logs).
 
-El achivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
+El archivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
 {{<getSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
 
 Y con esto terminamos el artículo.

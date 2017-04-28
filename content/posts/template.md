@@ -9,14 +9,14 @@ categorías: [ "Desarrollo" ]
 tags: [ "Entity Framework", "CSharp" ]
 series: [ "Entity Framework Core" ]
 repoName: EFCoreLib
-#repoRelease: "1.0"
+repoRelease: "1.0"
 ---
 
 Breve descripción de lo que se hace en el artículo.
 
-> ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
 
-> 0. Lista de los resultados principales del artículo
+> 0. Lista de los puntos más importantes del artículo
 
 {{< repoUrl >}}
 

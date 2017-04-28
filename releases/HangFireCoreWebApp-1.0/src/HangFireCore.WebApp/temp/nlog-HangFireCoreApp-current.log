@@ -1,0 +1,15 @@
+2017-04-27 21:44:33.9864|0|Hangfire.SqlServer.SqlServerStorage|INFO|  Start installing Hangfire SQL objects... |url: |action: 
+2017-04-27 21:44:34.2044|0|Hangfire.SqlServer.SqlServerStorage|INFO|  Hangfire SQL objects installed. |url: |action: 
+2017-04-27 21:44:34.2419|0|Hangfire.BackgroundJobServer|INFO|  Starting Hangfire Server |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|  Using job storage: 'SQL Server: localhost@HangFireCoreWebApp' |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|  Using the following options for SQL Server job storage: |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|      Queue poll interval: 00:00:15. |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|  Using the following options for Hangfire Server: |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|      Worker count: 20 |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|      Listening queues: 'default' |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|      Shutdown timeout: 00:00:15 |url: |action: 
+2017-04-27 21:44:34.2504|0|Hangfire.BackgroundJobServer|INFO|      Schedule polling interval: 00:00:15 |url: |action: 
+2017-04-27 21:44:34.3054||ScheduleJobsHelpers|INFO|  Scheduling recurring jobs... |url: |action: 
+2017-04-27 21:44:34.3054||ScheduleJobsHelpers|INFO|  Loading Job assembly: C:\Users\Miguel\Documents\Trabajo\Blog\coderepo.blog\repos\HangFireCoreWebApp\src\HangFireCore.WebApp\bin\Debug\netcoreapp1.1\HangFireCore.Job.One.dll |url: |action: 
+2017-04-27 21:44:34.5750||ScheduleJobsHelpers|INFO|  Loading Job assembly: C:\Users\Miguel\Documents\Trabajo\Blog\coderepo.blog\repos\HangFireCoreWebApp\src\HangFireCore.WebApp\bin\Debug\netcoreapp1.1\HangFireCore.Job.Two.dll |url: |action: 
+2017-04-27 21:45:00.7109||JobOne|INFO|  Executing Job One - 00:00:00.000 |url: |action: 
