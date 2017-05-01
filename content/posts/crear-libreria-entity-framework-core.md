@@ -176,4 +176,4 @@ Ahora basta con pulsar [Ctrl]+[F5], con lo que obtenemos el resultado esperado:
    {{<image src="/posts/images/cmd_2017-03-20_16-14-12.png">}}
 
 ---
-{{< goodbye.html >}}
+{{< goodbye >}}

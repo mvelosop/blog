@@ -196,7 +196,7 @@ Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www
 Y si en algún momento necesitamos empezar con una base de datos nueva, basta con eliminarla usando el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) y ejecutar la aplicación de nuevo.
 
 ---
-{{< goodbye.html >}}
+{{< goodbye >}}
 ---
 #### Enlaces relacionados
 

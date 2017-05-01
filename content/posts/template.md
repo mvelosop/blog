@@ -49,7 +49,7 @@ Para incluir una imágen:
 {{<image src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
 
 ---
-{{< goodbye.html >}}
+{{< goodbye >}}
 ---
 #### Enlaces relacionados
 

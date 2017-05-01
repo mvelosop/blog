@@ -295,7 +295,7 @@ El archivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
 {{<getSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
 
 ---
-{{< goodbye.html >}}
+{{< goodbye >}}
 ---
 #### Enlaces relacionados
 

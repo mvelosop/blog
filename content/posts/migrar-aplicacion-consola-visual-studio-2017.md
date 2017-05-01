@@ -97,4 +97,4 @@ Para verificar que todo sigue funcionando correctamente, eliminamos la base de d
 Así que, de aquí en adelante, a menos que no se pueda para algún tema en particular, seguiremos trabajando con Visual Studio 2017.
 
 ---
-{{< goodbye.html >}}
+{{< goodbye >}}
