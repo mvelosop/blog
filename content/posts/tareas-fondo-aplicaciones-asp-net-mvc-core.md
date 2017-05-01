@@ -6,7 +6,7 @@ date: 2017-04-28
 description: Cómo implementar tareas de fondo usando HangFire
 thumbnail: posts/images/plumbing-840835_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework Core", "Background Tasks", "Dynamic Composition", "CSharp" ]
+tags: [ "Entity Framework Core", "Background Tasks", "Dynamic Composition", "CSharp", "Logging", "Reflection", "Attributes" ]
 series: [ ]
 repoName: HangFireCoreWebApp
 repoRelease: "1.0"
@@ -19,7 +19,7 @@ Es este artículo vamos a desarrollar la estructura de una aplicación web en .N
 > 0. Crear atributos para especificar metadata al usar las clases.
 > 0. Incorporar NLog para realizar registro de eventos.
 > 0. Cargar módulos en forma dinámica
-> 0. Incorporar Hangfire como gestor de tareas en backgroud.
+> 0. Incorporar Hangfire como gestor de tareas en background.
 > 0. Usar reflection para identificar clases en un assembly.
 > 0. Crear/Actualizar la base de datos al arrancar la aplicación.
 
@@ -294,14 +294,8 @@ Eventualmente se puede ver más de un servidor activo. Esto ocurre porque las ta
 El archivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
 {{<getSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
 
-Y con esto terminamos el artículo.
-
 ---
-
-Espero que sea de ayuda.
-
-**Miguel.**
-
+{{< goodbye.html >}}
 ---
 #### Enlaces relacionados
 

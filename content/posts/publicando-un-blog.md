@@ -47,3 +47,6 @@ Estoy claro que estaba sufriendo un caso de [sesgo de confirmación](https://es.
 ## ¿Dónde publicar?
 
 Ya que estamos trabajando con tecnología .NET, lo más adecuado es publicarlo en Azure y, aunque puede haber opciones más económicas, también hay formas de aprovechar la plataforma para lograr ahorros significativos, aprovechando que se trata de un sitio estático, tal como lo indica este artículo: [Cloud hosting for a static website](https://www.microsoft.com/middleeast/azureboxes/cloud-hosting-for-a-static-website.aspx).
+
+---
+{{< goodbye.html >}}

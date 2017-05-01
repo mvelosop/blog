@@ -6,8 +6,8 @@ date: 2017-01-01
 description: Reseña tamaño twitter
 thumbnail: 
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework", "CSharp" ]
-series: [ "Entity Framework Core" ]
+tags: [  ]
+series: [  ]
 repoName: EFCoreLib
 repoRelease: "1.0"
 ---
@@ -48,14 +48,8 @@ Para incluir una imágen:
 
 {{<image src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
 
-Y con esto terminamos el artículo.
-
 ---
-
-Espero que sea de ayuda.
-
-**Miguel.**
-
+{{< goodbye.html >}}
 ---
 #### Enlaces relacionados
 

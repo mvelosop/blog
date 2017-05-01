@@ -55,6 +55,16 @@
     <script src="/scripts/clipboard.min.js"></script>
     <script src="/scripts/snippets.js"></script>
     <script src="/scripts/tooltips.js"></script>
+    <script> 
+      $('.share a').click(function(event){
+        event.preventDefault();
+        ga('send', 'event', 'share', 'click', {
+          hitCallback: function () {
+            window.open(event.currentTarget.href, '');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
 

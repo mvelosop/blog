@@ -6,7 +6,7 @@ date: 2017-03-20
 description: Desarrollo de una librería EF Core para entender la separación de componentes con EF Core.
 thumbnail: posts/images/books-1281581_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework", "CSharp" ]
+tags: [ "Entity Framework Core", "EF Core Configuration", "EF Core CLI", "Migrations", "CSharp" ]
 series: [ "Entity Framework Core" ]
 repoName: EFCoreLib
 repoRelease: "1.0"
@@ -17,11 +17,11 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 1. La capa de datos en el proyecto EFCore.Lib y
 2. La capa cliente en EFCore.App.
 
-> ### <i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Resultados principales
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
 
-> 0. Separamos la aplicación en una capa cliente y una capa de datos
-> 0. Usamos la capa de cliente (aplicación de consola) para ejecutar el EF Core CLI y crear las migraciones
-> 0. Apreciamos la simplicidad de los nuevos archivos .csproj
+> 0. Separar la aplicación en una capa cliente y una capa de datos
+> 0. Usar EF Core CLI en aplicación multicapa para crear las migraciones
+> 0. Apreciar la simplicidad de los nuevos archivos .csproj
 
 {{< repoUrl >}}
 
@@ -37,7 +37,7 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 
 Como en este artículo estamos separando los componentes de la aplicación, vamos a crear los archivos de programas y luego incluiremos los paquetes necesarios para poder compilar y ejecutar la solución.
 
-En este artículo vamos a desarrollar la solución desde el principio, para apreciar los archivos .proj en su expresión más simple, por no haber pasado por la migración de un proyecto de VS 2015.
+En este artículo vamos a desarrollar la solución desde el principio, para apreciar los archivos .proj en su expresión más simple. No podríamos apreciar esto si hacemos la migración de un proyecto de VS 2015.
 
 ### 1) Crear la solución EFCoreLib
 
@@ -47,13 +47,15 @@ En este artículo vamos a desarrollar la solución desde el principio, para apre
 
 ### 2) Crear proyecto src\EFCore.App 
 
-Este proyecto es el "cliente" que usa la "capa de datos" (el proyecto siguiente EFCore.Lib)
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> Este proyecto es la capa **Cliente** que usa la "capa de datos" (el proyecto EFCore.Lib)
 
 1. Crear el proyecto como una "Console Application (.NET Core)"
 
 ### 3) Crear proyecto src\EFCore.Lib
 
-Este proyecto corresponde a lo que sería la "capa de datos" de la solución, desde luego de una forma muy rudimentaria.
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> Este proyecto es la capa de **Datos**, desde luego de una forma muy rudimentaria.
 
 1. Crear el proyecto como una "Class Library (.NET Core)"
 
@@ -107,9 +109,12 @@ Para que el proyecto pueda compilar en este momento es necesario incluir las sig
 
 ### 6) Crear migración inicial
 
-En este caso, el proyecto EFCore.App, además de ser la "capa cliente" de la solución, va a ser el "host" para ejecutar los comandos de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet).
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> 
 
-Tal como se indica en la página de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#net-standard-limitation) hay una limitación de .NET Standard que no permite ejecutar ```dotnet``` en un proyecto "Class Library", así que hay que instalar los componentes necesarios en EFCore.App para ejecutarlo desde allí.
+> En este caso, el proyecto EFCore.App, además de ser la "capa cliente" de la solución, va a ser el "host" para ejecutar los comandos de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet).
+
+> Tal como se indica en la página de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#net-standard-limitation) hay una limitación de .NET Standard que no permite ejecutar ```dotnet``` en un proyecto "Class Library", así que hay que instalar los componentes necesarios en EFCore.App para ejecutarlo desde allí.
 
 Si en este momento ejecutamos ```dotnet ef``` desde el proyecto EFCore.App 
 
@@ -158,6 +163,11 @@ Para esto debemos:
 
 El archivo **EFCore.App.csproj** resultante es así:
 
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> En el formato .csproj no es necesario especificar todos los archivos que conforman la solución, porque se considera, por omisión, todos los archivos de todas las carpetas.
+
+> Una ventaja importante de este formato es que elimina los frecuentes conflictos al hacer "Merge" de dos ramas, producidos por movimiento de archivos dentro del .csproj.
+
 {{<getSourceFile "src\EFCore.App\EFCore.App.csproj">}}
 
 ### 8) Ejecutar la aplicación
@@ -165,10 +175,5 @@ El archivo **EFCore.App.csproj** resultante es así:
 Ahora basta con pulsar [Ctrl]+[F5], con lo que obtenemos el resultado esperado:
    {{<image src="/posts/images/cmd_2017-03-20_16-14-12.png">}}
 
-Y con esto terminamos el artículo.
-
 ---
-
-Espero que sea de ayuda.
-
-**Miguel.**
+{{< goodbye.html >}}
