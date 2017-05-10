@@ -2,3 +2,5 @@ public/
 publish/
 repos/
 themes/
+/releases/**/lib/
+/releases/**/obj/
