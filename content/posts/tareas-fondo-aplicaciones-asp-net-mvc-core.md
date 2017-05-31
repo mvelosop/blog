@@ -45,13 +45,13 @@ Entonces, la idea en este artículo es desarrollar una estructura donde sea muy 
 
 ## Paso a paso
 
-### 1) Crear la solución HangFireCoreWebApp
+### 1 - Crear la solución HangFireCoreWebApp
 
 1. Crear una solución "blank" llamada HangFireCoreWebApp
 2. Crear el "solution folder" "src"
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
-### 2) Desarrollar atributo para facilitar la programación de las tareas
+### 2 - Desarrollar atributo para facilitar la programación de las tareas
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Los atributos nos permiten especificar metadata asociada a casi cualquier componente de una aplicación, para luego utilizarla usando "reflection"
@@ -62,12 +62,12 @@ La idea es utilizar el atributo ```[HangfireJobMinutes(#)]``` para, para indicar
 
 Este es un atributo muy sencillo, a modo de ejemplo, para aplicaciones reales seguramente habrá que manejar escenarios más complejos.
 
-1. **Crear proyecto "src\HangFireCore.Core"**
+#### 2.1 - Crear proyecto "src\HangFireCore.Core"
 
-2. **Agregar archivo "HangfireJobMinutesAttribute.cs"** </br>
+#### 2.2 - Agregar archivo "HangfireJobMinutesAttribute.cs"
 {{<getSourceFile "src\HangFireCore.Core\HangfireJobMinutesAttribute.cs">}}
 
-### 3) Desarrollar un "módulo" con tareas programadas
+### 3 - Desarrollar un "módulo" con tareas programadas
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Aquí vemos cómo se incluye la posibilidad de generar trazas de log en una clase.
@@ -80,16 +80,18 @@ En el repositorio se incluye también el módulo **HangFire.Job.Two**, aunque no
 
 > Cuando hablamos de módulos dinámicos es importante tener en cuenta que al compilarlos no se van a copiar los .dll a la carpeta de la aplicación web, entonces hay copiarlos a mano para ver los cambios.
 
-1. **Crear proyecto "src\HangFireCore.Job.One"**
+#### 3.1 - Crear proyecto "src\HangFireCore.Job.One"
 
-2. **Incluir referencias y paquetes necesarios** </br>
-   * referencia al proyecto **src\HangFireCore.Core**
-   * Paquete **NLog.5.0.0-beta06**
+#### 3.2 - Incluir referencias y paquetes necesarios
 
-3. **Incluir archivo "JobOne.cs"**
+* referencia al proyecto **src\HangFireCore.Core**
+* Paquete **NLog.5.0.0-beta06**
+
+#### 3.3 - Incluir archivo "JobOne.cs"
+
 {{<getSourceFile "src\HangFireCore.Job.One\JobOne.cs">}}
 
-### 4) Crear el proyecto src\HangFireCore.WebApp
+### 4 - Crear el proyecto src\HangFireCore.WebApp
 
 En la aplicación web se integran de forma ligera (loosely coupled) los módulos de la solución, en este caso eso significa, que, si la aplicación encuentra los módulos de las tareas programadas, los carga y programa la ejecución de las tareas y si no los encuentra no pasa nada.
 
@@ -97,13 +99,13 @@ La idea fundamental de esta estructura es que no existe una referencia directa e
 
 Como no hay una referencia directa a esos assemblies, no serán incluidos directamente por el proceso de "Build" y entonces es necesario copiarlos a mano en la carpeta de la aplicación.
 
-1. **Crear un projecto .NET Core Web Application (.NET Core)**
+#### Crear un projecto .NET Core Web Application (.NET Core)
 
-    {{<image src="/posts/images/devenv_2017-04-25_11-01-58.png">}}
+{{<image src="/posts/images/devenv_2017-04-25_11-01-58.png">}}
 
-    Usamos el proyecto con autenticación por cuentas individuales, para que se cree todo lo relacionado con la conexión a la base de datos, porque la vamos a necesitar para el próximo paso.
+Usamos el proyecto con autenticación por cuentas individuales, para que se cree todo lo relacionado con la conexión a la base de datos, porque la vamos a necesitar para el próximo paso.
 
-### 5) Agregar carga dinámica de "módulos"
+### 5 - Agregar carga dinámica de "módulos"
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Aquí vemos una implementación sencilla de la carga dinámica de módulos en una aplicación y el uso de Refection para identificar las clases en un assembly.
@@ -113,53 +115,64 @@ Como no hay una referencia directa a esos assemblies, no serán incluidos direct
 
 Se implementa la carga de "modulos" como un [ExtensionMethod](https://msdn.microsoft.com/en-us//library/bb383977.aspx) de **IHostingEnvironment** para facilitar su invocación desde **Startup.cs**.
 
-1. **Agregar la clase "helpers\ScheduleJobsHelpers.cs** </br></br>
-   {{<getSourceFile "src\HangFireCore.WebApp\helpers\ScheduleJobsHelpers.cs">}}
+#### Agregar la clase "helpers\ScheduleJobsHelpers.cs**
 
-### 6) Incluir Hangfire en la aplicación web
+{{<getSourceFile "src\HangFireCore.WebApp\helpers\ScheduleJobsHelpers.cs">}}
+
+### 6 - Incluir Hangfire en la aplicación web
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Aquí vemos cómo se incluyen los componentes de **Hangfire** en una aplicación, más adelante vemos las configuraciones necesarias.
 
 Vamos a orientarnos por lo indicado en [Integrate HangFire With ASP.NET Core](http://dotnetthoughts.net/integrate-hangfire-with-aspnet-core/), para configurar Hangfire:
 
-1. **Incluir el paquete NuGet Hangfire 1.6.12**
+#### 6.1 - Incluir el paquete NuGet Hangfire 1.6.12
 
-2. **Modificar el archivo de configuración para trabajar con SQL Server en vez de LocalDb**  
-   {{<getSourceFile "src\HangFireCore.WebApp\appsettings.json">}}  
-   Prefiero trabajar con SQL Server Developer Edition, para que sea lo más parecido posible al ambiente de producción.
+#### 6.2 - Modificar el archivo de configuración para trabajar con SQL Server en vez de LocalDb
 
-3. **Crear un AuthorizationFilter para poder acceder al dashboard de Hangfire**
-   {{<getSourceFile "src\HangFireCore.WebApp\Helpers\HangfireDashboardAuthorizationFilter.cs">}}  
-   Esto es un filtro básico que sólo verifica que el usuario esté autenticado para permitir el acceso, en la práctica se debe aplicar algún criterio más estricto para permitirlo.
+{{<getSourceFile "src\HangFireCore.WebApp\appsettings.json">}}  
 
-### 7) Incluir NLog en la aplicación web
+Prefiero trabajar con SQL Server Developer Edition, para que sea lo más parecido posible al ambiente de producción.
+
+#### 6.3 - Crear un AuthorizationFilter para poder acceder al dashboard de Hangfire
+
+{{<getSourceFile "src\HangFireCore.WebApp\Helpers\HangfireDashboardAuthorizationFilter.cs">}}  
+Esto es un filtro básico que sólo verifica que el usuario esté autenticado para permitir el acceso, en la práctica se debe aplicar algún criterio más estricto para permitirlo.
+
+### 7 - Incluir NLog en la aplicación web
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Aquí vemos cómo se incluyen los componentes de **NLog** en una aplicación y cómo se configura le genereción de los registros, más adelante se muestra la configuración necesaria en el arranque.
 
 Vamos a utilizar [NLog](http://nlog-project.org/) (http://nlog-project.org/) para verificar el funcionamiento del sistema de tareas en background y como buena práctica general del desarrollo de aplicaciones.
 
-1. **Incluir paquetes NLog en la aplicación web**
+#### 7.1 - Incluir paquetes NLog en la aplicación web
 
-    * NLog.Web.AspNetCore 4.3.1
-    * NLog.Config 4.4.7
+* NLog.Web.AspNetCore 4.3.1
+* NLog.Config 4.4.7
 
-2. **Resolver incompatibilidad con ASP.NET Core** </br>  
-Según lo indicado en https://github.com/NLog/NLog.Extensions.Logging/blob/master/README.md (para el 25/04/2017), la instalación de NLog.Config no copia el archivo NLog.xsd, así que hay que extraerlo manualmente del nuget y copiarlo en la raíz del proyecto **HangFireCore.WebApp**. </br>  
+#### 7.2 - Resolver incompatibilidad con ASP.NET Core
+
+Según lo indicado en https://github.com/NLog/NLog.Extensions.Logging/blob/master/README.md (para el 25/04/2017), la instalación de NLog.Config no copia el archivo NLog.xsd, así que hay que extraerlo manualmente del nuget y copiarlo en la raíz del proyecto **HangFireCore.WebApp**.
+
 Para esto se debe buscar el paquete el la carpeta **.nuget** dentro del perfil del usuario y abrir el .nupkg correspondiente con un gestor de archivos .zip como WinRAR o WinZIP o cambiando temporalmente el nombre del .nupkg a .zip para usar el explorador de Windows.
 
-3. **Crear archivo NLog.config en la raíz de la aplicación web**  
-   {{<getSourceFile "src\HangFireCore.WebApp\NLog.config">}}  
-Según lo indicado en https://github.com/NLog/NLog.Extensions.Logging/blob/master/README.md, todavía no está soportado el ```${basedir}```, para manejar rutas relativas en los archivos .log, así que por ahora es necesario configurar una ruta absoluta (c:\temp\logs).  </br></br>
-Un aspecto interesante de NLog es que se puede modificar el archivo de configuración sin necesidad de detener la aplicación, por ejemplo para ajustar el nivel de detalle que se registra, para ver los resultados de inmediato.</br></br>
-Esta configuración crea archivos de log rotativos en c:\temp\logs. Una ventaja importante de usar archivos rotativos es que no es necesario estar pendiente de borrar los logs viejos:
-    * **nlog-all-current.log** día en curso para todas las aplicaciones (bueno para detectar interferencias)
-    * **nlog-all-archive.1.log** histórico del día -1 para todas las aplicaciones
-    * **nlog-HangFireCoreApp-current.log** día en curso para nuestra aplicación
-    * **nlog-HangFireCoreApp-archive.1.log** histórico del día -1 para nuestra aplicación
+#### 7.3 - Crear archivo NLog.config en la raíz de la aplicación web
 
-### 8) Configurar los componentes en el arranque de la aplicación web
+{{<getSourceFile "src\HangFireCore.WebApp\NLog.config">}}  
+
+Según lo indicado en https://github.com/NLog/NLog.Extensions.Logging/blob/master/README.md, todavía no está soportado el ```${basedir}```, para manejar rutas relativas en los archivos .log, así que por ahora es necesario configurar una ruta absoluta (c:\temp\logs).
+
+Un aspecto interesante de NLog es que se puede modificar el archivo de configuración sin necesidad de detener la aplicación, por ejemplo para ajustar el nivel de detalle que se registra, para ver los resultados de inmediato.
+
+Esta configuración crea archivos de log rotativos en c:\temp\logs. Una ventaja importante de usar archivos rotativos es que no es necesario estar pendiente de borrar los logs viejos:
+
+* **nlog-all-current.log** día en curso para todas las aplicaciones (bueno para detectar interferencias)
+* **nlog-all-archive.1.log** histórico del día -1 para todas las aplicaciones
+* **nlog-HangFireCoreApp-current.log** día en curso para nuestra aplicación
+* **nlog-HangFireCoreApp-archive.1.log** histórico del día -1 para nuestra aplicación
+
+### 8 - Configurar los componentes en el arranque de la aplicación web
 
 Aquí se detallan las modificaciones individuales y luego se muestra el archivo **Startup.cs** resultante.
 
@@ -167,122 +180,132 @@ Aquí se detallan las modificaciones individuales y luego se muestra el archivo 
 > Aquí se muestra cómo crear o actualizar la base de datos durante el arranque de la aplicación.
 
 
-1. **Agregar el método InitDb en Startup.cs para crear/actualizar la base de datos** </br>
+#### 8.1 - Agregar el método InitDb en Startup.cs para crear/actualizar la base de datos
 ```cs
-    private void InitDb()
+private void InitDb()
+{
+    var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+
+    optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+    using (var dbContext = new ApplicationDbContext(optionsBuilder.Options))
     {
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-
-        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-
-        using (var dbContext = new ApplicationDbContext(optionsBuilder.Options))
-        {
-            dbContext.Database.Migrate();
-        };
-    }
+        dbContext.Database.Migrate();
+    };
+}
 ```  
 Este método se usa para crear/actualizar la base de datos cuando arranque la aplicación y no con el primer request, porque debe existir la base de datos antes de iniciar Hangfire.
 
-2. **Inicializar Hangfire** </br> </br>
+#### 8.2 - Inicializar Hangfire
+
 Estos son los cambios necesarios, en los distintos métodos de Startup.cs, para configurar Hangfire:
+
 ```cs
-    using Hangfire;
-    using HangFireCore.WebApp.Data;
-    using HangFireCore.WebApp.Helpers;
-    using HangFireCore.WebApp.Models;
-    using HangFireCore.WebApp.Services;
+using Hangfire;
+using HangFireCore.WebApp.Data;
+using HangFireCore.WebApp.Helpers;
+using HangFireCore.WebApp.Models;
+using HangFireCore.WebApp.Services;
 
-    public void ConfigureServices(IServiceCollection services)
+public void ConfigureServices(IServiceCollection services)
+{
+    // Add Hangfire
+    services.AddHangfire(config => config.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    // Initialize Dabatabase
+    InitDb();
+
+    // Configure Hangfire
+    app.UseHangfireServer();
+
+    app.UseHangfireDashboard("/hangfire", new DashboardOptions()
     {
-        // Add Hangfire
-        services.AddHangfire(config => config.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
-    }
-
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-    {
-        // Initialize Dabatabase
-        InitDb();
-
-        // Configure Hangfire
-        app.UseHangfireServer();
-
-        app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-        {
-            Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
-        });
-    }
+        Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
+    });
+}
 ```  
 
-3. **Cargar módulos de forma dinámica** </br></br>
+#### 8.3 - Cargar módulos de forma dinámica
+
 Estos son los cambios necesarios para configurar la carga dinámica de módulos en Startup.cs, En este caso es importante cargar los módulos después que esté inicializada la base de datos y el servidor de Hangfire:
+
 ```cs
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    // Initialize Dabatabase
+    InitDb();
+
+    // Configure Hangfire
+    app.UseHangfireServer();
+
+    app.UseHangfireDashboard("/hangfire", new DashboardOptions()
     {
-        // Initialize Dabatabase
-        InitDb();
+        Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
+    });
 
-        // Configure Hangfire
-        app.UseHangfireServer();
-
-        app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-        {
-            Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
-        });
-
-        // Recurring jobs
-        env.ScheduleRecurringJobs();
-    }
+    // Recurring jobs
+    env.ScheduleRecurringJobs();
+}
 ``` 
 
-4. **Inicializar NLog** </br> </br>
+#### 8.4 - Inicializar NLog
+
 Estos son los cambios necesarios, en los distintos métodos de Startup.cs, para configurar NLog:
+
 ```cs
-    using Microsoft.AspNetCore.Http;
-    using NLog.Extensions.Logging;
-    using NLog.Web;
+using Microsoft.AspNetCore.Http;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
-    public Startup(IHostingEnvironment env)
-    {
-        env.ConfigureNLog("NLog.config");
-    }
+public Startup(IHostingEnvironment env)
+{
+    env.ConfigureNLog("NLog.config");
+}
 
-    public void ConfigureServices(IServiceCollection Services)
-    {
-        //call this in case you need aspnet-user-authtype/aspnet-user-identity
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-    }
+public void ConfigureServices(IServiceCollection Services)
+{
+    //call this in case you need aspnet-user-authtype/aspnet-user-identity
+    services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+}
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-    {
-        //add NLog to ASP.NET Core
-        loggerFactory.AddNLog();
+// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    //add NLog to ASP.NET Core
+    loggerFactory.AddNLog();
 
-        //add NLog.Web
-        app.AddNLogWeb();
-    }
+    //add NLog.Web
+    app.AddNLogWeb();
+}
 ```  
 
-5. **Verificar cambios en Startup.cs** </br>  
-Con los cambios anteriores el archivo de arranque debe quedar así:
-   {{<getSourceFile "src\HangFireCore.WebApp\Startup.cs">}}
+#### 8.5 - Verificar cambios en Startup.cs
 
-6. **Agregar opción Hangfire la barra de navegación** </br>  
+Con los cambios anteriores el archivo de arranque debe quedar así:
+
+{{<getSourceFile "src\HangFireCore.WebApp\Startup.cs">}}
+
+#### 8.6 - Agregar opción Hangfire la barra de navegación
+
 Modificar el archivo Views\Shared\_Layout.cshtml para agregar la opción HangFire, como se indica a continuación:  
+
 ```html
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-            <li><a asp-area="" asp-controller="Hangfire" asp-action="Index">Hangfire</a></li>
-        </ul>
-        @await Html.PartialAsync("_LoginPartial")
-    </div>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <li><a asp-area="" asp-controller="Hangfire" asp-action="Index">Hangfire</a></li>
+    </ul>
+    @await Html.PartialAsync("_LoginPartial")
+</div>
 ```
 
-### 9) Probar la aplicación
+### 9 - Probar la aplicación
 
 Ejecutar la aplicación con [Ctrl]+[F5] y navegar hasta /hangfire, si es la primera vez le pedirá que se registre y después de unos minutos debe ver algo similar a esto:
 {{<image src="/posts/images/chrome_2017-04-27_21-49-34.png">}} 
@@ -295,7 +318,9 @@ El archivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
 {{<getSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
 
 ---
+
 {{< goodbye >}}
+
 ---
 #### Enlaces relacionados
 

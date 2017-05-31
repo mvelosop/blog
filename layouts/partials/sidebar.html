@@ -19,6 +19,13 @@
 
   {{ if ne $current $home }}
   <section>
+    {{ if eq (getenv "HUGO_ENV") "DEV" }}
+    <div class="row">
+    <div class="col-md-12">
+      <h3><a href="/posts/checklist-publicacion/" style="background-color:gold; padding-left: 10px; padding-right: 10px;"> <i class="fa fa-check-square-o" aria-hidden="true"></i>Checklist Publicación</a></h3>
+      </div>
+      </div>
+    {{ end }}
     <header>Lo más reciente</header>
     <div>
       <div class="row">
@@ -33,7 +40,7 @@
 
   {{ range $key, $value := .Site.Taxonomies }}
   <section>
-    <header>{{ $key }}</header>
+    <header><a href="/{{ $key }}">{{ $key }}</a></header>
     <div>
       <ul class="p-terms">
         {{ range first 10 $value.ByCount }}<li><a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}">{{ .Name }}</a></li>{{ end }}
