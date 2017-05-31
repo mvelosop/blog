@@ -39,45 +39,51 @@ Como en este artículo estamos separando los componentes de la aplicación, vamo
 
 En este artículo vamos a desarrollar la solución desde el principio, para apreciar los archivos .proj en su expresión más simple. No podríamos apreciar esto si hacemos la migración de un proyecto de VS 2015.
 
-### 1) Crear la solución EFCoreLib
+### 1 - Crear la solución EFCoreLib
 
 1. Crear una solución "blank" llamada EFCoreLib
 2. Crear el "solution folder" "src"
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
-### 2) Crear proyecto src\EFCore.App 
+### 2 - Crear proyecto src\EFCore.App 
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Este proyecto es la capa **Cliente** que usa la "capa de datos" (el proyecto EFCore.Lib)
 
-1. Crear el proyecto como una "Console Application (.NET Core)"
+#### Crear el proyecto como una "Console Application (.NET Core)"
 
-### 3) Crear proyecto src\EFCore.Lib
+### 3 - Crear proyecto src\EFCore.Lib
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Este proyecto es la capa de **Datos**, desde luego de una forma muy rudimentaria.
 
-1. Crear el proyecto como una "Class Library (.NET Core)"
+#### Crear el proyecto como una "Class Library (.NET Core)"
 
-### 4) Crear los archivos de programa en EFCore.Lib
+### 4 - Crear los archivos de programa en EFCore.Lib
 
 Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core).
 
-0. **Model\Currency.cs**
-   {{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
+#### 4.1 - Model\Currency.cs
 
-0. **Base\EntityTypeConfiguration.cs**
-   {{<getSourceFile "src\EFCore.Lib\Base\EntityTypeConfiguration.cs">}}
+{{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
 
-0. **Data\CurrencyConfiguration.cs**
-   {{<getSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
+#### 4.2 - Base\EntityTypeConfiguration.cs
 
-0. **Config\ConnectionStrings.cs** <br/>  
-A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".  
-   {{<getSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
+{{<getSourceFile "src\EFCore.Lib\Base\EntityTypeConfiguration.cs">}}
 
-0. **Data\CommonDbContext.cs**
-   {{<getSourceFile "src\EFCore.Lib\Data\CommonDbContext.cs">}}
+#### 4.3 - Data\CurrencyConfiguration.cs
+
+{{<getSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
+
+#### 4.4 - Config\ConnectionStrings.cs
+
+A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".
+
+{{<getSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
+
+#### 4.5 - Data\CommonDbContext.cs
+
+{{<getSourceFile "src\EFCore.Lib\Data\CommonDbContext.cs">}}
 
 Para que el proyecto pueda compilar en este momento es necesario incluir los siguientes paquetes:
 
@@ -89,14 +95,19 @@ El archivo **EFCore.Lib.csproj** resultante es así:
 
 {{<getSourceFile "src\EFCore.Lib\EFCore.Lib.csproj">}}
 
-### 5) Crear los archivos de programa en EFCore.App
+### 5 - Crear los archivos de programa en EFCore.App
 
-1. **Config\AppOptions.cs** <br/>  
+#### 5.1 - Config\AppOptions.cs
+
 En este caso incluimos la clase que maneja todas las configuraciones de la "aplicación" haciendo referencia a la clase de configuración de la capa de datos.
-   {{<getSourceFile "src\EFCore.App\Config\AppOptions.cs">}}
 
-2. **Program.cs**
-   {{<getSourceFile "src\EFCore.App\Program.cs">}}
+{{<getSourceFile "src\EFCore.App\Config\AppOptions.cs">}}
+
+#### 5.2 - Program.cs
+
+{{<getSourceFile "src\EFCore.App\Program.cs">}}
+
+#### 5.3 - Incluir referencias y paquetes adicionales
 
 Para que el proyecto pueda compilar en este momento es necesario incluir las siguientes referencias:
 
@@ -107,7 +118,7 @@ Para que el proyecto pueda compilar en este momento es necesario incluir las sig
    * Microsoft.Extensions.Configuration.Binder
    * Microsoft.Extensions.Configuration.Json
 
-### 6) Crear migración inicial
+### 6 - Crear migración inicial
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > 
@@ -119,6 +130,8 @@ Para que el proyecto pueda compilar en este momento es necesario incluir las sig
 Si en este momento ejecutamos ```dotnet ef``` desde el proyecto EFCore.App 
 
 {{<image src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
+
+#### 6.1 - Instalar "Tooling" de Entity Framework
 
 Para esto hay que instalar el paquete **Microsoft.EntityFrameworkCore.Tools** en EFCore.App, pero este es un tipo de paquete **"DotNetCliTool"**, que no se puede instalar como un NuGet cualquiera.
 
@@ -137,6 +150,8 @@ También hay que instalar el paquete: **Microsoft.EntityFrameworkCore.Design**.
 
 Sin embargo, como sólo vamos a utilizar **EFCore.App** para ejecutar la [.NET Core EF CLI](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet), no es necesario agregar el atributo **PrivateAssets="All"** manualmente en el archivo .csproj y, por lo tanto, podemos instalarlo como cualquier paquete NuGet.
 
+#### 6.2 - Crear la migración inicial
+
 Después de esto ya podemos ejecutar el comando para crear la migración: ```dotnet ef migrations add InitialCreateMigration --project ..\EFCore.Lib```.
 
 Observe que usamos la opción ```--project``` o ```-p``` para indicar donde se va a crear la migración.
@@ -145,21 +160,24 @@ Después de ejecutar el comando obtenemos los archivos de la migración con el m
 
 {{<getSourceFile "src\EFCore.Lib\Migrations\20170318215905_InitialCreateMigration.cs">}}
 
-### 7) Preparar la aplicación para ejecución
+### 7 - Preparar la aplicación para ejecución
 
 Para esto debemos:
 
-1. Crear el archivo de configuración en el proyecto EFCore.App:
-   {{<getSourceFile "src\EFCore.App\appsettings.json">}}
+#### 7.1 - Crear el archivo de configuración
 
-2. Configurar el archivo **"appasettings.json"** para que se copie a la carpeta de salida
+{{<getSourceFile "src\EFCore.App\appsettings.json">}}
+
+#### 7.2 - Cambiar propiedades del archivo de configuración 
+
+Configurar el archivo de **"appasettings.json"** para que se copie a la carpeta de salida
 
    * **Botón Derecho > Properties** sobre el archivo **appsettings.json** 
    * Propiedad "Copy to Output Directory" => **"Copy if newer"**
 
-3. Establecer el proyecto **EFCore.App** como la aplicación de arranque  
+#### 7.3 - Establecer el proyecto **EFCore.App** como la aplicación de arranque  
 
-   * **Botón Derecho > Set as Startup Project** sobre el proyecto **EFCore.App** 
+Ejecutar **Botón Derecho > Set as Startup Project** sobre el proyecto **EFCore.App** 
 
 El archivo **EFCore.App.csproj** resultante es así:
 
@@ -170,7 +188,7 @@ El archivo **EFCore.App.csproj** resultante es así:
 
 {{<getSourceFile "src\EFCore.App\EFCore.App.csproj">}}
 
-### 8) Ejecutar la aplicación
+### 8 - Ejecutar la aplicación
 
 Ahora basta con pulsar [Ctrl]+[F5], con lo que obtenemos el resultado esperado:
    {{<image src="/posts/images/cmd_2017-03-20_16-14-12.png">}}

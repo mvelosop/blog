@@ -42,13 +42,13 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 
 ## Paso a paso
 
-### 1) Crear la solución EFCoreApp
+### 1 - Crear la solución EFCoreApp
 
 1. Crear una solución "blank" llamada EFCoreApp
 2. Crear el solution folder "src"
 3. Crear la carpeta "src" dentro de la carpeta de la solución
 
-### 2) Crear proyecto src/EFCore.App 
+### 2 - Crear proyecto src/EFCore.App 
 
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
@@ -79,7 +79,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 
    * **System.ComponentModel.Annotations**: Annotations para los modelos
   
-### 3) Agregar archivos del proyecto
+### 3 - Agregar archivos del proyecto
 
 #### Model\Currency.cs
 
@@ -126,7 +126,7 @@ El programa principal de la aplicación. Aquí están los métodos que crean/act
 
 {{< getSourceFile "src\EFCore.App\Program.cs" >}}
 
-### 4) Generar la migración inicial
+### 4 - Generar la migración inicial
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Aquí vemos la forma general de trabajar con el EF Core CLI.
@@ -168,7 +168,7 @@ Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (
 
 {{< getSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
 
-### 5) Crear archivo de configuración
+### 5 - Crear archivo de configuración
 
 #### appsettings.json
 
@@ -187,7 +187,7 @@ Verificar que project.json incluya la opción para copiar este archivo a la carp
     },
 ```
 
-### 6) Ejecutar la aplicación
+### 6 - Ejecutar la aplicación
 
 Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-editions-developers), al ejecutar la aplicación con [Ctrl]+[F5] se debe obtener una salida similar a esta:
 
@@ -196,8 +196,11 @@ Suponiendo que ya se instaló el [SQL Server 2016 Developer Edition](https://www
 Y si en algún momento necesitamos empezar con una base de datos nueva, basta con eliminarla usando el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) y ejecutar la aplicación de nuevo.
 
 ---
+
 {{< goodbye >}}
+
 ---
+
 #### Enlaces relacionados
 
 **.NET Core current downloads**  

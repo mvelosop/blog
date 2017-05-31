@@ -33,7 +33,7 @@ En este artículo vamos a migrar la aplicación que desarrollamos en el [artícu
 
 ## Paso a paso
 
-### 1) Abrir la solución con VS 2017
+### 1 - Abrir la solución con VS 2017
 
 En cuanto se abre la solución desarrollada con una versión anterior de Visual Studio se observa lo siguiente:
 
@@ -45,7 +45,7 @@ Y a continuación el siguiente informe de conversión:
 
 En este momento ya se realizó la conversión y la solución debería compilar sin problemas.
 
-### 2) Explorar los cambios realizados
+### 2 - Explorar los cambios realizados
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Al terminar la conversión se crea una carpeta Backup con los archivos originales de la solución (.sln) y del proyecto (project.json y el .xproj):
@@ -72,7 +72,7 @@ Al ejecutar ```dotnet ef``` verificamos que efectivamente se trata de la versió
 
 {{<image src="/posts/images/cmd_2017-03-14_10-43-14.png">}}
 
-### 3) Verificar funcionamiento de EF Core
+### 3 - Verificar funcionamiento de EF Core
 
 Sólo para verificar el funcionamiento del CLI de EF, eliminamos el contenido de la carpeta Migrations, para volver a generar la migración, y ejecutamos ```dotnet ef migrations add InitialCreateMigration``` y se generan los siguientes archivos:
 
