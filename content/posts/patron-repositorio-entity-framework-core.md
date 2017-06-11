@@ -6,7 +6,7 @@ date: 2017-06-11
 description: Implementar el patrón de repositorio para el módulo inicial de las pruebas de Domion
 thumbnail: /posts/images/stairs-195924_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [  ]
+tags: [ "Architecture", "Entity Framework Core", "Migrations", "Model Driven Architecture" ]
 series: [ "Domion" ]
 repoName: Domion.Net
 repoRelease: "2.0"
