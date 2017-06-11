@@ -26,6 +26,8 @@ Todo el código que publique estará bajo licencia MIT, así que lo único que s
 
 1. [Preparar una solución para ASP.NET Core](/posts/preparar-solucion-aspnet-core/) - Preparación de la solución base.
 
+2. [Patrón de repositorio con Entity Framework Core](/posts/patron-repositorio-entity-framework-core/) - Infraestructura y comienzo del primer módulo
+
 ## ¿Por qué Domion?
 
 Domi es una palaba griega (en caracteres latinos) que significa estructura y la entiendo como una forma de hacer referencia a la arquitectura de las aplicaciones, así que la utilicé como raíz y simplemente le agregué "on" porque me pareció que sonaba mejor.
@@ -71,6 +73,10 @@ Puede ver una [presentación de TDD](https://github.com/mvelosop/TDD.Kata1/blob/
 [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) es un proceso de desarrollo derivado de TDD, donde las especificaciones y los resultados esperados se elaboran en un formato que facilita la comunicación con los usuarios.
 
 En este caso estaremos trabajando con [SpecFlow](http://specflow.org/), la herramienta por excelencia de BDD para .NET.
+
+---
+
+Comencemos entonces de una vez con el primer artículo: [Preparar una solución para ASP.NET Core](/posts/preparar-solucion-aspnet-core/)
 
 ---
 

@@ -108,7 +108,7 @@ Usamos el proyecto con autenticación por cuentas individuales, para que se cree
 ### 5 - Agregar carga dinámica de "módulos"
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
-> Aquí vemos una implementación sencilla de la carga dinámica de módulos en una aplicación y el uso de Refection para identificar las clases en un assembly.
+> Aquí vemos una implementación sencilla de la carga dinámica de módulos en una aplicación y el uso de Reflection para identificar las clases en un assembly.
 
 > Carga dinámica significa que si encuentra los módulos se usan y si no, no pasa nada.
 

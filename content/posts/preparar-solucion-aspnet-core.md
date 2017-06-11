@@ -18,10 +18,18 @@ Este es el primer artículo de la [serie](/domion), donde se prepara la estructu
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
 
-> 0. Organizar los proyectos en carpetas de la solución del sistema de archivos para facilitar la navegación en la solución.
-> 0. Preparar una aplicación de consola para ejecutar las migraciones de EF.
-> 0. Manejar scripts dentro de la solución para facilitar tareas repetitivas.
-> 0. Eliminar proyectos de la solución sin causar conflictos entre Visual Studio y el sistema de archivos.
+> 0. Organización de las carpetas y proyectos de la solución.
+> 0. Aplicación de consola para ejecutar las migraciones de EF.
+> 0. Scripts de la solución para facilitar tareas repetitivas.
+
+Al terminar el artículo deberíamos tener una idea general de la arquitectura y conocer algunos detalles de la organización de los proyectos en la solución.
+
+En el artículo [siguiente](/posts/patron-repositorio-entity-framework-core/) trabajaremos con:
+
+> 0. Implementación del [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html)
+> 0. Facilidades para configurar modelos en [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index)
+> 0. Aplicación del proceso [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
+> 0. Migraciones con [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index) "Code First"
 
 {{< repoUrl >}}
 
@@ -29,7 +37,7 @@ Este es el primer artículo de la [serie](/domion), donde se prepara la estructu
 
 La organización del proyecto puede ayudar a facilitar el desarrollo, al agrupar los proyectos relacionados según sus funciones.
 
-En el caso de desarrollo de librerías es especialmente útil tener una carpeta de ejemplos, donde se pueda verificar el funcionamiento en situaciones similares a la realidad, entendiendo que por razones pedagógica, los ejemplos deben ser fundamentalmente sencillos.
+En el caso de desarrollo de librerías es especialmente útil tener una carpeta de ejemplos, donde se pueda verificar el funcionamiento en situaciones similares a la realidad, entendiendo que por razones pedagógicas, los ejemplos deben ser fundamentalmente sencillos.
 
 ### Herramientas y plataforma
 
@@ -56,7 +64,7 @@ Es importante marcar la opción para crear el repositorio Git
 
 ### 2 - Crear proyecto con fuentes principales de la solución
 
-#### 2.1 - Crear la carpeta de la solución "src"
+#### 2.1 - Crear el solution folder "src" en Visual Studio
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Las carpetas de la solución de Visual Studio son contenedores lógicos que sólo existen en Visual Estudio.
@@ -68,6 +76,11 @@ Esta es una carpeta lógica y realmente no existe en el sistema operativo. Si ag
 #### 2.2 - Crear la carpeta "src" en el sistema de archivos 
 
 Para crear la carpeta se puede hacer desde el explorador de windows, con **[botón derecho > Open Folder in File Explorer]**, pero si está instalada la extensión [Productivity Power Tools 2017](https://marketplace.visualstudio.com/items?itemName=VisualStudioProductTeam.ProductivityPowerPack2017) (altamente recomendada), bastará con pulsar **[Shift]+[Alt]+[,]** para abrir una ventana de comandos.
+
+> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> Es necesario realizar los dos pasos anteriores, es decir, crear **la carpeta "src"** en el sistema de archivos y **el solution folder "src"** en Visual Studio. 
+
+> Realmente son dos objetos distintos que no están relacionados, pero al tener el mismo nombre "parecen" lo mismo.
 
 ### 3 - Crear resto de carpetas de la solución
 
@@ -104,6 +117,8 @@ Agregar un nuevo proyecto tipo **Class Library (.NET Core)** sobre la carpeta "s
 {{<image src="/posts/images/devenv_2017-05-31_12-02-38.png">}}
 
 Es necesario agregar **"\src"** a mano en la ruta, en caso contrario el proyecto se guardará en la raíz de la solución.
+
+También puede seleccionar la carpeta con el botón "Browse...".
 
 #### 4.2 - Crear proyecto "src\Domion.Lib"
 
@@ -161,13 +176,15 @@ Para incluir los scripts en la carpeta se debe hacer lo siguiente:
 
 Es importante crear estos archivos desde el explorador de Windows, para ubicarlos donde queremos, no se puede hacer lo mismo que con los proyectos.
 
+#### 7.2 - Script para agregar migraciones
+
 {{<getSourceFile "scripts\add-migration.cmd">}}
 
-</br>
+#### 7.3 - Script para eliminar la última migración
 
 {{<getSourceFile "scripts\remove-migration.cmd">}}
 
-Cuando se copien estos scripts a otros proyectos, es necesario indicar la dirección del proyecto .CLI en la variable cliProjectDir, como una ruta relativa desde la carpeta scripts, en ambos scripts:
+Cuando se copien estos scripts a otros proyectos, es necesario indicar la dirección del proyecto .CLI en la variable **cliProjectDir**, como una ruta relativa desde la carpeta scripts, en ambos scripts:
 
 ```cmd
 set cliProjectDir="..\samples\DFlow.CLI"
@@ -197,7 +214,11 @@ Si quedó algún proyecto en la raíz de la solución, se debe:
 1. Eliminar la carpeta en el explorador de Windows.
 1. Crear el proyecto nuevamente
 
-Con esto ya tenemos el proyecto preparado para comenzar con el desarrollo, que veremos en el próximo artículo.
+Con esto ya tenemos el proyecto preparado para comenzar con el desarrollo.
+
+---
+
+Para comenzar el desarrollo podemos ir de una vez al artículo siguiente: [Patrón de repositorio con Entity Framework Core](/posts/patron-repositorio-entity-framework-core/)
 
 ---
 

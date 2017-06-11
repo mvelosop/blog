@@ -1,5 +1,8 @@
 {{ $gitHubUser := "https://github.com/mvelosop" }}
 {{ $repoUrl := printf "%s/%s" $gitHubUser $.Page.Params.repoName }}
 {{ $releaseUrl := printf "%s/%s/releases/tag/%s" $gitHubUser $.Page.Params.repoName $.Page.Params.repoRelease }}
+{{ $archiveUrl := printf "%s/%s/archive/%s/.zip" $gitHubUser $.Page.Params.repoName $.Page.Params.repoRelease }}
 <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
 <a href="{{ $repoUrl }}">{{ $repoUrl }}</a> (release <a href="{{ $releaseUrl }}">{{ $.Page.Params.repoRelease }}</a>)
+<span style="font-size:smaller"> <a href="{{ $archiveUrl }}">Descargar .zip</a></span>
+

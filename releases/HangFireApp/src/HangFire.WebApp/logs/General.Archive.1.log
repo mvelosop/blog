@@ -1,0 +1,203 @@
+2017-03-27 16:07:52.8887 INFO Start installing Hangfire SQL objects... 
+2017-03-27 16:07:52.9714 INFO Hangfire SQL objects installed. 
+2017-03-27 16:07:53.0034 INFO Starting Hangfire Server 
+2017-03-27 16:07:53.0034 INFO Using job storage: 'SQL Server: localhost@HangFireApp' 
+2017-03-27 16:07:53.0034 INFO Using the following options for SQL Server job storage: 
+2017-03-27 16:07:53.0034 INFO     Queue poll interval: 00:00:15. 
+2017-03-27 16:07:53.0034 INFO Using the following options for Hangfire Server: 
+2017-03-27 16:07:53.0114 INFO     Worker count: 20 
+2017-03-27 16:07:53.0114 INFO     Listening queues: 'default' 
+2017-03-27 16:07:53.0114 INFO     Shutdown timeout: 00:00:15 
+2017-03-27 16:07:53.0114 INFO     Schedule polling interval: 00:00:15 
+2017-03-27 16:07:53.0339 DEBUG Background process 'BackgroundProcessingServer' started. 
+2017-03-27 16:07:53.1599 DEBUG Background process 'ServerHeartbeat' started. 
+2017-03-27 16:07:53.1599 DEBUG Background process 'ServerWatchdog' started. 
+2017-03-27 16:07:53.1599 DEBUG Background process 'Hangfire.SqlServer.ExpirationManager' started. 
+2017-03-27 16:07:53.1599 DEBUG Background process 'Hangfire.SqlServer.CountersAggregator' started. 
+2017-03-27 16:07:53.1599 DEBUG Removing outdated records from the 'AggregatedCounter' table... 
+2017-03-27 16:07:53.1669 DEBUG Aggregating records in 'Counter' table... 
+2017-03-27 16:07:53.1669 DEBUG Background process 'Worker #f08b1bac' started. 
+2017-03-27 16:07:53.1669 DEBUG Background process 'Worker #f58bdbbe' started. 
+2017-03-27 16:07:53.1669 DEBUG Background process 'Worker #09c357b2' started. 
+2017-03-27 16:07:53.1669 DEBUG Background process 'Worker #0d41361a' started. 
+2017-03-27 16:07:53.1669 DEBUG Background process 'Worker #93c7bfcc' started. 
+2017-03-27 16:07:53.1849 DEBUG Background process 'Worker #181fdad6' started. 
+2017-03-27 16:07:53.1849 DEBUG Background process 'Worker #52c4b826' started. 
+2017-03-27 16:07:53.1849 DEBUG Background process 'Worker #15ddb536' started. 
+2017-03-27 16:07:53.1849 DEBUG Background process 'Worker #79889336' started. 
+2017-03-27 16:07:53.2019 DEBUG Background process 'Worker #1c602cc0' started. 
+2017-03-27 16:07:53.2019 TRACE Outdated records removed from the 'AggregatedCounter' table. 
+2017-03-27 16:07:53.2019 DEBUG Removing outdated records from the 'Job' table... 
+2017-03-27 16:07:53.2019 TRACE Records from the 'Counter' table aggregated. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #619830e1' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #3d659dc4' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #da0b933b' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #f954ead6' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #e0489404' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #a3419931' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #383f2f03' started. 
+2017-03-27 16:07:53.2339 DEBUG Background process 'Worker #1fa049b9' started. 
+2017-03-27 16:07:53.2189 DEBUG Background process 'Worker #31498190' started. 
+2017-03-27 16:07:53.2339 DEBUG Background process 'Worker #143d3517' started. 
+2017-03-27 16:07:53.2339 DEBUG Background process 'RecurringJobScheduler' started. 
+2017-03-27 16:07:53.2339 DEBUG Background process 'DelayedJobScheduler' started. 
+2017-03-27 16:07:53.2469 TRACE Outdated records removed from the 'Job' table. 
+2017-03-27 16:07:53.2469 DEBUG Removing outdated records from the 'List' table... 
+2017-03-27 16:07:53.2469 TRACE Outdated records removed from the 'List' table. 
+2017-03-27 16:07:53.2469 DEBUG Removing outdated records from the 'Set' table... 
+2017-03-27 16:07:53.2469 TRACE Outdated records removed from the 'Set' table. 
+2017-03-27 16:07:53.2609 DEBUG Removing outdated records from the 'Hash' table... 
+2017-03-27 16:07:53.2609 TRACE Outdated records removed from the 'Hash' table. 
+2017-03-27 16:08:08.3386 INFO 1 scheduled job(s) enqueued. 
+2017-03-27 16:08:08.3591 TRACE Executing Job One - 00:00.001 
+2017-03-27 16:09:58.2090 DEBUG Background process 'DelayedJobScheduler' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #1fa049b9' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 DEBUG Background process 'Worker #1fa049b9' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #31498190' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 DEBUG Background process 'Worker #31498190' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'RecurringJobScheduler' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 DEBUG Background process 'RecurringJobScheduler' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #f954ead6' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 DEBUG Background process 'Worker #f954ead6' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #619830e1' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2139 DEBUG Background process 'Worker #619830e1' stopped. 
+2017-03-27 16:09:58.2139 DEBUG Background process 'Hangfire.SqlServer.CountersAggregator' stopped. 
+2017-03-27 16:09:58.2139 DEBUG Background process 'Hangfire.SqlServer.ExpirationManager' stopped. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #f08b1bac' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #181fdad6' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #52c4b826' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #143d3517' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #93c7bfcc' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2090 TRACE Background process 'Worker #15ddb536' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'Worker #15ddb536' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #3d659dc4' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #3d659dc4' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #da0b933b' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #da0b933b' stopped. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'Worker #143d3517' stopped. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'Worker #93c7bfcc' stopped. 
+2017-03-27 16:09:58.2309 TRACE Background process 'Worker #0d41361a' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #79889336' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #79889336' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #383f2f03' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #383f2f03' stopped. 
+2017-03-27 16:09:58.2139 DEBUG Background process 'Worker #f08b1bac' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #e0489404' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #e0489404' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #09c357b2' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2139 DEBUG Background process 'ServerHeartbeat' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #f58bdbbe' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2764 DEBUG Background process 'Worker #f58bdbbe' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #1c602cc0' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2764 DEBUG Background process 'Worker #1c602cc0' stopped. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'Worker #181fdad6' stopped. 
+2017-03-27 16:09:58.2139 TRACE Background process 'Worker #a3419931' was stopped due to a shutdown request. 
+2017-03-27 16:09:58.2764 DEBUG Background process 'Worker #a3419931' stopped. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #09c357b2' stopped. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'ServerWatchdog' stopped. 
+2017-03-27 16:09:58.2664 DEBUG Background process 'Worker #0d41361a' stopped. 
+2017-03-27 16:09:58.2309 DEBUG Background process 'Worker #52c4b826' stopped. 
+2017-03-27 16:09:58.2964 DEBUG Background process 'BackgroundProcessingServer' stopped. 
+2017-03-27 16:09:58.2964 INFO Hangfire Server stopped. 
+2017-03-27 16:14:14.7787 INFO Start installing Hangfire SQL objects... 
+2017-03-27 16:14:14.8607 INFO Hangfire SQL objects installed. 
+2017-03-27 16:14:14.8896 INFO Starting Hangfire Server 
+2017-03-27 16:14:14.8896 INFO Using job storage: 'SQL Server: localhost@HangFireApp' 
+2017-03-27 16:14:14.8896 INFO Using the following options for SQL Server job storage: 
+2017-03-27 16:14:14.9016 INFO     Queue poll interval: 00:00:15. 
+2017-03-27 16:14:14.9016 INFO Using the following options for Hangfire Server: 
+2017-03-27 16:14:14.9016 INFO     Worker count: 20 
+2017-03-27 16:14:14.9016 INFO     Listening queues: 'default' 
+2017-03-27 16:14:14.9016 INFO     Shutdown timeout: 00:00:15 
+2017-03-27 16:14:14.9016 INFO     Schedule polling interval: 00:00:15 
+2017-03-27 16:14:14.9186 DEBUG Background process 'BackgroundProcessingServer' started. 
+2017-03-27 16:14:14.9616 DEBUG Background process 'ServerHeartbeat' started. 
+2017-03-27 16:14:14.9616 DEBUG Background process 'ServerWatchdog' started. 
+2017-03-27 16:14:14.9661 DEBUG Background process 'Hangfire.SqlServer.ExpirationManager' started. 
+2017-03-27 16:14:14.9661 DEBUG Background process 'Hangfire.SqlServer.CountersAggregator' started. 
+2017-03-27 16:14:14.9661 DEBUG Background process 'Worker #e1c14568' started. 
+2017-03-27 16:14:14.9661 DEBUG Removing outdated records from the 'AggregatedCounter' table... 
+2017-03-27 16:14:14.9661 DEBUG Aggregating records in 'Counter' table... 
+2017-03-27 16:14:14.9661 DEBUG Background process 'Worker #10123e1a' started. 
+2017-03-27 16:14:14.9796 DEBUG Background process 'Worker #6e4f84f5' started. 
+2017-03-27 16:14:14.9796 DEBUG Background process 'Worker #95f42f41' started. 
+2017-03-27 16:14:14.9796 DEBUG Background process 'Worker #66721d65' started. 
+2017-03-27 16:14:14.9796 DEBUG Background process 'Worker #28fc4c2b' started. 
+2017-03-27 16:14:14.9796 DEBUG Background process 'Worker #e013b2b6' started. 
+2017-03-27 16:14:14.9986 DEBUG Background process 'Worker #fd8477fc' started. 
+2017-03-27 16:14:14.9986 DEBUG Background process 'Worker #605ab4dd' started. 
+2017-03-27 16:14:14.9986 DEBUG Background process 'Worker #ea11f8ee' started. 
+2017-03-27 16:14:14.9986 TRACE Outdated records removed from the 'AggregatedCounter' table. 
+2017-03-27 16:14:14.9986 DEBUG Removing outdated records from the 'Job' table... 
+2017-03-27 16:14:14.9986 DEBUG Background process 'Worker #76183624' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #1171cc05' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #ddade86b' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #cb3b5f78' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #ab424e36' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #1906646d' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #8b79eee7' started. 
+2017-03-27 16:14:15.0136 DEBUG Background process 'Worker #23c5df3d' started. 
+2017-03-27 16:14:15.0286 DEBUG Background process 'Worker #c78b0402' started. 
+2017-03-27 16:14:15.0136 TRACE Outdated records removed from the 'Job' table. 
+2017-03-27 16:14:15.0286 DEBUG Removing outdated records from the 'List' table... 
+2017-03-27 16:14:15.0286 DEBUG Background process 'DelayedJobScheduler' started. 
+2017-03-27 16:14:15.0286 DEBUG Background process 'Worker #f4b0c482' started. 
+2017-03-27 16:14:15.0286 DEBUG Background process 'RecurringJobScheduler' started. 
+2017-03-27 16:14:15.0286 TRACE Records from the 'Counter' table aggregated. 
+2017-03-27 16:14:15.0286 TRACE Outdated records removed from the 'List' table. 
+2017-03-27 16:14:15.0286 DEBUG Removing outdated records from the 'Set' table... 
+2017-03-27 16:14:15.0456 TRACE Outdated records removed from the 'Set' table. 
+2017-03-27 16:14:15.0456 DEBUG Removing outdated records from the 'Hash' table... 
+2017-03-27 16:14:15.0456 TRACE Outdated records removed from the 'Hash' table. 
+2017-03-27 16:15:00.1488 TRACE Executing Job One - 00:00.000 
+2017-03-27 16:16:00.1831 TRACE Executing Job One - 01:00.035 
+2017-03-27 16:17:00.2379 TRACE Executing Job One - 02:00.090 
+2017-03-27 16:17:58.5947 DEBUG Background process 'DelayedJobScheduler' stopped. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #f4b0c482' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'RecurringJobScheduler' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #6e4f84f5' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #cb3b5f78' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #1906646d' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #10123e1a' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #c78b0402' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.5947 TRACE Background process 'Worker #66721d65' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6087 TRACE Background process 'Worker #8b79eee7' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6992 DEBUG Background process 'Worker #8b79eee7' stopped. 
+2017-03-27 16:17:58.6992 DEBUG Background process 'Worker #66721d65' stopped. 
+2017-03-27 16:17:58.6202 TRACE Background process 'Worker #28fc4c2b' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6202 TRACE Background process 'Worker #95f42f41' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6992 DEBUG Background process 'Worker #95f42f41' stopped. 
+2017-03-27 16:17:58.6992 DEBUG Background process 'Worker #28fc4c2b' stopped. 
+2017-03-27 16:17:58.6202 DEBUG Background process 'ServerHeartbeat' stopped. 
+2017-03-27 16:17:58.6087 TRACE Background process 'Worker #ddade86b' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6992 DEBUG Background process 'Worker #ddade86b' stopped. 
+2017-03-27 16:17:58.6087 TRACE Background process 'Worker #ea11f8ee' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7152 DEBUG Background process 'Worker #ea11f8ee' stopped. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'Worker #10123e1a' stopped. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'RecurringJobScheduler' stopped. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'Worker #6e4f84f5' stopped. 
+2017-03-27 16:17:58.6362 TRACE Background process 'Worker #605ab4dd' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7152 DEBUG Background process 'Worker #605ab4dd' stopped. 
+2017-03-27 16:17:58.6202 DEBUG Background process 'ServerWatchdog' stopped. 
+2017-03-27 16:17:58.6362 TRACE Background process 'Worker #e013b2b6' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7152 DEBUG Background process 'Worker #e013b2b6' stopped. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'Worker #c78b0402' stopped. 
+2017-03-27 16:17:58.6552 DEBUG Background process 'Hangfire.SqlServer.CountersAggregator' stopped. 
+2017-03-27 16:17:58.6087 TRACE Background process 'Worker #23c5df3d' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7152 DEBUG Background process 'Worker #23c5df3d' stopped. 
+2017-03-27 16:17:58.6202 TRACE Background process 'Worker #ab424e36' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7297 DEBUG Background process 'Worker #ab424e36' stopped. 
+2017-03-27 16:17:58.6202 TRACE Background process 'Worker #e1c14568' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'Worker #cb3b5f78' stopped. 
+2017-03-27 16:17:58.6852 DEBUG Background process 'Worker #1906646d' stopped. 
+2017-03-27 16:17:58.6202 TRACE Background process 'Worker #1171cc05' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7297 DEBUG Background process 'Worker #1171cc05' stopped. 
+2017-03-27 16:17:58.7297 DEBUG Background process 'Worker #e1c14568' stopped. 
+2017-03-27 16:17:58.6552 DEBUG Background process 'Hangfire.SqlServer.ExpirationManager' stopped. 
+2017-03-27 16:17:58.6362 TRACE Background process 'Worker #76183624' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7297 DEBUG Background process 'Worker #76183624' stopped. 
+2017-03-27 16:17:58.6362 TRACE Background process 'Worker #fd8477fc' was stopped due to a shutdown request. 
+2017-03-27 16:17:58.7297 DEBUG Background process 'Worker #fd8477fc' stopped. 
+2017-03-27 16:17:58.6732 DEBUG Background process 'Worker #f4b0c482' stopped. 
+2017-03-27 16:17:58.7482 DEBUG Background process 'BackgroundProcessingServer' stopped. 
+2017-03-27 16:17:58.7482 INFO Hangfire Server stopped. 

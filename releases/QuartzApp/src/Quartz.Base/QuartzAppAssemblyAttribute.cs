@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Quartz.Base
+{
+	[System.AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = true)]
+	public sealed class QuartzAppAssemblyAttribute : Attribute
+	{
+		// See the attribute guidelines at 
+		//  http://go.microsoft.com/fwlink/?LinkId=85236
+
+		// This is a positional argument
+		public QuartzAppAssemblyAttribute()
+		{
+		}
+	}
+}

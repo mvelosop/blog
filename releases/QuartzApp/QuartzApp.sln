@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BA04AB5-FF82-4484-8F76-2516473C63FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.ModuleA", "src\Quartz.ModuleA\Quartz.ModuleA.csproj", "{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.ModuleB", "src\Quartz.ModuleB\Quartz.ModuleB.csproj", "{90DA6C04-9578-46AD-B4F3-5DDD6987F938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.App", "src\Quartz.App\Quartz.App.csproj", "{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.Base", "src\Quartz.Base\Quartz.Base.csproj", "{EB87C452-A06B-40CF-91F4-B74BB45B9D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.ModuleC", "src\Quartz.ModuleC\Quartz.ModuleC.csproj", "{682D960D-070A-4135-A7CD-A79EEEABA372}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90DA6C04-9578-46AD-B4F3-5DDD6987F938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DA6C04-9578-46AD-B4F3-5DDD6987F938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DA6C04-9578-46AD-B4F3-5DDD6987F938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DA6C04-9578-46AD-B4F3-5DDD6987F938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB87C452-A06B-40CF-91F4-B74BB45B9D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB87C452-A06B-40CF-91F4-B74BB45B9D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB87C452-A06B-40CF-91F4-B74BB45B9D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB87C452-A06B-40CF-91F4-B74BB45B9D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{682D960D-070A-4135-A7CD-A79EEEABA372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682D960D-070A-4135-A7CD-A79EEEABA372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682D960D-070A-4135-A7CD-A79EEEABA372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682D960D-070A-4135-A7CD-A79EEEABA372}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B00BFEF2-6B84-4A44-B6A9-1AC9694F8E0F} = {4BA04AB5-FF82-4484-8F76-2516473C63FD}
+		{90DA6C04-9578-46AD-B4F3-5DDD6987F938} = {4BA04AB5-FF82-4484-8F76-2516473C63FD}
+		{AEF4C2D5-F9B7-4B5C-8B0F-BA17AD275C15} = {4BA04AB5-FF82-4484-8F76-2516473C63FD}
+		{EB87C452-A06B-40CF-91F4-B74BB45B9D7F} = {4BA04AB5-FF82-4484-8F76-2516473C63FD}
+		{682D960D-070A-4135-A7CD-A79EEEABA372} = {4BA04AB5-FF82-4484-8F76-2516473C63FD}
+	EndGlobalSection
+EndGlobal

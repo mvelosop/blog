@@ -1,0 +1,64 @@
+2017-04-24 20:05:49.9168 INFO Start installing Hangfire SQL objects... 
+2017-04-24 20:05:50.1603 INFO Hangfire SQL objects installed. 
+2017-04-24 20:05:50.1888 INFO Starting Hangfire Server 
+2017-04-24 20:05:50.1923 INFO Using job storage: 'SQL Server: localhost@HangFireApp' 
+2017-04-24 20:05:50.1923 INFO Using the following options for SQL Server job storage: 
+2017-04-24 20:05:50.1923 INFO     Queue poll interval: 00:00:15. 
+2017-04-24 20:05:50.1923 INFO Using the following options for Hangfire Server: 
+2017-04-24 20:05:50.1923 INFO     Worker count: 20 
+2017-04-24 20:05:50.1923 INFO     Listening queues: 'default' 
+2017-04-24 20:05:50.1923 INFO     Shutdown timeout: 00:00:15 
+2017-04-24 20:05:50.1923 INFO     Schedule polling interval: 00:00:15 
+2017-04-24 20:05:50.2113 TRACE ---------------------------------------- 
+2017-04-24 20:05:50.2113 TRACE Starting... 
+2017-04-24 20:05:50.2113 TRACE Loading HangFire modules... 
+2017-04-24 20:05:50.2113 TRACE Loading Job assembly: C:\Users\Miguel\Documents\Trabajo\Blog\coderepo.blog\repos\HangFireApp\src\HangFire.WebApp\bin\HangFire.JobOne.dll 
+2017-04-24 20:05:50.2113 TRACE Getting jobs... 
+2017-04-24 20:05:50.2113 TRACE Scheduling Job JobOne with 1 minutes interval 
+2017-04-24 20:05:50.2113 DEBUG Background process 'BackgroundProcessingServer' started. 
+2017-04-24 20:05:50.2838 DEBUG Background process 'ServerHeartbeat' started. 
+2017-04-24 20:05:50.2863 DEBUG Background process 'ServerWatchdog' started. 
+2017-04-24 20:05:50.2863 DEBUG Background process 'Hangfire.SqlServer.ExpirationManager' started. 
+2017-04-24 20:05:50.2863 DEBUG Background process 'Hangfire.SqlServer.CountersAggregator' started. 
+2017-04-24 20:05:50.2863 DEBUG Removing outdated records from the 'AggregatedCounter' table... 
+2017-04-24 20:05:50.2863 DEBUG Background process 'Worker #6c105fbd' started. 
+2017-04-24 20:05:50.2863 DEBUG Background process 'Worker #6e7ed25b' started. 
+2017-04-24 20:05:50.2863 DEBUG Aggregating records in 'Counter' table... 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #459fabc3' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #2f49a376' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #b2322885' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #cba8505b' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #d5e3f04e' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #6584121f' started. 
+2017-04-24 20:05:50.3043 DEBUG Background process 'Worker #ecd302c1' started. 
+2017-04-24 20:05:50.3183 DEBUG Background process 'Worker #23a57b7f' started. 
+2017-04-24 20:05:50.3183 DEBUG Background process 'Worker #ba1f71e1' started. 
+2017-04-24 20:05:50.3183 DEBUG Background process 'Worker #cd0772d2' started. 
+2017-04-24 20:05:50.3183 DEBUG Background process 'Worker #89001ee0' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #6c723082' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #d36bd0db' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #1048fb6b' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #1a09bf70' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #3d48a61a' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #f7d08007' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'Worker #b0b62c70' started. 
+2017-04-24 20:05:50.3343 DEBUG Background process 'DelayedJobScheduler' started. 
+2017-04-24 20:05:50.3528 DEBUG Background process 'RecurringJobScheduler' started. 
+2017-04-24 20:05:50.3683 TRACE Outdated records removed from the 'AggregatedCounter' table. 
+2017-04-24 20:05:50.3683 DEBUG Removing outdated records from the 'Job' table... 
+2017-04-24 20:05:50.3683 TRACE Records from the 'Counter' table aggregated. 
+2017-04-24 20:05:50.3683 TRACE Loading Job assembly: C:\Users\Miguel\Documents\Trabajo\Blog\coderepo.blog\repos\HangFireApp\src\HangFire.WebApp\bin\HangFire.JobTwo.dll 
+2017-04-24 20:05:50.3683 TRACE Getting jobs... 
+2017-04-24 20:05:50.3683 TRACE Scheduling Job JobTwo with 2 minutes interval 
+2017-04-24 20:05:50.3888 TRACE Outdated records removed from the 'Job' table. 
+2017-04-24 20:05:50.3888 DEBUG Removing outdated records from the 'List' table... 
+2017-04-24 20:05:50.3888 TRACE Outdated records removed from the 'List' table. 
+2017-04-24 20:05:50.3888 DEBUG Removing outdated records from the 'Set' table... 
+2017-04-24 20:05:50.4018 TRACE Outdated records removed from the 'Set' table. 
+2017-04-24 20:05:50.4018 DEBUG Removing outdated records from the 'Hash' table... 
+2017-04-24 20:05:50.4018 TRACE Outdated records removed from the 'Hash' table. 
+2017-04-24 20:06:00.4696 TRACE Executing Job One - 00:00.000 
+2017-04-24 20:06:00.4696 TRACE Executing Job Two - 00:00.000 
+2017-04-24 20:07:00.5159 TRACE Executing Job One - 01:00.047 
+2017-04-24 20:08:00.5657 TRACE Executing Job One - 02:00.097 
+2017-04-24 20:08:00.5812 TRACE Executing Job Two - 02:00.111 
