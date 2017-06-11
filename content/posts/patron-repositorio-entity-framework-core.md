@@ -12,7 +12,7 @@ repoName: Domion.Net
 repoRelease: "2.0"
 ---
 
-Este es el segundo artículo de la serie [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion). En el [artículo anterior](/posts/preparar-solucion-aspnet-core/) creamos la solución para definir la estructura general, con los proyectos pricipales, aunque sin programas.
+Este es el segundo artículo de la serie [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion). En el [artículo anterior](/posts/preparar-solucion-aspnet-core/) creamos la solución para definir la estructura general, con los proyectos principales, aunque sin programas.
 
 En esta oportunidad vamos a implementar el [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) con [Entity Framework Core (EF Core)](https://docs.microsoft.com/en-us/ef/core/index) en las librerías, para aplicarlo en el backend del primer módulo de la aplicación.
 
@@ -29,7 +29,7 @@ Los puntos más importantes que cubriremos son:
 > 0. Aplicación del proceso [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
 > 0. Migraciones con [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index) "Code First"
 
-Al terminar el artículo deberíamos tener una buena visión general de la arquitectura y conocer algunos detalles de los elementos pricipales.
+Al terminar el artículo deberíamos tener una buena visión general de la arquitectura y conocer algunos detalles de los elementos principales.
 
 En el artículo siguiente trabajaremos con:
 
@@ -70,7 +70,7 @@ Siento que es mucho más fácil cambiar el contexto de trabajo a otra aplicació
 ## A - Paso a paso - Patrón de repositorio
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
-> El [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) nos ofrece una abstracción del DbContext de EF Core, donde podemos agregar procesamiento y validaciones adicionales. Tambiém puede facilitar la realización de pruebas sin tener que involucrar al DbContext.
+> El [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) nos ofrece una abstracción del DbContext de EF Core, donde podemos agregar procesamiento y validaciones adicionales. También puede facilitar la realización de pruebas sin tener que involucrar al DbContext.
 
 Esta implementación del patrón de repositorio se apoya en la funcionalidad del [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext) de EF Core, que mantiene en memoria una colección de las entidades que han sido modificadas (en el ChangeTracker), antes de enviar los cambios a la base de datos para salvarlos.
 
@@ -100,7 +100,7 @@ La implementación de esta interfaz nos permite acceder al método **Find** de l
 
 #### A-1.3 - BaseRepository - Repositorio genérico
 
-Esta es la implementación base del repositorio genérico, está declarada como un clase abstracta, así que cada EntityManager específico debe heredar de ésta y entonces decidir que métodos cambiar u ocultar o, incluso, eliminando alguna de las interfaces de la declaración.
+Esta es la implementación base del repositorio genérico, está declarada como una clase abstracta, así que cada EntityManager específico debe heredar de ésta y entonces decidir que métodos cambiar u ocultar o, incluso, eliminando alguna de las interfaces de la declaración.
 
 {{<getSourceFile "src\Domion.Lib\Data\BaseRepository.cs">}}
 
@@ -121,9 +121,9 @@ Por eso, siguiendo una de las sugerencias en https://github.com/aspnet/EntityFra
 
 #### A-2.1 - EntityTypeConfiguration - Configuración genérica por clase de dominio
 
-El método Map de esta clase abstract recibe un EntityTypeBuilder<TEntity> con el que se pueder factorizar allí toda la configuración de una clase del modelo.
+El método Map de esta clase abstract recibe un EntityTypeBuilder<TEntity> con el que se puede refactorizar allí toda la configuración de una clase del modelo.
 
-En el punto [B-3.1](#b-3-1-budgetclassconfiguration-configuración-del-modelo-para-ef-core) podemos ver como se utiliza esta clase para manejar la clase de configuración.
+En el punto [B-3.1](#b-3-1-budgetclassconfiguration-configuración-del-modelo-para-ef-core) podemos ver cómo se utiliza esta clase para manejar la clase de configuración.
 
 {{<getSourceFile "src\Domion.Lib\Data\EntityTypeConfiguration.cs">}}
 
@@ -139,7 +139,7 @@ Con esto la configuración de cada clase del modelo queda reducida a una línea 
     modelBuilder.AddConfiguration(new BudgetClassConfiguration());
 ```
 
-Estas clases se encuentran el proyecto **Domion.Lib**
+Estas clases se encuentran en el proyecto **Domion.Lib**
 
 ### A-3 - Incluir referencias y compilar
 
@@ -159,13 +159,13 @@ Como mencionamos en el artículo inicial, [la aplicación de ejemplo será un "s
 
 Vamos a aclarar que el tamaño de esta aplicación modelo no justifica, por sí mismo, el uso de la estructura de la solución que estamos desarrollando.
 
-Sin embargo, como lo que buscamos es lograr una estructura flexible, que facilite el desarrollo de aplicaciones grandes y la divisón del trabajo entre varios equipos, entonces nos enfocamos en una aplicación muy sencilla, para poder dedicar el esfuerzo cognitivo en la estructura y no en el contenido.
+Sin embargo, como lo que buscamos es lograr una estructura flexible, que facilite el desarrollo de aplicaciones grandes y la división del trabajo entre varios equipos, entonces nos enfocamos en una aplicación muy sencilla, para poder dedicar el esfuerzo cognitivo en la estructura y no en el contenido.
 
 ### B-1 - Modelos de la aplicación
 
 También mecionamos en ese artículo que íbamos a aplicar el enfoque [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture) usando [Enterprise Architect](http://www.sparxsystems.com/products/ea/). 
 
-A continuación mostramos los modelos desarrollados con este enfoque y, como se puede observar, no son los modelos típicos de UML, con la excepción del modelo de dominio, sino que forman parte del [DSL - Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language) diseñado específicamente para facilitar el desarrollo de aplicaciones con Domion.
+A continuación, mostramos los modelos desarrollados con este enfoque y, como se puede observar, no son los modelos típicos de UML, con la excepción del modelo de dominio, sino que forman parte del [DSL - Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language) diseñado específicamente para facilitar el desarrollo de aplicaciones con Domion.
 
 #### B-1.1 - Modelo de Dominio
 
@@ -205,7 +205,7 @@ Este proceso no se detalla en el artículo, sólo se muestra el resultado final.
 
 Esta es la clase "principal" (la única por ahora) del modelo de dominio. 
 
-Los atributos **[Required]** y **[MaxLength(100)]**, así como el comentario **// Key data ---**, son el resultado de especificaciones particulares que se hacen en el modelo en Enterprise Architect. El comentario **Key data** nos indica que los valores de esa propiedad se debe manejar como valores únicos en la base de datos.
+Los atributos **[Required]** y **[MaxLength(100)]**, así como el comentario **// Key data ---**, son el resultado de especificaciones particulares que se hacen en el modelo en Enterprise Architect. El comentario **Key data** nos indica que los valores de esa propiedad se deben manejar como valores únicos en la base de datos.
 
 Aunque los atributos indicados realmente pertenecen a la capa de datos y no a la capa del modelo de dominio, donde estamos, me parece que es útil tenerlos aquí como referencia al implementar las pantallas.
 
@@ -231,9 +231,9 @@ Esta interfaz se puede modificar tanto como sea necesario, por ejemplo, se podr�
 
 #### B-3.1 - BudgetClassConfiguration - Configuración del modelo para EF Core
 
-Esta es la clase de configuración del modelo de datos para BudgetClass. Aquí de puede apreciar claramente los elementos relacionados con la base de datos.
+Esta es la clase de configuración del modelo de datos para BudgetClass. Aquí se pueden apreciar claramente los elementos relacionados con la base de datos.
 
-En esta clase no están los elementos relativos al tamaño de los campos o si son requeridos o no, porque ya están incluidos como atributos en la clase del modelo, como se mostró anteriomente.
+En esta clase no están los elementos relativos al tamaño de los campos o si son requeridos o no, porque ya están incluidos como atributos en la clase del modelo, como se mostró anteriormente.
 
 Vamos a destacar un elemento importante de la configuración, como uso de un **schema de base de datos** asociado a cada DbContext, como un modo de separar las áreas funcionales en la base de datos. Esto, además, nos facilitará el desarrollo de aplicaciones grandes, a la hora de distribuir el trabajo entre varios equipos y compartir el acceso a una base de datos desde varios DbContext.
 
@@ -245,7 +245,7 @@ El DbContext es el corazón de [Entity Framework](https://docs.microsoft.com/en-
 
 El [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext) es una implementación combinada de los patrones [Unit of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html) y [Repository](https://martinfowler.com/eaaCatalog/repository.html).
 
-También lo podemos ver como una ventana a la base de datos (con una interfaz de objetos) que nos facilita el acceso a los objejtos necesarios.
+También lo podemos ver como una ventana a la base de datos (con una interfaz de objetos) que nos facilita el acceso a los objetos necesarios.
 
 > ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
 > Es un error común manejar en un único DbContext todo el modelo de dominio de una aplicación, lo ideal es dividir el modelo en un DbContext por módulo o por área funcional.
@@ -260,7 +260,7 @@ Además, el DbContext también facilita la implementación de un [Bounded Contex
 
 Esta es la implementación del EntityManager para BudgetClass. Es la responsable de gestionar el acceso al DbContext, en especial en cuanto a las validaciones relacionadas con incluir o eliminar objetos en el repositorio, por ejemplo, evitar elementos duplicados, o eliminación de objetos referenciados por otros.
 
-Independientemente de que esas validaciones estén reforzadas a nivel de la base de datos, por ejemplo, usando Foreign Keys o índices únicos, esta clase permiter detectar estos casos antes de que se levante una excepción por una validación de la base de datos y mostrar un mensaje controlado al usuario.
+Independientemente de que esas validaciones estén reforzadas a nivel de la base de datos, por ejemplo, usando Foreign Keys o índices únicos, esta clase permite detectar estos casos antes de que se levante una excepción por una validación de la base de datos y mostrar un mensaje controlado al usuario.
 
 {{<getSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
 
@@ -308,7 +308,7 @@ Vamos a crear un proyecto para manejar los temas de configuración del módulo, 
 
 El paquete de tooling es el encargado de crear las migraciones y aplicar actualizaciones en las bases de datos en el ambiente de desarrollo.
 
-Para efectos de este artículo trabajaremos con la versión CLI (Command Line Interface) de las herramientas (**Microsoft.EntityFrameworkCore.Tools.DotNet**), para realizar las operaciones desde la línea de comandos. También se podría instalar la versión de PowerShell (**Microsoft.EntityFrameworkCore.Tools**) que se ejecuta desde la cónsola del Package Manager, es sólo un asunto de preferencias personales.
+Para efectos de este artículo trabajaremos con la versión CLI (Command Line Interface) de las herramientas (**Microsoft.EntityFrameworkCore.Tools.DotNet**), para realizar las operaciones desde la línea de comandos. También se podría instalar la versión de PowerShell (**Microsoft.EntityFrameworkCore.Tools**) que se ejecuta desde la consola del Package Manager, es sólo un asunto de preferencias personales.
 
 Para habilitar el tooling es necesario instalar el paquete **Microsoft.EntityFrameworkCore.Tools.DotNet** en **DFlow.CLI**, pero este es un tipo de paquete **"DotNetCliTool"**, que no se puede instalar como un NuGet cualquiera.
 
@@ -378,13 +378,13 @@ Y esta otra al ejecutarla por segunda vez:
 
 {{<image src="/posts/images/dotnet_2017-06-11_12-59-30.png">}}
 
-Y de esta forma verificamos que la aplicación está funcionando y terminamos el artículo, finalmente!
+Y de esta forma verificamos que la aplicación está funcionando y terminamos el artículo, ¡finalmente!
 
 ## Resumen
 
 En este artículo exploramos una implementación del patrón de repositorio y la utilizamos para poner a funcionar el backend del primer módulo de la aplicación de presupuesto personal.
 
-También tuvimos una visión general de los resultados de usar el enfoque MDA - Model Driven Architecture y como, gracias al enfoque Code First de Entity Framework, pasamos a tener una base de datos completamente funcional, con muy poco esfuerzo y casi sin sin tener que pensar en ello.
+También tuvimos una visión general de los resultados de usar el enfoque MDA - Model Driven Architecture y como, gracias al enfoque Code First de Entity Framework, pasamos a tener una base de datos completamente funcional, con muy poco esfuerzo y casi sin tener que pensar en ello.
 
 ---
 
