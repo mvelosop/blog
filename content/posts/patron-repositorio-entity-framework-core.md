@@ -31,6 +31,8 @@ Los puntos más importantes que cubriremos son:
 
 Al terminar el artículo deberíamos tener una buena visión general de la arquitectura y conocer algunos detalles de los elementos principales.
 
+También tendremos un esbozo de los beneficios y aportes del enfoque MDA en el desarrollo de aplicaciones, por ejemplo, en este artículo el **60% de las líneas de programa fueron generadas con Domion**.
+
 En el artículo siguiente trabajaremos con:
 
 > 0. Pruebas de integración con [xUnit](https://xunit.github.io/) y [FluentAssertions](http://fluentassertions.com/)
@@ -199,9 +201,17 @@ A partir de esos modelos, usando las plantillas de transformación y generación
 
 Este proceso no se detalla en el artículo, sólo se muestra el resultado final.
 
+##### ¿Qué tanto código se genera a partir de los modelos?
+
+Para este ejemplo, **el 60% fue generado por Domion**, el 14% por las EF Core Tools (migraciones) y sólo el 26% se produjo a mano.
+
+Para efectos de estas métricas, contamos las líneas no vacías (incluyendo comentarios y documentación) de todos los archivos (*.cs), de la carpeta "samples", menos los AssemblyInfo.cs, usando la herramienta [SourceMonitor](http://www.campwoodsw.com/sourcemonitor.html).
+
+Aun cuando este número es interesante y, desde luego, este es un ejemplo muy sencillo, lo más importante es saber que ese código inicial se ha producido de una forma estandarizada y uniforme, con todos los beneficios que eso aporta.
+
 ### B-2 - Componentes en DFlow.Budget.Core
 
-#### B-2.1 - BudgetClass - Clasificación de conceptos del presupuesto
+#### B-2.1 - BudgetClass - Clasificación de conceptos del presupuesto <span style="color: red;">[Generado 100%]</span>
 
 Esta es la clase "principal" (la única por ahora) del modelo de dominio. 
 
@@ -211,13 +221,13 @@ Aunque los atributos indicados realmente pertenecen a la capa de datos y no a la
 
 {{<getSourceFile "samples\DFlow.Budget.Core\Model\BudgetClass.cs">}}
 
-#### B-2.2 - TransactionType - Tipo de transacción
+#### B-2.2 - TransactionType - Tipo de transacción <span style="color: red;">[Generado 100%]</span>
 
 Esto es simplemente un enum convencional.
 
 {{<getSourceFile "samples\DFlow.Budget.Core\Model\TransactionType.cs">}}
 
-#### B-2.3 - IBudgetClassManager - Interfaz del EntityManager para BudgetClass
+#### B-2.3 - IBudgetClassManager - Interfaz del EntityManager para BudgetClass <span style="color: red;">[Generado 100%]</span>
 
 Esta es la interfaz específica para el BudgetClassManager, está declarada en el proyecto .Core para facilitar su uso desde las clases de dominio si hace falta.
 
@@ -229,7 +239,7 @@ Esta interfaz se puede modificar tanto como sea necesario, por ejemplo, se podr�
 
 ### B-3 - Componentes en DFlow.Budget.Lib
 
-#### B-3.1 - BudgetClassConfiguration - Configuración del modelo para EF Core
+#### B-3.1 - BudgetClassConfiguration - Configuración del modelo para EF Core <span style="color: red;">[Generado 100%]</span>
 
 Esta es la clase de configuración del modelo de datos para BudgetClass. Aquí se pueden apreciar claramente los elementos relacionados con la base de datos.
 
@@ -239,7 +249,7 @@ Vamos a destacar un elemento importante de la configuración, como uso de un **s
 
 {{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetClassConfiguration.cs">}}
 
-#### B-3.2 - BudgetDbContext - DbContext para el módulo
+#### B-3.2 - BudgetDbContext - DbContext para el módulo <span style="color: red;">[Generado 100%]</span>
 
 El DbContext es el corazón de [Entity Framework](https://docs.microsoft.com/en-us/ef/).
 
@@ -256,7 +266,7 @@ Además, el DbContext también facilita la implementación de un [Bounded Contex
 
 {{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetDbContext.cs">}}
 
-#### B-3.3 - BudgetClassManager - EntityManager para las clasificaciones
+#### B-3.3 - BudgetClassManager - EntityManager para las clasificaciones <span style="color: red;">[Generado 100%]</span>
 
 Esta es la implementación del EntityManager para BudgetClass. Es la responsable de gestionar el acceso al DbContext, en especial en cuanto a las validaciones relacionadas con incluir o eliminar objetos en el repositorio, por ejemplo, evitar elementos duplicados, o eliminación de objetos referenciados por otros.
 
@@ -385,6 +395,8 @@ Y de esta forma verificamos que la aplicación está funcionando y terminamos el
 En este artículo exploramos una implementación del patrón de repositorio y la utilizamos para poner a funcionar el backend del primer módulo de la aplicación de presupuesto personal.
 
 También tuvimos una visión general de los resultados de usar el enfoque MDA - Model Driven Architecture y como, gracias al enfoque Code First de Entity Framework, pasamos a tener una base de datos completamente funcional, con muy poco esfuerzo y casi sin tener que pensar en ello.
+
+De hecho, en este ejemplo **60% de las líneas de programa se generaron con Domion** y 14% con las EF Core Tools, sólo fue necesario escribir el 26%, sin contar las clases de las librerías base, en la carpeta "src ".
 
 ---
 

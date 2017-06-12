@@ -85,10 +85,6 @@ Checklist para publicación
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Los tags son adecuados
 
-<i class="fa fa-square-o" aria-hidden="true"></i> Se actualizó el número del release en el Front Matter
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Se copiaron los archivos fuente a la carpeta release
-
 <i class="fa fa-square-o" aria-hidden="true"></i> Se hizo commit del blog
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Se publicó en Azure
