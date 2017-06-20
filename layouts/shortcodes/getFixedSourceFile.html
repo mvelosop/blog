@@ -1,0 +1,9 @@
+{{ $file := .Get 0 }}
+{{ $release := .Get 1 }}
+{{ $fileExt := replace (index (findRE "(\\.)\\w+$" $file) 0) "." "" }}
+{{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName $release $file }}
+{{ $sourceFile := printf "releases\\%s-%s\\%s" $.Page.Params.repoName $release $file }}
+<div class="source-file"><div class="source-filename" style="line-height: 20px">{{ $sourceFilePath }}</div>
+<pre class="snippet">
+<code class="language-{{ $fileExt }}">{{ trim (readFile $sourceFile) "\ufeff" }}</code></pre>
+</div>

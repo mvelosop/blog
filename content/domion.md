@@ -24,9 +24,19 @@ Todo el código que publique estará bajo licencia MIT, así que lo único que s
 
 ## Artículos de la serie en orden de publicación
 
-1. [Preparar una solución para ASP.NET Core](/posts/preparar-solucion-aspnet-core/) - Preparación de la solución base.
+1. [Preparar una solución para ASP.NET Core](/posts/preparar-solucion-aspnet-core/) - [Release 1.0 (GitHub)](https://github.com/mvelosop/Domion.Net/releases/tag/1.0)
 
-2. [Patrón de repositorio con Entity Framework Core](/posts/patron-repositorio-entity-framework-core/) - Infraestructura y comienzo del primer módulo
+2. [Patrón de repositorio con Entity Framework Core](/posts/patron-repositorio-entity-framework-core/) - [Release 2.0 (GitHub)](https://github.com/mvelosop/Domion.Net/releases/tag/2.0)
+
+3. [Pruebas de integración con xUnit y Entity Framework Core](/posts/pruebas-integracion-xunit-entity-framework-core) - [Release 3.0 (GitHub)](https://github.com/mvelosop/Domion.Net/releases/tag/3.0)
+
+
+
+
+
+
+
+
 
 ## ¿Por qué Domion?
 

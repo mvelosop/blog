@@ -16,29 +16,11 @@ Checklist para publicación
 
 ## Solución
 
-<i class="fa fa-square-o" aria-hidden="true"></i> La solución funciona correctamente
+<i class="fa fa-square-o" aria-hidden="true"></i> El ejercicio se puede completar exitosamente con las instrucciones.
 
 <i class="fa fa-square-o" aria-hidden="true"></i> La solución tiene un .editorconfig para trabajar con espacios en vez de tabs.
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Se ejecutó la limpieza de todo el código con CodeMaid.
-
-## Repositorio local
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de LICENCE.txt
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de README.md
-
-<i class="fa fa-square-o" aria-hidden="true"></i> El archivo README.md tiene el enlace al artículo del blog
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Está actualizado el branch **master**
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Se creó el tag de la versión en master
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Se subió a GitHub
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Se copiaron los fuentes actuales a la carpeta del release correspondiente
-
-<i class="fa fa-square-o" aria-hidden="true"></i> Se actualizó el número del release en el artículo.
 
 ## Contenido del artículo
 
@@ -48,12 +30,16 @@ Checklist para publicación
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Los puntos importantes están destacados en el artículo
 
+<i class="fa fa-square-o" aria-hidden="true"></i> El estimado de tiempo para realizar el tutorial es adecuado
+
 
 ### Contexto
 
 <i class="fa fa-square-o" aria-hidden="true"></i> El contexto está actualizado
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Las herramienas y plataforma utilizadas están actualizadas
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Están listados todos los paquetes utilizados con sus versiones
 
 ### Cierre
 
@@ -88,6 +74,25 @@ Checklist para publicación
 <i class="fa fa-square-o" aria-hidden="true"></i> Se hizo commit del blog
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Se publicó en Azure
+
+## Repositorio local
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de LICENCE.txt
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de README.md
+
+<i class="fa fa-square-o" aria-hidden="true"></i> El archivo README.md tiene el enlace al artículo del blog
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Está actualizado el branch **master**
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Se creó el tag de la versión en master
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Se subió a GitHub
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Se copiaron los fuentes actuales a la carpeta del release correspondiente
+
+<i class="fa fa-square-o" aria-hidden="true"></i> Se actualizó el número del release en el artículo.
+
 
 
 

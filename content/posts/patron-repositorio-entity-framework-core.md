@@ -33,10 +33,9 @@ Al terminar el artículo deberíamos tener una buena visión general de la arqui
 
 También tendremos un esbozo de los beneficios y aportes del enfoque MDA en el desarrollo de aplicaciones, por ejemplo, en este artículo el **60% de las líneas de programa fueron generadas con Domion**.
 
-En el artículo siguiente trabajaremos con:
+En el artículo [siguiente](/posts/pruebas-integracion-xunit-entity-framework-core) trabajaremos con:
 
 > 0. Pruebas de integración con [xUnit](https://xunit.github.io/) y [FluentAssertions](http://fluentassertions.com/)
-> 0. Inyección de dependencias con [Autofac](https://autofac.org/)
 
 {{< repoUrl >}}
 
@@ -63,6 +62,14 @@ En este artículo vamos a explorar principalmente el primero de estos pasos, en 
 * [.NET Core SDK 1.0.4 - x64 Installer](https://download.microsoft.com/download/B/9/F/B9F1AF57-C14A-4670-9973-CDF47209B5BF/dotnet-dev-win-x64.1.0.4.exe)  
 (ver la [página de descargas de .NET Core](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) para otras versiones)
 
+### Paquetes NuGet utilizados
+
+* Microsoft.EntityFrameworkCore - 1.1.2
+* Microsoft.EntityFrameworkCore.Design - 1.1.2
+* Microsoft.EntityFrameworkCore.SqlServer - 1.1.2
+* NLog - 5.0.0-beta07
+* System.ComponentModel.Annotations - 4.3.0
+
 ### Recomendación general
 
 Durante el trabajo diario de desarrollo me ha resultado muy conveniente usar una base de datos local con [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) y el [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms), en vez de las herramientas integradas en Visual Studio.
@@ -80,7 +87,7 @@ Esta implementación del patrón de repositorio se apoya en la funcionalidad del
 
 Esta implementación del [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) se realiza con dos interfaces y un repositorio genérico, que luego se complementan con una interfaz y una clase específica identificada como "Manager" y que llamaremos en forma genérica como EntityManager.
 
-Todo el acceso al DbContext se realiza a través del EntityManager específico, para que se pueda adaptar a fácilmente a las necesidades particulares de cada situación, ocultando o implementando los métodos necesarios.
+Todo el acceso al DbContext se realiza a través del EntityManager específico, para que se pueda adaptar fácilmente a las necesidades particulares de cada situación, ocultando o implementando los métodos necesarios.
 
 Las interfaces están en el proyecto **Domion.Core** y el repositorio genérico en **Domion.Lib**.
 
@@ -271,6 +278,8 @@ Además, el DbContext también facilita la implementación de un [Bounded Contex
 Esta es la implementación del EntityManager para BudgetClass. Es la responsable de gestionar el acceso al DbContext, en especial en cuanto a las validaciones relacionadas con incluir o eliminar objetos en el repositorio, por ejemplo, evitar elementos duplicados, o eliminación de objetos referenciados por otros.
 
 Independientemente de que esas validaciones estén reforzadas a nivel de la base de datos, por ejemplo, usando Foreign Keys o índices únicos, esta clase permite detectar estos casos antes de que se levante una excepción por una validación de la base de datos y mostrar un mensaje controlado al usuario.
+
+Observe cómo está implementada la validación contra nombre duplicados, con los métodos ```FindDuplicateByName``` y ```ValidateSave```.
 
 {{<getSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
 
