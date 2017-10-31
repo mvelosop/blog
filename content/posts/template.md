@@ -14,7 +14,7 @@ repoRelease: "1.0"
 
 Breve descripción de lo que se hace en el artículo.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> ### <span class="important">> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Lista de los puntos más importantes del artículo
 

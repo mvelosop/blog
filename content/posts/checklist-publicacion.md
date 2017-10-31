@@ -26,12 +26,11 @@ Checklist para publicación
 
 ### Puntos importantes
 
-<i class="fa fa-square-o" aria-hidden="true"></i> Los puntos importantes están resumidos al inicio
-
 <i class="fa fa-square-o" aria-hidden="true"></i> Los puntos importantes están destacados en el artículo
 
-<i class="fa fa-square-o" aria-hidden="true"></i> El estimado de tiempo para realizar el tutorial es adecuado
+<i class="fa fa-square-o" aria-hidden="true"></i> Los puntos importantes están resumidos al inicio
 
+<i class="fa fa-square-o" aria-hidden="true"></i> El estimado de tiempo para realizar el tutorial es adecuado
 
 ### Contexto
 
@@ -92,8 +91,3 @@ Checklist para publicación
 <i class="fa fa-square-o" aria-hidden="true"></i> Se copiaron los fuentes actuales a la carpeta del release correspondiente
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Se actualizó el número del release en el artículo.
-
-
-
-
-
