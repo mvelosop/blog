@@ -76,7 +76,7 @@ Checklist para publicación
 
 ## Repositorio local
 
-<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de LICENCE.txt
+<i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de LICENSE.txt
 
 <i class="fa fa-square-o" aria-hidden="true"></i> Tiene el archivo de README.md
 

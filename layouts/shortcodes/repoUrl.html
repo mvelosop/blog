@@ -4,7 +4,7 @@
 {{ $releaseUrl := printf "%s/%s/releases/tag/%s" $gitHubUser $.Page.Params.repoName $repoRelease }}
 {{ $archiveUrl := printf "%s/%s/archive/%s/.zip" $gitHubUser $.Page.Params.repoName $repoRelease }}
 <h4>Programas fuente del artículo</h4>
-<p>Puede la versión final de los programas de este artículo en GitHub:</p>
+<p>Puede descargar la versión final de los programas de este artículo en GitHub:</p>
 
 <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
 <a href="{{ $repoUrl }}">{{ $repoUrl }}</a> (release <a href="{{ $releaseUrl }}">{{ $repoRelease }}</a>)
