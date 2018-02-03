@@ -1,4 +1,9 @@
-<aside>Compartir
+<aside>
+  {{ if eq .Params.Language "en" }}
+  Share
+  {{ else }}
+  Compartir
+  {{ end }}
   <div class="share">
     <a href="http://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton" title="Compartir por Twitter">
       <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color: #1da1f2"></i>

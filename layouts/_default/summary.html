@@ -1,6 +1,12 @@
 <article class="single">
 
   <a href="{{ .Permalink }}" class="thumb"{{ with .Params.thumbnail }} style="background-image: url({{ $.Site.BaseURL }}{{ . }});"{{ end }}></a>
+  {{ with .Params.image }}
+  <div class="image-credit">
+    <span>{{ if eq $.Params.language "en" }}Photo:{{ else }}Foto:{{ end }}</span>
+    <a href="{{ .url }}" target="_blank">{{ .authorName }}</a>
+  </div>
+  {{ end }}
   <div class="content-inner">
     <h1 class="title">{{ .Title }}</h1>
 
@@ -12,6 +18,13 @@
       {{ if .IsDraft }}<li style="color: #2196f3;">DRAFT</li>{{ end }}
       {{ end }}
     </ul>
+
+    {{ with .Params.spanishVersion }}
+    <div class="article-version" style="margin-bottom:16px"><strong><i class="fa fa-arrow-right" aria-hidden="true"></i> Versión en <a href="{{ . }}">ESPAÑOL</a></strong></div>
+    {{ end }}
+    {{ with .Params.englishVersion }}
+    <div class="article-version" style="margin-bottom:16px"><strong><i class="fa fa-arrow-right" aria-hidden="true"></i> <a href="{{ . }}">ENGLISH</a> version</strong></div>
+    {{ end }}
 
     {{ partial "share.html" . }}
 

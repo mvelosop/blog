@@ -1,0 +1,5 @@
+  {{ if eq .Params.Language "en" }}
+  {{ .Get 0 }}
+  {{ else }}
+  {{ .Get 1 }}
+  {{ end }}

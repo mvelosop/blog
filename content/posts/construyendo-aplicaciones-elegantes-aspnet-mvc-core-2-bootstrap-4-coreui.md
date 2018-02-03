@@ -1,4 +1,5 @@
 ---
+englishVersion: /posts/building-elegant-applications-aspnet-mvc-core-2-bootstrap-4-coreui/
 title: Construyendo aplicaciones elegantes con ASP.NET MVC Core 2 y Bootstrap 4 usando CoreUI
 draft: false
 author: Miguel Veloso
@@ -82,7 +83,7 @@ y seleccionando esa carpeta para crear el proyecto
 
 #### 1.3 - Crear la base de datos
 
-1. Cambiar el string de conexión a para trabajar con SQL Server Developer Edition
+1. Cambiar el string de conexión en el archivo `appsettings.json` para trabajar con SQL Server Developer Edition
 `Server=localhost; Initial Catalog=CoreUI.Web; Trusted_Connection=True; MultipleActiveResultSets=true`
 
 2. Correr la aplicación con [Ctrl]+[F5]
@@ -136,10 +137,16 @@ Clonar el [repositorio de CoreUI en GitHub](https://github.com/mrholek/CoreUI-Fr
 
 Vamos a copiar todo el contenido de la carpeta "**Static_Full_Project_GULP**" del repositorio en la carpeta "**src\CoreUI**" de la solución.
 
-Inicialmente hice esto dentro del proyecto CoreUI.Web, pero Visual Studio se puso extremadamente lento después de descargar los paquetes "client-side" en la carpeta **node_modules**, no estoy seguro si fue por Visual Studio propiamente dicho o por [Resharper](https://www.jetbrains.com/resharper/), pero con esto se resolvió.
+Inicialmente hice esto dentro del proyecto CoreUI.Web, pero Visual Studio se puso extremadamente lento después de descargar los paquetes "client-side" en la carpeta **node_modules**, no estoy seguro si fue por Visual Studio propiamente dicho o por [Resharper](https://www.jetbrains.com/resharper/), pero al hacerlo fuera del proyecto web todo funcionó muy bien.
 
-En este momento la solución debería verse como esto desde el file system:
+Más adelante incluiremos un paso para copiar la versión de CoreUI optimizada para despliegue en el proyecto web.
+
+En este momento la solución se debería ver como esto desde el file system:
 {{<image src="/posts/images/explorer_2017-11-03_11-33-21.png">}}
+
+> ### <span class="important"> {{< IMPORTANT "src\CoreUI no es parte de la solución de Visual Studio" >}}.
+
+> 0. Note que, aunque src\CoreUI está dentro de las carpetas de la solución y bajo control de versiones, no es parte de la solución de Visual Studio, es decir, esta carpeta no se ve en el explorador de la solución.
 
 #### 2.3 - Instalar los paquetes "client-side" necesarios
 
@@ -151,7 +158,7 @@ En este momento la solución debería verse como esto desde el file system:
 
 Luego ejecutamos los pasos de [instalación de la versión estática de CoreUI](http://coreui.io/docs/getting-started/static-version/), excepto el paso de instalación de Bower, desde la interfaz de comandos en la carpeta **src\CoreUI** de la solución.
 
-Al terminar deberíamos ver el sitio de esta forma:
+Al terminar deberíamos ver el sitio de esta forma (corriendo con `gulp serve`):
 {{<image src="/posts/images/chrome_2017-11-03_12-53-00.png">}}
 
 También podemos ver la carpeta **node_modules**, que contiene los paquetes "client-side" especificados en packages.json, así como los requeridos por estos.
@@ -166,7 +173,7 @@ También podemos ver la carpeta **node_modules**, que contiene los paquetes "cli
 
 #### 2.4 - Preparar versión de "distribución" base
 
-Todos los html que copiamos del repositorio hacen referencia directamente a los archivos necesarios en **node_modules**, pero estas carpetas son recursos para desarrollo, no para despliegue.
+Todos los html que copiamos del repositorio de CoreUI hacen referencia a los archivos en **node_modules**, pero estas carpetas son recursos para desarrollo, no para despliegue.
 
 Para preparar la versión optimizada para despliegue, vamos a ejecutar el comando `gulp build:dist` desde la interfaz de comandos sobre la carpeta **src\CoreUI**.
 
@@ -205,7 +212,7 @@ Además, vamos a:
 
 > 0. Normalmente los paquetes tienen una carpeta **dist** que contiene los componentes optimizados para el despliegue y es responsabilidad del desarrollador indicar los archivos correctos en el las listas indicadas.
 
-Después de esto volvemos a ejecutar `gulp build:dist` y si ejecutamos la aplicación MVC con [Ctrl]+[F5] y vamos a la dirección https://localhost:00000/index.html (00000 = puerto asignado por VS) debemos ver lo siguiente:
+Después de esto volvemos a ejecutar `gulp build:dist` y si ejecutamos la aplicación MVC con [Ctrl]+[F5] y vamos a la dirección https://localhost:#####/index.html (##### = puerto asignado por VS) debemos ver lo siguiente:
 
 {{<image src="/posts/images/chrome_2017-11-03_15-40-22.png">}}
 
@@ -217,13 +224,15 @@ La misma página anterior, pero mostrada como una página estática dentro de nu
 
 Con este proceso también entendimos cómo se incluyen nuevos componentes "client-side", como puede ser un date-picker, en la interfaz de usuario:
 
-1. Incluir referencia la librería en **src\CoreUI\package.json**
+> ### <span class="important"> {{< IMPORTANT "Pasos para incluir nuevos componentes "client-side"" >}}
 
-2. Ejecutar **npm install** para traer el paquete desde el repositorio de **npm**
+> 1. Incluir referencia la librería en **src\CoreUI\package.json**
 
-2. Editar el archivo **src\CoreUI\gulp-tasks\build-dist.js** para actualizar la lista los archivos que se deben copiar, en caso que no estén.
+> 2. Ejecutar **npm install** para traer el paquete desde el repositorio de **npm**
 
-3. Ejecutar `gulp build:dist` para generar la versión de distribución.
+> 2. Editar el archivo **src\CoreUI\gulp-tasks\build-dist.js** para actualizar la lista los archivos que se deben copiar, en caso que no estén.
+
+> 3. Ejecutar `gulp build:dist` para generar la versión de distribución.
 
 Después de eso, sólo falta incluir las nuevas referencias (scripts, estilos, imágenes, etc) en las vistas Razor que lo necesiten.
 
@@ -257,7 +266,7 @@ Para esto simplemente:
 
 > 0. Cualquier archivo .html válido es también una vista Razor válida, sólo hace falta cambiar la extensión a .cshtml
 
-Luego, al ejecutar la aplicación con [Ctrl]+[F5] y navegar hasta https://localhost:00000/CoreUI/Index (00000 = puerto asignado por VS) debemos ver lo siguiente:
+Luego, al ejecutar la aplicación con [Ctrl]+[F5] y navegar hasta https://localhost:#####/CoreUI/Index (##### = puerto asignado por VS) debemos ver lo siguiente:
 
 {{<image src="/posts/images/chrome_2017-11-03_17-37-33.png">}}
 
@@ -274,7 +283,7 @@ Eventualmente pueden ayudar las herramientas de desarrollo de los navegadores mo
 
 {{<image src="/posts/images/2017-11-03_17-58-39.png">}}
 
-Una vez que estén corregidas todas las referencias, tendremos la página que ya conocemos, pero esta vez generada por una vista Razor desde la dirección https://localhost:00000/CoreUI/Index.
+Una vez que estén corregidas todas las referencias, tendremos la página que ya conocemos, pero esta vez generada por una vista Razor desde la dirección https://localhost:#####/CoreUI/Index.
 
 #### 3.2 - Dividir la vista Index.cshtml en componentes
 
@@ -407,7 +416,7 @@ No vamos a mostrar todo el proceso, sólo la vista _Layout final y la lista de a
 
 {{<image src="/posts/images/devenv_2017-11-03_18-36-32.png">}}
 
-Si en este momento volvemos a la dirección https://localhost:00000/CoreUI/Index, veremos la misma pantalla, pero esta vez como una composición del contenido principal sobre el layout y las parciales.
+Si en este momento volvemos a la dirección https://localhost:#####/CoreUI/Index, veremos la misma pantalla, pero esta vez como una composición del contenido principal sobre el layout y las parciales.
 
 #### 3.3 - Convertir el resto de las páginas de CoreUI
 

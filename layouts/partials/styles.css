@@ -193,6 +193,10 @@ section>header a {
   text-decoration: underline;
 }
 
+.article-version a {
+  text-decoration: underline;
+}
+
 section.article-footer {
   margin-bottom: 1rem;
 }
@@ -495,4 +499,11 @@ blockquote h3 {
 
 .important {
   color: red;
+}
+
+.image-credit {
+  margin-top: -15px;
+  margin-right: 32px;
+  text-align: right;
+  font-size: smaller;
 }

@@ -1,6 +1,10 @@
-<p>Espero que este artículo le haya resultado útil e instructivo y le invito a usar la <a href="#disqus_thread"><strong>sección de comentarios</strong></a> para dudas y opiniones. </p>
-<p>También puede seguirme por <a href="https://twitter.com/mvelosop">Twitter</a> para más artículos, proyectos y opiniones y ver mis repositorios en <a href="https://github.com/mvelosop">Github</a>. </p>
-
+{{ if (eq $.Page.Params.Language "en") }}
+<p>I hope you've found this post useful and invite you let me know your opinion in the <a href="#disqus_thread"><strong>comments section</strong></a>. </p>
+<p>Follow me on <a href="https://twitter.com/mvelosop">Twitter</a> and take a look at my repos in <a href="https://github.com/mvelosop">Github</a>. </p>
+<p>Thank you,</p> 
+{{ else }}
+<p>Espero que este artículo le haya resultado útil y le invito a dejar su opinión en la <a href="#disqus_thread"><strong>sección de comentarios</strong></a>. </p>
+<p>Sígame en <a href="https://twitter.com/mvelosop">Twitter</a> y eche un vistazo a mis repositorios en <a href="https://github.com/mvelosop">Github</a>. </p>
 <p>Gracias,</p> 
-
+{{ end }}
 <strong>Miguel.</strong>

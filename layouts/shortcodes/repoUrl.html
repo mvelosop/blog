@@ -2,11 +2,24 @@
 {{ $repoUrl := printf "%s/%s" $gitHubUser $.Page.Params.repoName }}
 {{ $repoRelease := printf "%s" $.Page.Params.repoRelease }}
 {{ $releaseUrl := printf "%s/%s/releases/tag/%s" $gitHubUser $.Page.Params.repoName $repoRelease }}
+{{ $archiveName := printf "%s-%s.zip" $.Page.Params.repoName $repoRelease }}
 {{ $archiveUrl := printf "%s/%s/archive/%s/.zip" $gitHubUser $.Page.Params.repoName $repoRelease }}
-<h4>Programas fuente del artículo</h4>
-<p>Puede descargar la versión final de los programas de este artículo en GitHub:</p>
-
-<span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
-<a href="{{ $repoUrl }}">{{ $repoUrl }}</a> (release <a href="{{ $releaseUrl }}">{{ $repoRelease }}</a>)
-<span style="font-size:smaller"> <a href="{{ $archiveUrl }}">Fuentes del release {{ $repoRelease }} (.zip)</a></span>
-
+{{ if (eq $.Page.Params.Language "en") }}
+<h4>Source code</h4>
+<div>
+    <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
+    Post: <a href="{{ $archiveUrl }}">{{ $archiveName }}</a> (release <a href="{{ $releaseUrl }}">{{ $repoRelease }}</a> from repo) 
+    <br/>
+    <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
+    Repo: <a href="{{ $repoUrl }}">{{ $repoUrl }}</a> 
+</div>
+{{ else }}
+<h4>Programas fuente</h4>
+<div>
+    <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
+    Artículo: <a href="{{ $archiveUrl }}">{{ $archiveName }}</a> (release <a href="{{ $releaseUrl }}">{{ $repoRelease }}</a> del repositorio) 
+    <br/>
+    <span style="font-size: larger"><i class="fa fa-github-square" aria-hidden="true"></i></span>
+    Repositorio: <a href="{{ $repoUrl }}">{{ $repoUrl }}</a> 
+</div>
+{{ end }}

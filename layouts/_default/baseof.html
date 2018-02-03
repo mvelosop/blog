@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+{{ with .Params.Language }}
+<html lang="{{ . }}" >
+{{ else }}
+<html lang="{{ .Site.Language.Lang }}" >
+{{ end }}
   <head>
     {{ partial "meta.html" . }}
     {{ with .Site.Params.googlefonts }}
