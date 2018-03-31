@@ -298,7 +298,7 @@ article.sn > .article-body {
 
 article.sn > .article-body h2 {
   border-bottom: .25rem solid #333;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   line-height: 1.5rem;
   margin: 1.5rem 0;
   padding: .5rem 0;
@@ -306,8 +306,14 @@ article.sn > .article-body h2 {
 
 article.sn > .article-body h3 {
   border-left: .5rem solid #333;
+  font-size: 1.2rem;
   line-height: 1.5rem;
   margin: 1.5rem 0;
+  padding: .125rem .5rem;
+}
+
+article.sn > .article-body h4 {
+  border-left: .5rem solid #90a4ae;
   padding: .125rem .5rem;
 }
 

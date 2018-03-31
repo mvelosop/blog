@@ -54,7 +54,7 @@ I hope to do this in a way that will make it easy to update the base project whe
 (go to [.NET Core's download page](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) for other versions).
 
 
-## Step by stpe
+## Step by step
 
 ### 1 - Create ASP.NET MVC Core 2 project
 
