@@ -7,11 +7,10 @@ author: Miguel Veloso
 date: 2018-02-01
 description: Adapt a BS 4 template to an MVC application, to enhance the user experience
 thumbnail: posts/images/benjamin-child-90768.jpg
-categorías: [ "Desarrollo" ]
 tags: [ "User Experience", "Client Side Development", "Bootstrap 4", "CoreUI" ]
-series: [  ]
 repoName: AspNetCore2CoreUI
 repoRelease: "1.0"
+toc: true
 image:
     authorName: Benjamin Child
     url: https://unsplash.com/photos/0sT9YhNgSEs
@@ -19,7 +18,7 @@ image:
 
 In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template, based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
 
-> ### <span class="important"> {{< IMPORTANT "Key Takeaways" >}}
+> {{< IMPORTANT "Key Takeaways" >}}
 
 > 0. Key concepts about handling client-side packages with **npm**
 
@@ -146,7 +145,7 @@ We'll include a step later on to copy the final "deployment-optimized" version o
 At this point the solution should look like this from the file system:
 {{<image src="/posts/images/explorer_2017-11-03_11-33-21.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "src\CoreUI is not part of Visual Studio's solution" >}}.
+> {{< IMPORTANT "src\CoreUI is not part of Visual Studio's solution" >}}.
 
 > 0. Notice that, although src\CoreUI is within the solution's folder structure and under source control, it's not part of the Visual Studio solution, i.e. you just don't see it in the solution explorer.
 
@@ -167,7 +166,7 @@ Take note of the **node_modules** folder, that contains the client-side packages
 
 {{<image src="/posts/images/explorer_2017-11-03_13-19-44.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Installing packages with npm" >}}.
+> {{< IMPORTANT "Installing packages with npm" >}}.
 
 > 0. When installing packages with **npm**, the **node_modules** folder is created with all the required components, both for development tools such as [Gulp](https://gulpjs.com/), and for running the application. This folder usually takes up a lot of space and should not be included in the application deployment.
 
@@ -208,7 +207,7 @@ Besides that, we're going to:
 
 {{<image src="/posts/images/Code_2017-11-03_15-34-56.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Deployment Packages" >}}
+> {{< IMPORTANT "Deployment Packages" >}}
 
 > 0. The **vendorJS**, **vendorCSS** and **vendorFonts** lists from **build-dist.js** have the components used by the PRO version of CoreUI, but since they are not in **package.json**, they are not included for the deployment.
 
@@ -226,7 +225,7 @@ The same page as above, but displayed as a static page within our MVC applicatio
 
 While doing this, we also understood how to include new client-side components, such as a date-picker, in the user interface:
 
-> ### <span class="important"> {{< IMPORTANT "Steps to include new client-side components" >}}
+> {{< IMPORTANT "Steps to include new client-side components" >}}
 
 > 1. Include a reference the library in **src\CoreUI|package. json**
 
@@ -264,7 +263,7 @@ To do this simply:
 ```
 4. We changed all occurences of "@" to "@@" to avoid Razor's syntax error.
 
-> ### <span class="important"> {{< IMPORTANT "Razor Views and html" >}}
+> {{< IMPORTANT "Razor Views and html" >}}
 
 > 0. Any valid .html file is also a valid Razor view, you only need to change the extension to .cshtml.
 
@@ -465,7 +464,7 @@ In doing so, we learned a little more about the structure and use of client-side
 
 ---
 
-#### Related links
+### Related links
 
 **Bootstrap 4**<br/>
 https://getbootstrap.com/docs/4.0/getting-started/introduction/

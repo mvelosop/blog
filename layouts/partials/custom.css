@@ -74,6 +74,8 @@ blockquote strong{
 
 .important {
   color: red;
+  font-size: 1.2rem;
+  padding-left: 0.4rem;
 }
 
 .image-credit {
@@ -81,4 +83,22 @@ blockquote strong{
   margin-right: 32px;
   text-align: right;
   font-size: smaller;
+}
+
+.toc {
+  padding: 0;
+}
+
+.toc nav > ul {
+  font-size: 0.6rem;
+  word-break: normal;
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0; 
 }
