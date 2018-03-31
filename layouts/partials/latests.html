@@ -1,5 +1,11 @@
 <section class="sidebar">
-  <header>LO MÁS RECIENTE</header>
+  <header>
+    {{ if eq $.Params.Language "en" }}
+    LATEST
+    {{ else }}
+    LO ÚLTIMO
+    {{ end }}
+    </header>
   <div>
     <div class="articles sm">
       {{ range $i, $p := (first 5 .Site.Pages) }}

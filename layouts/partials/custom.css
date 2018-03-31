@@ -92,9 +92,16 @@ blockquote strong{
 .toc nav > ul {
   font-size: 0.6rem;
   word-break: normal;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 0;
+  padding-right: 15px;
+}
 
+.toc ul li > ul {
+  padding-left: 15px;
+}
+
+.toc li {
+  list-style-type: none !important;
 }
 
 .sticky {

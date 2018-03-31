@@ -10,6 +10,7 @@ tags: [ "Entity Framework Core", "EF Core Configuration", "EF Core CLI", "Migrat
 series: [ "Entity Framework Core" ]
 repoName: EFCoreLib
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo vamos a desarrollar una versión de la misma [aplicación de consola desarrollada anteriormente (migrada a VS 2017)](/posts/migrar-aplicacion-consola-visual-studio-2017) pero separándola en dos capas:
@@ -17,10 +18,12 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 1. La capa de datos en el proyecto EFCore.Lib y
 2. La capa cliente en EFCore.App.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Separar la aplicación en una capa cliente y una capa de datos
+
 > 0. Usar EF Core CLI en aplicación multicapa para crear las migraciones
+
 > 0. Apreciar la simplicidad de los nuevos archivos .csproj
 
 {{< repoUrl >}}
@@ -47,14 +50,16 @@ En este artículo vamos a desarrollar la solución desde el principio, para apre
 
 ### 2 - Crear proyecto src\EFCore.App 
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Este proyecto es la capa **Cliente** que usa la "capa de datos" (el proyecto EFCore.Lib)
 
 #### Crear el proyecto como una "Console Application (.NET Core)"
 
 ### 3 - Crear proyecto src\EFCore.Lib
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Este proyecto es la capa de **Datos**, desde luego de una forma muy rudimentaria.
 
 #### Crear el proyecto como una "Class Library (.NET Core)"
@@ -120,8 +125,7 @@ Para que el proyecto pueda compilar en este momento es necesario incluir las sig
 
 ### 6 - Crear migración inicial
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
-> 
+> {{< IMPORTANT "Importante" >}}
 
 > En este caso, el proyecto EFCore.App, además de ser la "capa cliente" de la solución, va a ser el "host" para ejecutar los comandos de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet).
 
@@ -181,7 +185,8 @@ Ejecutar **Botón Derecho > Set as Startup Project** sobre el proyecto **EFCore.
 
 El archivo **EFCore.App.csproj** resultante es así:
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > En el formato .csproj no es necesario especificar todos los archivos que conforman la solución, porque se considera, por omisión, todos los archivos de todas las carpetas.
 
 > Una ventaja importante de este formato es que elimina los frecuentes conflictos al hacer "Merge" de dos ramas, producidos por movimiento de archivos dentro del .csproj.

@@ -457,7 +457,6 @@ En este artículo vimos con bastante detalle el proceso de adaptación de una pl
 
 En este proceso aprendimos un poco más sobre la estructura y el uso de los paquetes "client-side" en el desarrollo de las interfaces de usuario.
 
-
 ---
 
 {{< goodbye >}}

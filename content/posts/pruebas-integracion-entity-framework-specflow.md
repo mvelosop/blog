@@ -10,6 +10,7 @@ tags: [ "Entity Framework Core", "CSharp", "SpecFlow" ]
 series: [ "Entity Framework Core" ]
 repoName: EFCoreLib
 keywords: ["entity-framework", "specflow"]
+toc: true
 ---
 
 En este artículo exploramos el uso de [SpecFlow](http://specflow.org/), una herramienta enfocada en desarrollo BDD (Behavior Driven Development), para facilitar las pruebas de integración de una librería muy sencilla.

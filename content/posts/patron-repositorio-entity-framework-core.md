@@ -10,6 +10,7 @@ tags: [ "Architecture", "Entity Framework Core", "Migrations", "Model Driven Arc
 series: [ "Domion" ]
 repoName: Domion.Net
 repoRelease: "2.0"
+toc: true
 ---
 
 Este es el segundo artículo de la serie [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion). En el [artículo anterior](/posts/preparar-solucion-aspnet-core/) creamos la solución para definir la estructura general, con los proyectos principales, aunque sin programas.
@@ -22,11 +23,14 @@ Este artículo es un poco largo porque hace falta implementar una parte importan
 
 Los puntos más importantes que cubriremos son:
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Implementación del [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html)
+
 > 0. Facilidades para configurar modelos en [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index)
+
 > 0. Aplicación del proceso [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
+
 > 0. Migraciones con [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index) "Code First"
 
 Al terminar el artículo deberíamos tener una buena visión general de la arquitectura y conocer algunos detalles de los elementos principales.
@@ -78,7 +82,8 @@ Siento que es mucho más fácil cambiar el contexto de trabajo a otra aplicació
 
 ## A - Paso a paso - Patrón de repositorio
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) nos ofrece una abstracción del DbContext de EF Core, donde podemos agregar procesamiento y validaciones adicionales. También puede facilitar la realización de pruebas sin tener que involucrar al DbContext.
 
 Esta implementación del patrón de repositorio se apoya en la funcionalidad del [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext) de EF Core, que mantiene en memoria una colección de las entidades que han sido modificadas (en el ChangeTracker), antes de enviar los cambios a la base de datos para salvarlos.
@@ -121,7 +126,8 @@ Estos extension methods agregan funcionalidad de uso común con los IQueryable, 
 
 ### A-2 - Extensiones para configuración de los modelos en EF Core
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Las extensiones que se muestran a continuación facilitan la configuración de modelos grandes en EF Core.
 
 Actualmente (EF Core 1.1.2), para configurar los modelos usando el Fluent API, es necesario hacerlo en un override del método OnModelCreation del DbContext, pero esto resulta poco práctico para aplicaciones de cualquier tamaño significativo, ya que el DbContext se puede extender más allá de lo razonable.
@@ -161,7 +167,8 @@ Estos son los componentes básicos de la infraestructura y en este momento se de
 
 ## B - Paso a paso - MDA - Componentes básicos de la aplicación
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El enfoque de diseño [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture) permite generar cantidades importantes de código a partir de modelos de alto nivel y esto contribuye tanto con la productividad del equipo de desarrollo como con la calidad y facilidad de mantenimiento de los productos.
 
 Como mencionamos en el artículo inicial, [la aplicación de ejemplo será un "sistema" de flujo de caja personal](/domion/#alcance-de-la-aplicación) y el "módulo" inicial va a tener, por ahora, una sola entidad: **BudgetClass**.
@@ -264,9 +271,10 @@ El [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityfram
 
 También lo podemos ver como una ventana a la base de datos (con una interfaz de objetos) que nos facilita el acceso a los objetos necesarios.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Es un error común manejar en un único DbContext todo el modelo de dominio de una aplicación, lo ideal es dividir el modelo en un DbContext por módulo o por área funcional.
->
+
 > En un artículo próximo veremos cómo manejar múltiples DbContext compartiendo la misma base de datos.
 
 Además, el DbContext también facilita la implementación de un [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html), que es uno de los elementos pricipales del [Domain Driven Design (DDD)](https://domainlanguage.com/ddd/).
@@ -299,7 +307,7 @@ Estos son los componentes básicos de la aplicación y en este momento se deber�
 
 ## C - Paso a paso - Migraciones
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
 > Las migraciones generadas por Entity Framework cuando se trabaja con la modalidad "Code First", permiten generar y actualizar la base de datos de forma automática y sin necesidad de dedicarle mucho tiempo.
 
 En esta fase vamos a crear la migración inicial, con la que se creará la base de datos al ejecutar la aplicación.
@@ -413,7 +421,7 @@ De hecho, en este ejemplo **60% de las líneas de programa se generaron con Domi
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **DbContext**  
 https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext

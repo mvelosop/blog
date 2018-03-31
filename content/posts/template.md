@@ -5,16 +5,15 @@ author: Miguel Veloso
 date: 2017-01-01
 description: Reseña tamaño twitter
 thumbnail: 
-categorías: [ "Desarrollo" ]
 tags: [  ]
-series: [  ]
 repoName: EFCoreLib
 repoRelease: "1.0"
+toc: true
 ---
 
 Breve descripción de lo que se hace en el artículo.
 
-> ### <span class="important">> {{< IMPORTANT "Puntos Importantes" >}}
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Lista de los puntos más importantes del artículo
 
@@ -54,13 +53,17 @@ Para incluir una imágen:
 
 {{<image src="/posts/images/cmd_2017-03-18_21-23-38.png">}}
 
+## Resumen
+
+Resumen del artículo.
+
 ---
 
 {{< goodbye >}}
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

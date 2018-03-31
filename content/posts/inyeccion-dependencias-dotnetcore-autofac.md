@@ -10,6 +10,7 @@ tags: [  ]
 series: [ "Domion" ]
 repoName: Domion.Net
 #repoRelease: "1.0"
+toc: true
 ---
 
 Breve descripción de lo que se hace en el artículo.
@@ -316,7 +317,7 @@ Así que al ejecutar todas las pruebas debemos obtener algo como esto:
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

@@ -1,6 +1,12 @@
 {{ with .Site.Params.author }}
 <section class="sidebar">
-  <header>AUTOR</header>
+  <header>    
+    {{ if eq $.Params.Language "en" }}
+    AUTHOR
+    {{ else }}
+    AUTOR
+    {{ end }}
+    </header>
   <div>
     <div class="author">
       <div class="author-thumb">

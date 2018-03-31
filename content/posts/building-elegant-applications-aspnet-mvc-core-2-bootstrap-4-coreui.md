@@ -52,7 +52,6 @@ I hope to do this in a way that will make it easy to update the base project whe
 * [.NET Core SDK 2.0.2 with .NET Core 2.0.0 - x64 SDK Installer](https://download.microsoft.com/download/7/3/A/73A3E4DC-F019-47D1-9951-0453676E059B/dotnet-sdk-2.0.2-win-x64.exe)  
 (go to [.NET Core's download page](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) for other versions).
 
-
 ## Step by step
 
 ### 1 - Create ASP.NET MVC Core 2 project
@@ -65,7 +64,7 @@ Let's start by creating a standard MVC application, using Visual Studio 2017's b
 
 2. Add "src" solution folder
 
-3. Rigth now your solution should look like this:
+3. Right now your solution should look like this:
 
 {{<image src="/posts/images/devenv_2017-10-31_17-06-44.png">}}
 
@@ -91,7 +90,7 @@ and select that folder to create the project
 
 3. Sign up to force database creation
 
-4. Click **Apply Migrations**, when you get the datase missing error:
+4. Click **Apply Migrations**, when you get the database missing error:
 {{<image src="/posts/images/chrome_2017-10-31_18-02-35.png">}}
 
 5. Refresh the screen when the database creation process is complete, to finish user registration
@@ -217,7 +216,7 @@ After this we run `gulp build: dist` again and if we now run the MVC application
 
 {{<image src="/posts/images/chrome_2017-11-03_15-40-22.png">}}
 
-The same page as above, but displayed as a static page within our MVC application.
+The same page as above but displayed as a static page within our MVC application.
 
 **We will now save the solution in the repository.**
 
@@ -258,7 +257,7 @@ To do this simply:
 3. Remove the use of the standard _Layout by typing this at the top of the view:
 ```cs
 @{
-	    Layout = "";
+        Layout = "";
 }
 ```
 4. We changed all occurences of "@" to "@@" to avoid Razor's syntax error.
@@ -330,28 +329,28 @@ We're not going to show the whole process, just the final _Layout view and the r
 <!-- BODY options, add following classes to body to change options
 
 // Header options
-1. '.header-fixed'					- Fixed Header
+1. '.header-fixed'                  - Fixed Header
 
 // Brand options
 1. '.brand-minimized'       - Minimized brand (Only symbol)
 
 // Sidebar options
-1. '.sidebar-fixed'					- Fixed Sidebar
-2. '.sidebar-hidden'				- Hidden Sidebar
-3. '.sidebar-off-canvas'		- Off Canvas Sidebar
-4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
-5. '.sidebar-compact'			  - Compact Sidebar
+1. '.sidebar-fixed'                 - Fixed Sidebar
+2. '.sidebar-hidden'                - Hidden Sidebar
+3. '.sidebar-off-canvas'        - Off Canvas Sidebar
+4. '.sidebar-minimized'         - Minimized Sidebar (Only icons)
+5. '.sidebar-compact'             - Compact Sidebar
 
 // Aside options
-1. '.aside-menu-fixed'			- Fixed Aside Menu
-2. '.aside-menu-hidden'			- Hidden Aside Menu
-3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+1. '.aside-menu-fixed'          - Fixed Aside Menu
+2. '.aside-menu-hidden'         - Hidden Aside Menu
+3. '.aside-menu-off-canvas' - Off Canvas Aside Menu
 
 // Breadcrumb options
-1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+1. '.breadcrumb-fixed'          - Fixed Breadcrumb
 
 // Footer options
-1. '.footer-fixed'					- Fixed footer
+1. '.footer-fixed'                  - Fixed footer
 
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -457,7 +456,6 @@ In this article we looked at the process in quite detail of adapting a static HT
 
 In doing so, we learned a little more about the structure and use of client-side packages for user interface development.
 
-
 ---
 
 {{< goodbye >}}
@@ -489,4 +487,3 @@ https://www.npmjs.com/
 
 **Resharper**<br/>
 https://www.jetbrains.com/resharper/
-

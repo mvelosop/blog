@@ -10,16 +10,19 @@ tags: [ "Architecture", "Project Structure" ]
 series: [ "Domion" ]
 repoName: Domion.Net
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo vamos a preparar la solución, con sus carpetas y proyectos, para comenzar con el desarrollo de [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion).
 
 Este es el primer artículo de la [serie](/domion), donde se prepara la estructura de carpetas y proyectos de la solución.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Organización de las carpetas y proyectos de la solución.
+
 > 0. Aplicación de consola para ejecutar las migraciones de EF.
+
 > 0. Scripts de la solución para facilitar tareas repetitivas.
 
 Al terminar el artículo deberíamos tener una idea general de la arquitectura y conocer algunos detalles de la organización de los proyectos en la solución.
@@ -66,7 +69,8 @@ Es importante marcar la opción para crear el repositorio Git
 
 #### 2.1 - Crear el solution folder "src" en Visual Studio
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Las carpetas de la solución de Visual Studio son contenedores lógicos que sólo existen en Visual Estudio.
 
 {{<image src="/posts/images/2017-05-31_09-17-55.png">}}
@@ -77,7 +81,8 @@ Esta es una carpeta lógica y realmente no existe en el sistema operativo. Si ag
 
 Para crear la carpeta se puede hacer desde el explorador de windows, con **[botón derecho > Open Folder in File Explorer]**, pero si está instalada la extensión [Productivity Power Tools 2017](https://marketplace.visualstudio.com/items?itemName=VisualStudioProductTeam.ProductivityPowerPack2017) (altamente recomendada), bastará con pulsar **[Shift]+[Alt]+[,]** para abrir una ventana de comandos.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Es necesario realizar los dos pasos anteriores, es decir, crear **la carpeta "src"** en el sistema de archivos y **el solution folder "src"** en Visual Studio. 
 
 > Realmente son dos objetos distintos que no están relacionados, pero al tener el mismo nombre "parecen" lo mismo.
@@ -109,7 +114,8 @@ Las librerías tienen dos proyectos principales:
 
 #### 4.1 - Crear proyecto "src\Domion.Core"
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Es importante agregar la carpeta "src" (o la que corresponda) en la ruta de creación del proyecto.
 
 Agregar un nuevo proyecto tipo **Class Library (.NET Core)** sobre la carpeta "src"
@@ -147,7 +153,8 @@ Además, La aplicación se llamará "DFlow", por lo tanto, siguiendo el mismo pr
 1. **samples\DFlow.Transactions.Core** - Class Library (.NET Core)
 1. **samples\DFlow.Transactions.Lib** - Class Library (.NET Core)
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Para poder crear las migraciones de Entity Framework (EF) necesitamos crear una aplicación de consola, donde luego instalaremos el "tooling" para EF.
 
 Finalmente, también vamos a necesitar una aplicación de consola para crear las migraciones, según una de las opciones para ello, indicadas en la página de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#net-standard-limitation), por una limitación de .NET Standard que no permite (al 31/05/2017) ejecutar ```dotnet``` en un proyecto "Class Library".
@@ -167,7 +174,8 @@ Como inicialmente vamos a trabajar con código generado con la [metodología MDA
 
 ### 7 - Crear scripts para generar migraciones
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Los scripts facilitan la ejecución de comandos comunes durante del desarrollo como la creación de las migraciones.
 
 Para incluir los scripts en la carpeta se debe hacer lo siguiente:
@@ -205,7 +213,8 @@ Y el explorador de Windows se debe ver así:
 
 {{<image src="/posts/images/explorer_2017-05-31_15-17-39.png">}}
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Para eliminar un proyecto de la solución sin causar problemas, se debe eliminar primero desde el explorador de Visual Studio.
 
 Si quedó algún proyecto en la raíz de la solución, se debe:
@@ -225,7 +234,7 @@ Para comenzar el desarrollo podemos ir de una vez al artículo siguiente: [Patr�
 {{< goodbye >}}
 
 ---
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

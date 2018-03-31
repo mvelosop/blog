@@ -1,6 +1,12 @@
 {{ if .Params.toc  }}
 <section class="sidebar">
-    <header>CONTENIDO</header>
+    <header>
+    {{ if eq $.Params.Language "en" }}
+    CONTENT
+    {{ else }}
+    CONTENIDO
+    {{ end }}
+    </header>
     
     <div class="toc">
         {{ .TableOfContents }}

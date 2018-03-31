@@ -10,16 +10,21 @@ tags: [ "Entity Framework Core", "EF Core Configuration", "EF Core CLI", "Migrat
 series: [ "Entity Framework Core" ]
 repoName: EFCoreApp
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo desarrollamos una aplicación de consola sencilla, usando Code First con EF Core 1.1, con el fin explorar algunos aspectos básicos del trabajo con EF Core.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Paquetes mínimos necesarios para trabajar con EF Core.
+
 > 0. Clases de configuración con Fluent API.
+
 > 0. Leer string de conexión de archivos configuración.
+
 > 0. Usar de EF Core CLI para crear la migración inicial.
+
 > 0. Crear automáticamente la base de datos.
 
 {{< repoUrl >}}
@@ -59,7 +64,8 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 
 #### Detalles de project.json
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos los paquetes mínimos necesarios para trabajar con EF Core
 
 * Paquetes de Entity Framework Core
@@ -89,21 +95,24 @@ La clase del modelo, Divisas en este caso.
 
 #### Base\EntityTypeConfiguration.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
 {{< getSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
 
 #### Data\CurrencyConfiguration.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > La clase de configuración del modelo permite mantener fuera del DbContext los detalles de cada clase. Esto simplifica mucho el DbContext.
 
 {{< getSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
 
 #### Config\ConfigClasses.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos como podemos manejar las opciones de configuración a través de clases auxiliares, para hacerlo de forma "strongly typed".
 
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
@@ -119,7 +128,8 @@ El DbContext para la aplicación, define la vista de la base de datos a la que t
 
 #### Program.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El método InitDb crea la base de datos o aplica las migraciones necesarias al arrancar la aplicación, en vez de hacerlo con el primer request. Esto mejora la experiencia del usuario.
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
@@ -128,7 +138,8 @@ El programa principal de la aplicación. Aquí están los métodos que crean/act
 
 ### 4 - Generar la migración inicial
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos la forma general de trabajar con el EF Core CLI.
 
 > Siempre podemos usar ```dotnet ef <comando> -h``` para consultar la ayuda del comando.
@@ -201,7 +212,7 @@ Y si en algún momento necesitamos empezar con una base de datos nueva, basta co
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

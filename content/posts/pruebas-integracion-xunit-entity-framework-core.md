@@ -10,6 +10,7 @@ tags: [ "Entity Framework Core", "xUnit", "Integration Tests", "EF Code First" ]
 series: [ "Domion" ]
 repoName: Domion.Net
 repoRelease: "3.0"
+toc: true
 ---
 
 Este es el tercer artículo de la serie [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion). En el [artículo anterior](/posts/patron-repositorio-entity-framework-core/) desarrollamos los componentes iniciales de la aplicación modelo, haciendo énfasis en el [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) con [Entity Framework Core (EF Core)](https://docs.microsoft.com/en-us/ef/core/index), que implementamos y denominamos, de forma general, como **EntityManagers**.
@@ -586,7 +587,7 @@ También aprendimos algunos detalles importantes sobre el trabajo y las pruebas 
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **Action**  
 https://msdn.microsoft.com/en-us/library/018hxwa8(v=vs.110).aspx
