@@ -652,6 +652,13 @@ section.footer > header a {
   background-color: #eceff1;
   background-size: cover;
   background-position: center;
+  position: relative;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .author .author-name {
