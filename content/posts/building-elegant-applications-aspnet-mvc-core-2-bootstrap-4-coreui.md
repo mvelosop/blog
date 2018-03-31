@@ -17,7 +17,7 @@ image:
     url: https://unsplash.com/photos/0sT9YhNgSEs
 ---
 
-In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template , based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
+In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template, based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
 
 > ### <span class="important"> {{< IMPORTANT "Key Takeaways" >}}
 
