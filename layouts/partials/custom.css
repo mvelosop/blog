@@ -1,0 +1,84 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans','Hiragino Kaku Gothic Pro',Meiryo,sans-serif;
+}
+
+h4, h5, h6 { 
+  font-size: 1rem; 
+  line-height: 1.5rem; 
+  margin: 1rem 0; 
+}
+
+.c4 { width: 25%; }
+.c8 { width: 75%; }
+
+article.lism {
+  margin: 1rem 0;
+}
+
+article.lism .thumb {
+  width: 100%;
+  float: none;
+}
+
+article.sn > .article-body h2 {
+  font-size: 1.4rem;
+}
+
+article.sn > .article-body h3 {
+  font-size: 1.2rem;
+  padding: .125rem .5rem;
+}
+
+article.sn > .article-body h4 {
+  border-left: .5rem solid #90a4ae;
+  padding: .125rem .5rem;
+}
+
+article.sn > .article-body li {
+  padding-bottom: 0;
+}
+
+article.sn > .article-body strong {
+  box-shadow: none;
+}
+
+.author .author-thumb {
+  position: relative;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+blockquote h3 {
+  font-size: 1rem;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem !important;
+  border-left-style: none !important;
+}
+
+blockquote ol {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+blockquote strong{
+  box-shadow: none !important;
+}
+
+.important {
+  color: red;
+}
+
+.image-credit {
+  margin-top: -15px;
+  margin-right: 32px;
+  text-align: right;
+  font-size: smaller;
+}
