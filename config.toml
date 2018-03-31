@@ -14,8 +14,6 @@ preserveTaxonomyNames = false
 
 [taxonomies]
 	tag = "tags"
-	category = "categorías"
-	series = "series"
 
 [params.author]
     # If you want to display author information set these
