@@ -10,7 +10,11 @@ disqusShortName = "www-coderepo-blog"
 
 pluralizeListTitles = true
 
-preserveTaxonomyNames = false
+preserveTaxonomyNames = true
+
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsStyle = "vs"
 
 [taxonomies]
 	tag = "tags"

@@ -111,15 +111,17 @@ Desde el explorador de la solución:
 Desde el explorador de archivos:
 
 1. Cambiar nombre de la carpeta **tests** por **samples.test**
-2. Editar el archivo Domion.Net.sln y cambiar las línea donde aparecen las rutas viejas de los proyectos de pruebas (```"tests\...```) por la ruta nueva (```"samples.tests\...```):
+2. Editar el archivo Domion.Net.sln y cambiar las línea donde aparecen las rutas originales de los proyectos de pruebas por las rutas nuevas:
 
-```txt
+Rutas originales (`"tests\...`) 
+```cs
 Project("{FAE ... FBC}") = "DFlow.Budget.Lib.Tests", "tests\DFlow.Budget.Lib.Tests\DFlow.Budget.Lib.Tests.csproj", ...
 
 Project("{9A1 ... 556}") = "DFlow.Transactions.Lib.Tests", "tests\DFlow.Transactions.Lib.Tests\DFlow.Transactions.Lib.Tests.csproj", ...
 ```
 
-```txt
+Rutas nuevas (`"samples.tests\...`)
+```cs
 Project("{FAE ... FBC}") = "DFlow.Budget.Lib.Tests", "sample.tests\DFlow.Budget.Lib.Tests\DFlow.Budget.Lib.Tests.csproj", ...
 
 Project("{9A1 ... 556}") = "DFlow.Transactions.Lib.Tests", "samples.tests\DFlow.Transactions.Lib.Tests\DFlow.Transactions.Lib.Tests.csproj", ...
@@ -182,7 +184,7 @@ En teoría se debería poder hacer sin necesidad de descargar los proyectos, per
 
 El archivo .csproj se modifica con **[Botón derecho > Edit {nombre del proyecto}.csproj]** sobre el proyecto en el explorador de la solución.
 
-Para cambiar la plataforma hay que cambiar el tag del TargetFramework de **netcoreapp1.1** (.NET Core 1.1)
+Para cambiar la plataforma hay que cambiar el tag del TargetFramework de .NET Core 1.1 (**`netcoreapp1.1`**)
 
 ```xml
 <PropertyGroup>
@@ -190,7 +192,7 @@ Para cambiar la plataforma hay que cambiar el tag del TargetFramework de **netco
 </PropertyGroup>
 ```
 
-a **net462** (.NET Framework 4.6.2)
+a .NET Framework 4.6.2 (**`net462`**)
 
 ```xml
 <PropertyGroup>
@@ -200,7 +202,7 @@ a **net462** (.NET Framework 4.6.2)
 
 Además de cambiar la plataforma, en el proyecto **DFlow.Budget.Core**, es necesario incluir un referencia a externa a **System.ComponentModel.Annotations** cuando el target framework sea "net462", así que el archivo **DFlow.Budget.Core.csproj** debe quedar así:
 
-{{<getSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj">}}
 
 Note que la inclusión de la referencia está condicionada al TargetFramework **net462**
 
@@ -273,7 +275,7 @@ Para facilitar el manejo de los datos de prueba, vamos a usar una clase que repr
 
 Además, como veremos en un artículo posterior, esto es especialmente útil cuando tenemos que hacer referencia a otros objetos
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs">}}
 
 #### C-1.2 - Estructura de las pruebas con un DbContext
 
@@ -519,7 +521,7 @@ Adicionalmente a lo que se indicó en ese punto, se puede ver que en los método
 
 Esto se hace para poder llamarlos desde los <strong>Ensure...</strong> y estar seguros que no estamos trabajando con el mismo DbContext donde se realizó la operación.
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
 
 #### C-3.3 - FluentAssertionsExtensions - Extensión para facilitar la verificación de errores
 
