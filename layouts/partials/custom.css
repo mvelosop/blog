@@ -79,7 +79,6 @@ blockquote strong{
 }
 
 .image-credit {
-  margin-top: -15px;
   margin-right: 32px;
   text-align: right;
   font-size: smaller;
@@ -103,10 +102,4 @@ blockquote strong{
 
 .toc li {
   list-style-type: none !important;
-}
-
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0; 
 }
