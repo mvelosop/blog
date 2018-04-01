@@ -5,9 +5,7 @@ author: Miguel Veloso
 date: 2017-05-30
 description: Un conjunto de componentes para facilitar el desarrollo de aplicaciones web y móviles
 thumbnail: images/puzzle-1713170_1280.jpg
-categorías: [ "Desarrollo" ]
-tags: [ "Architecture" ]
-series: [ "Domion" ]
+tags: [ "Architecture", "Domion" ]
 ---
 
 Con este artículo voy a comenzar una serie para repasar y aprender conceptos fundamentales del desarrollo de aplicaciones web y móviles en .NET. 

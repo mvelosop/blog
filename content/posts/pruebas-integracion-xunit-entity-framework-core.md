@@ -5,9 +5,7 @@ author: Miguel Veloso
 date: 2017-06-20
 description: Desarrollar las primeras pruebas de integración con xUnit
 thumbnail: /posts/images/gears-1236578_1280.jpg
-categorías: [ "Desarrollo" ]
-tags: [ "Entity Framework Core", "xUnit", "Integration Tests", "EF Code First" ]
-series: [ "Domion" ]
+tags: [ "Entity Framework Core", "xUnit", "Integration Tests", "EF Code First", "Domion" ]
 repoName: Domion.Net
 repoRelease: "3.0"
 toc: true

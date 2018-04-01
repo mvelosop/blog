@@ -5,9 +5,7 @@ author: Miguel Veloso
 date: 2017-05-31
 description: Organizar las carpetas y proyectos de una solución ASP.NET Core
 thumbnail: posts/images/site-592458_1280.jpg
-categorías: [ "Desarrollo" ]
-tags: [ "Architecture", "Project Structure" ]
-series: [ "Domion" ]
+tags: [ "Architecture", "Project Structure", "Domion" ]
 repoName: Domion.Net
 repoRelease: "1.0"
 toc: true
