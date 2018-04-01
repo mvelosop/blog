@@ -8,7 +8,7 @@
     </header>
   <div>
     <div class="articles sm">
-      {{ range $i, $p := (first 5 .Site.Pages) }}
+      {{ range $i, $p := (first 6 .Site.Pages) }}
       {{ .Render "li_sm" }}
       {{ end }}
     </div>

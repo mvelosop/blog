@@ -22,11 +22,17 @@ También aprovecharemos luego este aprendizaje para desarrollar nuevas plantilla
 > {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Pruebas de integración con [xUnit](https://xunit.github.io/) y [FluentAssertions](http://fluentassertions.com/).
+
 > 0. Mover o renombrar proyectos de una solución en VS 2017.
+
 > 0. Cambiar el TargetFramework en proyectos .NET Core.
+
 > 0. Entender la forma correcta de hacer pruebas de integración sobre un DbContext.
+
 > 0. Aplicar el patrón de pruebas Arrange / Act / Assert.
+
 > 0. Refactorización usando delegados.
+
 > 0. Estandarizar pruebas típicas como paso previo a generarlas usando [MDA](https://en.wikipedia.org/wiki/Model-driven_architecture).
 
 Al terminar el artículo tendremos una buena estructura para organizar las pruebas de integración y podremos apreciar las ventajas de trabajar con el enfoque "Code First" en [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index).
