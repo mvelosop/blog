@@ -133,7 +133,27 @@ div.chroma td:last-child {
 }
 
 div.source-filename {
+  color: gray;
   font-size: .8rem;
   margin-bottom: 0.2rem;
   font-weight: bold;
+}
+
+div.source-code {
+  position: relative;
+}
+
+.btn-copy {
+  display: inline-block;
+  cursor: pointer;
+  border-bottom-color: #333;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 18px;
+  padding: 7px 6px;
+  background-color: rgba(221, 221, 221, 0.5);
+  position: absolute;
+  right: 4px;
+  top: 4px;
 }
