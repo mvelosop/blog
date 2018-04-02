@@ -133,10 +133,17 @@ div.chroma td:last-child {
 }
 
 div.source-filename {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+div.source-filepath {
   color: gray;
   font-size: .8rem;
   margin-bottom: 0.2rem;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 div.source-code {

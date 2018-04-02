@@ -4,19 +4,22 @@
 {{ else }}
 {{ $.Scratch.Add "options" "linenos=table" }}
 {{ end }}
-{{ $fileExt := replace (index (findRE "(\\.)\\w+$" $file) 0) "." "" }}
+{{ $filePath := delimit (findRE "(.*\\\\)" $file 1) "" }}
+{{ $fileName := replace $file $filePath "" }}
+{{ $fileExt := replaceRE "(.*\\.)" "" $fileName }}
+<div class="source-filename">{{ $fileName }}</div>
 {{ with $.Page.Params.repoRelease }}
-{{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $file }}
+{{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $filePath }}
 {{ $sourceFile := printf "releases\\%s-%s\\%s" $.Page.Params.repoName . $file }}
-<div class="source-filename">{{ $sourceFilePath }}</div>
+<div class="source-filepath">{{ $sourceFilePath }}</div>
 <div class="source-code">
 <button class="btn-copy" data-clipboard-target=""><i class="fa fa-fw fa-copy"></i></button>
 {{ highlight (trim (readFile $sourceFile) "\n\ufeff") $fileExt ($.Scratch.Get "options") }}
 </div>
 {{ else }}
-{{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $file }}
+{{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $filePath }}
 {{ $sourceFile := printf "repos\\%s\\%s" $.Page.Params.repoName $file }}
-<div class="source-filename">{{ $sourceFilePath }}</div>
+<div class="source-filepath">{{ $sourceFilePath }}</div>
 <div class="source-code">
 <button class="btn-copy" data-clipboard-target=""><i class="fa fa-fw fa-copy"></i></button>
 {{ highlight (trim (readFile $sourceFile) "\n\ufeff") $fileExt ($.Scratch.Get "options") }}
