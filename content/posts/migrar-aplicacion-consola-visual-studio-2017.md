@@ -59,7 +59,7 @@ En este momento ya se realizó la conversión y la solución debería compilar s
 
 También podemos verificar que ahora ya no existe el archivo ```project.json``` y en su lugar está el archivo ```EFCore.App.csproj``` con el siguiente contenido:
 
-{{< getSourceFile "src\EFCore.App\EFCore.App.csproj" >}}
+{{< renderSourceFile "src\EFCore.App\EFCore.App.csproj" >}}
 
 En este archivo hay tres cosas notables:
 
@@ -85,7 +85,7 @@ Sólo para verificar el funcionamiento del CLI de EF, eliminamos el contenido de
 
 **Migrations/CommonDbContextModelSnapshot.cs**
 
-{{< getSourceFile "src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
+{{< renderSourceFile "src/EFCore.App/Migrations/CommonDbContextModelSnapshot.cs" >}}
 
 Como era de esperar, este archivo es igual al de la versión anterior con la única excepción de la línea que indica:
 
@@ -95,7 +95,7 @@ De la misma forma, el nuevo archivo de la migración sólo se diferencia en el n
 
 **Migrations/20170314105415_InitialCreateMigration.cs**
 
-{{< getSourceFile "src/EFCore.App/Migrations/20170314105415_InitialCreateMigration.cs" >}}
+{{< renderSourceFile "src/EFCore.App/Migrations/20170314105415_InitialCreateMigration.cs" >}}
 
 Para verificar que todo sigue funcionando correctamente, eliminamos la base de datos EFCore.App y ejecutamos el programa con [Ctrl]+[F5] y obtenemos el resultado esperado:
 

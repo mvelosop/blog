@@ -58,7 +58,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
 
-    {{< getSourceFile "src\EFCore.App\project.json" >}}
+    {{< renderSourceFile "src\EFCore.App\project.json" >}}
 
 3. Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute **```dotnet restore```**
 
@@ -91,7 +91,7 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 
 La clase del modelo, Divisas en este caso.
 
-{{< getSourceFile "src\EFCore.App\Model\Currency.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Model\Currency.cs" >}}
 
 #### Base\EntityTypeConfiguration.cs
 
@@ -99,7 +99,7 @@ La clase del modelo, Divisas en este caso.
 
 > Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
-{{< getSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
 
 #### Data\CurrencyConfiguration.cs
 
@@ -107,7 +107,7 @@ La clase del modelo, Divisas en este caso.
 
 > La clase de configuración del modelo permite mantener fuera del DbContext los detalles de cada clase. Esto simplifica mucho el DbContext.
 
-{{< getSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
 
 #### Config\ConfigClasses.cs
 
@@ -118,13 +118,13 @@ La clase del modelo, Divisas en este caso.
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
 **appsettings.json** de una forma "strongly typed".
 
-{{< getSourceFile "src\EFCore.App\Config\ConfigClasses.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Config\ConfigClasses.cs" >}}
 
 #### Data\CommonDbContext.cs
 
 El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
-{{< getSourceFile "src\EFCore.App\Data\CommonDbContext.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Data\CommonDbContext.cs" >}}
 
 #### Program.cs
 
@@ -134,7 +134,7 @@ El DbContext para la aplicación, define la vista de la base de datos a la que t
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
 
-{{< getSourceFile "src\EFCore.App\Program.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Program.cs" >}}
 
 ### 4 - Generar la migración inicial
 
@@ -169,7 +169,7 @@ Este archivo es la configuración de la última versión del modelo, se utiliza 
 
 Observe que en esta clase está consolidada toda la definición de los objetos de base de datos, usando Fluent API, incluyendo los atributos utilizados en las propiedades del modelo de dominio.
 
-{{< getSourceFile "src\EFCore.App\Migrations\CommonDbContextModelSnapshot.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Migrations\CommonDbContextModelSnapshot.cs" >}}
 
 #### Migrations\20170227231210_InitialCreateMigration
 
@@ -177,7 +177,7 @@ Este archivo es el encargado de generar la migración desde la versión anterior
 
 Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.
 
-{{< getSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
 
 ### 5 - Crear archivo de configuración
 
@@ -185,7 +185,7 @@ Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (
 
 Este string de conexión es adecuado para SQL Server Developer Edition con la instancia por default (MSSQLSERVER), puede ser necesario ajustarlo si la situación es distinta.
 
-{{< getSourceFile "src\EFCore.App\appsettings.json" >}}
+{{< renderSourceFile "src\EFCore.App\appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
 

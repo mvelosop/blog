@@ -102,25 +102,25 @@ También es posible, aunque menos frecuente, implementar sólo consultas especí
 
 Esta interfaz genérica nos permite implementar [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) de uso común, aplicables a todos los "Managers", sin necesidad de implementarlos para cada EntityManager.
 
-{{<getSourceFile "src\Domion.Core\Services\IQueryManager.cs">}}
+{{<renderSourceFile "src\Domion.Core\Services\IQueryManager.cs">}}
 
 #### A-1.2 - IEntityManager - Interfaz genérica para DbContext.Find()
 
 La implementación de esta interfaz nos permite acceder al método **Find** de los DbContext, si decidimos exponerlo a través del EntityManager.
 
-{{<getSourceFile "src\Domion.Core\Services\IEntityManager.cs">}}
+{{<renderSourceFile "src\Domion.Core\Services\IEntityManager.cs">}}
 
 #### A-1.3 - BaseRepository - Repositorio genérico
 
 Esta es la implementación base del repositorio genérico, está declarada como una clase abstracta, así que cada EntityManager específico debe heredar de ésta y entonces decidir que métodos cambiar u ocultar o, incluso, eliminando alguna de las interfaces de la declaración.
 
-{{<getSourceFile "src\Domion.Lib\Data\BaseRepository.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\BaseRepository.cs">}}
 
 #### A-1.4 - IQueryManagerExtensions - Extensiones para el IQueryManager
 
 Estos extension methods agregan funcionalidad de uso común con los IQueryable, directamente al IQueryManager, sin necesidad de implementarlos en cada EntityManager.
 
-{{<getSourceFile "src\Domion.Lib\Extensions\IQueryManagerExtensions.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Extensions\IQueryManagerExtensions.cs">}}
 
 ### A-2 - Extensiones para configuración de los modelos en EF Core
 
@@ -138,13 +138,13 @@ El método Map de esta clase abstract recibe un EntityTypeBuilder<TEntity> con e
 
 En el punto [B-3.1](#b-3-1-budgetclassconfiguration-configuración-del-modelo-para-ef-core) podemos ver cómo se utiliza esta clase para manejar la clase de configuración.
 
-{{<getSourceFile "src\Domion.Lib\Data\EntityTypeConfiguration.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\EntityTypeConfiguration.cs">}}
 
 #### A-2.2 - ModelBuilderExtensions - Extensión de ModelBuilder 
 
 Este extension method permite invocar la configuración de una clase desde el DbContext.
 
-{{<getSourceFile "src\Domion.Lib\Data\ModelBuilderExtensions.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\ModelBuilderExtensions.cs">}}
 
 Con esto la configuración de cada clase del modelo queda reducida a una línea en el DbContext, por ejemplo:
 
@@ -231,13 +231,13 @@ Los atributos **[Required]** y **[MaxLength(100)]**, así como el comentario **/
 
 Aunque los atributos indicados realmente pertenecen a la capa de datos y no a la capa del modelo de dominio, donde estamos, me parece que es útil tenerlos aquí como referencia al implementar las pantallas.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Model\BudgetClass.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Model\BudgetClass.cs">}}
 
 #### B-2.2 - TransactionType - Tipo de transacción <span style="color: red;">[Generado 100%]</span>
 
 Esto es simplemente un enum convencional.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Model\TransactionType.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Model\TransactionType.cs">}}
 
 #### B-2.3 - IBudgetClassManager - Interfaz del EntityManager para BudgetClass <span style="color: red;">[Generado 100%]</span>
 
@@ -247,7 +247,7 @@ En caso de ser necesario utilizar los managers desde la capa del modelo de domin
 
 Esta interfaz se puede modificar tanto como sea necesario, por ejemplo, se podría eliminar la referencia a IQueryManager<BudgetClass> y ocultar en el BudgetClassManager los métodos del repositorio base, para entonces implementar métodos de consulta específicos.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Services\IBudgetClassManager.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Services\IBudgetClassManager.cs">}}
 
 ### B-3 - Componentes en DFlow.Budget.Lib
 
@@ -259,7 +259,7 @@ En esta clase no están los elementos relativos al tamaño de los campos o si so
 
 Vamos a destacar un elemento importante de la configuración, como uso de un **schema de base de datos** asociado a cada DbContext, como un modo de separar las áreas funcionales en la base de datos. Esto, además, nos facilitará el desarrollo de aplicaciones grandes, a la hora de distribuir el trabajo entre varios equipos y compartir el acceso a una base de datos desde varios DbContext.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetClassConfiguration.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Data\BudgetClassConfiguration.cs">}}
 
 #### B-3.2 - BudgetDbContext - DbContext para el módulo <span style="color: red;">[Generado 100%]</span>
 
@@ -277,7 +277,7 @@ También lo podemos ver como una ventana a la base de datos (con una interfaz de
 
 Además, el DbContext también facilita la implementación de un [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html), que es uno de los elementos pricipales del [Domain Driven Design (DDD)](https://domainlanguage.com/ddd/).
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetDbContext.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Data\BudgetDbContext.cs">}}
 
 #### B-3.3 - BudgetClassManager - EntityManager para las clasificaciones <span style="color: red;">[Generado 100%]</span>
 
@@ -287,7 +287,7 @@ Independientemente de que esas validaciones estén reforzadas a nivel de la base
 
 Observe cómo está implementada la validación contra nombre duplicados, con los métodos ```FindDuplicateByName``` y ```ValidateSave```.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
 
 ### B-4 - Incluir dependencias y compilar
 
@@ -320,7 +320,7 @@ Vamos a crear un proyecto para manejar los temas de configuración del módulo, 
 
 #### C-1.2 - Agregar clase "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs"
 
-{{<getSourceFile "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs">}}
 
 #### C-1.3 - Instalar dependencias
 
@@ -377,7 +377,7 @@ Si todo está bien, se debe obtener una pantalla como esta:
 
 Y se debe obtener un archivo como este en la carpeta **Migrations** de **DFlow.Budget.Lib**.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Migrations\20170609203746_CreateMigration_BudgetDbContext.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Migrations\20170609203746_CreateMigration_BudgetDbContext.cs">}}
 
 ## D - Paso a Paso - Ejecutar la aplicación
 
@@ -387,7 +387,7 @@ Originalmente había pensado incluir el proyecto de pruebas de integración e in
 
 #### D-1.1 - Modificar Program.cs
 
-{{<getSourceFile "samples\DFlow.CLI\Program.cs">}}
+{{<renderSourceFile "samples\DFlow.CLI\Program.cs">}}
 
 #### D-1.2 - Activar DFlow.CLI como Startup project
 

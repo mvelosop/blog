@@ -208,7 +208,7 @@ Para terminar, cuando incluimos en el constuctor el parámetro ```ILifetimeScope
 
 El asistente ajustado finalmente queda así:
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
 
 ### A-3 - Ajustar clase de pruebas de integración
 
@@ -266,7 +266,7 @@ private void UsingManagerHelper(Action<ILifetimeScope, BudgetClassManagerHelper>
 
 Después de hacer las modificaciones principales anteriores y ajustar la clase de pruebas para que compile, llegamos a esta versión de la clase:
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs">}}
 
 ### A-4 - Compilar
 
@@ -290,7 +290,7 @@ En este punto ya hemos identificado una buena oportunidad de refactorización ha
 
 #### B-1.2 - Crear BaseContainerSetup
 
-{{<getSourceFile "src\Domion.Setup\BaseContainerSetup.cs">}}
+{{<renderSourceFile "src\Domion.Setup\BaseContainerSetup.cs">}}
 
 #### B-1.4 - Agregar referencia a Domion.Setup en DFlow.Budget.Setup
 
@@ -299,7 +299,7 @@ En este punto ya hemos identificado una buena oportunidad de refactorización ha
 
 #### B-1.5 - Ajustar BudgetContainerSetup
 
-{{<getSourceFile "samples\DFlow.Budget.Setup\BudgetContainerSetup.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Setup\BudgetContainerSetup.cs">}}
 
 ## C - Pruebas
 

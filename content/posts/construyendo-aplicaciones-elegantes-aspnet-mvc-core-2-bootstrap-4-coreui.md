@@ -245,7 +245,7 @@ En esta sección vamos a convertir las páginas estáticas html de CoreUI en vis
 
 Este es un controlador muy sencillo, que recibe el nombre de la vista a mostrar y la retorna.
 
-{{<getSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
+{{<renderSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
 
 #### 3.2 - Crear vista Index inicial
 

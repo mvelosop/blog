@@ -72,7 +72,7 @@ Este es un atributo muy sencillo, a modo de ejemplo, para aplicaciones reales se
 #### 2.1 - Crear proyecto "src\HangFireCore.Core"
 
 #### 2.2 - Agregar archivo "HangfireJobMinutesAttribute.cs"
-{{<getSourceFile "src\HangFireCore.Core\HangfireJobMinutesAttribute.cs">}}
+{{<renderSourceFile "src\HangFireCore.Core\HangfireJobMinutesAttribute.cs">}}
 
 ### 3 - Desarrollar un "módulo" con tareas programadas
 
@@ -97,7 +97,7 @@ En el repositorio se incluye también el módulo **HangFire.Job.Two**, aunque no
 
 #### 3.3 - Incluir archivo "JobOne.cs"
 
-{{<getSourceFile "src\HangFireCore.Job.One\JobOne.cs">}}
+{{<renderSourceFile "src\HangFireCore.Job.One\JobOne.cs">}}
 
 ### 4 - Crear el proyecto src\HangFireCore.WebApp
 
@@ -126,7 +126,7 @@ Se implementa la carga de "modulos" como un [ExtensionMethod](https://msdn.micro
 
 #### Agregar la clase "helpers\ScheduleJobsHelpers.cs**
 
-{{<getSourceFile "src\HangFireCore.WebApp\helpers\ScheduleJobsHelpers.cs">}}
+{{<renderSourceFile "src\HangFireCore.WebApp\helpers\ScheduleJobsHelpers.cs">}}
 
 ### 6 - Incluir Hangfire en la aplicación web
 
@@ -140,13 +140,13 @@ Vamos a orientarnos por lo indicado en [Integrate HangFire With ASP.NET Core](ht
 
 #### 6.2 - Modificar el archivo de configuración para trabajar con SQL Server en vez de LocalDb
 
-{{<getSourceFile "src\HangFireCore.WebApp\appsettings.json">}}  
+{{<renderSourceFile "src\HangFireCore.WebApp\appsettings.json">}}  
 
 Prefiero trabajar con SQL Server Developer Edition, para que sea lo más parecido posible al ambiente de producción.
 
 #### 6.3 - Crear un AuthorizationFilter para poder acceder al dashboard de Hangfire
 
-{{<getSourceFile "src\HangFireCore.WebApp\Helpers\HangfireDashboardAuthorizationFilter.cs">}}  
+{{<renderSourceFile "src\HangFireCore.WebApp\Helpers\HangfireDashboardAuthorizationFilter.cs">}}  
 Esto es un filtro básico que sólo verifica que el usuario esté autenticado para permitir el acceso, en la práctica se debe aplicar algún criterio más estricto para permitirlo.
 
 ### 7 - Incluir NLog en la aplicación web
@@ -170,7 +170,7 @@ Para esto se debe buscar el paquete el la carpeta **.nuget** dentro del perfil d
 
 #### 7.3 - Crear archivo NLog.config en la raíz de la aplicación web
 
-{{<getSourceFile "src\HangFireCore.WebApp\NLog.config">}}  
+{{<renderSourceFile "src\HangFireCore.WebApp\NLog.config">}}  
 
 Según lo indicado en https://github.com/NLog/NLog.Extensions.Logging/blob/master/README.md, todavía no está soportado el ```${basedir}```, para manejar rutas relativas en los archivos .log, así que por ahora es necesario configurar una ruta absoluta (c:\temp\logs).
 
@@ -299,7 +299,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
 Con los cambios anteriores el archivo de arranque debe quedar así:
 
-{{<getSourceFile "src\HangFireCore.WebApp\Startup.cs">}}
+{{<renderSourceFile "src\HangFireCore.WebApp\Startup.cs">}}
 
 #### 8.6 - Agregar opción Hangfire la barra de navegación
 
@@ -327,7 +327,7 @@ Se puede ver que en este caso hay dos tareas recurrentes, una se ejecuta cada mi
 Eventualmente se puede ver más de un servidor activo. Esto ocurre porque las tareas en background corren en threads independientes y no se cierran inmediatamente al reiniciar la aplicación, pero el gestor de tareas de Hangfire se encarga de hacerlo después de un timeout (ver logs).
 
 El archivo de log debe ser similar a este, pero ubicado en c:\temp\logs:
-{{<getSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
+{{<renderSourceFile "src\HangFireCore.WebApp\temp\nlog-HangFireCoreApp-current.log">}}
 
 ---
 

@@ -53,7 +53,7 @@ En este artículo vamos a desarrollar la solución desde el principio, para apre
 
 Para incluir un archivo fuente:
 
-{{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
 
 Para incluir una imágen:
 

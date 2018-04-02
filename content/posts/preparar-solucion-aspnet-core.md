@@ -184,11 +184,11 @@ Es importante crear estos archivos desde el explorador de Windows, para ubicarlo
 
 #### 7.2 - Script para agregar migraciones
 
-{{<getSourceFile "scripts\add-migration.cmd">}}
+{{<renderSourceFile "scripts\add-migration.cmd">}}
 
 #### 7.3 - Script para eliminar la última migración
 
-{{<getSourceFile "scripts\remove-migration.cmd">}}
+{{<renderSourceFile "scripts\remove-migration.cmd">}}
 
 Cuando se copien estos scripts a otros proyectos, es necesario indicar la dirección del proyecto .CLI en la variable **cliProjectDir**, como una ruta relativa desde la carpeta scripts, en ambos scripts:
 
