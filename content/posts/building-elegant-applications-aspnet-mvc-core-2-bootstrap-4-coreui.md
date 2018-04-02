@@ -244,7 +244,7 @@ In this section we'll convert the static HTML pages from CoreUI into Razor views
 
 This is a very simple controller, that receives the name of the view to display and returns it.
 
-{{<getSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
+{{<renderSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
 
 #### 3.2 - Create the initial Index view
 

@@ -202,7 +202,7 @@ a .NET Framework 4.6.2 (**`net462`**)
 
 Además de cambiar la plataforma, en el proyecto **DFlow.Budget.Core**, es necesario incluir un referencia a externa a **System.ComponentModel.Annotations** cuando el target framework sea "net462", así que el archivo **DFlow.Budget.Core.csproj** debe quedar así:
 
-{{<renderSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj" "linenos=table">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj">}}
 
 Note que la inclusión de la referencia está condicionada al TargetFramework **net462**
 
@@ -233,7 +233,7 @@ El proyecto se debe crear como **Class Library (.NET Core)**
 
 Para este proyecto también tenemos que hacer el cambio de plataforma e incluir el paquete **System.ComponentModel.Annotations**, así que vamos a modificar el archivo **Domion.FluentAssertions.csproj** a esto:
 
-{{<renderSourceFile "src\Domion.FluentAssertions\Domion.FluentAssertions.csproj" "linenos=table">}}
+{{<renderSourceFile "src\Domion.FluentAssertions\Domion.FluentAssertions.csproj">}}
 
 Con esto también instalaremos de una vez el paquete **FluentAssertions** que vamos a necesitar.
 
@@ -243,7 +243,7 @@ Con esto también instalaremos de una vez el paquete **FluentAssertions** que va
 
 Crear el archivo **xunit.runner.json** en la raíz del proyecto de pruebas: 
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\xunit.runner.json" "linenos=table">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\xunit.runner.json">}}
 
 Este archivo hace que el explorador de pruebas muestre el sólo nombre de los métodos de prueba (en vez de mostrar también el nombre completo de la clase):
 
@@ -275,7 +275,7 @@ Para facilitar el manejo de los datos de prueba, vamos a usar una clase que repr
 
 Además, como veremos en un artículo posterior, esto es especialmente útil cuando tenemos que hacer referencia a otros objetos
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs" "linenos=table">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs">}}
 
 #### C-1.2 - Estructura de las pruebas con un DbContext
 
@@ -510,7 +510,7 @@ Entre esta clase y **BudgetClassData**, se implementa el patrón [Mapper](https:
 
 Este patrón, va a resultar especialmente útil en los escenarios más complejos que veremos más adelante en la serie.
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassDataMapper.cs" "linenos=table">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassDataMapper.cs">}}
 
 #### C-3.2 - BudgetClassManagerHelper - Asistente del EntityManager
 
@@ -520,7 +520,7 @@ Adicionalmente a lo que se indicó en ese punto, se puede ver que en los método
 
 Esto se hace para poder llamarlos desde los <strong>Ensure...</strong> y estar seguros que no estamos trabajando con el mismo DbContext donde se realizó la operación.
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs" "linenos=table">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
 
 #### C-3.3 - FluentAssertionsExtensions - Extensión para facilitar la verificación de errores
 
@@ -532,7 +532,7 @@ La parte constante del mensaje va desde el comienzo del string hasta la posició
 
 Esta clase la vamos a incluir en el proyecto **src\Domion.FluentAssertions** que creamos [anteriormente](#b-2-crear-projecto-src-domion-fluentassertions).
 
-{{<renderSourceFile "src\Domion.FluentAssertions\Extensions\FluentAssertionsExtensions.cs" "linenos=table">}}
+{{<renderSourceFile "src\Domion.FluentAssertions\Extensions\FluentAssertionsExtensions.cs">}}
 
 #### C-3.4 - BudgetClassManager_IntegrationTests - Pruebas de integración
 
@@ -544,7 +544,7 @@ Finalmente llegamos a las pruebas de integración, donde implementamos las sigui
 4. No se puede insertar una entidad con nombre duplicado.
 5. No se puede modificar el nombre de una entidad si ya existe otra con el nuevo nombre, porque se duplicaría.
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs" "linenos=table">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs">}}
 
 > {{< IMPORTANT "Importante" >}}
 
