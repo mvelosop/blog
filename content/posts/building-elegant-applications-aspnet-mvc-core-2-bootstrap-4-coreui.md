@@ -54,11 +54,11 @@ I hope to do this in a way that will make it easy to update the base project whe
 
 ## Step by step
 
-### 1 - Create ASP.NET MVC Core 2 project
+### 1 - Create an ASP.NET MVC Core 2 project
 
 Let's start by creating a standard MVC application, using Visual Studio 2017's built-in template.
 
-#### 1.1 - Create blank solution
+#### 1.1 - Create a blank solution
 
 1. Create "blank solution" "AspNetCore2CoreUI" with a Git repository
 
@@ -68,7 +68,7 @@ Let's start by creating a standard MVC application, using Visual Studio 2017's b
 
 {{<image src="/posts/images/devenv_2017-10-31_17-06-44.png">}}
 
-#### 1.2 - Add ASP.NET MVC Core 2 project
+#### 1.2 - Add an ASP.NET MVC Core 2 project
 
 1. Create **CoreUI.Web** project of type "ASP.NET Core Web Application" in "src" solution folder and also create "src" folder in the file system.
 {{<image src="/posts/images/devenv_2017-10-31_17-13-01.png">}}
@@ -295,7 +295,7 @@ Now let's split the Index.cshtml view in several components:
 
 We're not going to show the whole process, just the final _Layout view and the resulting file list, so it should be pretty obvious what the job is and, ultimately, you can see the final result in the article's repository.
 
-```
+{{<renderSourceCode "html" "linenos=table">}}
 <!--
 * CoreUI - Open Source Bootstrap Admin Template
 * @@version v1.0.4
@@ -412,7 +412,7 @@ We're not going to show the whole process, just the final _Layout view and the r
 
 </body>
 </html>
-```
+{{</renderSourceCode>}}
 
 {{<image src="/posts/images/devenv_2017-11-03_18-36-32.png">}}
 

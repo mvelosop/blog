@@ -1,4 +1,5 @@
 {{ $file := .Get 0 }}
+{{ $options := .Get 1 }}
 {{ $fileExt := replace (index (findRE "(\\.)\\w+$" $file) 0) "." "" }}
 {{ with $.Page.Params.repoRelease }}
 {{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $file }}
@@ -6,13 +7,15 @@
 <div class="source-filename">{{ $sourceFilePath }}</div>
 <div class="source-code">
 <button class="btn-copy" data-clipboard-target=""><i class="fa fa-fw fa-copy"></i></button>
-{{ highlight (trim (readFile $sourceFile) "\n\ufeff") $fileExt "linenos=table" }}
+{{ highlight (trim (readFile $sourceFile) "\n\ufeff") $fileExt $options }}
 </div>
 {{ else }}
 {{ $sourceFilePath := printf "[%s] %s" $.Page.Params.repoName $file }}
 {{ $sourceFile := printf "repos\\%s\\%s" $.Page.Params.repoName $file }}
-<div class="source-file"><div class="source-filename" style="line-height: 20px">{{ $sourceFilePath }}</div>
-<pre class="snippet">
-<code class="language-{{ $fileExt }}">{{ trim (readFile $sourceFile) "\ufeff" }}</code></pre>
+<div class="source-filename">{{ $sourceFilePath }}</div>
+<div class="source-code">
+<button class="btn-copy" data-clipboard-target=""><i class="fa fa-fw fa-copy"></i></button>
+{{ $.Scratch.Get "options" }}
+{{ highlight (trim (readFile $sourceFile) "\n\ufeff") $fileExt $options }}
 </div>
 {{ end }}

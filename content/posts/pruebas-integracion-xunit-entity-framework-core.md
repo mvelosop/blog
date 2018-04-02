@@ -202,7 +202,7 @@ a .NET Framework 4.6.2 (**`net462`**)
 
 Además de cambiar la plataforma, en el proyecto **DFlow.Budget.Core**, es necesario incluir un referencia a externa a **System.ComponentModel.Annotations** cuando el target framework sea "net462", así que el archivo **DFlow.Budget.Core.csproj** debe quedar así:
 
-{{<renderSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\DFlow.Budget.Core.csproj" "linenos=table">}}
 
 Note que la inclusión de la referencia está condicionada al TargetFramework **net462**
 
@@ -233,7 +233,7 @@ El proyecto se debe crear como **Class Library (.NET Core)**
 
 Para este proyecto también tenemos que hacer el cambio de plataforma e incluir el paquete **System.ComponentModel.Annotations**, así que vamos a modificar el archivo **Domion.FluentAssertions.csproj** a esto:
 
-{{<getSourceFile "src\Domion.FluentAssertions\Domion.FluentAssertions.csproj">}}
+{{<renderSourceFile "src\Domion.FluentAssertions\Domion.FluentAssertions.csproj" "linenos=table">}}
 
 Con esto también instalaremos de una vez el paquete **FluentAssertions** que vamos a necesitar.
 
@@ -243,7 +243,7 @@ Con esto también instalaremos de una vez el paquete **FluentAssertions** que va
 
 Crear el archivo **xunit.runner.json** en la raíz del proyecto de pruebas: 
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\xunit.runner.json">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\xunit.runner.json" "linenos=table">}}
 
 Este archivo hace que el explorador de pruebas muestre el sólo nombre de los métodos de prueba (en vez de mostrar también el nombre completo de la clase):
 
@@ -275,7 +275,7 @@ Para facilitar el manejo de los datos de prueba, vamos a usar una clase que repr
 
 Además, como veremos en un artículo posterior, esto es especialmente útil cuando tenemos que hacer referencia a otros objetos
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassData.cs" "linenos=table">}}
 
 #### C-1.2 - Estructura de las pruebas con un DbContext
 
@@ -289,63 +289,62 @@ Además, como veremos en un artículo posterior, esto es especialmente útil cua
 
 Al combinar esto con lo indicado en el punto anterior, resulta que una prueba típica tiene la siguiente estructura, donde lo que más destaca es un ```using () { }``` para cada fase (Arrange, Act, Assert) como se muestra a continuación:
 
-```cs
+{{<renderSourceCode "cs" "linenos=table">}}
 [Fact]
 public void TryInsert_InsertsRecord_WhenValidData()
 {
-	IEnumerable<ValidationResult> errors = null;
+    IEnumerable<ValidationResult> errors = null;
 
-	// Arrange ---------------------------
+    // Arrange ---------------------------
 
-	var data = BudgetClassData("Insert-Success-Valid - Inserted", TransactionType.Income);
+    var data = BudgetClassData("Insert-Success-Valid - Inserted", TransactionType.Income);
 
-	// Ensure entitiy does not exist
-	using (var dbContext = dbSetupHelper.GetDbContext())
-	{
-		var manager = new BudgetClassManager(dbContext);
+    // Ensure entitiy does not exist
+    using (var dbContext = dbSetupHelper.GetDbContext())
+    {
+        var manager = new BudgetClassManager(dbContext);
 
-		var entity = manager.SingleOrDefault(bc => bc.Name == data.Name);
+        var entity = manager.SingleOrDefault(bc => bc.Name == data.Name);
 
-		if (entity != null)
-		{
-			errors = manager.TryDelete(entity);
+        if (entity != null)
+        {
+            errors = manager.TryDelete(entity);
 
-			errors.Should().BeEmpty();
+            errors.Should().BeEmpty();
 
-			manager.SaveChanges();
-		}
-	}
+            manager.SaveChanges();
+        }
+    }
 
-	// Act -------------------------------
+    // Act -------------------------------
 
-	// Insert entity
-	using (var dbContext = dbSetupHelper.GetDbContext())
-	{
-		var manager = new BudgetClassManager(dbContext);
+    // Insert entity
+    using (var dbContext = dbSetupHelper.GetDbContext())
+    {
+        var manager = new BudgetClassManager(dbContext);
 
-		BudgetClass entity = new BudgetClass { Name = data.Name, TransactionType = data.TransactionType };
+        BudgetClass entity = new BudgetClass { Name = data.Name, TransactionType = data.TransactionType };
 
-		errors = manager.TryInsert(entity);
+        errors = manager.TryInsert(entity);
 
-		manager.SaveChanges();
-	}
+        manager.SaveChanges();
+    }
 
-	// Assert ----------------------------
+    // Assert ----------------------------
 
-	errors.Should().BeEmpty();
+    errors.Should().BeEmpty();
 
-	// Verify entity exists
-	using (var dbContext = dbSetupHelper.GetDbContext())
-	{
-		var manager = new BudgetClassManager(dbContext);
+    // Verify entity exists
+    using (var dbContext = dbSetupHelper.GetDbContext())
+    {
+        var manager = new BudgetClassManager(dbContext);
 
-		var entity = manager.SingleOrDefault(bc => bc.Name == data.Name);
+        var entity = manager.SingleOrDefault(bc => bc.Name == data.Name);
 
-		entity.Should().NotBeNull();
-	}
+        entity.Should().NotBeNull();
+    }
 }
-
-```
+{{</renderSourceCode>}}
 
 Según lo que hemos comentado, debería ser bastante clara la necesidad del ```using () {}``` en la fase **Act**, pero ¿Por qué en el **Arrange** y el **Assert**?
 
@@ -462,42 +461,42 @@ private void UsingManager(Action<BudgetClassManager> action)
 
 Ahora, aplicando todas las refactorizaciones, la prueba queda bastante simplificada respecto a la versión inicial:
 
-```cs
+{{<renderSourceCode "cs" "linenos=table">}}
 [Fact]
 public void TryInsert_InsertsRecord_WhenValidData()
 {
-	IEnumerable<ValidationResult> errors = null;
+    IEnumerable<ValidationResult> errors = null;
 
-	// Arrange ---------------------------
+    // Arrange ---------------------------
 
-	var data = BudgetClassData("Insert-Success-Valid - Inserted", TransactionType.Income);
+    var data = BudgetClassData("Insert-Success-Valid - Inserted", TransactionType.Income);
 
-	UsingManagerHelper(helper =>
-	{
-		helper.EnsureEntitiesDoNotExist(data);
-	});
+    UsingManagerHelper(helper =>
+    {
+        helper.EnsureEntitiesDoNotExist(data);
+    });
 
-	// Act -------------------------------
+    // Act -------------------------------
 
-	UsingManager(manager =>
-	{
-		BudgetClass entity = new BudgetClass { Name = data.Name, TransactionType = data.TransactionType };
+    UsingManager(manager =>
+    {
+        BudgetClass entity = new BudgetClass { Name = data.Name, TransactionType = data.TransactionType };
 
-		errors = manager.TryInsert(entity).ToList();
+        errors = manager.TryInsert(entity).ToList();
 
-		manager.SaveChanges();
-	});
+        manager.SaveChanges();
+    });
 
-	// Assert ----------------------------
+    // Assert ----------------------------
 
-	errors.Should().BeEmpty();
+    errors.Should().BeEmpty();
 
-	UsingManagerHelper(helper =>
-	{
-		helper.AssertEntitiesExist(data);
-	});
+    UsingManagerHelper(helper =>
+    {
+        helper.AssertEntitiesExist(data);
+    });
 }
-```
+{{</renderSourceCode>}}
 
 ### C-3 - Refactorización y versión final
 
@@ -511,7 +510,7 @@ Entre esta clase y **BudgetClassData**, se implementa el patrón [Mapper](https:
 
 Este patrón, va a resultar especialmente útil en los escenarios más complejos que veremos más adelante en la serie.
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassDataMapper.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassDataMapper.cs" "linenos=table">}}
 
 #### C-3.2 - BudgetClassManagerHelper - Asistente del EntityManager
 
@@ -521,7 +520,7 @@ Adicionalmente a lo que se indicó en ese punto, se puede ver que en los método
 
 Esto se hace para poder llamarlos desde los <strong>Ensure...</strong> y estar seguros que no estamos trabajando con el mismo DbContext donde se realizó la operación.
 
-{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Helpers\BudgetClassManagerHelper.cs" "linenos=table">}}
 
 #### C-3.3 - FluentAssertionsExtensions - Extensión para facilitar la verificación de errores
 
@@ -533,7 +532,7 @@ La parte constante del mensaje va desde el comienzo del string hasta la posició
 
 Esta clase la vamos a incluir en el proyecto **src\Domion.FluentAssertions** que creamos [anteriormente](#b-2-crear-projecto-src-domion-fluentassertions).
 
-{{<getSourceFile "src\Domion.FluentAssertions\Extensions\FluentAssertionsExtensions.cs">}}
+{{<renderSourceFile "src\Domion.FluentAssertions\Extensions\FluentAssertionsExtensions.cs" "linenos=table">}}
 
 #### C-3.4 - BudgetClassManager_IntegrationTests - Pruebas de integración
 
@@ -543,9 +542,9 @@ Finalmente llegamos a las pruebas de integración, donde implementamos las sigui
 2. Se pueden modificar entidades.
 3. Se pueden eliminar entidades.
 4. No se puede insertar una entidad con nombre duplicado.
-5. No se puede modificar el nombre de una entidad si ya existe otra con el nuevo nombre, porque se duplicaría.</br></br>
+5. No se puede modificar el nombre de una entidad si ya existe otra con el nuevo nombre, porque se duplicaría.
 
-{{<getSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs">}}
+{{<renderSourceFile "samples.tests\DFlow.Budget.Lib.Tests\Tests\BudgetClassManager_IntegrationTests.cs" "linenos=table">}}
 
 > {{< IMPORTANT "Importante" >}}
 
