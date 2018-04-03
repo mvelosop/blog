@@ -5,11 +5,10 @@ author: Miguel Veloso
 date: 2017-06-11
 description: Implementar el patrón de repositorio para el módulo inicial de las pruebas de Domion
 thumbnail: /posts/images/stairs-195924_1280.jpg
-categorías: [ "Desarrollo" ]
-tags: [ "Architecture", "Entity Framework Core", "Migrations", "Model Driven Architecture" ]
-series: [ "Domion" ]
+tags: [ "Architecture", "Entity Framework Core", "Migrations", "Model Driven Architecture", "Domion" ]
 repoName: Domion.Net
 repoRelease: "2.0"
+toc: true
 ---
 
 Este es el segundo artículo de la serie [Domion - Un sistema para desarrollar aplicaciones en .NET Core](/domion). En el [artículo anterior](/posts/preparar-solucion-aspnet-core/) creamos la solución para definir la estructura general, con los proyectos principales, aunque sin programas.
@@ -22,11 +21,14 @@ Este artículo es un poco largo porque hace falta implementar una parte importan
 
 Los puntos más importantes que cubriremos son:
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Implementación del [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html)
+
 > 0. Facilidades para configurar modelos en [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index)
+
 > 0. Aplicación del proceso [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture)
+
 > 0. Migraciones con [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/index) "Code First"
 
 Al terminar el artículo deberíamos tener una buena visión general de la arquitectura y conocer algunos detalles de los elementos principales.
@@ -78,7 +80,8 @@ Siento que es mucho más fácil cambiar el contexto de trabajo a otra aplicació
 
 ## A - Paso a paso - Patrón de repositorio
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El [patrón de repositorio](https://martinfowler.com/eaaCatalog/repository.html) nos ofrece una abstracción del DbContext de EF Core, donde podemos agregar procesamiento y validaciones adicionales. También puede facilitar la realización de pruebas sin tener que involucrar al DbContext.
 
 Esta implementación del patrón de repositorio se apoya en la funcionalidad del [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext) de EF Core, que mantiene en memoria una colección de las entidades que han sido modificadas (en el ChangeTracker), antes de enviar los cambios a la base de datos para salvarlos.
@@ -99,29 +102,30 @@ También es posible, aunque menos frecuente, implementar sólo consultas especí
 
 Esta interfaz genérica nos permite implementar [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) de uso común, aplicables a todos los "Managers", sin necesidad de implementarlos para cada EntityManager.
 
-{{<getSourceFile "src\Domion.Core\Services\IQueryManager.cs">}}
+{{<renderSourceFile "src\Domion.Core\Services\IQueryManager.cs">}}
 
 #### A-1.2 - IEntityManager - Interfaz genérica para DbContext.Find()
 
 La implementación de esta interfaz nos permite acceder al método **Find** de los DbContext, si decidimos exponerlo a través del EntityManager.
 
-{{<getSourceFile "src\Domion.Core\Services\IEntityManager.cs">}}
+{{<renderSourceFile "src\Domion.Core\Services\IEntityManager.cs">}}
 
 #### A-1.3 - BaseRepository - Repositorio genérico
 
 Esta es la implementación base del repositorio genérico, está declarada como una clase abstracta, así que cada EntityManager específico debe heredar de ésta y entonces decidir que métodos cambiar u ocultar o, incluso, eliminando alguna de las interfaces de la declaración.
 
-{{<getSourceFile "src\Domion.Lib\Data\BaseRepository.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\BaseRepository.cs">}}
 
 #### A-1.4 - IQueryManagerExtensions - Extensiones para el IQueryManager
 
 Estos extension methods agregan funcionalidad de uso común con los IQueryable, directamente al IQueryManager, sin necesidad de implementarlos en cada EntityManager.
 
-{{<getSourceFile "src\Domion.Lib\Extensions\IQueryManagerExtensions.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Extensions\IQueryManagerExtensions.cs">}}
 
 ### A-2 - Extensiones para configuración de los modelos en EF Core
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Las extensiones que se muestran a continuación facilitan la configuración de modelos grandes en EF Core.
 
 Actualmente (EF Core 1.1.2), para configurar los modelos usando el Fluent API, es necesario hacerlo en un override del método OnModelCreation del DbContext, pero esto resulta poco práctico para aplicaciones de cualquier tamaño significativo, ya que el DbContext se puede extender más allá de lo razonable.
@@ -134,13 +138,13 @@ El método Map de esta clase abstract recibe un EntityTypeBuilder<TEntity> con e
 
 En el punto [B-3.1](#b-3-1-budgetclassconfiguration-configuración-del-modelo-para-ef-core) podemos ver cómo se utiliza esta clase para manejar la clase de configuración.
 
-{{<getSourceFile "src\Domion.Lib\Data\EntityTypeConfiguration.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\EntityTypeConfiguration.cs">}}
 
 #### A-2.2 - ModelBuilderExtensions - Extensión de ModelBuilder 
 
 Este extension method permite invocar la configuración de una clase desde el DbContext.
 
-{{<getSourceFile "src\Domion.Lib\Data\ModelBuilderExtensions.cs">}}
+{{<renderSourceFile "src\Domion.Lib\Data\ModelBuilderExtensions.cs">}}
 
 Con esto la configuración de cada clase del modelo queda reducida a una línea en el DbContext, por ejemplo:
 
@@ -161,7 +165,8 @@ Estos son los componentes básicos de la infraestructura y en este momento se de
 
 ## B - Paso a paso - MDA - Componentes básicos de la aplicación
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El enfoque de diseño [MDA - Model Driven Architecture](https://en.wikipedia.org/wiki/Model-driven_architecture) permite generar cantidades importantes de código a partir de modelos de alto nivel y esto contribuye tanto con la productividad del equipo de desarrollo como con la calidad y facilidad de mantenimiento de los productos.
 
 Como mencionamos en el artículo inicial, [la aplicación de ejemplo será un "sistema" de flujo de caja personal](/domion/#alcance-de-la-aplicación) y el "módulo" inicial va a tener, por ahora, una sola entidad: **BudgetClass**.
@@ -226,13 +231,13 @@ Los atributos **[Required]** y **[MaxLength(100)]**, así como el comentario **/
 
 Aunque los atributos indicados realmente pertenecen a la capa de datos y no a la capa del modelo de dominio, donde estamos, me parece que es útil tenerlos aquí como referencia al implementar las pantallas.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Model\BudgetClass.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Model\BudgetClass.cs">}}
 
 #### B-2.2 - TransactionType - Tipo de transacción <span style="color: red;">[Generado 100%]</span>
 
 Esto es simplemente un enum convencional.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Model\TransactionType.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Model\TransactionType.cs">}}
 
 #### B-2.3 - IBudgetClassManager - Interfaz del EntityManager para BudgetClass <span style="color: red;">[Generado 100%]</span>
 
@@ -242,7 +247,7 @@ En caso de ser necesario utilizar los managers desde la capa del modelo de domin
 
 Esta interfaz se puede modificar tanto como sea necesario, por ejemplo, se podría eliminar la referencia a IQueryManager<BudgetClass> y ocultar en el BudgetClassManager los métodos del repositorio base, para entonces implementar métodos de consulta específicos.
 
-{{<getSourceFile "samples\DFlow.Budget.Core\Services\IBudgetClassManager.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Core\Services\IBudgetClassManager.cs">}}
 
 ### B-3 - Componentes en DFlow.Budget.Lib
 
@@ -254,7 +259,7 @@ En esta clase no están los elementos relativos al tamaño de los campos o si so
 
 Vamos a destacar un elemento importante de la configuración, como uso de un **schema de base de datos** asociado a cada DbContext, como un modo de separar las áreas funcionales en la base de datos. Esto, además, nos facilitará el desarrollo de aplicaciones grandes, a la hora de distribuir el trabajo entre varios equipos y compartir el acceso a una base de datos desde varios DbContext.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetClassConfiguration.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Data\BudgetClassConfiguration.cs">}}
 
 #### B-3.2 - BudgetDbContext - DbContext para el módulo <span style="color: red;">[Generado 100%]</span>
 
@@ -264,14 +269,15 @@ El [DbContext](https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityfram
 
 También lo podemos ver como una ventana a la base de datos (con una interfaz de objetos) que nos facilita el acceso a los objetos necesarios.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Es un error común manejar en un único DbContext todo el modelo de dominio de una aplicación, lo ideal es dividir el modelo en un DbContext por módulo o por área funcional.
->
+
 > En un artículo próximo veremos cómo manejar múltiples DbContext compartiendo la misma base de datos.
 
 Además, el DbContext también facilita la implementación de un [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html), que es uno de los elementos pricipales del [Domain Driven Design (DDD)](https://domainlanguage.com/ddd/).
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Data\BudgetDbContext.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Data\BudgetDbContext.cs">}}
 
 #### B-3.3 - BudgetClassManager - EntityManager para las clasificaciones <span style="color: red;">[Generado 100%]</span>
 
@@ -281,7 +287,7 @@ Independientemente de que esas validaciones estén reforzadas a nivel de la base
 
 Observe cómo está implementada la validación contra nombre duplicados, con los métodos ```FindDuplicateByName``` y ```ValidateSave```.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Services\BudgetClassManager.cs">}}
 
 ### B-4 - Incluir dependencias y compilar
 
@@ -299,7 +305,7 @@ Estos son los componentes básicos de la aplicación y en este momento se deber�
 
 ## C - Paso a paso - Migraciones
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
 > Las migraciones generadas por Entity Framework cuando se trabaja con la modalidad "Code First", permiten generar y actualizar la base de datos de forma automática y sin necesidad de dedicarle mucho tiempo.
 
 En esta fase vamos a crear la migración inicial, con la que se creará la base de datos al ejecutar la aplicación.
@@ -314,7 +320,7 @@ Vamos a crear un proyecto para manejar los temas de configuración del módulo, 
 
 #### C-1.2 - Agregar clase "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs"
 
-{{<getSourceFile "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Setup\BudgetDbSetupHelper.cs">}}
 
 #### C-1.3 - Instalar dependencias
 
@@ -371,7 +377,7 @@ Si todo está bien, se debe obtener una pantalla como esta:
 
 Y se debe obtener un archivo como este en la carpeta **Migrations** de **DFlow.Budget.Lib**.
 
-{{<getSourceFile "samples\DFlow.Budget.Lib\Migrations\20170609203746_CreateMigration_BudgetDbContext.cs">}}
+{{<renderSourceFile "samples\DFlow.Budget.Lib\Migrations\20170609203746_CreateMigration_BudgetDbContext.cs">}}
 
 ## D - Paso a Paso - Ejecutar la aplicación
 
@@ -381,7 +387,7 @@ Originalmente había pensado incluir el proyecto de pruebas de integración e in
 
 #### D-1.1 - Modificar Program.cs
 
-{{<getSourceFile "samples\DFlow.CLI\Program.cs">}}
+{{<renderSourceFile "samples\DFlow.CLI\Program.cs">}}
 
 #### D-1.2 - Activar DFlow.CLI como Startup project
 
@@ -413,7 +419,7 @@ De hecho, en este ejemplo **60% de las líneas de programa se generaron con Domi
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **DbContext**  
 https://docs.microsoft.com/en-us/ef/core/api/microsoft.entityframeworkcore.dbcontext

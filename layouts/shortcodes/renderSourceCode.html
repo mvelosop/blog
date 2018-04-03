@@ -1,0 +1,6 @@
+{{ $lang := .Get 0 }}
+{{ $options := .Get 1 }}
+<div class="source-code">
+<button class="btn-copy" data-clipboard-target=""><i class="fa fa-fw fa-copy"></i></button>
+{{ highlight (trim .Inner "\r\n") $lang $options }}
+</div>

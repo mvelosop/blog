@@ -10,21 +10,26 @@ disqusShortName = "www-coderepo-blog"
 
 pluralizeListTitles = true
 
-preserveTaxonomyNames = false
+preserveTaxonomyNames = true
+
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsStyle = "vs"
 
 [taxonomies]
 	tag = "tags"
-	category = "categorías"
-	series = "series"
 
-[author]
+[params.author]
     # If you want to display author information set these
     # This is Optional values
     name = "Miguel Veloso"
 
+    description1 = "Independent Software Consultant"
+    description2 = "Certified ScrumMaster"
+
     # Please set account ids
     # This is Optional values
-    twitter  = "mvelosop"
-    linkedin = "miguelvelosop"
-    github   = "mvelosop"
-    email    = "mvelosop@gmail.com"
+    twitter  = "https://twitter.com/mvelosop"
+    linkedin = "https://www.linkedin.com/in/miguelvelosop/?locale=en_US"
+    github   = "https://github.com/mvelosop"
+    email    = "mailto:mvelosop@gmail.com"

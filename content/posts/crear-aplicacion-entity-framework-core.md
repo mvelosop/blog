@@ -10,16 +10,21 @@ tags: [ "Entity Framework Core", "EF Core Configuration", "EF Core CLI", "Migrat
 series: [ "Entity Framework Core" ]
 repoName: EFCoreApp
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo desarrollamos una aplicación de consola sencilla, usando Code First con EF Core 1.1, con el fin explorar algunos aspectos básicos del trabajo con EF Core.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Paquetes mínimos necesarios para trabajar con EF Core.
+
 > 0. Clases de configuración con Fluent API.
+
 > 0. Leer string de conexión de archivos configuración.
+
 > 0. Usar de EF Core CLI para crear la migración inicial.
+
 > 0. Crear automáticamente la base de datos.
 
 {{< repoUrl >}}
@@ -53,13 +58,14 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 1. Crear el proyecto como una "Console Application (.NET Core)"
 2. Actualizar project.json a lo siguiente:
 
-    {{< getSourceFile "src\EFCore.App\project.json" >}}
+    {{< renderSourceFile "src\EFCore.App\project.json" >}}
 
 3. Salvar el archivo desde VS para actualizar todos los paquetes o, si prefiere usar la interfaz de comandos de desarrollo ([Shift]+[Alt]+[,]), ejecute **```dotnet restore```**
 
 #### Detalles de project.json
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos los paquetes mínimos necesarios para trabajar con EF Core
 
 * Paquetes de Entity Framework Core
@@ -85,50 +91,55 @@ Para seguir este artículo es necesario tener instalado lo siguiente:
 
 La clase del modelo, Divisas en este caso.
 
-{{< getSourceFile "src\EFCore.App\Model\Currency.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Model\Currency.cs" >}}
 
 #### Base\EntityTypeConfiguration.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Estas clases permiten manejar una clase de configuración por cada clase del modelo, para mantener el DbContext lo más sencillo posible, de forma similar a como se puede hacer con EF 6, según lo sugerido en https://github.com/aspnet/EntityFramework/issues/2805
 
-{{< getSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Base\EntityTypeConfiguration.cs" >}}
 
 #### Data\CurrencyConfiguration.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > La clase de configuración del modelo permite mantener fuera del DbContext los detalles de cada clase. Esto simplifica mucho el DbContext.
 
-{{< getSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Data\CurrencyConfiguration.cs" >}}
 
 #### Config\ConfigClasses.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos como podemos manejar las opciones de configuración a través de clases auxiliares, para hacerlo de forma "strongly typed".
 
 Clases de configuración de la aplicación, permiten manejar la configuraciones que se carguen del archivo 
 **appsettings.json** de una forma "strongly typed".
 
-{{< getSourceFile "src\EFCore.App\Config\ConfigClasses.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Config\ConfigClasses.cs" >}}
 
 #### Data\CommonDbContext.cs
 
 El DbContext para la aplicación, define la vista de la base de datos a la que tiene acceso la aplicación.
 
-{{< getSourceFile "src\EFCore.App\Data\CommonDbContext.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Data\CommonDbContext.cs" >}}
 
 #### Program.cs
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > El método InitDb crea la base de datos o aplica las migraciones necesarias al arrancar la aplicación, en vez de hacerlo con el primer request. Esto mejora la experiencia del usuario.
 
 El programa principal de la aplicación. Aquí están los métodos que crean/actualizan la base de datos y realizar la carga de datos iniciales.
 
-{{< getSourceFile "src\EFCore.App\Program.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Program.cs" >}}
 
 ### 4 - Generar la migración inicial
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Aquí vemos la forma general de trabajar con el EF Core CLI.
 
 > Siempre podemos usar ```dotnet ef <comando> -h``` para consultar la ayuda del comando.
@@ -158,7 +169,7 @@ Este archivo es la configuración de la última versión del modelo, se utiliza 
 
 Observe que en esta clase está consolidada toda la definición de los objetos de base de datos, usando Fluent API, incluyendo los atributos utilizados en las propiedades del modelo de dominio.
 
-{{< getSourceFile "src\EFCore.App\Migrations\CommonDbContextModelSnapshot.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Migrations\CommonDbContextModelSnapshot.cs" >}}
 
 #### Migrations\20170227231210_InitialCreateMigration
 
@@ -166,7 +177,7 @@ Este archivo es el encargado de generar la migración desde la versión anterior
 
 Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (yyyyMMddHHmmss) de generación de la migración.
 
-{{< getSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
+{{< renderSourceFile "src\EFCore.App\Migrations\20170227231210_InitialCreateMigration.cs" >}}
 
 ### 5 - Crear archivo de configuración
 
@@ -174,7 +185,7 @@ Los números iniciales del nombre indican el año-mes-día-hora-minuto-segundo (
 
 Este string de conexión es adecuado para SQL Server Developer Edition con la instancia por default (MSSQLSERVER), puede ser necesario ajustarlo si la situación es distinta.
 
-{{< getSourceFile "src\EFCore.App\appsettings.json" >}}
+{{< renderSourceFile "src\EFCore.App\appsettings.json" >}}
 
 Verificar que project.json incluya la opción para copiar este archivo a la carpeta de salida:
 
@@ -201,7 +212,7 @@ Y si en algún momento necesitamos empezar con una base de datos nueva, basta co
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **.NET Core current downloads**  
 https://www.microsoft.com/net/download/core#/current

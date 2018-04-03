@@ -1,0 +1,16 @@
+<section class="sidebar">
+  <header>
+    {{ if eq $.Params.Language "en" }}
+    LATEST
+    {{ else }}
+    LO ÚLTIMO
+    {{ end }}
+    </header>
+  <div>
+    <div class="articles sm">
+      {{ range $i, $p := (first 6 .Site.Pages) }}
+      {{ .Render "li_sm" }}
+      {{ end }}
+    </div>
+  </div>
+</section>

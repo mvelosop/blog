@@ -7,19 +7,18 @@ author: Miguel Veloso
 date: 2018-02-01
 description: Adapt a BS 4 template to an MVC application, to enhance the user experience
 thumbnail: posts/images/benjamin-child-90768.jpg
-categorías: [ "Desarrollo" ]
 tags: [ "User Experience", "Client Side Development", "Bootstrap 4", "CoreUI" ]
-series: [  ]
 repoName: AspNetCore2CoreUI
 repoRelease: "1.0"
+toc: true
 image:
     authorName: Benjamin Child
     url: https://unsplash.com/photos/0sT9YhNgSEs
 ---
 
-In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template , based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
+In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template, based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
 
-> ### <span class="important"> {{< IMPORTANT "Key Takeaways" >}}
+> {{< IMPORTANT "Key Takeaways" >}}
 
 > 0. Key concepts about handling client-side packages with **npm**
 
@@ -53,24 +52,23 @@ I hope to do this in a way that will make it easy to update the base project whe
 * [.NET Core SDK 2.0.2 with .NET Core 2.0.0 - x64 SDK Installer](https://download.microsoft.com/download/7/3/A/73A3E4DC-F019-47D1-9951-0453676E059B/dotnet-sdk-2.0.2-win-x64.exe)  
 (go to [.NET Core's download page](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) for other versions).
 
+## Step by step
 
-## Step by stpe
-
-### 1 - Create ASP.NET MVC Core 2 project
+### 1 - Create an ASP.NET MVC Core 2 project
 
 Let's start by creating a standard MVC application, using Visual Studio 2017's built-in template.
 
-#### 1.1 - Create blank solution
+#### 1.1 - Create a blank solution
 
 1. Create "blank solution" "AspNetCore2CoreUI" with a Git repository
 
 2. Add "src" solution folder
 
-3. Rigth now your solution should look like this:
+3. Right now your solution should look like this:
 
 {{<image src="/posts/images/devenv_2017-10-31_17-06-44.png">}}
 
-#### 1.2 - Add ASP.NET MVC Core 2 project
+#### 1.2 - Add an ASP.NET MVC Core 2 project
 
 1. Create **CoreUI.Web** project of type "ASP.NET Core Web Application" in "src" solution folder and also create "src" folder in the file system.
 {{<image src="/posts/images/devenv_2017-10-31_17-13-01.png">}}
@@ -92,7 +90,7 @@ and select that folder to create the project
 
 3. Sign up to force database creation
 
-4. Click **Apply Migrations**, when you get the datase missing error:
+4. Click **Apply Migrations**, when you get the database missing error:
 {{<image src="/posts/images/chrome_2017-10-31_18-02-35.png">}}
 
 5. Refresh the screen when the database creation process is complete, to finish user registration
@@ -146,7 +144,7 @@ We'll include a step later on to copy the final "deployment-optimized" version o
 At this point the solution should look like this from the file system:
 {{<image src="/posts/images/explorer_2017-11-03_11-33-21.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "src\CoreUI is not part of Visual Studio's solution" >}}.
+> {{< IMPORTANT "src\CoreUI is not part of Visual Studio's solution" >}}.
 
 > 0. Notice that, although src\CoreUI is within the solution's folder structure and under source control, it's not part of the Visual Studio solution, i.e. you just don't see it in the solution explorer.
 
@@ -167,7 +165,7 @@ Take note of the **node_modules** folder, that contains the client-side packages
 
 {{<image src="/posts/images/explorer_2017-11-03_13-19-44.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Installing packages with npm" >}}.
+> {{< IMPORTANT "Installing packages with npm" >}}.
 
 > 0. When installing packages with **npm**, the **node_modules** folder is created with all the required components, both for development tools such as [Gulp](https://gulpjs.com/), and for running the application. This folder usually takes up a lot of space and should not be included in the application deployment.
 
@@ -208,7 +206,7 @@ Besides that, we're going to:
 
 {{<image src="/posts/images/Code_2017-11-03_15-34-56.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Deployment Packages" >}}
+> {{< IMPORTANT "Deployment Packages" >}}
 
 > 0. The **vendorJS**, **vendorCSS** and **vendorFonts** lists from **build-dist.js** have the components used by the PRO version of CoreUI, but since they are not in **package.json**, they are not included for the deployment.
 
@@ -218,7 +216,7 @@ After this we run `gulp build: dist` again and if we now run the MVC application
 
 {{<image src="/posts/images/chrome_2017-11-03_15-40-22.png">}}
 
-The same page as above, but displayed as a static page within our MVC application.
+The same page as above but displayed as a static page within our MVC application.
 
 **We will now save the solution in the repository.**
 
@@ -226,7 +224,7 @@ The same page as above, but displayed as a static page within our MVC applicatio
 
 While doing this, we also understood how to include new client-side components, such as a date-picker, in the user interface:
 
-> ### <span class="important"> {{< IMPORTANT "Steps to include new client-side components" >}}
+> {{< IMPORTANT "Steps to include new client-side components" >}}
 
 > 1. Include a reference the library in **src\CoreUI|package. json**
 
@@ -246,7 +244,7 @@ In this section we'll convert the static HTML pages from CoreUI into Razor views
 
 This is a very simple controller, that receives the name of the view to display and returns it.
 
-{{<getSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
+{{<renderSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
 
 #### 3.2 - Create the initial Index view
 
@@ -259,12 +257,12 @@ To do this simply:
 3. Remove the use of the standard _Layout by typing this at the top of the view:
 ```cs
 @{
-	    Layout = "";
+        Layout = "";
 }
 ```
 4. We changed all occurences of "@" to "@@" to avoid Razor's syntax error.
 
-> ### <span class="important"> {{< IMPORTANT "Razor Views and html" >}}
+> {{< IMPORTANT "Razor Views and html" >}}
 
 > 0. Any valid .html file is also a valid Razor view, you only need to change the extension to .cshtml.
 
@@ -297,7 +295,7 @@ Now let's split the Index.cshtml view in several components:
 
 We're not going to show the whole process, just the final _Layout view and the resulting file list, so it should be pretty obvious what the job is and, ultimately, you can see the final result in the article's repository.
 
-```
+{{<renderSourceCode "html" "linenos=table">}}
 <!--
 * CoreUI - Open Source Bootstrap Admin Template
 * @@version v1.0.4
@@ -331,28 +329,28 @@ We're not going to show the whole process, just the final _Layout view and the r
 <!-- BODY options, add following classes to body to change options
 
 // Header options
-1. '.header-fixed'					- Fixed Header
+1. '.header-fixed'                  - Fixed Header
 
 // Brand options
 1. '.brand-minimized'       - Minimized brand (Only symbol)
 
 // Sidebar options
-1. '.sidebar-fixed'					- Fixed Sidebar
-2. '.sidebar-hidden'				- Hidden Sidebar
-3. '.sidebar-off-canvas'		- Off Canvas Sidebar
-4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
-5. '.sidebar-compact'			  - Compact Sidebar
+1. '.sidebar-fixed'                 - Fixed Sidebar
+2. '.sidebar-hidden'                - Hidden Sidebar
+3. '.sidebar-off-canvas'        - Off Canvas Sidebar
+4. '.sidebar-minimized'         - Minimized Sidebar (Only icons)
+5. '.sidebar-compact'             - Compact Sidebar
 
 // Aside options
-1. '.aside-menu-fixed'			- Fixed Aside Menu
-2. '.aside-menu-hidden'			- Hidden Aside Menu
-3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+1. '.aside-menu-fixed'          - Fixed Aside Menu
+2. '.aside-menu-hidden'         - Hidden Aside Menu
+3. '.aside-menu-off-canvas' - Off Canvas Aside Menu
 
 // Breadcrumb options
-1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+1. '.breadcrumb-fixed'          - Fixed Breadcrumb
 
 // Footer options
-1. '.footer-fixed'					- Fixed footer
+1. '.footer-fixed'                  - Fixed footer
 
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -414,7 +412,7 @@ We're not going to show the whole process, just the final _Layout view and the r
 
 </body>
 </html>
-```
+{{</renderSourceCode>}}
 
 {{<image src="/posts/images/devenv_2017-11-03_18-36-32.png">}}
 
@@ -458,14 +456,13 @@ In this article we looked at the process in quite detail of adapting a static HT
 
 In doing so, we learned a little more about the structure and use of client-side packages for user interface development.
 
-
 ---
 
 {{< goodbye >}}
 
 ---
 
-#### Related links
+### Related links
 
 **Bootstrap 4**<br/>
 https://getbootstrap.com/docs/4.0/getting-started/introduction/
@@ -490,4 +487,3 @@ https://www.npmjs.com/
 
 **Resharper**<br/>
 https://www.jetbrains.com/resharper/
-

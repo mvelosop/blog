@@ -11,11 +11,12 @@ tags: [ "User Experience", "Client Side Development", "Bootstrap 4", "CoreUI" ]
 series: [  ]
 repoName: AspNetCore2CoreUI
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo vamos a explicar como adaptar la plantilla [CoreUI](http://coreui.io/), basada en [Bootstrap 4](http://getbootstrap.com/) para usarla como base en aplicaciones ASP.NET MVC Core 2.
 
-> ### <span class="important"> {{< IMPORTANT "Puntos Importantes" >}}
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Conceptos importantes sobre el manejo de paquetes "client-side" con **npm**
 
@@ -144,7 +145,7 @@ Más adelante incluiremos un paso para copiar la versión de CoreUI optimizada p
 En este momento la solución se debería ver como esto desde el file system:
 {{<image src="/posts/images/explorer_2017-11-03_11-33-21.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "src\CoreUI no es parte de la solución de Visual Studio" >}}.
+> {{< IMPORTANT "src\CoreUI no es parte de la solución de Visual Studio" >}}.
 
 > 0. Note que, aunque src\CoreUI está dentro de las carpetas de la solución y bajo control de versiones, no es parte de la solución de Visual Studio, es decir, esta carpeta no se ve en el explorador de la solución.
 
@@ -165,7 +166,7 @@ También podemos ver la carpeta **node_modules**, que contiene los paquetes "cli
 
 {{<image src="/posts/images/explorer_2017-11-03_13-19-44.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Instalación de paquetes con npm" >}}
+> {{< IMPORTANT "Instalación de paquetes con npm" >}}
 
 > 0. Cuando se instalan paquetes con **npm** se crea la carpeta **node_modules** con todos los componentes necesarios, tanto para las herramientas de desarrollo como [Gulp](https://gulpjs.com/), como para la ejecución de la aplicación. Esta carpeta suele ocupar mucho espacio y no se debe incluir en el despliegue de las aplicaciones.
 
@@ -206,7 +207,7 @@ Además, vamos a:
 
 {{<image src="/posts/images/Code_2017-11-03_15-34-56.png">}}
 
-> ### <span class="important"> {{< IMPORTANT "Paquetes para despliegue" >}}
+> {{< IMPORTANT "Paquetes para despliegue" >}}
 
 > 0. Las listas **vendorJS**, **vendorCSS** y **vendorFonts** de **build-dist.js** tienen los componentes utilizados por la versión PRO de CoreUI, pero como no están en **package.json**, no se incluyen en el despliegue.
 
@@ -224,7 +225,7 @@ La misma página anterior, pero mostrada como una página estática dentro de nu
 
 Con este proceso también entendimos cómo se incluyen nuevos componentes "client-side", como puede ser un date-picker, en la interfaz de usuario:
 
-> ### <span class="important"> {{< IMPORTANT "Pasos para incluir nuevos componentes "client-side"" >}}
+> {{< IMPORTANT "Pasos para incluir nuevos componentes "client-side"" >}}
 
 > 1. Incluir referencia la librería en **src\CoreUI\package.json**
 
@@ -244,7 +245,7 @@ En esta sección vamos a convertir las páginas estáticas html de CoreUI en vis
 
 Este es un controlador muy sencillo, que recibe el nombre de la vista a mostrar y la retorna.
 
-{{<getSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
+{{<renderSourceFile "src\CoreUI.Web\Controllers\CoreUIController.cs">}}
 
 #### 3.2 - Crear vista Index inicial
 
@@ -262,7 +263,7 @@ Para esto simplemente:
 ```
 4. Cambiamos los "@" por "@@" para evitar el error de sintaxis de Razor
 
-> ### <span class="important"> {{< IMPORTANT "Vistas Razor y html" >}}
+> {{< IMPORTANT "Vistas Razor y html" >}}
 
 > 0. Cualquier archivo .html válido es también una vista Razor válida, sólo hace falta cambiar la extensión a .cshtml
 
@@ -456,14 +457,13 @@ En este artículo vimos con bastante detalle el proceso de adaptación de una pl
 
 En este proceso aprendimos un poco más sobre la estructura y el uso de los paquetes "client-side" en el desarrollo de las interfaces de usuario.
 
-
 ---
 
 {{< goodbye >}}
 
 ---
 
-#### Enlaces relacionados
+### Enlaces relacionados
 
 **Bootstrap 4**<br/>
 https://getbootstrap.com/docs/4.0/getting-started/introduction/

@@ -8,11 +8,12 @@ thumbnail: images/checklist-2077024_1280.jpg
 categorías: [ "Desarrollo" ]
 tags: [  ]
 series: [  ]
+toc: true
 ---
 
 Checklist para publicación
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Validar todos los puntos que apliquen</span>
+> {{< IMPORTANT "Validar todos los puntos que apliquen" >}}
 
 ## Solución
 

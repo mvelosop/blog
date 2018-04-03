@@ -1,52 +1,11 @@
-<aside class="site">
+<aside class="l-sidebar">
 
-  {{ $current := printf "%s" .Permalink }}
-  {{ $about := printf "%sabout/" .Site.BaseURL }}
-  {{ $home := printf "%s" .Site.BaseURL }}
-
-  <section>
-    <header>Autor</header>
-
-    {{ if ne $current $about }}
-      <div class="image-cropper" style="width: 100px; height: 100px;">
-        <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
-      </div>
-    {{ end }}
-
-    {{ partial "personalLinks.html" . }}
-
-  </section>
-
-  {{ if ne $current $home }}
-  <section>
-    {{ if eq (getenv "HUGO_ENV") "DEV" }}
-    <div class="row">
-    <div class="col-md-12">
-      <h3><a href="/posts/checklist-publicacion/" style="background-color:gold; padding-left: 10px; padding-right: 10px;"> <i class="fa fa-check-square-o" aria-hidden="true"></i>Checklist Publicación</a></h3>
-      </div>
-      </div>
-    {{ end }}
-    <header>Lo más reciente</header>
-    <div>
-      <div class="row">
-        {{ range $i, $p := (first 3 .Site.Pages) }}
-        <div class="col-md-12 col-sm-6 col-xs-12">{{ .Render "li_sm" }}</div>
-        {{ if eq (mod (add $i 1) 2) 0 }}<div class="col-sm-12"></div>{{ end }}
-        {{ end }}
-      </div>
-    </div>
-  </section>
-  {{ end }}
-
-  {{ range $key, $value := .Site.Taxonomies }}
-  <section>
-    <header><a href="/{{ $key }}">{{ $key }}</a></header>
-    <div>
-      <ul class="p-terms">
-        {{ range first 10 $value.ByCount }}<li><a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}">{{ .Name }}</a></li>{{ end }}
-      </ul>
-    </div>
-  </section>
-  {{ end }}
+  <div class="sections sidebar">
+    {{ partial "author.html" . }}
+    {{ partial "latests.html" . }}
+    {{ partial "categories.html" . }}
+    {{ partial "tags.html" . }}
+    {{ partial "toc.html" . }}
+  </div>
 
 </aside>

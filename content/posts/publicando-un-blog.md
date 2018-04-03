@@ -4,6 +4,7 @@ draft: false
 title: Publicando un Blog
 description: Sobre el inicio y el proceso de preparación del blog.
 thumbnail: posts/images/sunrise-165094_1280.jpg
+toc: true
 ---
 
 Después evaluar durante algún tiempo la posibilidad de dedicarle tiempo a escribir un blog, finalmente me decidí, en buena medida por la recomendación de Santiago Porras ([@saintwukong](https://twitter.com/saintwukong)), un amigo de Tenerife.

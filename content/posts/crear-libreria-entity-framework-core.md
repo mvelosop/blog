@@ -10,6 +10,7 @@ tags: [ "Entity Framework Core", "EF Core Configuration", "EF Core CLI", "Migrat
 series: [ "Entity Framework Core" ]
 repoName: EFCoreLib
 repoRelease: "1.0"
+toc: true
 ---
 
 En este artículo vamos a desarrollar una versión de la misma [aplicación de consola desarrollada anteriormente (migrada a VS 2017)](/posts/migrar-aplicacion-consola-visual-studio-2017) pero separándola en dos capas:
@@ -17,10 +18,12 @@ En este artículo vamos a desarrollar una versión de la misma [aplicación de c
 1. La capa de datos en el proyecto EFCore.Lib y
 2. La capa cliente en EFCore.App.
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Puntos Importantes</span>
+> {{< IMPORTANT "Puntos Importantes" >}}
 
 > 0. Separar la aplicación en una capa cliente y una capa de datos
+
 > 0. Usar EF Core CLI en aplicación multicapa para crear las migraciones
+
 > 0. Apreciar la simplicidad de los nuevos archivos .csproj
 
 {{< repoUrl >}}
@@ -47,14 +50,16 @@ En este artículo vamos a desarrollar la solución desde el principio, para apre
 
 ### 2 - Crear proyecto src\EFCore.App 
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Este proyecto es la capa **Cliente** que usa la "capa de datos" (el proyecto EFCore.Lib)
 
 #### Crear el proyecto como una "Console Application (.NET Core)"
 
 ### 3 - Crear proyecto src\EFCore.Lib
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > Este proyecto es la capa de **Datos**, desde luego de una forma muy rudimentaria.
 
 #### Crear el proyecto como una "Class Library (.NET Core)"
@@ -65,25 +70,25 @@ Vamos a crear en esencia los mismos archivos que usamos en el artículo [Crear A
 
 #### 4.1 - Model\Currency.cs
 
-{{<getSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Model\Currency.cs">}}
 
 #### 4.2 - Base\EntityTypeConfiguration.cs
 
-{{<getSourceFile "src\EFCore.Lib\Base\EntityTypeConfiguration.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Base\EntityTypeConfiguration.cs">}}
 
 #### 4.3 - Data\CurrencyConfiguration.cs
 
-{{<getSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Data\CurrencyConfiguration.cs">}}
 
 #### 4.4 - Config\ConnectionStrings.cs
 
 A diferencia de lo que hicimos en el artículo [Crear Aplicación EF Core](/posts/crear-aplicacion-entity-framework-core), en el proyecto EFCore.Lib sólo incluimos la clase de configuración **ConnectionStrings.cs** porque sólo esta tiene que ver con la "capa de datos".
 
-{{<getSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Config\ConnectionStrings.cs">}}
 
 #### 4.5 - Data\CommonDbContext.cs
 
-{{<getSourceFile "src\EFCore.Lib\Data\CommonDbContext.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Data\CommonDbContext.cs">}}
 
 Para que el proyecto pueda compilar en este momento es necesario incluir los siguientes paquetes:
 
@@ -93,7 +98,7 @@ Para que el proyecto pueda compilar en este momento es necesario incluir los sig
 
 El archivo **EFCore.Lib.csproj** resultante es así:
 
-{{<getSourceFile "src\EFCore.Lib\EFCore.Lib.csproj">}}
+{{<renderSourceFile "src\EFCore.Lib\EFCore.Lib.csproj">}}
 
 ### 5 - Crear los archivos de programa en EFCore.App
 
@@ -101,11 +106,11 @@ El archivo **EFCore.Lib.csproj** resultante es así:
 
 En este caso incluimos la clase que maneja todas las configuraciones de la "aplicación" haciendo referencia a la clase de configuración de la capa de datos.
 
-{{<getSourceFile "src\EFCore.App\Config\AppOptions.cs">}}
+{{<renderSourceFile "src\EFCore.App\Config\AppOptions.cs">}}
 
 #### 5.2 - Program.cs
 
-{{<getSourceFile "src\EFCore.App\Program.cs">}}
+{{<renderSourceFile "src\EFCore.App\Program.cs">}}
 
 #### 5.3 - Incluir referencias y paquetes adicionales
 
@@ -120,8 +125,7 @@ Para que el proyecto pueda compilar en este momento es necesario incluir las sig
 
 ### 6 - Crear migración inicial
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
-> 
+> {{< IMPORTANT "Importante" >}}
 
 > En este caso, el proyecto EFCore.App, además de ser la "capa cliente" de la solución, va a ser el "host" para ejecutar los comandos de la [interfaz de comandos .NET EF Core (.NET Core EF CLI)](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet).
 
@@ -158,7 +162,7 @@ Observe que usamos la opción ```--project``` o ```-p``` para indicar donde se v
 
 Después de ejecutar el comando obtenemos los archivos de la migración con el mismo contenido de la aplicación inicial:
 
-{{<getSourceFile "src\EFCore.Lib\Migrations\20170318215905_InitialCreateMigration.cs">}}
+{{<renderSourceFile "src\EFCore.Lib\Migrations\20170318215905_InitialCreateMigration.cs">}}
 
 ### 7 - Preparar la aplicación para ejecución
 
@@ -166,7 +170,7 @@ Para esto debemos:
 
 #### 7.1 - Crear el archivo de configuración
 
-{{<getSourceFile "src\EFCore.App\appsettings.json">}}
+{{<renderSourceFile "src\EFCore.App\appsettings.json">}}
 
 #### 7.2 - Cambiar propiedades del archivo de configuración 
 
@@ -181,12 +185,13 @@ Ejecutar **Botón Derecho > Set as Startup Project** sobre el proyecto **EFCore.
 
 El archivo **EFCore.App.csproj** resultante es así:
 
-> ### <span class="important"><i style="font-size: larger" class="fa fa-info-circle" aria-hidden="true"></i> Importante</span>
+> {{< IMPORTANT "Importante" >}}
+
 > En el formato .csproj no es necesario especificar todos los archivos que conforman la solución, porque se considera, por omisión, todos los archivos de todas las carpetas.
 
 > Una ventaja importante de este formato es que elimina los frecuentes conflictos al hacer "Merge" de dos ramas, producidos por movimiento de archivos dentro del .csproj.
 
-{{<getSourceFile "src\EFCore.App\EFCore.App.csproj">}}
+{{<renderSourceFile "src\EFCore.App\EFCore.App.csproj">}}
 
 ### 8 - Ejecutar la aplicación
 

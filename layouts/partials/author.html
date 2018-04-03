@@ -1,0 +1,30 @@
+{{ with .Site.Params.author }}
+<section class="sidebar">
+  <header>    
+    {{ if eq $.Params.Language "en" }}
+    AUTHOR
+    {{ else }}
+    AUTOR
+    {{ end }}
+    </header>
+  <div>
+    <div class="author">
+      <div class="author-thumb">
+          <a href="/about"><img src="https://s.gravatar.com/avatar/f1bbbfb5807b2ac46cd38e78cc703aee?s=100" /></a>
+      </div>
+      {{ with .thumbnail }}
+      <div class="author-thumb" style="background-image: url({{ $.Site.BaseURL }}{{ . }});"></div>
+      {{ end }}
+      <div class="author-name">{{ .name }}</div>
+      <ul class="author-facts">
+        {{ with .twitter }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>{{ end }}
+        {{ with .linkedin }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>{{ end }}
+        {{ with .github }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>{{ end }}
+        {{ with .email }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>{{ end }}
+      </ul>
+      <div class="author-description">{{ .description1 | safeHTML }}<br />{{ .description2 | safeHTML }}</div>
+      <div style="font-size: 0.9rem; margin-top: 0.5rem"><a href="/about">Acerca de mi / About me</a></div>
+    </div>
+  </div>
+</section>
+{{ end }}

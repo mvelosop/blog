@@ -1,0 +1,166 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans','Hiragino Kaku Gothic Pro',Meiryo,sans-serif;
+}
+
+h4, h5, h6 { 
+  font-size: 1rem; 
+  line-height: 1.5rem; 
+  margin: 1rem 0; 
+}
+
+.c4 { width: 25%; }
+.c8 { width: 75%; }
+
+article.lism {
+  margin: 1rem 0;
+}
+
+article.lism .thumb {
+  width: 100%;
+  float: none;
+}
+
+article.sn > .article-body h2 {
+  font-size: 1.4rem;
+}
+
+article.sn > .article-body h3 {
+  font-size: 1.2rem;
+  padding: .125rem .5rem;
+}
+
+article.sn > .article-body h4 {
+  border-left: .5rem solid #90a4ae;
+  padding: .125rem .5rem;
+}
+
+article.sn > .article-body li {
+  padding-bottom: 0;
+}
+
+article.sn > .article-body strong {
+  box-shadow: none;
+}
+
+.author .author-thumb {
+  position: relative;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+blockquote h3 {
+  font-size: 1rem;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem !important;
+  border-left-style: none !important;
+}
+
+blockquote ol {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+blockquote strong{
+  box-shadow: none !important;
+}
+
+.important {
+  color: red;
+  font-size: 1.2rem;
+  padding-left: 0.4rem;
+}
+
+.image-credit {
+  margin-right: 32px;
+  text-align: right;
+  font-size: smaller;
+}
+
+.toc {
+  padding: 0;
+}
+
+.toc nav > ul {
+  font-size: 0.6rem;
+  word-break: normal;
+  padding-left: 0;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.toc ul li > ul {
+  padding-left: 15px;
+}
+
+.toc li {
+  list-style-type: none !important;
+}
+
+article.sn > .article-body pre {
+  background-color: #f6f6f8;
+  color: #333;
+  margin: 0;
+}
+
+article.sn > .article-body code,
+article.sn > .article-body pre {
+  font-size: .8rem;
+}
+
+article.sn > .article-body li code {
+  /* background-color: #eceff1; */
+  color: #333;
+  border-radius: 4px;
+  margin: 0 .25rem;
+  padding: .375rem;
+  white-space: nowrap;
+}
+
+article.sn > .article-body pre > code {
+  padding: 0.5rem;
+ }
+ 
+div.chroma td:last-child {
+  width: 100%;
+}
+
+div.source-filename {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+div.source-filepath {
+  color: gray;
+  font-size: .8rem;
+  margin-bottom: 0.2rem;
+  /* font-weight: bold; */
+}
+
+div.source-code {
+  position: relative;
+}
+
+.btn-copy {
+  display: inline-block;
+  cursor: pointer;
+  border-bottom-color: #333;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 18px;
+  padding: 7px 6px;
+  background-color: rgba(221, 221, 221, 0.5);
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}

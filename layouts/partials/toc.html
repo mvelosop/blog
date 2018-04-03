@@ -1,0 +1,15 @@
+{{ if .Params.toc  }}
+<section class="sidebar">
+    <header>
+    {{ if eq $.Params.Language "en" }}
+    CONTENT
+    {{ else }}
+    CONTENIDO
+    {{ end }}
+    </header>
+    
+    <div class="toc">
+        {{ .TableOfContents }}
+    </div>
+</section>
+{{ end }}
