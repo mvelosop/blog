@@ -175,7 +175,7 @@ Take note of the **node_modules** folder, that contains the client-side packages
 
 All html files we copy from CoreUI's repo reference directly the files in **node_modules**, but these folders are development resources, not deployment resources.
 
-To prepare the deployment-optimized version, let's run the `gulp build: dist` command from the command prompt on the **src\CoreUI** folder.
+To prepare the deployment-optimized version, let's run the `gulp build:dist` command from the command prompt on the **src\CoreUI** folder.
 
 This will generate a new **dist** folder in **src\CoreUI** with the content ready for deployment, referring to the minimized versions of the required libraries.
 
@@ -202,7 +202,7 @@ Besides that, we're going to:
 
 1. Create an additional task in the same file, to copy the distribution files to the **wwwroot** folder of our MVC project, where we'll be using them and
 
-2. Include that task as part of `build: dist`
+2. Include that task as part of `build:dist`
 
 {{<image src="/posts/images/Code_2017-11-03_15-34-56.png">}}
 
@@ -212,7 +212,7 @@ Besides that, we're going to:
 
 > 0. Packages usually have a **dist** folder that contains the components optimized for deployment and it's the developer's responsibility to include the correct files in those lists.
 
-After this we run `gulp build: dist` again and if we now run the MVC application using [Ctrl]+[F5] and go to the address https://localhost:#####/index.html (##### = port assigned by VS) we should get something like this:
+After this we run `gulp build:dist` again and if we now run the MVC application using [Ctrl]+[F5] and go to the address https://localhost:#####/index.html (##### = port assigned by VS) we should get something like this:
 
 {{<image src="/posts/images/chrome_2017-11-03_15-40-22.png">}}
 
@@ -226,7 +226,7 @@ While doing this, we also understood how to include new client-side components, 
 
 > {{< IMPORTANT "Steps to include new client-side components" >}}
 
-> 1. Include a reference the library in **src\CoreUI|package. json**
+> 1. Include a reference the library in **src\CoreUI\package. json**
 
 > 2. Run **npm install** to download the package from the **npm** repository
 
