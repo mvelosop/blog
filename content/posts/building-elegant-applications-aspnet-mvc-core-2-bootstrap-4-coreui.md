@@ -16,6 +16,10 @@ image:
     url: https://unsplash.com/photos/0sT9YhNgSEs
 ---
 
+<p style="background-color: #ffe680; padding: 1rem;">
+<span style="color: red; font-weight: bold">UPDATE</span>: there is an <a href="/posts/building-elegant-applications-aspnet-mvc-core-2.1-bootstrap-4-coreui-2/" style="font-weight: bold">UPDATED and REVISED version of this post</a>. covering <a href="https://blogs.msdn.microsoft.com/dotnet/2018/02/27/announcing-net-core-2-1-preview-1/">ASP.NET Core 2.1 (Preview)</a> and <a href="https://coreui.io/">CoreUI 2.0.0 (beta)</a>.
+</p>
+
 In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template, based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
 
 > {{< IMPORTANT "Key Takeaways" >}}
