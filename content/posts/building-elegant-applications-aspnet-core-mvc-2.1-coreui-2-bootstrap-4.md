@@ -44,7 +44,7 @@ I don't expect this post to be too affected by the final release of all involved
 
 ### Platform and Tools
 
-* [Visual Studio 2017 Community Edition (Preview)](https://www.visualstudio.com/thank-you-downloading-visual-studio/?ch=pre&sku=Community&rel=15)  
+* [Visual Studio 2017 Community Edition (Preview 3)](https://www.visualstudio.com/thank-you-downloading-visual-studio/?ch=pre&sku=Community&rel=15)  
 (go to [Visual Studio's download page](https://www.visualstudio.com/downloads/) for other versions).
 
 * [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
@@ -86,7 +86,7 @@ Right now your solution should look like this:
 
 #### 1.2 - Add an ASP.NET MVC Core 2.1 project
 
-1. Create the **CoreUI.Mvc** project of type "**ASP.NET Core Web Application**" in "**src**" solution folder and also create the "**src**" folder in the file system.
+1. Create the **CoreUI.Mvc** project of type "**ASP.NET Core Web Application**" in the "**src**" solution folder and also create the "**src**" folder in the file system.
 {{<image src="/posts/images/devenv_2018-04-08_14-25-47.png">}}
 and upon browsing for the folder, create the "**src**" folder in the solution folder
 {{<image src="/posts/images/2018-04-08_14-31-44.png">}}
@@ -155,11 +155,11 @@ git clone https://github.com/coreui/coreui-free-bootstrap-admin-template
 
 You could also fork it in GitHub and then clone your repo, so you can then push your customizations and, eventually, contribute to the CoreUI repo.
 
-We'll now create a new branch to do our customizations, let's call it "**deploy**", so:
+We'll now create a new branch to do our customizations, let's call it "**dist**", so:
 
 {{<renderSourceCode "bat" "linenos=table">}}
 cd .\coreui-free-bootstrap-admin-template
-git checkout -b deploy master
+git checkout -b dist master
 {{</renderSourceCode>}}
 
 #### 2.2 - Create the distribution folder
@@ -227,7 +227,7 @@ Now we have to create a "**vendors.html**" file, referencing the files we want t
 
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">
 
-<h3>Files to include in dist/vendors</h3>
+<h3>Files to deploy to dist/vendors</h3>
 <ul>
   <li>node_modules/jquery-validation/dist/jquery.validate.min.js</li>
   <li>node_modules/jquery-validation/dist/additional-methods.js</li>
@@ -242,7 +242,7 @@ Now we have to create a "**vendors.html**" file, referencing the files we want t
 
 This file will be scanned during the "**build**" command to select the files that will be copied from "**node_modules**" to "**dist/vendors**".
 
-So now we can create/update the distribution folder with:
+So we can now create/update the distribution folder with:
 
 {{<renderSourceCode "bat" "linenos=table">}}
 npm run build
@@ -262,7 +262,7 @@ The solution should now be like this:
 
 {{<image src="/posts/images/explorer_2018-04-09_18-07-30.png">}}
 
-To make the merge cleaner, we'll rename the "**images**" folder to "**img**" as CoreUI's equivalent.
+In a moment we will  merge that "**dist**" folder to our app's wwwroot and, to make it cleaner, we'll rename the "**images**" folder to "**img**", just like CoreUI's equivalent.
 
 **This is an excellent time to commit to your local repo!**
 
@@ -275,131 +275,173 @@ To make the merge cleaner, we'll rename the "**images**" folder to "**img**" as 
 In the integration process we separate files in two sets:
 
 1. Html files, that have to be converted to **Razor** views and 
-2. All other files, that will just be copied to the "**wwwroot**" folder
+2. All other (static) files, that will just be copied to the "**wwwroot**" folder
 
 This is where a tool like Beyond Compare really shines, specially when it's time to update the files to new versions of CoreUI.
 
-#### 3.1 - Develop a generic controller for CoreUI views
+#### 3.1 - Copy static files to wwwroot folder
 
-This is a very simple controller, that receives the name of the view to display and returns it.
+So we have to copy these folders from "**src\CoreUI**" to "**src\CoreUI.Mvc\wwwroot**":
+
+- css
+- img
+- js
+- vendors
+
+If using [Beyond Compare](http://www.scootersoftware.com/), the result should be something like this:
+
+{{<image src="/posts/images/BCompare_2018-04-10_10-55-47.png">}}
+
+
+#### 3.2 - Create a generic controller for CoreUI views
+
+Next we'll convert the static CoreUI-s html files to Razor views (*.cshtml), but first need to create a generic controller for CoreUI's views, that just receives the name of the view to display and returns it.
 
 {{<renderSourceFile "src\CoreUI.Mvc\Controllers\CoreUIController.cs">}} 
 
-We'll also create the corresponding "**Views\CoreUI**" folder for the Razor views.
+We also need the corresponding "**Views\CoreUI**" folder for the Razor views.
 
-----
-----
+#### 3.3 - Create the initial Razor _Layout view
 
-In this section we'll convert the static HTML pages from CoreUI into Razor views (.cshtml) that can be used in any application.
+When working in Razor, the rendered page usually has, at least, two parts:
 
-#### 3.2 - Create the initial Index view
+1. The **content**, which is the core of whatever you want to show at any one time, e.g. the Index page, and can be named whatever makes sense, i.e. "**Index.cshtml**".
 
-To do this simply:
+2. The **layout**, that "surrounds" the content and is usually named "**_Layout.cshtml**".
 
-1. Copy page **index. html** from **wwwroot** to the new folder **Views\CoreUI**
+Making the equivalence to CoreUI's html files, it's easy to realize that for the initial Index view:
 
-2. Change the extension to .cshtlm
+- The layout is equivalent to "**blank.html**"
+- The content is equivalent to the difference between "**index.html**" and "**blank.html**"
 
-3. Remove the use of the standard _Layout by typing this at the top of the view:
-```cs
-@{
-        Layout = "";
-}
-```
-4. We changed all occurences of "@" to "@@" to avoid Razor's syntax error.
+So first, let's compare the "**src\CoreUI**" to "**src\CoreUI.Mvc\Views\CoreUI**" folders and hide the folders we've already copied to wwwroot:
+
+{{<image src="/posts/images/2018-04-10_11-13-19.png">}}
+
+And now:
+
+1. Copy "**blank.html**" to the right side and rename it to "**_Layout.cshtml**"
+
+2. Create an empty "**Index.cshtml**" file on the right side
+
+You should have this now:
+
+{{<image src="/posts/images/BCompare_2018-04-10_11-51-25.png">}}
+
+Then we have to edit the "**_Layout.cshtml**" file and make these changes:
+
+1. Disable the default layout by adding `@{ Layout = ""; }` before the html code.
+
+2. Replace **`@`** with **`@@`** to avoid Razor sintax error.
+
+3. Add **`~/`** to all references to static files in wwwroot.
+
+4. Add **`@ RenderBody()`** where the page content should be.
+
+To get to this:
+
+{{<image src="/posts/images/devenv_2018-04-10_16-38-26.png">}}
+
+{{<image src="/posts/images/devenv_2018-04-10_16-45-25.png">}}
+
+We can now execute the application with [Ctrl]+[F5] and when navigating to https://localhost:#####/CoreUI/Index (##### = port assigned by VS) we should get this:
+
+{{<image src="/posts/images/chrome_2018-04-10_17-09-40.png">}}
+
+You should check the "**Network**" section on the browser's developer tools to fix all missing references:
+
+{{<image src="/posts/images/chrome_2018-04-10_17-06-07.png">}}
+
 
 > {{< IMPORTANT "Razor Views and html" >}}
 
-> 0. Any valid .html file is also a valid Razor view, you only need to change the extension to .cshtml.
+> 0. Any valid .html file is also a valid Razor view, you should only need to change the extension to .cshtml and replace @ for @@.
 
-Then, when running the application with [Ctrl]+[F5] and navigating to https://localhost:#####/CoreUI/Index (##### = port assigned by VS) we should see the following:
+#### 3.4 - Create the Razor Index view
 
-{{<image src="/posts/images/chrome_2017-11-03_17-37-33.png">}}
+Using [Beyond Compare](http://www.scootersoftware.com/) (or equivalent) to compare "**src\CoreUI**" to "**src\CoreUI.Mvc\Views\CoreUI**":
 
-This happens because references to css, js, images, etc. files need to be corrected.
+1. Delete the "**Index.cshtml**" file in "**Views\CoreUI**"
 
-This is all it takes:
+2. Copy "**index.html**" to the right side
 
-1. Identify the addresses pointing to the files and 
-2. Add ````~/```` in front of them:
+3. Compare "**blank.html**" (left side) to "**index.html**" (right side)
 
-{{<image src="/posts/images/devenv_2017-11-03_17-45-17.png">}}
+{{<image src="/posts/images/BCompare_2018-04-10_17-56-49.png">}}
 
-If necessary, modern browser development tools can help identify missing files:
+On the left thumbnail view we can identify four zones:
 
-{{<image src="/posts/images/2017-11-03_17-58-39.png">}}
+1. Before the index content zone both files are identical
+2. In the index content zone the **blank.html** has no lines
+3. Afert the index content zone bot files are identical again
+4. There are a few additional lines at the end of the **index.html** file
 
-Once all references are corrected, we will have the page we already know, but this time generated by a Razor view from https://localhost:#####/CoreUI/Index.
+So we just delete the common lines from zones 1, 2 and the last two lines on the **index.html** file (on the right side), by selecting them in Beyond Compare and pressing the [Del] key:
 
-#### 3.2 - Splitting the Index.cshtml view in components
+When finishing we should get to this:
 
-Now let's split the Index.cshtml view in several components:
+{{<image src="/posts/images/BCompare_2018-04-10_20-31-31.png">}}
 
-1. A "_Layout.cshtml" view
-2. Several componentized partial views and 
-3. the Index.cshtml view, with the main content of the page.
+Notice the four lines at the end that exist only in **index.html**.
 
-We're not going to show the whole process, just the final _Layout view and the resulting file list, so it should be pretty obvious what the job is and, ultimately, you can see the final result in the article's repository.
+The way to handle that is creating a **Scripts** section in the **index.html** file and adding a call to the **RenderSection** helper in the **_Layout**.
+
+So we have to:
+
+1. Rename the "**index.html**" file to "**Index.cshtml**"
+
+2. Enclose the script lines in a Scripts section and
+
+3. Fix the references prepending **`~/`**, just like we did on the layout before
+
+After that, the last lines of "**Index.cshtml**" should be:
+
+{{<image src="/posts/images/devenv_2018-04-10_21-20-25.png">}}
+
+And now the last lines of "**_Layout.cshtml**" should be:
+
+{{<image src="/posts/images/devenv_2018-04-10_21-46-39.png">}}
+
+So, if we now run the application again and refresh the https://localhost:#####/CoreUI/Index page, we should get this:
+
+{{<image src="/posts/images/chrome_2018-04-10_21-34-56.png">}}
+
+#### 3.5 - Componentize the _Layout view
+
+It's not practical to have a massive 700+ lines _Layout view, so we'll split it into smaller components.
+
+We're not going through the whole process here, will only show the final result and you can check all details in the post's repo, but it should be pretty obvious:
 
 {{<renderSourceCode "html" "linenos=table">}}
+@{ Layout = ""; }
+
 <!--
-* CoreUI - Open Source Bootstrap Admin Template
-* @@version v1.0.4
-* @@link http://coreui.io
-* Copyright (c) 2017 creativeLabs Łukasz Holeczek
-* @@license MIT
- -->
+* CoreUI - Free Bootstrap Admin Template
+* @@version v2.0.0-beta.0
+* @@link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+*
+* Adaptated to ASP.NET MVC Core 2.1 by Miguel Veloso
+* http://coderepo.blog
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <title>CoreUI - Open Source Bootstrap Admin Template</title>
-
-    <!-- Icons -->
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <!-- Icons-->
+    <link href="~/vendors/css/flag-icon.min.css" rel="stylesheet">
     <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/vendors/css/simple-line-icons.min.css" rel="stylesheet">
-
-    <!-- Main styles for this application -->
-    <link rel="stylesheet" href="~/css/style.css">
-
-    <!-- Styles required by this view -->
-
+    <link href="~/vendors/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="~/css/style.css" rel="stylesheet">
 </head>
-<!-- BODY options, add following classes to body to change options
-
-// Header options
-1. '.header-fixed'                  - Fixed Header
-
-// Brand options
-1. '.brand-minimized'       - Minimized brand (Only symbol)
-
-// Sidebar options
-1. '.sidebar-fixed'                 - Fixed Sidebar
-2. '.sidebar-hidden'                - Hidden Sidebar
-3. '.sidebar-off-canvas'        - Off Canvas Sidebar
-4. '.sidebar-minimized'         - Minimized Sidebar (Only icons)
-5. '.sidebar-compact'             - Compact Sidebar
-
-// Aside options
-1. '.aside-menu-fixed'          - Fixed Aside Menu
-2. '.aside-menu-hidden'         - Hidden Aside Menu
-3. '.aside-menu-off-canvas' - Off Canvas Aside Menu
-
-// Breadcrumb options
-1. '.breadcrumb-fixed'          - Fixed Breadcrumb
-
-// Footer options
-1. '.footer-fixed'                  - Fixed footer
-
--->
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 
     <!-- *APP-HEADER* -->
     @Html.Partial("_AppHeader")
@@ -408,71 +450,81 @@ We're not going to show the whole process, just the final _Layout view and the r
     <div class="app-body">
         <div class="sidebar">
 
-            <!-- *SIDEBAR-NAV* -->
-            @Html.Partial("_SidebarNav")
-            <!-- /*SIDEBAR-NAV* -->
-
+            <!-- *SIDE-BAR-NAV* -->
+            @Html.Partial("_SideBarNav")
+            <!-- /*SIDE-BAR-NAV* -->
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
 
-        <!-- *MAIN CONTENT* -->
         <main class="main">
 
-            <!-- *BREADCRUMB* -->
-            @Html.Partial("_BreadCrumb")
-            <!-- /*BREADCRUMB* -->
+            <ol class="breadcrumb">
 
-            <!-- *CONTAINER-FLUID* -->
+                <!-- *BREADCRUMB* -->
+                @Html.Partial("_Breadcrumb")
+                <!-- /*BREADCRUMB* -->
+
+                <!-- *BREADCRUMB-MENU* -->
+                @Html.Partial("_BreadcrumbMenu")
+                <!-- /*BREADCRUMB-MENU* -->
+
+            </ol>
+
             <div class="container-fluid">
+                <div class="animated fadeIn">
 
-                <!-- *PAGE* -->
-                @RenderBody()
-                <!-- /*PAGE* -->
+                    <!-- *CONTENT* -->
+                    @RenderBody()
+                    <!-- /*CONTENT* -->
 
+                </div>
             </div>
-            <!-- /*CONTAINER-FLUID* -->
 
         </main>
-        <!-- /*MAIN CONTENT* -->
 
         <!-- *ASIDE-MENU* -->
         @Html.Partial("_AsideMenu")
         <!-- /*ASIDE-MENU* -->
 
     </div>
+
     <footer class="app-footer">
-        <span><a href="http://coreui.io">CoreUI</a> © 2017 creativeLabs.</span>
-        <span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>
+        <div>
+            <a href="https://coreui.io">CoreUI</a>
+            <span>&copy; 2018 creativeLabs.</span>
+        </div>
+        <div class="ml-auto">
+            <span>Powered by</span>
+            <a href="https://coreui.io">CoreUI</a>
+        </div>
     </footer>
-    <!-- Bootstrap and necessary plugins -->
+
+    <!-- Bootstrap and necessary plugins-->
     <script src="~/vendors/js/jquery.min.js"></script>
     <script src="~/vendors/js/popper.min.js"></script>
     <script src="~/vendors/js/bootstrap.min.js"></script>
     <script src="~/vendors/js/pace.min.js"></script>
-    <!-- Plugins and scripts required by all views -->
-    <script src="~/vendors/js/Chart.min.js"></script>
-    <!-- CoreUI main scripts -->
-    <script src="~/js/app.js"></script>
-    <!-- Plugins and scripts required by this views -->
-    <!-- Custom scripts required by this view -->
+    <script src="~/vendors/js/perfect-scrollbar.min.js"></script>
+    <script src="~/vendors/js/coreui.min.js"></script>
+
+    <!-- Plugins and scripts required by the views -->
+    @RenderSection("Scripts", required: false)
 
 </body>
-</html>
-{{</renderSourceCode>}}
+</html>{{</renderSourceCode>}}
 
-{{<image src="/posts/images/devenv_2017-11-03_18-36-32.png">}}
+And the resulting files:
 
-If we now go back to https://localhost:#####/CoreUI/Index, we'll see the same screen, but this time as a composition of the main content on the layout and the partial views.
+{{<image src="/posts/images/devenv_2018-04-10_23-38-32.png">}}
 
-#### 3.3 - Convert the rest of the CoreUI pages
+If we now go back to https://localhost:#####/CoreUI/Index, we'll see the same view, but this time as a composition of the main content on the layout and the partial views.
 
-The conversion of the rest of the pages into razor views is quite simple, although there are some details that's better to look at directly in the repository.
+#### 3.6 - Convert the rest of the CoreUI pages
 
-The work is basically:
+To convert the rest of the pages into razor views, we just have to repeat step 3.4 for each html file in "**src\CoreUI**". You can repeat the process as many times as you want, to help consolidate the process and can get the rest of the files, or compare them, from the post's repo.
 
-1. Leave just the content inside the `<div class="container-fluid">` tag, since this and everything else is, directly or indirectly (other componentized partial views), in **_Layout.cshtml** and
+Besides splitting, we also have to **change the links to reference the corresponding route using Tag Helpers**, so they use **CoreUIController**.
 
-2. Change the extension to .cshtml
 
 ### 4 - Integrate CoreUI views with MVC application
 
