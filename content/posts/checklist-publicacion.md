@@ -6,7 +6,7 @@ date: 2017-01-01
 description: Reseña tamaño twitter
 thumbnail: images/checklist-2077024_1280.jpg
 categorías: [ "Desarrollo" ]
-tags: [  ]
+tags: [ "Check List" ]
 series: [  ]
 toc: true
 ---
@@ -32,6 +32,8 @@ Checklist para publicación
 <i class="fa fa-square-o" aria-hidden="true"></i> Los puntos importantes están resumidos al inicio
 
 <i class="fa fa-square-o" aria-hidden="true"></i> El estimado de tiempo para realizar el tutorial es adecuado
+
+<i class="fa fa-square-o" aria-hidden="true"></i> El orden en la tabla de contenido es correcto
 
 ### Contexto
 
