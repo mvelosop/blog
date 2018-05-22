@@ -137,6 +137,15 @@ En este proceso aprenderemos algo (o, al menos yo aprendí algo) sobre el manejo
 
 #### 2.1 - Clonar el repositorio de CoreUI
 
+<div style="background-color: #ffe680; padding: 0.1rem 1rem;">
+<p>
+<span style="color: red; font-weight: bold">NOTA</span>: Este artículo se escribió usando CoreUI v1.0.4, para completar con éxito estos pasos, debe clonar <a href="https://github.com/coreui/coreui-free-bootstrap-admin-template/tree/v1.0.4">CoreUI v1.0.4 desde GitHub</a>.
+</p>
+<p>
+Estoy trabajando en un artículo actualizado, que cubre las próximas versiones de ASP.NET Core MVC 2.1 y CoreUI 2.0.0 que publicaré en breve.
+</p>
+</div>
+
 Clonar el [repositorio de CoreUI en GitHub](https://github.com/mrholek/CoreUI-Free-Bootstrap-Admin-Template) en cualquier carpeta que resulte conveniente, fuera de la solución.
 
 #### 2.2 Copiar la versión de HTML 5 estática en la solución
