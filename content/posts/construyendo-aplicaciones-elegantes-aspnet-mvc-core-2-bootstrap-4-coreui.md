@@ -14,6 +14,11 @@ repoRelease: "1.0"
 toc: true
 ---
 
+
+<p style="background-color: #ffe680; padding: 1rem;">
+<span style="color: red; font-weight: bold">ACTUALIZACIÓN</span>: hay una versión <a href="/posts/construyendo-aplicaciones-elegantes-aspnet-core-mvc-2.1-coreui-2-bootstrap-4/" style="font-weight: bold">ACTUALIZADA Y REVISADA de este artículo</a>. Que cubre <a href="https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/">ASP.NET Core 2.1 (rc1)</a> y <a href="https://coreui.io/">CoreUI 2.0.0</a>.
+</p>
+
 En este artículo vamos a explicar como adaptar la plantilla [CoreUI](http://coreui.io/), basada en [Bootstrap 4](http://getbootstrap.com/) para usarla como base en aplicaciones ASP.NET MVC Core 2.
 
 > {{< IMPORTANT "Puntos Importantes" >}}

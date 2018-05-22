@@ -6,5 +6,11 @@
         "mssqllocaldb",
         "wwwroot",
         "aspnetcore"
+    ],
+    "spellright.language": "es",
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
     ]
 }

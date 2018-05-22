@@ -1,19 +1,20 @@
 ---
 language: en
-spanishVersion: /posts/construyendo-aplicaciones-elegantes-aspnet-mvc-core-2-bootstrap-4-coreui/
+spanishVersion: /posts/construyendo-aplicaciones-elegantes-aspnet-core-mvc-2.1-coreui-2-bootstrap-4/
 title: Building elegant applications with ASP.NET Core MVC 2.1 and CoreUI 2 (Bootstrap 4)
 draft: false
 author: Miguel Veloso
-date: 2018-04-07
-description: Adapt a BS 4 template to an MVC application, to enhance the user experience
+date: 2018-05-21
+description: Adapt the CoreUI BS 4 template to an ASP.NET Core 2.1 MVC application, to enhance the user experience
 thumbnail: posts/images/asp.net-core-mvc-coreui-en.png
 tags: [ "User Experience", "Client Side Development", "Bootstrap 4", "CoreUI" ]
 repoName: AspNetCore2CoreUI
-# repoRelease: "2.0"
+repoRelease: "2.0"
 toc: true
 image:
-    authorName: Benjamin Child
-    url: https://unsplash.com/photos/0sT9YhNgSEs
+    authorName: Pablo Iglesias
+    url: https://github.com/campusMVP/dotnetCoreLogoPack
+
 ---
 
 This is the **UPDATED** and **REVISED** version of my previous post: [Building elegant applications with ASP.NET MVC Core 2 and Bootstrap 4 using CoreUI](/posts/building-elegant-applications-aspnet-mvc-core-2-bootstrap-4-coreui/)
@@ -31,6 +32,8 @@ Although this is an ASP.NET Core MVC 2.1 specific post, the general idea should,
 > 0. Understanding the relations between main views, layout views and partial views.
 
 > 0. Handling nested layouts
+
+> 0. Customizing Identity 2.1 views from UI packages
 
 {{< repoUrl >}}
 
@@ -76,7 +79,7 @@ Let's start by creating a standard MVC application, using Visual Studio 2017's b
 
 1. Create a "blank solution" named **AspNetCore21CoreUI2** with a Git repository
 
-1. Add an **.editorconfig** to to the solution standardize some formatting options for the project (after installing [EditorConfig Language Services](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.EditorConfig))
+1. Add an **.editorconfig** file to the solution to standardize some formatting options for the project (after installing [EditorConfig Language Services](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.EditorConfig))
 
 1. Add a **src** solution folder
 
@@ -90,9 +93,9 @@ Right now your solution should look like this:
 
 #### 1.2 - Add an ASP.NET MVC Core 2.1 project
 
-1. Create the **CoreUI.Mvc** project of type **ASP.NET Core Web Application** in the **src** solution folder and also create the **src** folder in the file system.
+1. Create the **CoreUI.Mvc** project of type **ASP.NET Core Web Application** in the **src** solution folder.
 {{<image src="/posts/images/devenv_2018-04-08_14-25-47.png">}}
-and upon browsing for the folder, create the **src** folder in the solution folder
+and upon browsing for the folder, create the **src** folder in the file system:
 {{<image src="/posts/images/2018-04-08_14-31-44.png">}}
 
 2. Select an **ASP.NET Core 2.1** **MVC** type application and 
@@ -280,7 +283,7 @@ Then, we have to install the new dependencies using:
 npm install
 {{</renderSourceCode>}}
 
-One of the tasks of **build-aspnetcore** is to copy all referenced package files from **node_modules** to **lib**, so we create a file named **vendors.html** (or whatever) and to reference the files we'll be referencing from the app's Razor views, like this:
+One of the tasks of **build-aspnetcore** is to copy all referenced package files from **node_modules** to **lib**, so we create a file named **vendors.html** (or whatever) to include the files we'll be referencing from the app's Razor views, like this:
 
 {{<renderSourceCode "html" "linenos=table">}}
 <!DOCTYPE html>
@@ -320,7 +323,7 @@ npm run build-aspnetcore
 
 > {{< IMPORTANT "Client-side package managers" >}}.
 
-> - At some point you might want to use some specialized client-side package manager, like WebPack, but we won't get cover that in this post.
+> - At some point you might want to use some specialized client-side package manager, like WebPack, but we won't cover that in this post.
 
 #### 2.5 - Copy the distribution folder into the solution
 
@@ -491,7 +494,7 @@ Also worth noting here, is that item #2 just happens because the views layout is
 
 {{<renderSourceFile "src\CoreUI.Mvc\Views\_ViewStart.cshtml">}}
 
-But we don't want (just for fun) to display the breadcrumbs view in the standard ASP.NTE MVC views.
+But we don't want (just for fun) to display the breadcrumbs view in the standard ASP.NET MVC views.
 
 We will solve this using "nested layouts" to check a nice ASP.NET MVC feature.
 
@@ -534,7 +537,7 @@ One final detail, to properly handle the breadcrumbs this way, it's necessary to
 }
 {{</renderSourceCode>}}
 
-So, not surprisingly, this is the resulting **blank.cshtml** view, noting all sections shown there are just markers and optional, e.g. can be omitted completely.
+So, not surprisingly, this is the resulting **blank.cshtml** view, noting all sections shown there are just markers and optional, i.e. can be omitted completely.
 
 {{<renderSourceFile "src\CoreUI.Mvc\Views\CoreUI\blank.cshtml">}}
 
@@ -542,7 +545,11 @@ If we now go back to https://localhost:#####/CoreUI/Index, we'll see the same vi
 
 And now with the MVC menu on the top bar and the breadcrumbs only in the CoreUI views.
 
-#### 4.2 - Integrate Account views
+#### 4.2 - Integrate Account views from Identity
+
+> {{< IMPORTANT "Customizing Identity 2.1 UI views" >}}.
+
+> - Starting with ASP.NET Core 2.1 there is new feature that allows including Razor views in class libraries, so the views are no longer generated, so you have to follow this procedure to customize them in case you need it.
 
 Just one more step to finish, so the standard Identity views integrate nicely with CoreUI.
 
@@ -574,7 +581,7 @@ So, at this point, I think a good starting point for an elegant and attractive u
 
 ## Summary
 
-In this article we looked at the process in quite detail of adapting the latest version of CoreUI HTML template to ease the development of attractive ASP.NET Core MVC 2.1 applications.
+In this article we looked in quite detail at the process for adapting the latest version of CoreUI HTML template to ease the development of attractive ASP.NET Core MVC 2.1 applications.
 
 ---
 
@@ -584,26 +591,34 @@ In this article we looked at the process in quite detail of adapting the latest 
 
 ### Related links
 
-**Bootstrap 4**<br/>
-https://getbootstrap.com/docs/4.0/getting-started/introduction/
+**.NET Core 2.1.0-rc1 with SDK 2.1.300-rc1 - x64 SDK Installer**<br/>
+https://download.microsoft.com/download/B/1/9/B19A2F87-F00F-420C-B4B9-A0BA4403F754/dotnet-sdk-2.1.300-rc1-008673-win-x64.exe)  
 
-**CoreUI**<br/>
-http://coreui.io/
+**Beyond Compare, from Scooter Software**<br/>
+http://www.scootersoftware.com/
 
-**CoreUI en GitHub**<br/>
-https://github.com/mrholek/CoreUI-Free-Bootstrap-Admin-Template
+**Bootstrap 4.1**<br/>
+https://getbootstrap.com/docs/4.1/getting-started/introduction/
 
-**Gulp**<br/>
-https://gulpjs.com/
+**CoreUI 2.0.0 in GitHub**<br/>
+https://github.com/coreui/coreui-free-bootstrap-admin-template/tree/v2.0.0
 
-**Installing CoreUI-s static version**<br/>
-http://coreui.io/docs/getting-started/static-version/
+**CoreUI build-aspnetcore PR in GitHub**<br/>
+https://github.com/coreui/coreui-free-bootstrap-admin-template/pull/379
+
+**Customize default ASP.NET Core 2.1 Identity UI**<br/>
+https://blogs.msdn.microsoft.com/webdev/2018/04/12/asp-net-core-2-1-0-preview2-now-available/#user-content-customize-default-identity-ui
+
+**EditorConfig Language Service for Visual Studio**<br/>
+https://marketplace.visualstudio.com/items?itemName=MadsKristensen.EditorConfig
 
 **Node**<br/>
-https://nodejs.org
+https://nodejs.org/
 
 **npm**<br/>
 https://www.npmjs.com/
 
-**ReSharper**<br/>
-https://www.jetbrains.com/resharper/
+**Razor tag helpers**<br/>
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-2.1
+
+
