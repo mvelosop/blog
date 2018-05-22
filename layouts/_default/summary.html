@@ -4,7 +4,7 @@
 
   {{ with $.Params.image }}
   <div class="image-credit">
-    <span>{{ if eq $.Params.language "en" }}Photo:{{ else }}Foto:{{ end }}</span>
+    <span>{{ if eq $.Params.language "en" }}{{ default "Photo" .caption }}{{ else }}{{ default "Foto" .caption }}{{ end }}:</span>
     <a href="{{ .url }}" target="_blank">{{ .authorname }}</a>
   </div>
   {{ end }}
