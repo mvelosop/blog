@@ -12,9 +12,9 @@ repoName: AspNetCore2CoreUI
 repoRelease: "2.0"
 toc: true
 image:
+    caption: ASP.NET Core MVC Logo
     authorName: Pablo Iglesias
     url: https://github.com/campusMVP/dotnetCoreLogoPack
-
 ---
 
 This is the **UPDATED** and **REVISED** version of my previous post: [Building elegant applications with ASP.NET MVC Core 2 and Bootstrap 4 using CoreUI](/posts/building-elegant-applications-aspnet-mvc-core-2-bootstrap-4-coreui/)

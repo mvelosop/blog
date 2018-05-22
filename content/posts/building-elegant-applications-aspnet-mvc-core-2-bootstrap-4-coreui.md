@@ -12,12 +12,12 @@ repoName: AspNetCore2CoreUI
 repoRelease: "1.0"
 toc: true
 image:
-    authorName: Pablo Iglesias
-    url: https://github.com/campusMVP/dotnetCoreLogoPack
+    authorName: Benjamin Child
+    url: https://unsplash.com/photos/0sT9YhNgSEs
 ---
 
 <p style="background-color: #ffe680; padding: 1rem;">
-<span style="color: red; font-weight: bold">UPDATE</span>: there is an <a href="/posts/building-elegant-applications-aspnet-mvc-core-2.1-bootstrap-4-coreui-2/" style="font-weight: bold">UPDATED and REVISED version of this post</a>. covering <a href="https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/">ASP.NET Core 2.1 (rc1)</a> and <a href="https://coreui.io/">CoreUI 2.0.0</a>.
+<span style="color: red; font-weight: bold">UPDATE</span>: there is an <a href="/posts/building-elegant-applications-aspnet-core-mvc-2.1-coreui-2-bootstrap-4/" style="font-weight: bold">UPDATED and REVISED version of this post</a>. covering <a href="https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/">ASP.NET Core 2.1 (rc1)</a> and <a href="https://coreui.io/">CoreUI 2.0.0</a>.
 </p>
 
 In this post we'll explain how to adapt the [CoreUI](http://coreui.io/) template, based on [Bootstrap 4](http://getbootstrap.com/), to use it as a base for ASP.NET MVC Core 2 applications.
@@ -134,15 +134,6 @@ We're now going to prepare the base folder with CoreUI, which we'll use to copy 
 In this process we will learn something (or at least I learned something) about the management of client-side libraries in Javascript.
 
 #### 2.1 - Clone the CoreUI repository
-
-<div style="background-color: #ffe680; padding: 0.1rem 1rem;">
-<p>
-<span style="color: red; font-weight: bold">NOTICE</span>: This post was written using CoreUI v1.0.4, to successfully complete the steps here, you have to clone <a href="https://github.com/coreui/coreui-free-bootstrap-admin-template/tree/v1.0.4">CoreUI v1.0.4 from GitHub</a>.
-</p>
-<p>
-I am currently working on an updated post covering the upcoming ASP.NET Core MVC 2.1 and CoreUI 2.0.0, stay tuned!.
-</p>
-</div>
 
 Clone the [CoreUI repository in GitHub](https://github.com/mrholek/CoreUI-Free-Bootstrap-Admin-Template) to any folder you like, outside the solution.
 
