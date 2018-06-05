@@ -40,7 +40,7 @@ Aunque este es un artículo específico de ASP.NET Core MVC 2.1, la idea general
 
 ## Contexto
 
-Ha pasado un tiempo desde que escribí el primer artículo en CoreUI y en estas fechas (MAY-2017), hay nuevas versiones/candidatos tanto para ASP.NET MVC Core (v2.1) como para CoreUI (v2.0.0) y, además, he llegado a conocer un poco más sobre temas de front-end, así que pensé que sería un buen momento para publicar un artículo actualizado y revisado.
+Ha pasado un tiempo desde que escribí el primer artículo en CoreUI y en estas fechas (MAY-2018), hay nuevas versiones/candidatos tanto para ASP.NET MVC Core (v2.1) como para CoreUI (v2.0.0) y, además, he llegado a conocer un poco más sobre temas de front-end, así que pensé que sería un buen momento para publicar un artículo actualizado y revisado.
 
 El proceso de adaptación de CoreUI va a ser un poco diferente al del artículo anterior, para empezar, ahora todo está centrado en **npm**, ya que **bower** y **gulp** han sido eliminados tanto de VS como de CoreUI y CoreUI está utilizando las capacidades de ejecución de tareas de npm.
 
