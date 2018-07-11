@@ -374,6 +374,8 @@ If using [Beyond Compare](http://www.scootersoftware.com/), the result should be
 
 Next we'll create a simple controller to display any of the CoreUI Razor views (***.cshtml**), that just receives the name of the view to display.
 
+{{<renderSourceFile "src\CoreUI.Mvc\Controllers\CoreUIController.cs">}}
+
 We also need to create the corresponding **Views\CoreUI** folder for the Razor views for this controller.
 
 #### 3.3 - Copy the Razor views to the Views\CoreUI folder

@@ -375,6 +375,8 @@ Si se utiliza [Beyond Compare](http://www.scootersoftware.com/), el resultado de
 
 A continuación crearemos un controlador simple para mostrar cualquiera de las vistas Razor de CoreUI (***.cshtml**), que sólo recibe el nombre de la vista a mostrar.
 
+{{<renderSourceFile "src\CoreUI.Mvc\Controllers\CoreUIController.cs">}}
+
 También necesitamos crear la carpeta **Views\CoreUI** correspondiente, para las vistas Razor de este controlador.
 
 #### 3.3 - Copiar las vistas de Razor a la carpeta Views\CoreUI
