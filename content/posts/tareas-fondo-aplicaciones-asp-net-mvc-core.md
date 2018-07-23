@@ -126,7 +126,7 @@ Se implementa la carga de "modulos" como un [ExtensionMethod](https://msdn.micro
 
 #### Agregar la clase "helpers\ScheduleJobsHelpers.cs**
 
-{{<renderSourceFile "src\HangFireCore.WebApp\helpers\ScheduleJobsHelpers.cs">}}
+{{<renderSourceFile "src\HangFireCore.WebApp\Helpers\ScheduleJobsHelpers.cs">}}
 
 ### 6 - Incluir Hangfire en la aplicación web
 
