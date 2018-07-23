@@ -14,6 +14,11 @@ repoRelease: "1.0"
 toc: true
 ---
 
+
+<p style="background-color: #ffe680; padding: 1rem;">
+<span style="color: red; font-weight: bold">ACTUALIZACIÓN</span>: hay una versión <a href="/posts/construyendo-aplicaciones-elegantes-aspnet-core-mvc-2.1-coreui-2-bootstrap-4/" style="font-weight: bold">ACTUALIZADA Y REVISADA de este artículo</a>. Que cubre <a href="https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/">ASP.NET Core 2.1 (rc1)</a> y <a href="https://coreui.io/">CoreUI 2.0.0</a>.
+</p>
+
 En este artículo vamos a explicar como adaptar la plantilla [CoreUI](http://coreui.io/), basada en [Bootstrap 4](http://getbootstrap.com/) para usarla como base en aplicaciones ASP.NET MVC Core 2.
 
 > {{< IMPORTANT "Puntos Importantes" >}}
@@ -131,6 +136,15 @@ Ahora vamos a preparar la carpeta base con CoreUI, que luego vamos a utilizar pa
 En este proceso aprenderemos algo (o, al menos yo aprendí algo) sobre el manejo de las librerías "client-side" en Javascript.
 
 #### 2.1 - Clonar el repositorio de CoreUI
+
+<div style="background-color: #ffe680; padding: 0.1rem 1rem;">
+<p>
+<span style="color: red; font-weight: bold">NOTA</span>: Este artículo se escribió usando CoreUI v1.0.4, para completar con éxito estos pasos, debe clonar <a href="https://github.com/coreui/coreui-free-bootstrap-admin-template/tree/v1.0.4">CoreUI v1.0.4 desde GitHub</a>.
+</p>
+<p>
+Estoy trabajando en un artículo actualizado, que cubre las próximas versiones de ASP.NET Core MVC 2.1 y CoreUI 2.0.0 que publicaré en breve.
+</p>
+</div>
 
 Clonar el [repositorio de CoreUI en GitHub](https://github.com/mrholek/CoreUI-Free-Bootstrap-Admin-Template) en cualquier carpeta que resulte conveniente, fuera de la solución.
 

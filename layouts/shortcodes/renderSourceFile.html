@@ -7,6 +7,7 @@
 {{ $filePath := delimit (findRE "(.*\\\\)" $file 1) "" }}
 {{ $fileName := replace $file $filePath "" }}
 {{ $fileExt := replaceRE "(.*\\.)" "" $fileName }}
+{{ $fileExt := replace $fileExt "cshtml" "html" }}
 <div class="source-filename">{{ $fileName }}</div>
 {{ with $.Page.Params.repoRelease }}
 {{ $sourceFilePath := printf "[%s-%s] %s" $.Page.Params.repoName . $filePath }}

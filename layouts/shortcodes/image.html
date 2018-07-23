@@ -1,3 +1,4 @@
+{{ if not (.Get "href") }}<a href="{{ $.Site.BaseURL }}{{ .Get "src" }}" target="_blank">{{ end }}
 <figure{{ if .Get "class" }} class="{{ .Get "class" }}"{{ end }}>
   <img src="{{ $.Site.BaseURL }}{{ .Get "src" }}" alt="{{ .Page.Title }} {{ .Get "src" }}" width="auto">
   {{ if .Get "caption" }}
@@ -10,3 +11,4 @@
   </figcaption>
   {{ end }}
 </figure>
+{{ if not (.Get "href") }}</a>{{ end }}
