@@ -16,6 +16,8 @@ pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsStyle = "vs"
 
+publishDir = "public"
+
 [taxonomies]
 	tag = "tags"
 
