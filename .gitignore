@@ -1,6 +1,6 @@
 public/
 publish/
 repos/
-themes/
+themes.bak/
 /releases/**/lib/
 /releases/**/obj/
