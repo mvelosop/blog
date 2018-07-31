@@ -283,33 +283,13 @@ Then, we have to install the new dependencies using:
 npm install
 {{</renderSourceCode>}}
 
-One of the tasks of **build-aspnetcore** is to copy all referenced package files from **node_modules** to **lib**, so we create a file named **vendors.html** (or whatever) to include the files we'll be referencing from the app's Razor views, like this:
+Besides installing the libraries in node_modules, we also have to copy the libraries used on the Razor views to the **dist/lib** folder, so one of the tasks of **build-aspnetcore** is to copy all files from **node_modules** referenced in the views to the **lib** folder.
 
-{{<renderSourceCode "html" "linenos=table">}}
-<!DOCTYPE html>
-<html>
+To achieve that we create file **vendors.html** (or whatever) in **CoreUI** views folder to include the files we'll be referencing from the app's Razor views, like this:
 
-<head>
-  <meta charset="utf-8" />
-  <title>Vendor list</title>
-</head>
+{{<renderSourceFile "src\CoreUI\vendors.html">}}
 
-<body style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">
-
-<h3>Files to deploy to dist/lib</h3>
-<ul>
-  <li>"node_modules/jquery-validation/dist/jquery.validate.min.js"</li>
-  <li>"node_modules/jquery-validation/dist/additional-methods.js"</li>
-  <li>"node_modules/jquery-validation/dist/localization/messages_es.js"</li>
-  <li>"node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"</li>
-</ul>
-
-</body>
-
-</html>
-{{</renderSourceCode>}}
-
-This file will be scanned during the **build/build-aspnetcore** command to select the files that will be copied from **node_modules** to **dist/lib**.
+This file will be scanned during the **build/build-aspnetcore** command, just like all other CoreUI views, to select the files that will be copied from **node_modules** to **dist/lib**.
 
 **It is important (for the script to work) to include the relative path and filename, from the home folder, including the very same "node_modules" folder, in quotation marks.**
 

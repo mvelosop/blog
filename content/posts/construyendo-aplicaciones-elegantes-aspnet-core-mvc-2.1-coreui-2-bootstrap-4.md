@@ -284,33 +284,13 @@ Luego, tenemos que instalar las nuevas dependencias usando:
 npm install
 {{</renderSourceCode>}}
 
-Una de las tareas de **build-aspnetcore** es copiar todos los archivos de paquetes referenciados de **node_modules** a **lib**, así que creamos un archivo llamado **vendors.html** (o cualquier otro) para incluir los archivos que vamos a referenciar desde las vistas Razor de la aplicación, así:
+Además de instalar las librerías en node_modules, también hay que copiar a **dist/lib** las librerías que se utilizan en las vistas Razor y por esto, una de las tareas de **build-aspnetcore** es copiar todos los archivos de **node_modules** referenciados en las vistas, a la carpeta **lib**.
 
-{{<renderSourceCode "html" "linenos=table">}}
-<!DOCTYPE html>
-<html>
+Para esto creamos el archivo **vendors.html** (o cualquier otro) en la carpeta de las vistas de **CoreUI** para incluir las referencias que vamos a usar desde las vistas Razor de la aplicación, así:
 
-<head>
-  <meta charset="utf-8" />
-  <title>Vendor list</title>
-</head>
+{{<renderSourceFile "src\CoreUI\vendors.html">}}
 
-<body style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">
-
-<h3>Files to deploy to dist/lib</h3>
-<ul>
-  <li>"node_modules/jquery-validation/dist/jquery.validate.min.js"</li>
-  <li>"node_modules/jquery-validation/dist/additional-methods.js"</li>
-  <li>"node_modules/jquery-validation/dist/localization/messages_es.js"</li>
-  <li>"node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"</li>
-</ul>
-
-</body>
-
-</html>
-{{</renderSourceCode>}}
-
-Este archivo se escaneará con el comando **build/build-aspnetcore** para seleccionar los archivos que se copiarán de **node_modules** a **dist/lib**.
+Este archivo será revisado con el comando **build/build-aspnetcore**, igual que todas las vistas de CoreUI, para seleccionar los archivos que se copiarán de **node_modules** a **dist/lib**.
 
 **Es importante (para que el script funcione) incluir la ruta relativa y el nombre del archivo, desde la carpeta de inicio, incluyendo la misma carpeta "node_modules", entre comillas.**
 
