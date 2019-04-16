@@ -4,9 +4,9 @@
 {{ else }}
 {{ $.Scratch.Add "options" "linenos=table" }}
 {{ end }}
-{{ $filePath := delimit (findRE "(.*//)" $file 1) "" }}
+{{ $filePath := delimit (findRE "(.*/)" $file 1) "" }}
 {{ $fileName := replace $file $filePath "" }}
-{{ $fileExt := replaceRE "(.*/.)" "" $fileName }}
+{{ $fileExt := replaceRE "(.*\\.)" "" $fileName }}
 {{ $fileExt := replace $fileExt "cshtml" "html" }}
 <div class="source-filename">{{ replace $fileName "/" "\\" }}</div>
 {{ with $.Page.Params.repoRelease }}
