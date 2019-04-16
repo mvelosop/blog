@@ -219,6 +219,14 @@ And this is an excellent tool to explore in detail the internals of your applica
 
 The code in `Startup.cs` in the repo, also registers a `SerilogMiddleware`, that logs directly from the ASP.NET Core pipeline, that also gives you some additional insights.
 
+### Test with the Bot Emulator
+
+Now you're ready to test the bot and you just have to:
+
+- Run your Web API app with [Ctrl+F5] or [F5] to inspect with the debugger and
+
+- Open the file `SimpleWebApiBot.bot` with the [Bot Emulator](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0) and send a message to your bot.
+
 ## Conclusions
 
 So, we got to see that a **Bot Builder v4** bot can be implemented as a simple ASP.NET Core Web API project, and that opens the door to easily implement some interesting scenarios, such as sending proactive messages without using a Direct Line client or interfacing directly to an Alexa skill.
