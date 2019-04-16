@@ -185,3 +185,7 @@ div.source-code {
 .lnt {
   color: gray;
 }
+
+img {
+  max-width: 100%;
+}
