@@ -25,6 +25,8 @@ The Bot Builder C# SDK is built on top of ASP.NET Core so we'll develop a simple
 
 So let's get into the details.
 
+**WARNING:** Consider this post as experimental and not production safe!
+
 {{< repoUrl >}}
 
 ## Messaging Overview
