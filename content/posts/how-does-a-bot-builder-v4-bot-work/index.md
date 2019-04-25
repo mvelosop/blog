@@ -59,7 +59,9 @@ Instead of the **request -> response** of a typical web app.
 
 But, in this case it's the **replies** that convey the important information back to the user.
 
-It's important to keep in mind that the adapter has constant communication with the Bot Service, so it can send a message to the user at any time, without the need for an initial request.
+By the way, those replies are just simple independent requests from the bot adapter to the Bot Service (actually to the `ServiceUrl` from the `ConversationReference`).
+
+It's important to keep in mind that the adapter can send a message through the Bot Service at any time, without the need for an initial request, as long as it has some key data from `ConversationReference`.
 
 ## The simplest Web API bot
 
