@@ -1,7 +1,7 @@
 ---
 language: en
 title: How to receive events in a Bot Framework SDK v4 Web API bot?
-draft: true
+draft: false
 author: "Miguel Veloso"
 date: 2019-05-10
 description: Continue the exploration of Bot Framework SDK enabling our Web API bot to receive arbitrary events through a REST API endpoint.
