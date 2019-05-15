@@ -51,6 +51,10 @@ article.sn > .article-body strong {
   box-shadow: none;
 }
 
+article.sn > .article-body blockquote {
+  border-left-color: rgb(156, 156, 156);
+}
+
 .author .author-thumb {
   position: relative;
   overflow: hidden;

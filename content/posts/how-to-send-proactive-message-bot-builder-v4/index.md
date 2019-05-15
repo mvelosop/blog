@@ -15,23 +15,35 @@ image:
     url: https://unsplash.com/photos/2c9ffiPlD9Q
 ---
 
+This is the second in a five-post series, where we explore the Bot Builder C# SDK v4:
+
+1. [How does a Bot Builder v4 bot work?](/posts/how-does-a-bot-builder-v4-bot-work/)
+2. **How to send proactive messages with Bot Builder v4?** (This article)
+3. [How to receive events in a Bot Framework SDK v4 Web API bot?](/posts/how-to-receive-events-bot-framework-sdk-v4-web-api-bot)
+4. How to test a Bot Framework SDK v4 bot?
+5. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
+
 In this post we'll continue with the bot we completed in [the previous post](/posts/how-does-a-bot-builder-v4-bot-work/) to add the ability to send proactive messages.
 
 A proactive message is just one that's sent without the user typing anything, so it's not a reply to user input.
 
-In the previous post we realized that the `BotFrameworkAdapter` is responsible to send a message to the Bot Service/Emulator, so it's received by the user.
+In the previous post we realized that the `BotFrameworkAdapter` is responsible of sending a message to the Bot Service/Emulator, so it's received by the user.
 
 We'll add a new feature so our bot can set a timer and then notify the user when it goes off.
 
-**WARNING:** Consider this post as experimental and not production safe!
+**WARNING:** The code shown here is experimental and has not been tested in production, so handle with care!
 
 {{< repoUrl >}}
 
 ## Overview
 
-To implement this feature, we have a `Timer` class with a `Start` method that waits asynchronously for the configured time and then directly calls the `ContinueConversationAsync` method in the adapter, to send the message back to the emulator.
+You might want to read the [overview section of the previous post](/posts/how-does-a-bot-builder-v4-bot-work#overview), as we're building on it.
 
-To use the `ContinueConversationAsync` method we need a reference to the adapter and a `ConversationReference`, that identifies the conversation that will receive the proactive message, so we need to have both in the timer.
+![](send-proactive-message.png)
+
+For this scenario, we have a `Timer` class that uses a `ConversationReference` to call the `ContinueConversationAsync` method in the adapter, to send the message back to the emulator.
+
+The `ConversationReference` is stored in the `Timer` when the bot receives the command to start it, and this identifies the conversation that will receive the proactive message..
 
 When the user sends a **TIMER \<seconds\>** message, a new instance of `Timer` is created, and then started in a separate thread, so it runs independently until if finishes. When the time's up the `Timer` sends a message back to the user.
 
@@ -208,7 +220,7 @@ public class Timer
 
 Details explained here:
 
-- The timer needs a reference to the `BotFrameworkAdapter` (**line 7**) and a the `ConversationReference` (**line 8**), as required by the `ContinueConversationAsync` method from the adapter.
+- The timer needs a reference to the `BotFrameworkAdapter` (**line 7**) and the `ConversationReference` (**line 8**), as required by the `ContinueConversationAsync` method from the adapter.
 
 - The timer waits asynchronously (**line 35**).
 
@@ -331,16 +343,21 @@ And for this to work, we just need to register the above class in `ConfigureServ
 services.AddTransient<IBot, ProactiveBot>();
 ```
 
-## Conclusions
+## Takeaways
 
-- To send a proactive message we just really need the adapter and the conversation reference, not really the bot instance.
+To summarize, in this post we've learned:
 
-- The above conclusion confirms that the connection to the Bot Service (or the emulator) is independent of a request, as we found out in the previous article.
+- That to send a proactive message we just need the adapter and the conversation reference, not really the bot instance.
+- That it's possible to use a standard `IBot` with the Web API paradigm, just as when using the standard Bot Builder v4 paradigm.
+- To start a background thread that runs in the background.
 
-- This might be the basis for the bot to handle an arbitrary event, and report back to the user about it. We'll explore this in the next article.
+I Hope you've found this post interesting and useful. [Follow me on Twitter](https://www.twitter.com/mvelosop) for more posts.
 
-We'll see some of this in the next article, so stay tuned and [follow me on Twitter](https://twitter.com/mvelosop).
+You are also welcomed to leave a comment or ask a question [in the comments section below](#disqus_thread).
 
-Hope this helps you.
+**Happy coding!**
 
-Happy coding!
+> **Resources**
+>
+> - Code repository in GitHub\
+>   <https://github.com/mvelosop/GAB2019-BotInternals>
