@@ -7,10 +7,12 @@
         "wwwroot",
         "aspnetcore"
     ],
-    "spellright.language": "es",
+    "spellright.language": [
+      "en"
+    ],
     "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
+      "markdown",
+      "latex",
+      "plaintext"
     ]
 }

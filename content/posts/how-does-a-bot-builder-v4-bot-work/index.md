@@ -15,55 +15,59 @@ image:
     url: https://unsplash.com/photos/xFjti9rYILo
 ---
 
+This is the first in a five-post series, where we explore the Bot Builder C# SDK v4:
+
+1. **How does a Bot Builder v4 bot work?** (this article)
+2. [How to send proactive messages with Bot Builder v4?](/posts/how-to-send-proactive-message-bot-builder-v4)
+3. [How to receive events in a Bot Framework SDK v4 Web API bot?](/posts/how-to-receive-events-bot-framework-sdk-v4-web-api-bot)
+4. How to test a Bot Framework SDK v4 bot?
+5. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
+
 In this post we explore the core fundamentals of the messages flow inside a bot developed with Bot Builder C# SDK v4.
 
 The new v4 paradigm arguably makes it easier to create a bot than v3, but the introduced change might represent an important barrier if you're coming from v3.
 
-One significant change is the departure from the familiar Web API paradigm, however, as we'll see in this article, that apparent departure is not really that large and you can actually still use a WEB API approach.
+One significant change is the departure from the familiar Web API paradigm, however, as we'll see in this article, that apparent departure is not really that large and you can actually still use a Web API approach.
 
 The Bot Builder C# SDK is built on top of ASP.NET Core so we'll develop a simple bot as a Web API app, and by going this way we'll realize it's actually quite simple.
 
 So let's get into the details.
 
-**WARNING:** Consider this post as experimental and not production safe!
+**WARNING:** The code shown here is experimental and has not been tested in production, so handle with care!
 
 {{< repoUrl >}}
 
-## Messaging Overview
+## Overview
 
 The following diagram shows a simplified flow of messages during an interaction with a bot.
 
-![Diagram showing the key messages flow from the user to your bot application an back. The steps are described right after this image.](bot-internals.png)
+![Diagram showing the key messages flow from the user to your bot application an back. The steps are described right after this image.](bot-framework-standard-app.png)
 
 And these are the most important steps:
 
 1. When users types some text in their device, it's sent through a channel to the Azure Bot Service.
 
-2. The Azure Bot Service creates an `Activity` and posts it to your bot application.
+2. The Azure Bot Service creates an `Activity` and sends a post request to your ASP.NET Core bot application.
 
-3. A `BotMessageHandler` (equivalent to a controller action) creates an instance of the bot and...
+3. The request enters the "request pipeline" where several Middleware components are registered and one of them is the `BotMessageHandler`, that "intercepts" requests to `/api/messages` to handle them. The `MvcRoutHandler` is another middleware that can be registered in the request pipeline with the `app.UseMvc()` method in the `Startup.Configure` method.
 
-4. Asks the `BotFrameworkAdapter` to process the `Activity`.
+4. The `BotMessageHandler` requests instances of the `BotFrameworkAdapter` and the `IBot` to Dependency Injection and calls the `BotFrameworkAdapter` to process the `Activity`.
 
 5. The `BotFrameworkAdapter` creates a `TurnContext` and calls the bot handler method (`OnTurnAsync`) to process the `Activity`.
 
-6. While processing the activity, the bot can send back many activities to the Bot Service, through the adapter, and the user can see them immediately.
+6. While processing the activity, the bot can send back as many activities as needed to the Bot Service, through the adapter. Each one of this activities is a request to a channel's `ServiceUrl` in the Bot Service.
 
-7. When the bot handler method finishes, the response is sent back to the Bot Service and the interaction is finished.
+7. The user can see each activity message immediately.
 
-So this means we can summarize the typical user interaction for a bot app as:
+It's important to highlight that the adapter can send a message through the Bot Service at any time, as long as it knows the channel's `ServiceUrl` and the conversation that must receive the message.
 
-- **request -> replies -> response**
+The following diagram shows the general approach we'll use in this article:
 
-Instead of the **request -> response** of a typical web app.
+Instead of the Bot Framework's `BotFrameworkAdapter` we'll use a simple "activity action", in a regular MVC controller, to receive the POST request from the Bot Service and then do the equivalent of step 4 in the above to process, as shown in the next diagram.
 
-But, in this case it's the **replies** that convey the important information back to the user.
+![](web-api-bot-approach.png)
 
-By the way, those replies are just simple independent requests from the bot adapter to the Bot Service (actually to the `ServiceUrl` from the `ConversationReference`).
-
-It's important to keep in mind that the adapter can send a message through the Bot Service at any time, without the need for an initial request, as long as it has some key data from `ConversationReference`.
-
-## The simplest Web API bot
+## Implementation details
 
 So, with this knowledge in hand, we'll now implement what's probably the simplest Web API bot you can make.
 
@@ -125,7 +129,7 @@ public class BotController : ControllerBase
 }
 {{< /highlight >}}
 
-The important lines above are the following:
+In the code above:
 
 - Request the adapter type, an `IAdapterIntegration`, from Dependency Injection (DI) (**line 9**).
 
@@ -175,11 +179,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 {{< /highlight >}}
 
-In this case it's important to highlight that:
+In the code above:
 
 - The `BotFrameworkAdapter` is registered as a singleton (**line 5**).
 
-- The `SimpleCredentialProvider` doesn't use username or password (**line 10**).
+- The `SimpleCredentialProvider` doesn't need username or password (**line 10**), because we'll be using the Bot Emulator.
 
 ### Setting up logging with Serilog + Seq
 
@@ -231,12 +235,39 @@ Now you're ready to test the bot and you just have to:
 
 - Open the file `SimpleWebApiBot.bot` with the [Bot Emulator](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0) and send a message to your bot.
 
-## Conclusions
+## Takeaways
 
-So, we got to see that a **Bot Builder v4** bot can be implemented as a simple ASP.NET Core Web API project, and that opens the door to easily implement some interesting scenarios, such as sending proactive messages without using a Direct Line client or interfacing directly to an Alexa skill.
+To summarize, in this post we've learned:
 
-We'll see some of this in the next article, so stay tuned and [follow me on Twitter](https://twitter.com/mvelosop).
+- The core working principles of the Bot Builder v4.
+- To use a standard Web API controller to implement a bot, using only the BotFrameworkAdapter from the Bot Builder v4.
+- To set up and use logging with Serilog and Seq.
 
-Hope this helps you.
+I Hope you've found this post interesting and useful. [Follow me on Twitter](https://www.twitter.com/mvelosop) for more posts.
 
-Happy coding!
+You are also welcomed to leave a comment or ask a question [in the comments section below](#disqus_thread).
+
+**Happy coding!**
+
+> **Resources**
+>
+> - Code repository in GitHub\
+>   <https://github.com/mvelosop/GAB2019-BotInternals>
+>
+> - Bot Builder v4 samples\
+>   <https://github.com/Microsoft/BotBuilder-Samples/tree/master/samples/>
+>
+> - Bot Emulator\
+>   <https://docs.microsoft.com/azure/bot-service/bot-service-debug-emulator>
+>
+> - Serilog\
+>   <https://serilog.net/>
+>
+> - Seq\
+>   <https://datalust.co/seq>
+>
+> - Seq development and small projects licensing\
+>   <https://datalust.co/Pricing>
+>
+> - Structured Logging blog post\
+>   <https://nblumhardt.com/2016/06/structured-logging-concepts-in-net-series-1/>
