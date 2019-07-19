@@ -4,7 +4,7 @@ title: How to test a Bot Framework SDK v4 bot?
 draft: false
 author: "Miguel Veloso"
 date: 2019-07-19
-description: Learn how easy it is to test the interactions in your Bot Framework v4 bot.
+description: Learn how easy it is to test the interactions in your Bot Framework v4 bot, and a nice way to set up DI for testing.
 thumbnail: posts/how-to-test-bot-framework-sdk-v4-bot/ildefonso-polo-DX9X0g0Cg88-unsplash.jpg
 tags: [ "Bot Builder v4", "ASP.NET Core", "Testing" ]
 repoName: GAB2019-EventBot
