@@ -15,13 +15,14 @@ image:
     url: https://unsplash.com/photos/xFjti9rYILo
 ---
 
-This is the first in a five-post series, where we explore the Bot Builder C# SDK v4:
+This is the first in a six-post series, where we explore the Bot Builder C# SDK v4:
 
 1. **How does a Bot Builder v4 bot work?** (this article)
 2. [How to send proactive messages with Bot Builder v4?](/posts/how-to-send-proactive-message-bot-builder-v4)
 3. [How to receive events in a Bot Framework SDK v4 Web API bot?](/posts/how-to-receive-events-bot-framework-sdk-v4-web-api-bot)
-4. How to test a Bot Framework SDK v4 bot?
-5. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
+4. [How to test a Bot Framework SDK v4 bot?](/posts/how-to-test-bot-framework-sdk-v4-bot)
+5. How to do integration testing for a Bot Framework SDK v4 event bot?
+6. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
 
 In this post we explore the core fundamentals of the messages flow inside a bot developed with Bot Builder C# SDK v4.
 

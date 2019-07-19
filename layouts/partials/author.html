@@ -22,7 +22,7 @@
         {{ with .github }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>{{ end }}
         {{ with .email }}<li><a href="{{ . }}" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>{{ end }}
       </ul>
-      <div class="author-description">{{ .description1 | safeHTML }}<br />{{ .description2 | safeHTML }}</div>
+      <div class="author-description"><ul>{{ .description1 | safeHTML }}{{ .description2 | safeHTML }}</ul></div>
       <div style="font-size: 0.9rem; margin-top: 0.5rem"><a href="/about">Acerca de mi / About me</a></div>
     </div>
   </div>

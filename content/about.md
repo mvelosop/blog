@@ -14,7 +14,7 @@ links: personalLinks
 
 # Miguel Veloso
 
-Consultor independiente en desarrollo web con tecnología .NET (C#, ASP.NET MVC, .NET Core).
+Software Development Engineer en [Plain Concepts](https://www.plainconcepts.com/).
 
 Apasionado de la tecnología y el desarrollo de software "[Clean Code](https://en.wiktionary.org/wiki/clean_code)".
 

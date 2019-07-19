@@ -26,8 +26,8 @@ publishDir = "public"
     # This is Optional values
     name = "Miguel Veloso"
 
-    description1 = "Independent Software Consultant"
-    description2 = "Certified ScrumMaster"
+    description1 = "<li> Software Development Engineer at <a href='https://www.plainconcepts.com/'>Plain Concepts</a></li>"
+    description2 = "<li> Certified ScrumMaster</li>"
 
     # Please set account ids
     # This is Optional values
