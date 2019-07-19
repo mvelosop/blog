@@ -15,13 +15,14 @@ image:
     url: https://unsplash.com/photos/2c9ffiPlD9Q
 ---
 
-This is the second in a five-post series, where we explore the Bot Builder C# SDK v4:
+This is the second in a six-post series, where we explore the Bot Builder C# SDK v4:
 
 1. [How does a Bot Builder v4 bot work?](/posts/how-does-a-bot-builder-v4-bot-work/)
 2. **How to send proactive messages with Bot Builder v4?** (This article)
 3. [How to receive events in a Bot Framework SDK v4 Web API bot?](/posts/how-to-receive-events-bot-framework-sdk-v4-web-api-bot)
-4. How to test a Bot Framework SDK v4 bot?
-5. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
+4. [How to test a Bot Framework SDK v4 bot?](/posts/how-to-test-bot-framework-sdk-v4-bot)
+5. How to do integration testing for a Bot Framework SDK v4 event bot?
+6. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
 
 In this post we'll continue with the bot we completed in [the previous post](/posts/how-does-a-bot-builder-v4-bot-work/) to add the ability to send proactive messages.
 
