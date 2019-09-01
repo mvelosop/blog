@@ -15,14 +15,13 @@ image:
     url: https://unsplash.com/photos/DX9X0g0Cg88
 ---
 
-This is the fourth in a six-post series, where we explore the Bot Framework (previously Bot Builder) SDK v4:
+This is the fourth in a five-post series, where we explore the Bot Framework (previously Bot Builder) SDK v4:
 
 1. [How does a Bot Builder v4 bot work?](/posts/how-does-a-bot-builder-v4-bot-work/)
 2. [How to send proactive messages with Bot Builder v4?](/posts/how-to-send-proactive-message-bot-builder-v4)
 3. [How to receive events in a Bot Framework SDK v4 Web API bot?](/posts/how-to-receive-events-bot-framework-sdk-v4-web-api-bot)
 4. **How to test a Bot Framework SDK v4 bot?** (This article)
-5. How to do integration testing for a Bot Framework SDK v4 event bot?
-6. How to build a Bot Framework SDK v4 bot as an Azure Function web API app?
+5. [How to do integration testing for a Bot Framework SDK v4 event bot?](/posts/how-to-do-integration-testing-bot-framework-v4-event-bot/)
 
 In this article we'll continue to work on our simple Web API bot, but focusing on the testing side. We won't be adding any new feature but we'll explore some interesting techniques to use DI (Dependency Injection) for testing.
 
@@ -404,7 +403,7 @@ You are also welcomed to leave a comment or ask a question [in the comments sect
 > - Kent Beck's guidance famous comment in Stack Overflow \
 >   <https://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests#answer-153565>
 >
-> - IClassFixture\<T\>** interface from xUnit \
+> - IClassFixture\<T\> interface from xUnit \
 >   <https://xunit.net/docs/shared-context#class-fixture>
 >
 > - Fluent Assertions library \
