@@ -30,6 +30,10 @@ To test the event handling part we have to execute the API actions of our contro
 
 So, in this article, we'll focus on Web API integration testing including the regular bot testing, so this will be some sort of **double integration testing**! 😉
 
+**WARNING:** The code shown here is experimental and has not been tested in production, so handle with care!
+
+{{< repoUrl >}}
+
 ## Overview
 
 In this case the setup process will be more elaborate than the tests themselves, but let's consider them as simple samples that can help us open a world of possibilities.
