@@ -3,7 +3,7 @@ language: en
 title: How to do integration testing for a Bot Framework SDK v4 event bot?
 draft: true
 author: "Miguel Veloso"
-date: 2019-09-01
+date: 2019-08-31
 description: Continue the exploration of Bot Framework SDK enabling our Web API bot to receive arbitrary events through a REST API endpoint.
 thumbnail: posts/how-to-do-integration-testing-bot-framework-v4-event-bot/nicolas-thomas-3GZi6OpSDcY-unsplash.jpg
 tags: [ "Bot Builder v4", "ASP.NET Core", "Testing", "Integration Testing" ]
