@@ -536,7 +536,7 @@ public class EchoBot : ActivityHandler
 
 Again, pretty simple 😃
 
-### 3 - Add an Adaptive Dialog
+### 3 - Switch to using Adaptive Dialogs
 
 So we've finally gotten to the Adaptive Dialogs section 😃
 
@@ -550,7 +550,7 @@ To add Adaptive Dialogs, we have to:
 2. Add as many dialogs as needed
 3. Add dialog testing classes
 
-#### 3.1 - Convert a project for Adaptive Dialogs
+#### 3.1 - Convert the project for Adaptive Dialogs
 
 We'll mostly follow the [Create a bot project for adaptive dialogs](https://docs.microsoft.com/azure/bot-service/bot-builder-adaptive-dialog-setup?view=azure-bot-service-4.0) article, but on our EchoBot project.
 
@@ -564,9 +564,13 @@ We'll be using basic Adaptive Dialogs, so you just need to add this package to t
 
 ##### Add a RootDialog
 
-Create a `Dialogs` folders with a `RootDialog` folder inside, and create the `RootDialog.cs` class inside, as follows:
+When using Adaptive Dialogs (and regular Dialogs too) it's a common practice to have a `RootDialog` that acts as the top-level menu of the conversation.
 
-{{< highlight cs "linenos=table, hl_lines=1" >}}
+There's also the convention to have all dialogs under the `Dialogs` folder, and then a folder for each dialog, with it's class inside. This dialog folder will be used later to have some dialog-related assets.
+
+So, create a `Dialogs` folder with a `RootDialog` folder inside, and create the `RootDialog.cs` class inside, with the following code:
+
+{{< highlight cs "linenos=table, hl_lines=1 7 9" >}}
 namespace AdaptiveDialogsBot.BotApp.Dialogs
 {
     public class RootDialog : AdaptiveDialog
@@ -587,15 +591,231 @@ namespace AdaptiveDialogsBot.BotApp.Dialogs
 
 In the code above:
 
-- Take care to remove the `.RootDialog` you'll get in the namespace (**line 1**), created from the `RootDialog` folder we're using. Otherwise you'll get conflicts between the class name and the namespace.
+- Take care to remove the trailing `.RootDialog` you'll get in the namespace (**line 1**), created from the `RootDialog` folder we're using. Otherwise you'll get conflicts between the class name and the namespace.
+- Check see the `Triggers` property (**line 7**) and its `Actions` property (**line 9**). These are some of the key features that make developing with Adaptive Dialogs much more productive. We'll get deeper on this later on.
+- Though not obvious here, all `Actions` (**line 9**) are also dialogs, so you can create specialized dialogs and use them just like that in Adaptive Dialogs.
 
+##### Add a DialogBot
 
-##### Register State and other support classes
+The `DialogBot` is another key component of Adaptive Dialogs, because it includes the use of the `DialogManager`. The `DialogManager` is mandatory for Adaptive Dialogs, and it can also manage regular old-fashioned dialogs.
 
-Update the `ConfigureServices` method in `Startup.cs` as follows:
+{{< highlight cs "linenos=table, hl_lines=8 13" >}}
+public class DialogBot<T> : ActivityHandler
+    where T : Dialog
+{
+    private readonly DialogManager DialogManager;
+    protected readonly ILogger Logger;
 
-{{< highlight cs "linenos=table, hl_lines=1 8 30 35" >}}
+    public DialogBot(
+        T rootDialog, 
+        ILogger<DialogBot<T>> logger)
+    {
+        Logger = logger;
+
+        DialogManager = new DialogManager(rootDialog);
+    }
+
+    public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
+    {
+        Logger.LogInformation("Running dialog with Activity.");
+        await DialogManager.OnTurnAsync(turnContext, cancellationToken: cancellationToken).ConfigureAwait(false);
+    }
+}
 {{< /highlight >}}
+
+In the previous code:
+
+- The root dialog is whatever dialog is injected into `DialogBot` (**line 8**).
+- The `DialogManager` works with this root dialog (**line 13**).
+
+##### Update the AdapterWithErrorHandler
+
+The `ConversationState` is essential to `DialogManager`, and `DialogManager` expects to get it from the `TurnContext`, so we have to add it in the Adapter, as shown next:
+
+{{< highlight cs "linenos=table, hl_lines=16-18" >}}
+public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
+{
+    public AdapterWithErrorHandler(
+        IConfiguration configuration,
+        ILogger<BotFrameworkHttpAdapter> logger,
+        ICredentialProvider credentialProvider,
+        IStorage storage,
+        UserState userState,
+        ConversationState conversationState)
+        : base(configuration, logger)
+    {
+        Use(new LoggingMiddleware());
+
+        // These methods add middleware to the adapter. The middleware adds the storage and state objects to the
+        // turn context each turn so that the dialog manager can retrieve them.
+        this.UseStorage(storage);
+        this.UseBotState(userState);
+        this.UseBotState(conversationState);
+
+        OnTurnError = async (turnContext, exception) =>
+        {
+            // Log any leaked exception from the application.
+            logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
+
+            // Send a message to the user
+            await turnContext.SendActivityAsync("The bot encountered an error or bug.");
+            await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+
+            // Send a trace activity, which will be displayed in the Bot Framework Emulator
+            await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+        };
+    }
+}
+{{< /highlight >}}
+
+In the code above:
+
+- You can see that the `Storage`, `UserState` and `ConversationState` are "registered" in the `TurnContext` as middlewares (**lines 16-18**), so they can be used by `DialogManager`.
+
+##### Register the new bot and other support classes
+
+We'll register all the new components into the DI container so we can use them in bot application, so update the `ConfigureServices` method in `Startup.cs` as follows:
+
+{{< highlight cs "linenos=table, hl_lines=9 15" >}}
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers().AddNewtonsoftJson();
+
+    // Create the Bot Framework Adapter with error handling enabled.
+    services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+
+    // Create the bot. the ASP Controller is expecting an IBot.
+    services.AddSingleton<IBot, DialogBot<RootDialog>>();
+
+    // Create the credential provider to be used with the Bot Framework Adapter.
+    services.AddSingleton<ICredentialProvider, ConfigurationCredentialProvider>();
+
+    // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.) 
+    services.AddSingleton<IStorage, MemoryStorage>();
+
+    // Create the User state. (Used in this bot's Dialog implementation.)
+    services.AddSingleton<UserState>();
+
+    // Create the Conversation state. (Used by the Dialog system itself.)
+    services.AddSingleton<ConversationState>();
+
+    // The adaptive dialog that will be run by the bot.
+    services.AddSingleton<RootDialog>();
+}
+{{< /highlight >}}
+
+In the previous code:
+
+- You can see that `DialogBot<RootDialog>` has replaced `EchoBot` as the implementation for `IBot` (**line 9**), and that it does so as a `Singleton`, instead of as a `Transient` instance.
+- Using `MemoryStorage` as an implementation of `IStorage` (**line 15**) is fine for testing and demos, but not for production, where you should use some persistent storage.
+
+##### Run your new AdaptiveDialogsBot
+
+You should be able to run your bot and test it with the Bot Emulator as shown next:
+
+![](inital-adaptive-dialogs-bot.png)
+
+Keep in mind that, at this point, the bot doesn't respond on `ConversationUpdate`, so you'll have to take the initiative with a simple "**Hi**" 😉.
+
+Also, current test don't pass either but we'll fix that right now
+
+#### 3.2 - Update the bot to pass current tests
+
+For this step we'll use the most naïve solution, without using some of the most interesting features of Adaptive Dialogs but that'll be just to pass the tests, and we'll fix that later.
+
+##### Update RootDialog
+
+So, we'll use the `Triggers` and `Actions` mentioned before, by updating `RootDialog` as follows:
+
+{{< highlight cs "linenos=table, hl_lines=3 6 8 9 12 14 24" >}}
+public class RootDialog : AdaptiveDialog
+{
+    public RootDialog() : base(nameof(RootDialog))
+    {
+        Triggers = new List<OnCondition> {
+            new OnConversationUpdateActivity {
+                Actions = {
+                    new Foreach {
+                        ItemsProperty = "turn.activity.membersAdded",
+                        Actions = {
+                            new IfCondition {
+                                Condition = "$foreach.value.id != turn.activity.recipient.id",
+                                Actions = {
+                                    new SendActivity("Hello and welcome!")
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            new OnUnknownIntent {
+                Actions = {
+                    new CodeAction(async (dialogContext, options) =>
+                    {
+                        string replyText;
+
+                        if (dialogContext.Context.Activity.Text.Equals("Hello", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var now = DateTime.Now.TimeOfDay;
+
+                            var time = now < new TimeSpan(12, 0, 0)
+                                ? "morning"
+                                : now > new TimeSpan(19, 0, 0)
+                                    ? "evening"
+                                    : "afternoon";
+
+                            replyText = "Good " + time;
+                        }
+                        else
+                        {
+                            replyText = $"Echo: {dialogContext.Context.Activity.Text}";
+                        }
+
+                        await dialogContext.Context.SendActivityAsync(MessageFactory.Text(replyText, replyText));
+
+                        return await dialogContext.EndDialogAsync(options);
+                    }),
+                }
+            },
+        };
+    }
+}
+{{< /highlight >}}
+
+In the code above:
+
+- Notice that we're coding on the constructor (**line 3**), so this is actually a *declaration* or configuration of the dialog.
+- We added the `OnConversationUpdateActivity` trigger (**line 6**) and the only action is a `Foreach` "loop" (**line 8**) on the `membersAdded` property of the incoming activity (**line 9**), and a greeting message is sent to the other members (**line 14**), those that are different from the recipient, that is, the bot itself (**line 12**).
+- We almost copied, verbatim, the code from the original `EchoBot` in a `CodeAction` (**line 24**), that's just a lambda function (or delegate) that'll get invoked when necessary. You can actually set breakpoints in any `CodeAction`.
+- A `CodeAction` **MUST** end with a `return await dialogContext.EndDialogAsync(options)`.
+
+##### Add the state middleware to the TestAdapter
+
+Update the `BotApplicationTestAdapter` as follows, so `DialogManager` can do its job:
+
+{{< highlight cs "linenos=table, hl_lines=9-11" >}}
+public BotApplicationTestAdapter(
+    ILogger<BotApplicationTestAdapter> logger,
+    IStorage storage,
+    UserState userState,
+    ConversationState conversationState)
+{
+    Use(new LoggingMiddleware());
+
+    this.UseStorage(storage);
+    this.UseBotState(userState);
+    this.UseBotState(conversationState);
+
+    //...
+}
+{{< /highlight >}}
+
+In the code above:
+
+- You can see that the state middlewares are added (**lines 9-11**) just as we did before on the `AdapterWithErrorHandler`.
+
+You should be able to check that all tests now complete successfully.
 
 
 ## Takeaways
