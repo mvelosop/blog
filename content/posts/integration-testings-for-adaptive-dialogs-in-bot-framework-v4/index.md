@@ -727,7 +727,7 @@ For this step we'll use the most naïve solution, without using some of the most
 
 So, we'll use the `Triggers` and `Actions` mentioned before, by updating `RootDialog` as follows:
 
-{{< highlight cs "linenos=table, hl_lines=3 6 8 9 12 14 24" >}}
+{{< highlight cs "linenos=table, hl_lines=3 6 8 9 12 14 22 24" >}}
 public class RootDialog : AdaptiveDialog
 {
     public RootDialog() : base(nameof(RootDialog))
@@ -787,6 +787,7 @@ In the code above:
 
 - Notice that we're coding on the constructor (**line 3**), so this is actually a *declaration* or configuration of the dialog.
 - We added the `OnConversationUpdateActivity` trigger (**line 6**) and the only action is a `Foreach` "loop" (**line 8**) on the `membersAdded` property of the incoming activity (**line 9**), and a greeting message is sent to the other members (**line 14**), those that are different from the recipient, that is, the bot itself (**line 12**).
+- The `OnUnknownIntent` is the default intent, that will always be triggered now (**line 22**), since we haven't defined any recognizer.
 - We almost copied, verbatim, the code from the original `EchoBot` in a `CodeAction` (**line 24**), that's just a lambda function (or delegate) that'll get invoked when necessary. You can actually set breakpoints in any `CodeAction`.
 - A `CodeAction` **MUST** end with a `return await dialogContext.EndDialogAsync(options)`.
 
@@ -815,7 +816,444 @@ In the code above:
 
 - You can see that the state middlewares are added (**lines 9-11**) just as we did before on the `AdapterWithErrorHandler`.
 
-You should be able to check that all tests now complete successfully.
+You should be able to check that all tests complete successfully now.
 
+### 4 - Add adaptive dialogs
+
+In the previous section we added the adaptive `RootDialog` in a rather naïve way, mostly copying code from the `EchoBot`, so in this section we'll add a greeting dialog following "the Adaptive Dialogs way" 😉. 
+
+And we'll do it using TDD 😁
+
+#### 4.1 - Use dialog test helper classes
+
+We won't add any feature here, we'll just add a new dialog-oriented test class, just to check that our current bot passes a new, equivalent set of test.
+
+We'll roughly follow the [How to unit test bots](https://docs.microsoft.com/azure/bot-service/unit-test-bots?view=azure-bot-service-4.0&tabs=csharp) official documentation although, as of April 2021, still doesn't cover adaptive dialogs.
+
+##### Create a new dialog-based test class
+
+Create a `DialogBotTests` folder with the test class `DialogBotShould`.
+
+The class will implement `IClassFixture<BotApplicationFactory>` and `IDisposable` the same way as the `EchoBotShould` test class, actually the constructor and other private methods are identical, so we'll only review here only the second test case:
+
+{{< highlight cs "linenos=table, hl_lines=5 6 8 9 15 18" >}}
+[Fact]
+public async Task Greet_back_on_hello()
+{
+    // Arrange -----------------
+    var testAdapter = GetService<TestAdapter>();
+    testAdapter.Locale = "en-us";
+
+    var dialogUnderTest = GetService<RootDialog>();
+    var testClient = new DialogTestClient(testAdapter, dialogUnderTest);
+
+    var conversationUpdate = Activity.CreateConversationUpdateActivity();
+    conversationUpdate.MembersAdded.Add(testAdapter.Conversation.User);
+
+    // Act ---------------------
+    var reply = await testClient.SendActivityAsync<IMessageActivity>(conversationUpdate as Activity);
+    reply.Text.Should().Be("Hello and welcome!");
+
+    reply = await testClient.SendActivityAsync<IMessageActivity>("Hello");
+    reply.Text.Should().BeOneOf(new[] {
+        "Good morning",
+        "Good afternoon",
+        "Good evening"
+    });
+
+    // Assert ------------------
+}
+{{< /highlight >}}
+
+In the code above:
+
+- We get the `TestAdapter` (**line 5**) and set the locale (**line 6**), just as with the `EchoBot` tests.
+- We get the `RootDialog` instead of the whole bot (**line 8**), however testing the root dialog is (almost) the same as testing the whole bot.
+- We create a `DialogTestClient` (**line 9**) instead of the `TestFlow`, but we se a different overload for `DialogTestClient` from the one in the documentation, to make sure we use our `BotApplicationTestAdapter` that's already set up to handle adaptive dialogs.
+- One interesting point of `DialogTestClient` is that it allows you to test dialogs individually, which can make testing easier.
+- You can also test each turn separately.
+- The `DialogTestClient` API requires a more verbose code (**lines 15, 18**), but you can easily create extension methods to make it simpler.
+
+#### 4.2 - Use the Language Generator (LG) feature
+
+The Language Generator feature allows you to define templates with the output text, with all of the bot's replies, outside of the bot code.
+You can define variants for the templates, so the bot can use any of them for a reply and can also be localized.
+
+The best way to edit LG templates is with VS Code and the [Bot Framework Adaptive Tools](https://marketplace.visualstudio.com/items?itemName=BotBuilder.bot-framework-adaptive-tools)
+
+##### Remove text from the bot code
+
+Since the idea is to move all of the specific text out of the bot code, and will only handle "business" logic and no "presentation-specific" code.
+
+In this step we'll reference the templates file in the `RootDialog` and start using [AdaptiveExpressions](https://docs.microsoft.com/azure/bot-service/adaptive-expressions/adaptive-expressions-prebuilt-functions?view=azure-bot-service-4.0) and [adaptive dialog Actions](https://docs.microsoft.com/azure/bot-service/adaptive-dialog/adaptive-dialog-prebuilt-actions?view=azure-bot-service-4.0)
+Update the RoodDialog.cs code as follows:
+
+{{< highlight cs "linenos=table, hl_lines=7 9 20 31 44 49 53" >}}
+public class RootDialog : AdaptiveDialog
+{
+    public RootDialog(
+        IHostEnvironment hostEnvironment)
+        : base(nameof(RootDialog))
+    {
+        var dialogRoot = Path.Combine(hostEnvironment.ContentRootPath, "Dialogs");
+        var templates = Templates.ParseFile(Path.Combine(dialogRoot, "RootDialog", "RootDialog.lg"));
+        Generator = new TemplateEngineLanguageGenerator(templates);
+
+        Triggers = new List<OnCondition> {
+            new OnConversationUpdateActivity {
+                Actions = {
+                    new Foreach {
+                        ItemsProperty = "turn.activity.membersAdded",
+                        Actions = {
+                            new IfCondition {
+                                Condition = "$foreach.value.id != turn.activity.recipient.id",
+                                Actions = {
+                                    new SendActivity("${Welcome()}")
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            new OnUnknownIntent {
+                Actions = {
+                    new IfCondition {
+                        Condition = "toLower(turn.activity.text) == 'hello'",
+
+                        Actions = {
+                            new CodeAction(async (dialogContext, options) =>
+                            {
+                                var now = DateTime.Now.TimeOfDay;
+
+                                var time = now < new TimeSpan(12, 0, 0)
+                                    ? "morning"
+                                    : now > new TimeSpan(19, 0, 0)
+                                        ? "evening"
+                                        : "afternoon";
+
+                                dialogContext.State.SetValue("dialog.greetingTime", time);
+
+                                return await dialogContext.EndDialogAsync(options);
+                            }),
+
+                            new SendActivity("${Greeting()}")
+                        },
+
+                        ElseActions = {
+                            new SendActivity("${Echo()}")
+                        }
+                    },
+                }
+            },
+        };
+    }
+}
+{{< /highlight >}}
+
+In the code above:
+
+- Create a template-based generator from the `RootDialog.lg` file (**line 9**).
+- Use the `ContentRoot` from the environment (**line 7**) so this also works while testing.
+- Use the `Welcome()` template (**line 20**).
+- Check for the "hello" utterance with an adaptive expression (**line 31**)
+- Use te `CodeAction` only to set the value of the `dialog.greetingTime` property (**line 44**) so we can use it in the templates.
+- Use the `Greeting()` template (**line 49**) to reply to the "hello" utterance.
+- Use the `Echo()` template (**line 53**) to reply to everything else
+
+##### Create an LG file
+
+As mentioned, the LG templates will only handle "presentation" logic.
+
+Take a look at the [.lg file format documentation](https://docs.microsoft.com/azure/bot-service/file-format/bot-builder-lg-file-format?view=azure-bot-service-4.0) to learn its features.
+
+Create the file `RootDialog.lg` with this content:
+
+{{< highlight lg "linenos=table, hl_lines=1 4 5 6 13 14" >}}
+# Welcome
+- Hello and welcome!
+
+# Greeting
+- SWITCH: ${dialog.greetingTime}
+- CASE: ${'morning'}
+    - Good morning
+- CASE: ${'afternoon'}
+    - Good afternoon
+- DEFAULT:
+    - Good evening
+
+# Echo
+- Echo: ${turn.activity.text}
+{{< /highlight >}}
+
+In the template above you can see that:
+
+- Templates are identified with a `#` (**lines 1, 4, 13**)
+- State properties can be accessed from the templates (**lines 5, 14**)
+- You can use some logic statements in the templates (**line 5**)
+
+At this point your tests should complete successfully.
+
+#### 4.3 - Use an intent recognizer and another dialog
+
+The best way to handle intents in adaptive dialogs is using [recognizers](https://docs.microsoft.com/azure/bot-service/adaptive-dialog/adaptive-dialog-prebuilt-recognizers?view=azure-bot-service-4.0) and handling them with an `OnIntent` trigger.
+
+You can create several types of recognizers, but in this article we'll go with [RegexRecognizers](https://docs.microsoft.com/azure/bot-service/adaptive-dialog/adaptive-dialog-prebuilt-recognizers?view=azure-bot-service-4.0#regexrecognizer)
+
+We'll also add a greeting dialog that will be used when the `Greeting` intent is detected, to ask for the user name.
+
+We'll use TDD to implement this.
+
+##### Create a new test case
+
+Create a new test case as follows:
+
+{{< highlight cs "linenos=table, hl_lines=33" >}}
+[Fact]
+public async Task Ask_for_the_user_name_on_greeting()
+{
+    // Arrange -----------------
+    var testAdapter = GetService<TestAdapter>();
+    testAdapter.Locale = "en-us";
+
+    var dialogUnderTest = GetService<RootDialog>();
+    var testClient = new DialogTestClient(testAdapter, dialogUnderTest);
+
+    var conversationUpdate = Activity.CreateConversationUpdateActivity();
+    conversationUpdate.MembersAdded.Add(testAdapter.Conversation.User);
+
+    // Act ---------------------
+    var reply = await testClient.SendActivityAsync<IMessageActivity>(conversationUpdate as Activity);
+    reply.Text.Should().Be("Hello and welcome!");
+
+    reply = await testClient.SendActivityAsync<IMessageActivity>("Hello");
+    reply.Text.Should().BeOneOf(new[] {
+        "Good morning",
+        "Good afternoon",
+        "Good evening"
+    });
+
+    reply = testClient.GetNextReply<IMessageActivity>();
+    reply.Text.Should().Be("What's your name?");
+
+    reply = await testClient.SendActivityAsync<IMessageActivity>("Miguel");
+    reply.Text.Should().Be("Thanks Miguel 😊");
+
+    // Assert ------------------
+    var userName = testClient.DialogContext.State.GetStringValue("conversation.userName");
+    userName.Should().Be("Miguel");
+}
+{{< /highlight >}}
+
+In the code above:
+
+- We'll check that the user state has the the entered user name (**line 33**).
+
+At this point the only failing test should be the one above. So we have to make it pass the test.
+
+##### Create the GreetingDialog
+
+Create the `GreetingDialog` class inside the `GreetingDialog` folder under `Dialogs` as follows:
+
+{{< highlight cs "linenos=table, hl_lines=1 8 30 35" >}}
+public class GreetingDialog : AdaptiveDialog
+{
+    public GreetingDialog(
+        IHostEnvironment hostEnvironment)
+    {
+        var dialogRoot = Path.Combine(hostEnvironment.ContentRootPath, "Dialogs");
+        var templates = Templates.ParseFile(Path.Combine(dialogRoot, "GreetingDialog", "GreetingDialog.lg"));
+        Generator = new TemplateEngineLanguageGenerator(templates);
+
+        Triggers = new List<OnCondition> {
+            new OnBeginDialog {
+                Actions = {
+
+                    new TextInput {
+                        Property = "dialog.userName",
+                        Prompt = new ActivityTemplate("${RequestUserName()}")
+                    },
+
+                    new SendActivity("${ThankUser()}"),
+
+                    new EndDialog("=dialog.userName")
+                }
+            }
+        };
+    }
+}
+{{< /highlight >}}
+
+In the code above you can see that:
+
+- The actions are executed when the dialog begins (**lines 11, 12**),
+- The user is prompted for their name (**line 14**) and it's saved in the `userName` property of the current dialog (**line 15**).
+- The return value from the dialog is taken from its `userName` property (**line 21**).
+
+##### Create the GreetingDialog LG template
+
+Now create the `GreetingDialog.lg` template as follows:
+
+{{< highlight cs "linenos=table, hl_lines=5" >}}
+# RequestUserName
+- What's your name?
+
+# ThankUser
+- Thanks ${dialog.userName} 😊
+{{< /highlight >}}
+
+It the template above you can see that:
+
+- The `userName` property from the dialog is used (**line 5**).
+
+##### Create a recognizer for RootDialog
+
+Create the `RootDialogRecognizer` in the `RootDialog` folder as follows:
+
+{{< highlight cs "linenos=table, hl_lines=8" >}}
+public class RootDialogRecognizer : RegexRecognizer
+{
+    public RootDialogRecognizer()
+    {
+        Intents = new List<IntentPattern> {
+            new IntentPattern {
+                Intent = "Greeting",
+                Pattern = "(Hi|Hello)"
+            },
+        };
+    }
+}
+{{< /highlight >}}
+
+It the code above you can see that:
+
+- A simple regex pattern is used for the `Greeting` intent (**line 8**).
+
+##### Update the RootDialog
+
+Update the RootDialog as follows:
+
+{{< highlight cs "linenos=table, hl_lines=11 20 24 25 43 44" >}}
+public class RootDialog : AdaptiveDialog
+{
+    public RootDialog(
+        IHostEnvironment hostEnvironment)
+        : base(nameof(RootDialog))
+    {
+        var dialogRoot = Path.Combine(hostEnvironment.ContentRootPath, "Dialogs");
+        var templates = Templates.ParseFile(Path.Combine(dialogRoot, "RootDialog", "RootDialog.lg"));
+        Generator = new TemplateEngineLanguageGenerator(templates);
+
+        Recognizer = new RootDialogRecognizer();
+
+        Triggers = new List<OnCondition> {
+            new OnConversationUpdateActivity {
+                //...
+            },
+
+            new OnUnknownIntent {
+                Actions = {
+                    new SendActivity("${Echo()}")
+                }
+            },
+
+            new OnIntent("Greeting") {
+                Actions = {
+                    new CodeAction(async (dialogContext, options) =>
+                    {
+                        var now = DateTime.Now.TimeOfDay;
+
+                        var time = now < new TimeSpan(12, 0, 0)
+                            ? "morning"
+                            : now > new TimeSpan(19, 0, 0)
+                                ? "evening"
+                                : "afternoon";
+
+                        dialogContext.State.SetValue("dialog.greetingTime", time);
+
+                        return await dialogContext.EndDialogAsync(options);
+                    }),
+
+                    new SendActivity("${Greeting()}"),
+
+                    new BeginDialog(nameof(GreetingDialog)) {
+                        ResultProperty = "conversation.userName"
+                    },
+                }
+            }
+        };
+
+        Dialogs.Add(new GreetingDialog(hostEnvironment));
+    }
+}
+{{< /highlight >}}
+
+It the code above you can see that:
+
+- The new `RootDialogRecognizer` is used (**line 11**).
+- The `OnUnknownIntent` only uses the `Echo()` template (**line 20**).
+- The new `OnIntent("Greeting")` trigger takes care of the greeting actions (**lines 24, 25**).
+- The `GreetingDialog` is called (**line 43**) and its result is saved in the `conversation.userName` property (**line 44**).
+- The `GreetingDialog` is added to the set of dialogs used by `RootDialog`
+
+##### Update the RootDialog LG template
+
+We now have to use the user name in the greeting templates.
+
+Update the `RootDialog.lg` file as follows:
+
+{{< highlight cs "linenos=table, hl_lines=1 8 30 35" >}}
+# Welcome
+- Hello and welcome!
+
+# Greeting
+- SWITCH: ${dialog.greetingTime}
+- CASE: ${'morning'}
+    - Good morning ${conversation.userName}
+- CASE: ${'afternoon'}
+    - Good afternoon ${conversation.userName}
+- DEFAULT:
+    - Good evening ${conversation.userName}
+
+# Echo
+- Echo: ${turn.activity.text}
+{{< /highlight >}}
+
+It the template above you can see that:
+
+- The `conversation.userName` property is simply used where needed (**lines 7, 9, 11**). If the property doesn't exist an empty string is generated (and the final output is trimmed!).
+
+##### Update the TestAdapter registration
+
+There's just a minor adjustment to make to the `TestAdapter` registration, because a singleton scope configuration causes some test case interferences.
+
+Update the registration as follows:
+
+{{< highlight cs "linenos=table, hl_lines=1" >}}
+public class BotApplicationFactory : WebApplicationFactory<Startup>
+{
+    //...
+
+    protected override IHost CreateHost(IHostBuilder builder)
+    {
+        //...
+
+        builder.ConfigureServices(services =>
+        {
+            services.AddScoped<TestAdapter, BotApplicationTestAdapter>();
+        });
+
+        return base.CreateHost(builder);
+    }
+
+    //...
+}
+{{< /highlight >}}
+
+It the code above you can see that:
+
+- The scope was changed to `AddScoped` (**line 11**).
+
+At this point all test should complete successfully 😊
 
 ## Takeaways
