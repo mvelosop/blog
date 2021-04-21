@@ -1,7 +1,7 @@
 ---
 language: en
 title: Integration Testing with Adaptive Dialogs in Bot Framework v4
-draft: true
+draft: false
 author: Miguel Veloso
 date: 2021-04-21
 description: Learn how to perform integration testing with Adaptive Dialogs in Bot Framework v4

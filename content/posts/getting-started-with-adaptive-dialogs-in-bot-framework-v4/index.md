@@ -1,7 +1,7 @@
 ---
 language: en
 title: Getting started with Adaptive Dialogs in Bot Framework v4
-draft: true
+draft: false
 author: Miguel Veloso
 date: 2021-04-20
 description: Get started with Adaptive Dialogs by code using Bot Framework SDK v4
